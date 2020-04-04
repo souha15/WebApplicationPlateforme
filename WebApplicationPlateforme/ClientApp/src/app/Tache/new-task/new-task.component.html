@@ -1,0 +1,100 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <!-- Second Navbar -->
+      <nav class="d-flex p-0 bd-highlight tasks-nav mt-2">
+        <a [routerLink]="['/main-tasks']" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-home"></i></span>
+          الرئيسية
+        </a>
+        <a [routerLink]="['/new-task']" class="p-2 flex-fill bd-highlight active">
+          <span><i class="fa fa-calendar-plus"></i></span>
+          إضافة مهمة
+        </a>
+        <a href="" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-tasks"></i></span>
+          المهام الواردة
+        </a>
+        <a href="" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-clock"></i></span>
+          المهام المتأخرة
+        </a>
+        <a href="" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-user-tie"></i></span>
+          الموظفين
+        </a>
+        <a href="" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-user-cog"></i></span>
+          مدير النظام
+        </a>
+      </nav>
+      <h4 class="my-2 task-head">مهمة جديدة</h4>
+      <form action="" class="task-form form-row">
+
+        <div class="col-sm-6">
+          <label><span><i class="fa fa-sort-numeric-down"></i></span>رقم المهمة</label>
+          <span class="task-num">ترقيم آلي</span>
+        </div>
+        <div class="col-sm-6">
+          <label for="date"><span><i class="fa fa-calendar-alt"></i></span>التاريخ </label>
+          <input type="date" id="date">
+        </div>
+
+        <div class="col-sm-6">
+          <label for="sort"><span><i class="fa fa-list-ol"></i></span>الاولوية</label>
+          <select id="sort">
+            <option value="high">عالية</option>
+            <option value="mid">متوسطة</option>
+            <option value="low">منخفضة</option>
+          </select>
+        </div>
+        <div class="col-sm-6">
+          <label for="task"><span><i class="fa fa-calendar-check"></i></span>المهمة</label>
+          <input type="text" id="task" class="t">
+        </div>
+        <div class="col-12">
+          <label for="task-details"><span><i class="fa fa-list"></i></span>وصف المهمة</label>
+          <input type="text" id="task-details">
+        </div>
+        <div class="col-sm-4">
+          <label for="days"><span><i class="fa fa-calendar-day"></i></span>المدة باليوم</label>
+          <input type="text" id="days">
+        </div>
+        <div class="col-sm-8">
+          <label for="user"><span><i class="fa fa-user"></i></span>المسند إليه</label>
+          <select id="user" class="">
+            <option value="all">الجميع</option>
+            <option value="employee">موظف</option>
+          </select>
+          <select>
+            <option value="co-op">مشاركة</option>
+            <option value="user1">جابر</option>
+            <option value="user2">عيسى</option>
+            <option value="user3">علي</option>
+          </select>
+        </div>
+
+        <div class="col-sm-8">
+          <label for="files" class="files-label"><span><i class="fa fa-paperclip"></i></span>المرفقات <span><i class="fa fa-file-upload"></i></span></label>
+          <input type="file" id="files" class="">
+        </div>
+        <div class="save">
+          <button type="submit" class="btn btn-success"><span><i class="fa fa-save"></i></span> حفظ</button>
+          <a href="#" class="btn"><span><i class="fa fa-print fa-2x"></i></span></a>
+        </div>
+
+      </form>
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات في أبو عريش</p>
+</footer>

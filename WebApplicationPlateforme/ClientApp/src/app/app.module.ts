@@ -11,6 +11,15 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { LoginPageComponent } from './User/login-page/login-page.component';
+import { UserInfoComponent } from './User/user-info/user-info.component';
+import { MainTasksComponent } from './Tache/main-tasks/main-tasks.component';
+import { NewTaskComponent } from './Tache/new-task/new-task.component';
+import { TasksListComponent } from './Tache/tasks-list/tasks-list.component';
+import { TaskDetailsComponent } from './Tache/task-details/task-details.component';
+import { EvaluatedTaskComponent } from './Tache/evaluated-task/evaluated-task.component';
+import { CompletedTaskComponent } from './Tache/completed-task/completed-task.component';
+import { AlertsComponent } from './alerts/alerts.component';
+import { MailingComponent } from './mailing/mailing.component';
 
 
 @NgModule({
@@ -22,6 +31,15 @@ import { LoginPageComponent } from './User/login-page/login-page.component';
     FetchDataComponent,
     SideMenuComponent,
     LoginPageComponent,
+    UserInfoComponent,
+    MainTasksComponent,
+    NewTaskComponent,
+    TasksListComponent,
+    TaskDetailsComponent,
+    EvaluatedTaskComponent,
+    CompletedTaskComponent,
+    AlertsComponent,
+    MailingComponent,
 
   ],
   imports: [
@@ -34,6 +52,17 @@ import { LoginPageComponent } from './User/login-page/login-page.component';
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'side-menu', component: SideMenuComponent },
       { path: 'nav-menu', component: NavMenuComponent },
+      { path: 'login-page', component: LoginPageComponent },
+      { path: 'mailing', component: MailingComponent },
+      { path: 'alerts', component: AlertsComponent },
+      { path: 'completed-task', component: CompletedTaskComponent },
+      { path: 'evaluated-task', component: EvaluatedTaskComponent },
+      { path: 'task-details', component: TaskDetailsComponent },
+      { path: 'tasks-list', component: TasksListComponent },
+      { path: 'new-task', component: NewTaskComponent },
+      { path: 'main-tasks', component: MainTasksComponent },
+      { path: 'user-info', component: UserInfoComponent },
+
      
     ])
   ],
