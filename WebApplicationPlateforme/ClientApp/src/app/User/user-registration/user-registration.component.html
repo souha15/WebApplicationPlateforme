@@ -1,0 +1,56 @@
+
+  <form class="login-form" [formGroup]="UserService.formModel" autocomplete="off" (submit)="onSubmit()">
+    <h4 class="text-center">تسجيل موظف</h4>
+
+    <div class="form-group">
+      <label for="user-name"><i class="fa fa-user "></i></label>
+      <input type="text" id="user-name" class="form-control" placeholder="الاسم بالكامل" formControlName="FullName" required>
+      <label class="text-danger" *ngIf="UserService.formModel.get('FullName').touched && UserService.formModel.get('FullName').errors?.required"> هذا الحقل إجباري</label>
+    </div>
+
+    <div class="form-group">
+      <label for="user-name"><i class="fa fa-envelope"></i></label>
+      <input type="text" id="user-name" class="form-control" placeholder="البريد الالكتروني" formControlName="Email" required>
+      <label class="text-danger" *ngIf="UserService.formModel.get('Email').touched && UserService.formModel.get('Email').errors?.required"> هذا الحقل إجباري</label>
+      <label class="text-danger" *ngIf="UserService.formModel.get('Email').touched && UserService.formModel.get('Email').errors?.email"> عنوان البريد الإلكتروني غير صالح</label>
+    </div>
+
+
+    <div class="form-group">
+      <label for="user-name"><i class="fa fa-user-circle "></i></label>
+      <input type="text" id="user-name" class="form-control" placeholder=" الرئيس المباشر" formControlName="Statut" required>
+    </div>
+
+    <div class="form-group">
+      <label for="user-name"><i class="fa fa-mobile"></i></label>
+      <input type="text" id="user-name" class="form-control" placeholder=" الجوال" formControlName="PhoneNumber" required>
+    </div>
+
+
+    <div class="form-group">
+      <label for="user-name"><i class="fa fa-user"></i></label>
+      <input type="text" id="user-name" class="form-control" placeholder="اسم المستخدم" formControlName="UserName" required>
+      <label class="text-danger" *ngIf="UserService.formModel.get('UserName').touched && UserService.formModel.get('UserName').errors?.required"> هذا الحقل إجباري</label>
+      <label class="text-danger" *ngIf="UserService.formModel.get('UserName').touched && UserService.formModel.get('UserName').errors?.minlength"> الحد الأدنى 6 أحرف</label>
+    </div>
+
+
+    <div formGroupName="Passwords">
+      <div class="form-group">
+        <label for="password"><i class="fa fa-key"></i></label>
+        <input type="password" id="password" class="form-control" placeholder="كلمة المرور" formControlName="Password" required>
+        <label class="text-danger" *ngIf="UserService.formModel.get('Passwords.Password').touched && UserService.formModel.get('Passwords.Password').errors?.required"> هذا الحقل إجباري</label>
+      </div>
+
+      <div class="form-group">
+        <label for="password"><i class="fa fa-unlock-alt"></i></label>
+        <input type="password" id="password" class="form-control" placeholder="تأكيد كلمة المرور" formControlName="ConfirmPassword" required>
+        <label class="text-danger" *ngIf="UserService.formModel.get('Passwords.ConfirmPassword').touched && UserService.formModel.get('Passwords.ConfirmPassword').errors?.required"> هذا الحقل إجباري</label>
+        <label class="text-danger" *ngIf="UserService.formModel.get('Passwords.ConfirmPassword').touched && UserService.formModel.get('Passwords.ConfirmPassword').errors?.passwordMismatch"> كلمة المرور غير متطابقة</label>
+      </div>
+    </div>
+    <hr>
+    <button type="submit" class="enter">تسجيل</button>
+    <div class="clearfix"></div>
+
+  </form>

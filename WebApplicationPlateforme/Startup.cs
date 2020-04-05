@@ -1,10 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebApplicationPlateforme.Data;
+using WebApplicationPlateforme.Model.User;
 
 namespace WebApplicationPlateforme
 {
@@ -20,6 +24,29 @@ namespace WebApplicationPlateforme
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
+          
+            services.AddEntityFrameworkNpgsql()
+                .AddDbContext<ApplicationDbContext>(
+                options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+            /* services.AddDefaultIdentity<ApplicationUser>()
+                 .AddEntityFrameworkStores<ApplicationDbContext>();
+                 */
+            services.AddIdentityCore<ApplicationUser>()
+                .AddRoles<IdentityRole>()
+        .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+            }
+           );
+            services.AddCors();
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -70,6 +97,14 @@ namespace WebApplicationPlateforme
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+            app.UseCors(builder =>
+            
+                builder.WithOrigins("http://localhost:4200")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+            );
+            app.UseAuthentication();
+            //app.UseMvc();
         }
     }
 }
