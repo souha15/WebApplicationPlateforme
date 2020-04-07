@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { UserServiceService } from '../../shared/Services/User/user-service.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login-page',
@@ -7,9 +11,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private UserService: UserServiceService,
+    private router: Router,
+    private tostr: ToastrService) { }
 
-  ngOnInit(): void {
+  formModel = {
+    UserName: '',
+    Password:''
   }
 
+  ngOnInit(): void {
+    if (localStorage.getItem('token') != null)
+      this.router.navigateByUrl('/home')
+  }
+
+  onSubmit(form: NgForm) {
+    this.UserService.login(form.value).subscribe(
+      (res: any) => {
+        localStorage.setItem('token', res.token);
+        this.router.navigateByUrl('/home');
+      },
+      err => {
+        if (err.status == 400)
+          this.tostr.error("خطأ في اسم المستخدم أو كلمة مرور", "فشل في تسجيل الدخول");
+        else
+          console.log(err);
+      }
+
+    );
+  }
 }

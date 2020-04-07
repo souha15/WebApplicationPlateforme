@@ -1,11 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserServiceService } from '../shared/Services/User/user-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-menu',
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css']
 })
-export class NavMenuComponent {
+export class NavMenuComponent implements OnInit {
+  userDetails;
+  constructor(private UserService: UserServiceService,
+    private router : Router
+  ) { }
+
+
+  ngOnInit(): void {
+    this.UserService.getUserProfile().subscribe(
+      res => {
+        this.userDetails = res;
+        
+      },
+      err => {
+        console.log(err);
+      },
+    );
+  }
+
+
+  getUserProfile() {
+   return  this.UserService.getUserProfile().subscribe(
+      res => {
+        this.userDetails = res;
+      },
+      err => {
+        console.log(err);
+      },
+    );
+  }
   isExpanded = false;
 
   collapse() {
@@ -14,5 +45,10 @@ export class NavMenuComponent {
 
   toggle() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  onLogout() {
+    localStorage.removeItem("token");
+    this.router.navigateByUrl('/User/login-page');
   }
 }

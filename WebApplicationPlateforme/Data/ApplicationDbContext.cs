@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplicationPlateforme.Model.Global;
 using WebApplicationPlateforme.Model.Taches;
 using WebApplicationPlateforme.Model.User;
 
@@ -17,5 +18,9 @@ namespace WebApplicationPlateforme.Data
         public DbSet<Tache> tache { get; set; }
         public DbSet<Commentaire> commentaires { get; set; }
         public DbSet<ApplicationUser> applicationUsers { get; set; }
+        public DbSet<Evaluation> evaluations { get; set; }
+        public DbSet<PiecesJointes> piecesJointes { get; set; }
+        public DbSet<Departement> departements { get; set; }
+        public DbSet<Administration> administrations { get; set; }
     }
 }

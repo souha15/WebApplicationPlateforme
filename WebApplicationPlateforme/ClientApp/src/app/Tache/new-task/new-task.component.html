@@ -35,44 +35,47 @@
         </a>
       </nav>
       <h4 class="my-2 task-head">مهمة جديدة</h4>
-      <form action="" class="task-form form-row">
+      <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit()">
 
         <div class="col-sm-6">
           <label><span><i class="fa fa-sort-numeric-down"></i></span>رقم المهمة</label>
-          <span class="task-num">ترقيم آلي</span>
+          <span class="task-num">{{tache.Id}}</span>
         </div>
         <div class="col-sm-6">
           <label for="date"><span><i class="fa fa-calendar-alt"></i></span>التاريخ </label>
-          <input type="date" id="date">
+          <input type="date" id="date" name="date" #date="ngModel" [(ngModel)]="tache.date">
         </div>
 
         <div class="col-sm-6">
           <label for="sort"><span><i class="fa fa-list-ol"></i></span>الاولوية</label>
-          <select id="sort">
-            <option value="high">عالية</option>
-            <option value="mid">متوسطة</option>
-            <option value="low">منخفضة</option>
+          <select id="sort" name="Priorite" #Priorite="ngModel" [(ngModel)]="tache.Priorite">
+            <option [ngValue]="undefined" selected disabled>-الاولوية-</option>
+            <option value="عالية">عالية</option>
+            <option value="متوسطة">متوسطة</option>
+            <option value="منخفضة">منخفضة</option>
           </select>
         </div>
         <div class="col-sm-6">
           <label for="task"><span><i class="fa fa-calendar-check"></i></span>المهمة</label>
-          <input type="text" id="task" class="t">
+          <input type="text" id="task" class="t" name="TacheNom" #TacheNom="ngModel" [(ngModel)]="tache.TacheNom" >
         </div>
         <div class="col-12">
           <label for="task-details"><span><i class="fa fa-list"></i></span>وصف المهمة</label>
-          <input type="text" id="task-details">
+          <input type="text" id="task-details" name="Description" #Description="ngModel" [(ngModel)]="tache.Description">
         </div>
         <div class="col-sm-4">
           <label for="days"><span><i class="fa fa-calendar-day"></i></span>المدة باليوم</label>
-          <input type="text" id="days">
+          <input type="text" id="days" name="Delai" #Delai="ngModel" [(ngModel)]="tache.Delai">
         </div>
         <div class="col-sm-8">
           <label for="user"><span><i class="fa fa-user"></i></span>المسند إليه</label>
-          <select id="user" class="">
+          <select id="user" class="" name="Atous" #Atous="ngModel" [(ngModel)]="tache.Atous">
+            <option [ngValue]="undefined" selected disabled>-المسند إليه-</option>
             <option value="all">الجميع</option>
             <option value="employee">موظف</option>
           </select>
-          <select>
+          <select name="AffectedName" #AffectedName="ngModel" [(ngModel)]="tache.AffectedName">
+            <option [ngValue]="undefined" selected disabled>-الموظف-</option>
             <option value="co-op">مشاركة</option>
             <option value="user1">جابر</option>
             <option value="user2">عيسى</option>

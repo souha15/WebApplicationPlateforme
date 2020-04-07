@@ -15,23 +15,24 @@ export class UserRegistrationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+   
+    this.UserService.formModel.reset();
   }
   onSubmit() {
     this.UserService.register().subscribe(
       (res: any) => {
         if (res.succeeded) {
-          
-          this.toastr.success('New user created!', 'Registration successful.');
+          this.UserService.formModel.reset();
+          this.toastr.success('تم إنشاء المستخدم', 'تم التسجيل بنجاح');
         } else {
           res.errors.forEach(element => {
             switch (element.code) {
               case 'DuplicateUserName':
-                this.toastr.error('Username is already taken', 'Registration failed.');
+                this.toastr.error('اسم المستخدم مسجل من قبل', 'فشل في التسجيل');
                 break;
 
               default:
-                this.toastr.error(element.description, 'Registration failed.');
+                this.toastr.error(element.description, 'فشل في التسجيل');
                 break;
             }
           });

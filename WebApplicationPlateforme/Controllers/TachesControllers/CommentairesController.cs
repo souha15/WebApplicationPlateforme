@@ -8,52 +8,52 @@ using Microsoft.EntityFrameworkCore;
 using WebApplicationPlateforme.Data;
 using WebApplicationPlateforme.Model.Taches;
 
-namespace WebApplicationPlateforme.Controllers
+namespace WebApplicationPlateforme.Controllers.TachesControllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TachesController : ControllerBase
+    public class CommentairesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public TachesController(ApplicationDbContext context)
+        public CommentairesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Taches
+        // GET: api/Commentaires
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Tache>>> Gettache()
+        public async Task<ActionResult<IEnumerable<Commentaire>>> Getcommentaires()
         {
-            return await _context.tache.ToListAsync();
+            return await _context.commentaires.ToListAsync();
         }
 
-        // GET: api/Taches/5
+        // GET: api/Commentaires/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Tache>> GetTache(int id)
+        public async Task<ActionResult<Commentaire>> GetCommentaire(int id)
         {
-            var tache = await _context.tache.FindAsync(id);
+            var commentaire = await _context.commentaires.FindAsync(id);
 
-            if (tache == null)
+            if (commentaire == null)
             {
                 return NotFound();
             }
 
-            return tache;
+            return commentaire;
         }
 
-        // PUT: api/Taches/5
+        // PUT: api/Commentaires/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTache(int id, Tache tache)
+        public async Task<IActionResult> PutCommentaire(int id, Commentaire commentaire)
         {
-            if (id != tache.Id)
+            if (id != commentaire.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(tache).State = EntityState.Modified;
+            _context.Entry(commentaire).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace WebApplicationPlateforme.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TacheExists(id))
+                if (!CommentaireExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,37 @@ namespace WebApplicationPlateforme.Controllers
             return NoContent();
         }
 
-        // POST: api/Taches
+        // POST: api/Commentaires
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Tache>> PostTache(Tache tache)
+        public async Task<ActionResult<Commentaire>> PostCommentaire(Commentaire commentaire)
         {
-            _context.tache.Add(tache);
+            _context.commentaires.Add(commentaire);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTache", new { id = tache.Id }, tache);
+            return CreatedAtAction("GetCommentaire", new { id = commentaire.Id }, commentaire);
         }
 
-        // DELETE: api/Taches/5
+        // DELETE: api/Commentaires/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Tache>> DeleteTache(int id)
+        public async Task<ActionResult<Commentaire>> DeleteCommentaire(int id)
         {
-            var tache = await _context.tache.FindAsync(id);
-            if (tache == null)
+            var commentaire = await _context.commentaires.FindAsync(id);
+            if (commentaire == null)
             {
                 return NotFound();
             }
 
-            _context.tache.Remove(tache);
+            _context.commentaires.Remove(commentaire);
             await _context.SaveChangesAsync();
 
-            return tache;
+            return commentaire;
         }
 
-        private bool TacheExists(int id)
+        private bool CommentaireExists(int id)
         {
-            return _context.tache.Any(e => e.Id == id);
+            return _context.commentaires.Any(e => e.Id == id);
         }
     }
 }

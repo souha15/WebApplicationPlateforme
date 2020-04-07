@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { PathSharedService } from '../../path-shared.service';
+import { UserDetail } from '../../Models/User/user-detail.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserServiceService {
-  readonly BaseURI = 'http://localhost:44384/api';
-  constructor(private fb: FormBuilder,
-    private http: HttpClient) { }
 
+  constructor(private fb: FormBuilder,
+    private http: HttpClient,
+    private PathService: PathSharedService) { }
+
+  readonly BaseURI = this.PathService.getPath();
   formModel = this.fb.group({
     UserName: ['', [Validators.minLength(6),Validators.required]],
     Email: ['', [Validators.email, Validators.required]],
@@ -47,5 +51,38 @@ export class UserServiceService {
       Statut: this.formModel.value.Statut
     };
     return this.http.post(this.BaseURI + '/ApplicationUser/Register', body);
+  }
+
+  //User Login
+  login(formData) {
+    return this.http.post(this.BaseURI + '/ApplicationUser/Login', formData);
+  }
+
+  //Get User Profile
+
+  getUserProfile() {
+
+    return this.http.get(this.BaseURI + '/UserProfile', {
+      headers: new HttpHeaders({
+        "Authorization": "Bearer " + localStorage.getItem('token'),
+
+        //"Content-Type": "application/json"
+      })
+
+    });
+  }
+
+  //Get User Profile Observable
+
+  getUserProfileObservable() {
+
+    return this.http.get<UserDetail>(this.BaseURI + '/UserProfile', {
+      headers: new HttpHeaders({
+        "Authorization": "Bearer " + localStorage.getItem('token'),
+
+        //"Content-Type": "application/json"
+      })
+
+    });
   }
 }

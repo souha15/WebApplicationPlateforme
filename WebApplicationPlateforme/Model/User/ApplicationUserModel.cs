@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplicationPlateforme.Model.Global;
 
 namespace WebApplicationPlateforme.Model.User
 {
@@ -30,8 +32,8 @@ namespace WebApplicationPlateforme.Model.User
         public string Emploi { get; set; }
         public string Rang { get; set; }
         public string TypeEmploi { get; set; }
-        public string Administration { get; set; }
-        public string Departement { get; set; }
+        public string NomAdministration { get; set; }
+        public string NomDepartement { get; set; }
         public string Unite { get; set; }
         public string Qualification { get; set; }
         public string TypeQualification { get; set; }
@@ -48,5 +50,15 @@ namespace WebApplicationPlateforme.Model.User
         public string HeureArrive { get; set; }
         public string HeureDepart { get; set; }
         public string Photo { get; set; }
+
+        [ForeignKey("Administration")]
+        public int? IdAdministration { get; set; }
+
+        [ForeignKey("Departement")]
+        public int? IdDepartement { get; set; }
+
+        public virtual Administration Administration { get; set; }
+
+        public virtual Departement Departement { get; set; }
     }
 }

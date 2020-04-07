@@ -219,12 +219,68 @@ namespace WebApplicationPlateforme.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Global.Administration", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Nom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NomDirecteur")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("administrations");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Global.Departement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<int>("IdAdministration")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Nom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NomAdministration")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NomDirecteur")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdAdministration");
+
+                    b.ToTable("departements");
+                });
+
             modelBuilder.Entity("WebApplicationPlateforme.Model.Taches.Commentaire", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("IdTache")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("IdUser")
+                        .HasColumnType("text");
 
                     b.Property<string>("NomUser")
                         .HasColumnType("text");
@@ -237,7 +293,71 @@ namespace WebApplicationPlateforme.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdTache");
+
+                    b.HasIndex("IdUser");
+
                     b.ToTable("commentaires");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Taches.Evaluation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<int>("IdTache")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("IdUserEvaluating")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NomUserEvaluated")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Rating")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("dateTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdTache");
+
+                    b.HasIndex("IdUserEvaluating");
+
+                    b.ToTable("evaluations");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Taches.PiecesJointes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("IdTache")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("NomUser")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("dateTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdTache");
+
+                    b.ToTable("piecesJointes");
                 });
 
             modelBuilder.Entity("WebApplicationPlateforme.Model.Taches.Tache", b =>
@@ -246,6 +366,9 @@ namespace WebApplicationPlateforme.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("AffectedName")
+                        .HasColumnType("text");
 
                     b.Property<string>("Atous")
                         .HasColumnType("text");
@@ -265,6 +388,9 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("Createur")
                         .HasColumnType("text");
 
+                    b.Property<string>("CreatorName")
+                        .HasColumnType("text");
+
                     b.Property<string>("Delai")
                         .HasColumnType("text");
 
@@ -272,6 +398,9 @@ namespace WebApplicationPlateforme.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Etat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("IdUserCreator")
                         .HasColumnType("text");
 
                     b.Property<string>("Priorite")
@@ -291,15 +420,14 @@ namespace WebApplicationPlateforme.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdUserCreator");
+
                     b.ToTable("tache");
                 });
 
             modelBuilder.Entity("WebApplicationPlateforme.Model.User.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("Administration")
-                        .HasColumnType("text");
 
                     b.Property<string>("AutreIndemnite")
                         .HasColumnType("text");
@@ -314,9 +442,6 @@ namespace WebApplicationPlateforme.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Degre")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Departement")
                         .HasColumnType("text");
 
                     b.Property<string>("Emploi")
@@ -337,6 +462,12 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("HeureDepart")
                         .HasColumnType("text");
 
+                    b.Property<int?>("IdAdministration")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("IdDepartement")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Indemnite")
                         .HasColumnType("text");
 
@@ -347,6 +478,12 @@ namespace WebApplicationPlateforme.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Nationalite")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NomAdministration")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NomDepartement")
                         .HasColumnType("text");
 
                     b.Property<string>("Num")
@@ -403,6 +540,10 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("adresse")
                         .HasColumnType("text");
 
+                    b.HasIndex("IdAdministration");
+
+                    b.HasIndex("IdDepartement");
+
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
@@ -455,6 +596,68 @@ namespace WebApplicationPlateforme.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Global.Departement", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.Global.Administration", "Administration")
+                        .WithMany()
+                        .HasForeignKey("IdAdministration")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Taches.Commentaire", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.Taches.Tache", "Tache")
+                        .WithMany()
+                        .HasForeignKey("IdTache")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("IdUser");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Taches.Evaluation", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.Taches.Tache", "Tache")
+                        .WithMany()
+                        .HasForeignKey("IdTache")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("IdUserEvaluating");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Taches.PiecesJointes", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.Taches.Tache", "Tache")
+                        .WithMany()
+                        .HasForeignKey("IdTache")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Taches.Tache", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("IdUserCreator");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.User.ApplicationUser", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.Global.Administration", "Administration")
+                        .WithMany()
+                        .HasForeignKey("IdAdministration");
+
+                    b.HasOne("WebApplicationPlateforme.Model.Global.Departement", "Departement")
+                        .WithMany()
+                        .HasForeignKey("IdDepartement");
                 });
 #pragma warning restore 612, 618
         }

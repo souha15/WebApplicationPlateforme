@@ -20,6 +20,8 @@ import { MailingComponent } from './mailing/mailing.component';
 import { UserRegistrationComponent } from './User/user-registration/user-registration.component';
 import { UserServiceService } from './shared/Services/User/user-service.service';
 import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthGuard } from './shared/Services/User/auth/auth.guard';
 
 @NgModule({
   declarations: [
@@ -45,13 +47,15 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },    
+      {
+        path: '', component: LoginPageComponent, pathMatch: 'full'},
+      { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },  
       { path: 'user-registration', component: UserRegistrationComponent },
       { path: 'side-menu', component: SideMenuComponent },
-      { path: 'nav-menu', component: NavMenuComponent },
-      { path: 'login-page', component: LoginPageComponent },
+      { path: 'nav-menu', component: NavMenuComponent },     
       { path: 'mailing', component: MailingComponent },
       { path: 'alerts', component: AlertsComponent },
       { path: 'completed-task', component: CompletedTaskComponent },
