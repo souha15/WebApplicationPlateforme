@@ -3,6 +3,7 @@ import { TacheService } from '../../shared/Services/Taches/tache.service';
 import { ToastrService } from 'ngx-toastr';
 import { Tache } from '../../shared/Models/Taches/tache.model';
 import { UserServiceService } from '../../shared/Services/User/user-service.service';
+import { UserDetail } from '../../shared/Models/User/user-detail.model';
 
 @Component({
   selector: 'app-new-task',
@@ -16,36 +17,66 @@ export class NewTaskComponent implements OnInit {
     private UserService: UserServiceService,
     ) { }
 
-  tache: Tache = new Tache();
-  CreatedTache: Tache = new Tache();
-  UserIdConnected: string ;
   ngOnInit(): void {
 
-    this.UserIdConnected = this.getUserConnected();
-    console.log(this.UserIdConnected)
+    this.getUserConnected();
+    this.getUsersList();
   }
 
   // Get User Connected
 
-  getUserConnected():string {
+  UserIdConnected: string;
+  UserNameConnected: string;
+
+  getUserConnected() {
+    
     this.UserService.getUserProfileObservable().subscribe(res => {
-      this.UserIdConnected = res.Id;
-      
-     
+      this.UserIdConnected = res.id;
+      this.UserNameConnected = res.fullName;
+          
+    })  
+  }
+
+  //Get Users List
+
+  UsersList: UserDetail[] = [];
+
+  getUsersList() {
+    this.UserService.GetUsersList().subscribe(res => {
+      this.UsersList = res
     })
-    console.log(this.UserIdConnected);
-    return this.UserIdConnected;
+  }
+
+  // Select Event
+
+  isEmployeeSelected: boolean;
+  selectInput(event) {
+    let selected = event.target.value;
+    if (selected == "employee") {
+      this.isEmployeeSelected = true;
+    } else {
+      this.isEmployeeSelected = false;
+    }
   }
   //Create Tache
+
+  tache: Tache = new Tache();
+  CreatedTache: Tache = new Tache();
+  tacheId: number;
+
   onSubmit() {
-    this.tache.CreatorName = this.getUserConnected();
+    this.tache.idUserCreator = this.UserIdConnected;
+    this.tache.creatorName = this.UserNameConnected;
+    this.tache.etat ="غير منجزة"
     this.TacheService.CreateTache(this.tache).subscribe(
       (res: any) => {
         this.CreatedTache = res;
-        this.toastr.success("", "");
+        this.tacheId = this.CreatedTache.id;
+        console.log(this.tacheId)
+        this.toastr.success("تم تسجيل المهمة بنجاح", " تسجيل المهمة");
       },
       err => {
-        this.toastr.error(err,"")
+        this.toastr.error("فشل تسجيل المهمة"," تسجيل المهمة")
       }
 
     )

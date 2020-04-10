@@ -10,6 +10,7 @@ namespace WebApplicationPlateforme.Model.User
 {
     public class ApplicationUser :IdentityUser
     {
+       
         public string RegistreCivil { get; set; }
         public string FullNameEnglish { get; set; }
         public string FullName { get; set; }

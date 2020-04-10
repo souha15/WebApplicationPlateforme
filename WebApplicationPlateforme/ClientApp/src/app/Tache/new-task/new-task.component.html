@@ -39,7 +39,7 @@
 
         <div class="col-sm-6">
           <label><span><i class="fa fa-sort-numeric-down"></i></span>رقم المهمة</label>
-          <span class="task-num">{{tache.Id}}</span>
+          <span class="task-num">{{tacheId}}</span>
         </div>
         <div class="col-sm-6">
           <label for="date"><span><i class="fa fa-calendar-alt"></i></span>التاريخ </label>
@@ -57,7 +57,7 @@
         </div>
         <div class="col-sm-6">
           <label for="task"><span><i class="fa fa-calendar-check"></i></span>المهمة</label>
-          <input type="text" id="task" class="t" name="TacheNom" #TacheNom="ngModel" [(ngModel)]="tache.TacheNom" >
+          <input type="text" id="task" class="t" name="TacheNom" #TacheNom="ngModel" [(ngModel)]="tache.TacheNom">
         </div>
         <div class="col-12">
           <label for="task-details"><span><i class="fa fa-list"></i></span>وصف المهمة</label>
@@ -69,18 +69,17 @@
         </div>
         <div class="col-sm-8">
           <label for="user"><span><i class="fa fa-user"></i></span>المسند إليه</label>
-          <select id="user" class="" name="Atous" #Atous="ngModel" [(ngModel)]="tache.Atous">
+          <select id="user" class="" name="Atous" #Atous="ngModel" [(ngModel)]="tache.Atous" (change)="selectInput($event)">
             <option [ngValue]="undefined" selected disabled>-المسند إليه-</option>
             <option value="all">الجميع</option>
             <option value="employee">موظف</option>
           </select>
-          <select name="AffectedName" #AffectedName="ngModel" [(ngModel)]="tache.AffectedName">
-            <option [ngValue]="undefined" selected disabled>-الموظف-</option>
-            <option value="co-op">مشاركة</option>
-            <option value="user1">جابر</option>
-            <option value="user2">عيسى</option>
-            <option value="user3">علي</option>
-          </select>
+          
+            <select name="AffectedName" #AffectedName="ngModel" [(ngModel)]="tache.AffectedName" *ngIf="isEmployeeSelected">
+              <option [ngValue]="undefined" selected disabled>-الموظف-</option>
+              <option *ngFor="let item of UsersList" value="{{item.id}}">{{item.fullName}}</option>
+            </select>
+         
         </div>
 
         <div class="col-sm-8">
@@ -89,7 +88,7 @@
         </div>
         <div class="save">
           <button type="submit" class="btn btn-success"><span><i class="fa fa-save"></i></span> حفظ</button>
-          <a href="#" class="btn"><span><i class="fa fa-print fa-2x"></i></span></a>
+
         </div>
 
       </form>

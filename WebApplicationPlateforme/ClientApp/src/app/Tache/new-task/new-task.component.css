@@ -1,0 +1,9 @@
+.task-num {
+  color: #ed685e;
+  font-weight: bold;
+  font-size: 18px;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: hidden;
+}

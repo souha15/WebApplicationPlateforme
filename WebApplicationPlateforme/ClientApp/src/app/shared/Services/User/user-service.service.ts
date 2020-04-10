@@ -85,4 +85,16 @@ export class UserServiceService {
 
     });
   }
+
+  //Get UserList
+
+  GetUsersList() {
+    return this.http.get<UserDetail[]>(this.BaseURI + '/User');
+  }
+
+  //Get User By ID
+
+  GetUserById(Id) {
+    return this.http.get<UserDetail>(this.BaseURI + '/User/' + Id);
+  }
 }

@@ -5,6 +5,35 @@ a {
   color: #0366d6;
 }
 
+td.work {
+  display: block;
+  margin: auto;
+  text-align: center;
+  padding: 5px;
+  color: #fff;
+  background: #007bff
+}
+
+td.done {
+  display: block;
+  margin: auto;
+  text-align: center;
+  padding: 5px;
+  color: #fff;
+  background: #28a745
+}
+
+td.notdone {
+  display: block;
+  margin: auto;
+  text-align: center;
+  padding: 5px;
+  color: #fff;
+  background: #dc3545
+} 
+thead > tr > th {
+  cursor: pointer;
+}
 code {
   color: #e01a76;
 }

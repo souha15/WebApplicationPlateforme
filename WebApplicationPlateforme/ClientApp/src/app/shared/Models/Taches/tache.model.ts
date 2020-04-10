@@ -1,20 +1,20 @@
 export class Tache {
-  Id?: number;
+  id?: number;
   date: string;
   Priorite: string;
-  TacheNom: string;
-  Description: string;
-  Delai: string;
-  Atous: string;
-  Createur: string;
-  Etat: string;
+  tacheNom: string;
+  description: string;
+  delai: string;
+  atous: string;
+  createur: string;
+  etat: string;
   type: string;
-  SousProjet: string;
+  sousProjet: string;
   Attribut1: string;
   Attribut2: string;
   Attribut3: string;
   Attribut4 : number;
-  CreatorName: string;
-  IdUserCreator: string;
-  AffectedName: string;
+  creatorName: string;
+  idUserCreator: string;
+  affectedName: string;
 }

@@ -38,7 +38,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let tache of allTache | async| orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+            <tr *ngFor="let tache of filtredtachelist |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
               <th scope="row">{{tache.id}}</th>
               <td>{{tache.tacheNom}}</td>
               <td>{{tache.creatorName}}</td>
@@ -52,9 +52,9 @@
                 {{tache.etat}}
 
                 <!-- <span class="task-st in-work" *ngIf="tache.etat == 'تحت الإجراء'">{{tache.etat}}</span>
-            <span class="task-st done" *ngIf="tache.etat == 'منجزة'">{{tache.etat}}</span>
-            <span class="task-st not-done" *ngIf="tache.etat == 'غير منجزة'">{{tache.etat}}</span>
-             -->
+                <span class="task-st done" *ngIf="tache.etat == 'منجزة'">{{tache.etat}}</span>
+                <span class="task-st not-done" *ngIf="tache.etat == 'غير منجزة'">{{tache.etat}}</span>
+                 -->
               </td>
             </tr>
 

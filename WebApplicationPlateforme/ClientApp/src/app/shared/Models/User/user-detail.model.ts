@@ -1,11 +1,11 @@
 export class UserDetail {
-        Id : string;
-        UserName : string;
-        Email : string;
+        id : string;
+        userName : string;
+        email : string;
         Password : string;
         RegistreCivil : string;
         FullNameEnglish : string;
-        FullName : string;
+        fullName : string;
         adresse : string;
         PhoneNumber : string;
         Tel : string;

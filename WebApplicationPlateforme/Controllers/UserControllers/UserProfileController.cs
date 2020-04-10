@@ -34,7 +34,9 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
             {
                 user.FullName,
                 user.Email,
-                user.UserName
+                user.UserName,
+                user.Id
+
             };
         }
     
