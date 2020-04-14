@@ -38,7 +38,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let tache of filtredtachelist |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+            <tr *ngFor="let tache of filtredtachelist |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }" [routerLink]="['/evaluated-task', tache.id]">
               <th scope="row">{{tache.id}}</th>
               <td>{{tache.tacheNom}}</td>
               <td>{{tache.creatorName}}</td>

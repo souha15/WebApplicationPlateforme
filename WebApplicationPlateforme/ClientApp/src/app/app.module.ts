@@ -28,6 +28,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { TasksListReceivedComponent } from './Tache/tasks-list-received/tasks-list-received.component';
 import { TasksListDoneComponent } from './Tache/tasks-list-done/tasks-list-done.component';
 import { TasksListDelayedComponent } from './Tache/tasks-list-delayed/tasks-list-delayed.component';
+import { TasksListCreatedComponent } from './Tache/tasks-list-created/tasks-list-created.component';
+import { EvaluationService } from './shared/Services/Taches/evaluation.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +51,7 @@ import { TasksListDelayedComponent } from './Tache/tasks-list-delayed/tasks-list
     TasksListReceivedComponent,
     TasksListDoneComponent,
     TasksListDelayedComponent,
+    TasksListCreatedComponent,
 
   ],
   imports: [
@@ -59,31 +63,36 @@ import { TasksListDelayedComponent } from './Tache/tasks-list-delayed/tasks-list
     Ng2SearchPipeModule,
     Ng2OrderModule,
     NgxPaginationModule,
+    
     ToastrModule.forRoot(),
     RouterModule.forRoot([
       {
         path: '', component: LoginPageComponent, pathMatch: 'full'},
       { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+      { path: 'tasks-list-created', component: TasksListCreatedComponent, canActivate: [AuthGuard] },
       { path: 'tasks-list-received', component: TasksListReceivedComponent, canActivate: [AuthGuard] },
       { path: 'tasks-list-done', component: TasksListDoneComponent, canActivate: [AuthGuard] },
       { path: 'tasks-list-delayed', component: TasksListDelayedComponent, canActivate: [AuthGuard] },   
-      { path: 'user-registration', component: UserRegistrationComponent },
-      { path: 'side-menu', component: SideMenuComponent },
-      { path: 'nav-menu', component: NavMenuComponent },     
-      { path: 'mailing', component: MailingComponent },
-      { path: 'alerts', component: AlertsComponent },
-      { path: 'completed-task', component: CompletedTaskComponent },
-      { path: 'evaluated-task', component: EvaluatedTaskComponent },
-      { path: 'task-details', component: TaskDetailsComponent },
-      { path: 'tasks-list', component: TasksListComponent },
-      { path: 'new-task', component: NewTaskComponent },
-      { path: 'main-tasks', component: MainTasksComponent },
-      { path: 'user-info', component: UserInfoComponent },
+      { path: 'user-registration', component: UserRegistrationComponent, canActivate: [AuthGuard] },
+      { path: 'side-menu', component: SideMenuComponent, canActivate: [AuthGuard]  },
+      { path: 'nav-menu', component: NavMenuComponent, canActivate: [AuthGuard] },     
+      { path: 'mailing', component: MailingComponent, canActivate: [AuthGuard]  },
+      { path: 'alerts', component: AlertsComponent, canActivate: [AuthGuard]  },
+      { path: 'completed-task', component: CompletedTaskComponent, canActivate: [AuthGuard] },
+      { path: 'completed-task/:id', component: CompletedTaskComponent, canActivate: [AuthGuard] },
+      { path: 'evaluated-task', component: EvaluatedTaskComponent, canActivate: [AuthGuard]  },
+      { path: 'evaluated-task/:id', component: EvaluatedTaskComponent, canActivate: [AuthGuard]  },
+      { path: 'task-details/:id', component: TaskDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'task-details', component: TaskDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'tasks-list', component: TasksListComponent, canActivate: [AuthGuard] },
+      { path: 'new-task', component: NewTaskComponent, canActivate: [AuthGuard] },
+      { path: 'main-tasks', component: MainTasksComponent, canActivate: [AuthGuard] },
+      { path: 'user-info', component: UserInfoComponent, canActivate: [AuthGuard]  },
 
      
     ])
   ],
-  providers: [UserServiceService],
+  providers: [UserServiceService, EvaluationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

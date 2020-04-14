@@ -1,7 +1,7 @@
 export class Tache {
   id?: number;
   date: string;
-  Priorite: string;
+  priorite: string;
   tacheNom: string;
   description: string;
   delai: string;

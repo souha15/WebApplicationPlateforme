@@ -22,7 +22,7 @@
                 <span class="glyphicon sort-icon" *ngIf="key =='tacheNom'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
               </th>
               <th scope="col" (click)="sort('creatorName')">
-                المحرر
+                مسندة إلى
                 <span class="glyphicon sort-icon" *ngIf="key =='creatorName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
               </th>
               <th scope="col" (click)="sort('description')">
@@ -38,10 +38,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let tache of allTache | async| orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }" [routerLink]="['/task-details', tache.id]">
+            <tr *ngFor="let tache of filtredtachelist |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }" [routerLink]="['/completed-task', tache.id]">
               <th scope="row">{{tache.id}}</th>
               <td>{{tache.tacheNom}}</td>
-              <td>{{tache.creatorName}}</td>
+              <td>{{tache.createur}}</td>
               <td>{{tache.description}}</td>
               <td [ngClass]="{
 
@@ -52,9 +52,9 @@
                 {{tache.etat}}
 
                 <!-- <span class="task-st in-work" *ngIf="tache.etat == 'تحت الإجراء'">{{tache.etat}}</span>
-            <span class="task-st done" *ngIf="tache.etat == 'منجزة'">{{tache.etat}}</span>
-            <span class="task-st not-done" *ngIf="tache.etat == 'غير منجزة'">{{tache.etat}}</span>
-             -->
+                <span class="task-st done" *ngIf="tache.etat == 'منجزة'">{{tache.etat}}</span>
+                <span class="task-st not-done" *ngIf="tache.etat == 'غير منجزة'">{{tache.etat}}</span>
+                 -->
               </td>
             </tr>
 
@@ -78,3 +78,4 @@
 <footer class="text-center">
   <p>المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات في أبو عريش</p>
 </footer>
+

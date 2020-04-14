@@ -18,27 +18,27 @@
           <div class="row">
             <div class="col-6">
               <span class="label">رقم المهمة</span>
-              <span class="num-task">0012</span>
+              <span class="num-task">{{tache.id}}</span>
             </div>
             <div class="col-6">
               <span class="label">التاريخ</span>
-              <span>25/06/1441</span>
+              <span>{{tache.date}}</span>
             </div>
             <div class="col-6">
               <span class="label">الموضوع</span>
-              <span>تجهيز إعلان محاضرة</span>
+              <span>{{tache.tacheNom}}</span>
             </div>
             <div class="col-6">
               <span class="label">مدة التنفيذ</span>
-              <span>3 أيام </span>
+              <span>{{tache.delai}} أيام </span>
             </div>
             <div class="col-6">
               <span class="label">جهة الطلب</span>
-              <span>عبد الكريم صديق</span>
+              <span>{{tache.creatorName}}</span>
             </div>
             <div class="col-6">
               <span class="label">الموظف</span>
-              <span>أشرف ملاكدي</span>
+              <span>{{tache.createur}}</span>
             </div>
 
           </div>
@@ -48,7 +48,7 @@
             </div>
             <div class="col-md-6">
               <span>
-                طباعة 20 نسخة ملونة من إعلان محاضرة الشيخ محمد شامي وتختيمها من مكتب الأوقاف
+               {{tache.description}}
               </span>
             </div>
             <div class="col-12">
@@ -60,30 +60,31 @@
               </div>
             </div>
             <div class="col-12 text-right">
-              <a href="#" class="btn complete-btn">
+              <a  class="btn complete-btn">
                 <i class="fa fa-star"></i>
                 تقييم
               </a>
-
+              <form #form="ngForm" autocomplete="off" (submit)="onSubmit()">
               <div>
                 <label class="d-block">
-                  <input type="checkbox" name="value">
+                  <input type="checkbox" name="value1" (change)='onSelect($event)'>
                   إنجاز جميع عناصر المهمة
                 </label>
                 <label class="d-block">
-                  <input type="checkbox" name="value">
+                  <input type="checkbox" name="value2" (change)='onSelect($event)'>
                   الإنجاز في الوقت المحدد
                 </label>
                 <label class="d-block">
-                  <input type="checkbox" name="value">
+                  <input type="checkbox" name="value3" (change)='onSelect($event)'>
                   سرعة التفاعل والرد
                 </label>
                 <label class="d-block">
-                  <input type="checkbox" name="value">
+                  <input type="checkbox" name="value4" (change)='onSelect($event)'>
                   جودة العمل
                 </label>
               </div>
-
+              <button class="btncolor" type="submit"><i class="fa fa-star"></i> تقييم</button>
+              </form>
             </div>
           </div>
         </div>

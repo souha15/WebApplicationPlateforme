@@ -21,7 +21,7 @@
                 </li>
                 <li class="flex-fill item-text">
                   <p>رقم المهمة</p>
-                  <span class="num-task">96</span>
+                  <span class="num-task">{{tache.id}}</span>
                 </li>
               </ul>
             </div>
@@ -32,7 +32,7 @@
                 </li>
                 <li class="flex-fill item-text">
                   <p>محرر المهمة</p>
-                  <span>عبد العزيز الشهري</span>
+                  <span>{{tache.creatorName}}</span>
                 </li>
               </ul>
             </div>
@@ -43,7 +43,7 @@
                 </li>
                 <li class="flex-fill item-text">
                   <p> المسند إليه</p>
-                  <span>عبد العزيز الشهري</span>
+                  <span>{{tache.createur}}</span>
                 </li>
               </ul>
             </div>
@@ -54,7 +54,7 @@
                 </li>
                 <li class="flex-fill item-text">
                   <p>الحالة</p>
-                  <span>منجزة</span>
+                  <span>{{tache.etat}}</span>
                 </li>
               </ul>
             </div>
@@ -66,23 +66,19 @@
                 <tr>
                   <th scope="col">رقم المهمة</th>
                   <th scope="col">اسم المهمة</th>
-                  <th scope="col">نوع المهمة</th>
                   <th scope="col">أولوية</th>
                   <th scope="col">تاريخ البداية</th>
-                  <th scope="col">تاريخ النهاية</th>
-                  <th scope="col">مهمة تابعة</th>
+                  <th scope="col">المدة باليوم</th>
                   <th scope="col">وصف المهمة</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row">96</th>
-                  <td>حجز على العالي</td>
-                  <td>هندسة</td>
-                  <td>عاجل</td>
-                  <td>20/1/2020</td>
-                  <td>5/2/2020</td>
-                  <td>لا يوجد</td>
+                  <th scope="row">{{tache.id}}</th>
+                  <td>{{tache.tacheNom}}</td>
+                  <td>{{tache.priorite}}</td>
+                  <td>{{tache.date}}</td>
+                  <td>{{tache.delai}}</td>
                   <td><span class="show-details">اظهار التفاصيل</span></td>
                 </tr>
               </tbody>

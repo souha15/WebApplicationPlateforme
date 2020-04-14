@@ -4,12 +4,13 @@ import { Tache } from '../../shared/Models/Taches/tache.model';
 import { Observable } from 'rxjs';
 import { UserServiceService } from '../../shared/Services/User/user-service.service';
 
+
 @Component({
-  selector: 'app-tasks-list-delayed',
-  templateUrl: './tasks-list-delayed.component.html',
-  styleUrls: ['./tasks-list-delayed.component.css']
+  selector: 'app-tasks-list-created',
+  templateUrl: './tasks-list-created.component.html',
+  styleUrls: ['./tasks-list-created.component.css']
 })
-export class TasksListDelayedComponent implements OnInit {
+export class TasksListCreatedComponent implements OnInit {
 
   constructor(private TacheService: TacheService,
     private UserService: UserServiceService, ) { }
@@ -39,7 +40,7 @@ export class TasksListDelayedComponent implements OnInit {
       this.tacheliste = res
 
       if (this.tacheliste != null) {
-        this.filtredtachelist = this.tacheliste.filter(item => item.affectedName == this.UserIdConnected && item.etat == "غير منجزة")
+        this.filtredtachelist = this.tacheliste.filter(item => item.idUserCreator == this.UserIdConnected)
 
       }
     });
@@ -68,12 +69,5 @@ export class TasksListDelayedComponent implements OnInit {
 
     })
   }
-
-  // Difference with 2 dates
-  calculateDiff(dateSent) {
-    let currentDate = new Date();
-    dateSent = new Date(dateSent);
-
-    return Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate())) / (1000 * 60 * 60 * 24));
-  }
 }
+

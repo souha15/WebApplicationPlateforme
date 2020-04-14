@@ -75,7 +75,7 @@
             <option value="employee">موظف</option>
           </select>
           
-            <select name="AffectedName" #AffectedName="ngModel" [(ngModel)]="tache.AffectedName" *ngIf="isEmployeeSelected">
+            <select name="AffectedName" #AffectedName="ngModel" [(ngModel)]="tache.AffectedName" *ngIf="isEmployeeSelected" (change)="selectInput2($event)">
               <option [ngValue]="undefined" selected disabled>-الموظف-</option>
               <option *ngFor="let item of UsersList" value="{{item.id}}">{{item.fullName}}</option>
             </select>

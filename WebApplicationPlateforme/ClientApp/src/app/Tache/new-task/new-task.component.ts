@@ -58,6 +58,15 @@ export class NewTaskComponent implements OnInit {
       this.isEmployeeSelected = false;
     }
   }
+
+  userAffectedName: string;
+  selectInput2(event) {
+    let Id = event.target.value;
+    this.UserService.GetUserById(Id).subscribe(res => {
+      this.userAffectedName = res.fullName;
+
+    })
+  }
   //Create Tache
 
   tache: Tache = new Tache();
@@ -67,12 +76,13 @@ export class NewTaskComponent implements OnInit {
   onSubmit() {
     this.tache.idUserCreator = this.UserIdConnected;
     this.tache.creatorName = this.UserNameConnected;
-    this.tache.etat ="غير منجزة"
+    this.tache.etat = "غير منجزة"
+    this.tache.createur = this.userAffectedName;
     this.TacheService.CreateTache(this.tache).subscribe(
       (res: any) => {
         this.CreatedTache = res;
         this.tacheId = this.CreatedTache.id;
-        console.log(this.tacheId)
+  
         this.toastr.success("تم تسجيل المهمة بنجاح", " تسجيل المهمة");
       },
       err => {
