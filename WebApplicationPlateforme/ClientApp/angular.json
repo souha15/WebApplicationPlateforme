@@ -28,7 +28,14 @@
               "src/styles.css",
               "node_modules/ngx-toastr/toastr.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "src/assets/js/bootstrap.min.js",
+              "src/assets/js/all.min.js",
+              "src/assets/js/frontend.js",
+              "src/assets/js/jquery-3.4.1.min.js"
+
+            ]
           },
           "configurations": {
             "production": {

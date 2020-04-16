@@ -22,5 +22,7 @@ namespace WebApplicationPlateforme.Data
         public DbSet<PiecesJointes> piecesJointes { get; set; }
         public DbSet<Departement> departements { get; set; }
         public DbSet<Administration> administrations { get; set; }
+        public DbSet<Privileges> privileges { get; set; }
+        public string WebRootPath { get; internal set; }
     }
 }

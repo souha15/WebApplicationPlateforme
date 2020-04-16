@@ -15,6 +15,7 @@ export class UserServiceService {
 
   readonly BaseURI = this.PathService.getPath();
   formModel = this.fb.group({
+   
     UserName: ['', [Validators.minLength(6),Validators.required]],
     Email: ['', [Validators.email, Validators.required]],
     FullName: ['',  Validators.required],
@@ -40,9 +41,11 @@ export class UserServiceService {
     }
 
   }
-  /* User Registration */
+/* User Registration */
+  Username: string;
   register() {
     var body = {
+      
       UserName: this.formModel.value.UserName,
       Email: this.formModel.value.Email,
       FullName: this.formModel.value.FullName,
@@ -50,6 +53,8 @@ export class UserServiceService {
       PhoneNumber: this.formModel.value.PhoneNumber,
       Statut: this.formModel.value.Statut
     };
+    this.Username = this.formModel.value.UserName;
+    
     return this.http.post(this.BaseURI + '/ApplicationUser/Register', body);
   }
 
@@ -97,4 +102,9 @@ export class UserServiceService {
   GetUserById(Id) {
     return this.http.get<UserDetail>(this.BaseURI + '/User/' + Id);
   }
+
+  GetUserByUserName(UserName) {
+    return this.http.get<UserDetail>(this.BaseURI + '/GetUserName/' + UserName);
+  }
 }
+

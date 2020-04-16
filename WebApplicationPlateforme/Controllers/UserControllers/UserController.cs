@@ -33,5 +33,7 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
             var user = _userManager.Users.FirstOrDefault(u => u.Id == Id);
             return user;
         }
+
+     
     }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../shared/Services/User/user-service.service';
 import { Router } from '@angular/router';
+import { PrivilegesService } from '../shared/Services/User/privileges.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -10,7 +11,8 @@ import { Router } from '@angular/router';
 export class NavMenuComponent implements OnInit {
   userDetails;
   constructor(private UserService: UserServiceService,
-    private router : Router
+    private router: Router,
+    private privilegesService: PrivilegesService
   ) { }
 
 
@@ -51,4 +53,6 @@ export class NavMenuComponent implements OnInit {
     localStorage.removeItem("token");
     this.router.navigateByUrl('/User/login-page');
   }
+
+
 }

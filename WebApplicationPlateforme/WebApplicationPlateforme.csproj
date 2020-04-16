@@ -43,10 +43,13 @@
     <Folder Include="ClientApp\src\app\shared\Models\Global\" />
     <Folder Include="ClientApp\src\app\shared\Models\User\" />
     <Folder Include="ClientApp\src\app\shared\Models\Taches\" />
+    <Folder Include="ClientApp\src\app\shared\Interfaces\" />
+    <Folder Include="ClientApp\src\app\shared\Enum\" />
     <Folder Include="ClientApp\src\app\shared\Services\Global\" />
     <Folder Include="ClientApp\src\app\shared\Services\Taches\" />
     <Folder Include="ClientApp\src\app\Tache\" />
     <Folder Include="ClientApp\src\app\User\" />
+    <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 
   <ItemGroup>

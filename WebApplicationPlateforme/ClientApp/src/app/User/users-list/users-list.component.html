@@ -1,0 +1,75 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">قائمة الموظفين</h3>
+      </header>
+
+
+      <div class="form-group pull-right">
+        <input type="text" class="search form-control" placeholder="ما الذي تبحث عنه ؟">
+      </div>
+      <span class="counter pull-right"></span>
+      <table class="table results">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">اسم الموظف</th>
+            <th scope="col">الإدارة</th>
+            <th scope="col">اسم المدير</th>
+          </tr>
+          <tr class="warning no-result">
+            <td colspan="4"><i class="fa fa-exclamation-triangle"></i> لا يوجد نتائج</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>محمد</td>
+            <td>المشروعات</td>
+            <td>محمود</td>
+            <td><a class="btn btn-success" href="#">تعديل</a></td>
+            <td><a class="btn btn-danger" href="#">حذف</a></td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>سعيد</td>
+            <td>العلاقات العامة</td>
+            <td>علي</td>
+            <td><a class="btn btn-success" href="#">تعديل</a></td>
+            <td><a class="btn btn-danger" href="#">حذف</a></td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>احمد</td>
+            <td>التسويق</td>
+            <td>سعد</td>
+            <td><a class="btn btn-success" href="#">تعديل</a></td>
+            <td><a class="btn btn-danger" href="#">حذف</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <a href="emp-register.html">إضافة موظف جديد <i class="fa fa-user-plus"></i></a>
+      <!-- Pagination -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item"><a class="page-link" href="#">السابق</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">التالي</a></li>
+        </ul>
+      </nav>
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات في أبو عريش</p>
+</footer>

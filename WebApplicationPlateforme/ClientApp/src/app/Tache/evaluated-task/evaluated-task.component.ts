@@ -3,6 +3,7 @@ import { Tache } from '../../shared/Models/Taches/tache.model';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { TacheService } from '../../shared/Services/Taches/tache.service';
+import { EvaluationService } from '../../shared/Services/Taches/evaluation.service';
 @Component({
   selector: 'app-evaluated-task',
   templateUrl: './evaluated-task.component.html',
@@ -12,14 +13,15 @@ export class EvaluatedTaskComponent implements OnInit {
 
   private routeSub: Subscription;
   constructor(private route: ActivatedRoute,
-    private TacheService: TacheService) { }
+    private TacheService: TacheService,
+    private evaluationService: EvaluationService) { }
 
   ngOnInit(): void {
     this.getIdUrl();
     this.getTaskDetails();
 
   }
-
+  
   //get id in URl
   TaskId: number;
   tache: Tache = new Tache();
@@ -32,9 +34,19 @@ export class EvaluatedTaskComponent implements OnInit {
   }
 
   // getTask
+  rated: boolean = false;
+  currentRate :number;
   getTaskDetails() {
     this.TacheService.GetById(this.TaskId).subscribe(res => {
       this.tache = res
+      this.evaluationService.GetById(this.tache.id).subscribe(res => {
+        if (res != null) {
+          this.currentRate = +res.rating;
+          this.rated = true;
+        } else
+          this.rated = false
+      })
+
 
     })
   }

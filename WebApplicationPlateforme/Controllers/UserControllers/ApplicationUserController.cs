@@ -37,6 +37,7 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
         {
             var applicationUser = new ApplicationUser()
             {
+              
                 UserName = model.UserName,
                 Email = model.Email,
                 RegistreCivil = model.RegistreCivil,

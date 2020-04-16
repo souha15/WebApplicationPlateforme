@@ -5,7 +5,9 @@ body {
 
 
 
-
+.pointer-link {
+  cursor: pointer;
+} 
 
 div.form-group label {
   color: black;

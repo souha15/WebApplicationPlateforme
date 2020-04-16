@@ -74,25 +74,56 @@
             <option value="all">الجميع</option>
             <option value="employee">موظف</option>
           </select>
-          
-            <select name="AffectedName" #AffectedName="ngModel" [(ngModel)]="tache.AffectedName" *ngIf="isEmployeeSelected" (change)="selectInput2($event)">
-              <option [ngValue]="undefined" selected disabled>-الموظف-</option>
-              <option *ngFor="let item of UsersList" value="{{item.id}}">{{item.fullName}}</option>
-            </select>
-         
+
+          <select name="AffectedName" #AffectedName="ngModel" [(ngModel)]="tache.AffectedName" *ngIf="isEmployeeSelected" (change)="selectInput2($event)">
+            <option [ngValue]="undefined" selected disabled>-الموظف-</option>
+            <option *ngFor="let item of UsersList" value="{{item.id}}">{{item.fullName}}</option>
+          </select>
+
         </div>
 
-        <div class="col-sm-8">
-          <label for="files" class="files-label"><span><i class="fa fa-paperclip"></i></span>المرفقات <span><i class="fa fa-file-upload"></i></span></label>
-          <input type="file" id="files" class="">
-        </div>
         <div class="save">
           <button type="submit" class="btn btn-success"><span><i class="fa fa-save"></i></span> حفظ</button>
 
         </div>
-
+       
       </form>
-    </div><!-- End col-9 -->
+        <form class="task-form form-row">
+          <div class="col-sm-12">
+            <label for="files" class="files-label">
+              <ul class="d-flex list-unstyled">
+                <li class="upload-symbol">
+                  <i class="fa fa-cloud-upload-alt fa-3x"></i>
+                </li>
+                <li class="flex-fill">
+                  <p>اسحب الملفات هنا</p>
+                  <a (click)="inputFile.click()"> <span>أو انقر للاختيار يدويا</span></a>
+                </li>
+              </ul>
+            </label>
+            <input type="file" id="files" class="" (change)="upload($event)" #inputFile>
+        
+
+            <h2>File List</h2>
+            <p *ngIf="showProgress"> progress <strong>{{percentage}}%</strong></p>
+            <label class="error" [hidden]="!showDownloadError">ci sono stati errori durante il download</label>
+            <label class="error" [hidden]="!showUploadError">ci sono stati errori durante l'upload</label>
+            <hr>
+            <div class="container">
+              <ul>
+                <li *ngFor="let file of files">
+                  <a>
+                    {{file}}
+                   
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </form>
+
+</div><!-- End col-9 -->
   </div>
 
 </div>

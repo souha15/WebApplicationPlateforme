@@ -30,6 +30,10 @@ import { TasksListDoneComponent } from './Tache/tasks-list-done/tasks-list-done.
 import { TasksListDelayedComponent } from './Tache/tasks-list-delayed/tasks-list-delayed.component';
 import { TasksListCreatedComponent } from './Tache/tasks-list-created/tasks-list-created.component';
 import { EvaluationService } from './shared/Services/Taches/evaluation.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UsersListComponent } from './User/users-list/users-list.component';
+import { PrivilegesService } from './shared/Services/User/privileges.service';
+
 
 @NgModule({
   declarations: [
@@ -52,6 +56,7 @@ import { EvaluationService } from './shared/Services/Taches/evaluation.service';
     TasksListDoneComponent,
     TasksListDelayedComponent,
     TasksListCreatedComponent,
+    UsersListComponent,
 
   ],
   imports: [
@@ -63,7 +68,7 @@ import { EvaluationService } from './shared/Services/Taches/evaluation.service';
     Ng2SearchPipeModule,
     Ng2OrderModule,
     NgxPaginationModule,
-    
+    NgbModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
       {
@@ -88,11 +93,12 @@ import { EvaluationService } from './shared/Services/Taches/evaluation.service';
       { path: 'new-task', component: NewTaskComponent, canActivate: [AuthGuard] },
       { path: 'main-tasks', component: MainTasksComponent, canActivate: [AuthGuard] },
       { path: 'user-info', component: UserInfoComponent, canActivate: [AuthGuard]  },
+      { path: 'users-list', component: UsersListComponent, canActivate: [AuthGuard]  },
 
      
     ])
   ],
-  providers: [UserServiceService, EvaluationService],
+  providers: [UserServiceService, EvaluationService, PrivilegesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

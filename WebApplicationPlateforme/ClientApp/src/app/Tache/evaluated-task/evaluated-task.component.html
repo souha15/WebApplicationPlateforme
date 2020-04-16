@@ -121,22 +121,35 @@
             </ul>
             <a href="#">اضف تعليق</a>
           </div>
-          <div class="col-12 text-center">
+          <div class="col-12 text-center" *ngIf="rated">
             <a href="#" class="btn complete-btn mb-3" style="background: #072">
               <i class="fa fa-check"></i>
               تم التقييم
             </a>
 
             <div class="stars">
-              <span class="star"><i class="far fa-star fa-lg"></i></span>
-              <span class="star"><i class="fa fa-star fa-lg"></i></span>
-              <span class="star"><i class="fa fa-star fa-lg"></i></span>
-              <span class="star"><i class="fa fa-star fa-lg"></i></span>
-              <span class="star"><i class="fa fa-star fa-lg"></i></span>
-            </div>
 
+              <ng-template #t let-fill="fill">
+                <span class="star" [class.full]="fill === 100">
+                  <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                </span>
+              </ng-template>
+
+              <ngb-rating [(rate)]="currentRate" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+
+              <hr>
+              <pre>التقييم: <b>{{currentRate}}</b></pre>
+              </div>
+              <!--- <div class="stars">
+      <span class="star"><i class="far fa-star fa-lg"></i></span>
+      <span class="star"><i class="fa fa-star fa-lg"></i></span>
+      <span class="star"><i class="fa fa-star fa-lg"></i></span>
+      <span class="star"><i class="fa fa-star fa-lg"></i></span>
+      <span class="star"><i class="fa fa-star fa-lg"></i></span>
+    </div>-->
+
+            </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
