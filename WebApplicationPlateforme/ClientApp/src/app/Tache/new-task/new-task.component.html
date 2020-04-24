@@ -9,30 +9,34 @@
     <div class="col-md-9 col-sm-8">
       <!-- Second Navbar -->
       <nav class="d-flex p-0 bd-highlight tasks-nav mt-2">
-        <a [routerLink]="['/main-tasks']" class="p-2 flex-fill bd-highlight">
+        <a [routerLink]="['/main-tasks']" href="" class="p-2 flex-fill bd-highlight active">
           <span><i class="fa fa-home"></i></span>
           الرئيسية
         </a>
-        <a [routerLink]="['/new-task']" class="p-2 flex-fill bd-highlight active">
+        <a [routerLink]="['/new-task']" href="" class="p-2 flex-fill bd-highlight">
           <span><i class="fa fa-calendar-plus"></i></span>
           إضافة مهمة
         </a>
-        <a href="" class="p-2 flex-fill bd-highlight">
+        <a [routerLink]="['/tasks-list-received']" href="" class="p-2 flex-fill bd-highlight">
           <span><i class="fa fa-tasks"></i></span>
           المهام الواردة
         </a>
-        <a href="" class="p-2 flex-fill bd-highlight">
+        <a [routerLink]="['/tasks-list-delayed']" href="" class="p-2 flex-fill bd-highlight">
           <span><i class="fa fa-clock"></i></span>
           المهام المتأخرة
         </a>
-        <a href="" class="p-2 flex-fill bd-highlight">
-          <span><i class="fa fa-user-tie"></i></span>
-          الموظفين
+        <a href="" [routerLink]="['/tasks-reports']" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-file-text"></i></span>
+          تقارير المهام المرسلة
         </a>
-        <a href="" class="p-2 flex-fill bd-highlight">
-          <span><i class="fa fa-user-cog"></i></span>
-          مدير النظام
+        <a href="" [routerLink]="['/tasks-reports-received']" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-file"></i></span>
+          تقارير المهام الواردة
         </a>
+        <!--<a href="" class="p-2 flex-fill bd-highlight">
+    <span><i class="fa fa-user-cog"></i></span>
+    مدير النظام
+  </a>-->
       </nav>
       <h4 class="my-2 task-head">مهمة جديدة</h4>
       <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit()">
@@ -86,44 +90,31 @@
           <button type="submit" class="btn btn-success"><span><i class="fa fa-save"></i></span> حفظ</button>
 
         </div>
-       
       </form>
-        <form class="task-form form-row">
-          <div class="col-sm-12">
-            <label for="files" class="files-label">
-              <ul class="d-flex list-unstyled">
-                <li class="upload-symbol">
-                  <i class="fa fa-cloud-upload-alt fa-3x"></i>
-                </li>
-                <li class="flex-fill">
-                  <p>اسحب الملفات هنا</p>
-                  <a (click)="inputFile.click()"> <span>أو انقر للاختيار يدويا</span></a>
-                </li>
-              </ul>
-            </label>
-            <input type="file" id="files" class="" (change)="upload($event)" #inputFile>
-        
+      <form class="task-form form-row">
+        <div class="col-sm-8">
+          <label for="files" class="files-label"><span><i class="fa fa-paperclip"></i></span>المرفقات <span><i class="fa fa-file-upload"></i></span></label>
+          <input type="file" id="files" class="" (change)="upload($event)" #inputFile>
 
-            <h2>File List</h2>
-            <p *ngIf="showProgress"> progress <strong>{{percentage}}%</strong></p>
-            <label class="error" [hidden]="!showDownloadError">ci sono stati errori durante il download</label>
-            <label class="error" [hidden]="!showUploadError">ci sono stati errori durante l'upload</label>
-            <hr>
-            <div class="container">
-              <ul>
-                <li *ngFor="let file of files">
-                  <a>
-                    {{file}}
-                   
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <p *ngIf="showProgress"> progress <strong>{{percentage}}%</strong></p>
+          <label class="error" [hidden]="!showDownloadError">ci sono stati errori durante il download</label>
+          <label class="error" [hidden]="!showUploadError">ci sono stati errori durante l'upload</label>
+          <hr>
 
-        </form>
 
-</div><!-- End col-9 -->
+          <ul *ngFor="let pd of serviceupload.list;">
+            <li *ngIf="tacheId == pd.idTache">
+              <a *ngIf="tacheId == pd.idTache" (click)="onDelete(pd.id)" class="aaa"><i class="fa fa-trash"></i>  </a>
+              <a>
+                {{pd.path}}
+
+              </a>
+            </li>
+          </ul>
+        </div>
+      </form>
+
+    </div><!-- End col-9 -->
   </div>
 
 </div>
@@ -131,3 +122,19 @@
 <footer class="text-center">
   <p>المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات في أبو عريش</p>
 </footer>
+<!--     <table class="table table-bordered table-hover">
+            <tr>
+
+              <td>قائمة الملفات</td>
+              <td>حذف </td>
+            </tr>
+
+            <tr *ngFor="let pd of serviceupload.list;">
+
+              <td *ngIf="tacheId == pd.idTache">
+
+                {{pd.path}}
+              </td>
+              <td *ngIf="tacheId == pd.idTache"><a (click)="onDelete(pd.id)" class="aaa"><i class="fa fa-trash"></i> حذف </a></td>
+            </tr>
+          </table>-->

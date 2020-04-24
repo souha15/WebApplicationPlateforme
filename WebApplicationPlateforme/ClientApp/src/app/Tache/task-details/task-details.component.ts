@@ -1,9 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Tache } from '../../shared/Models/Taches/tache.model';
 import { TacheService } from '../../shared/Services/Taches/tache.service';
 import { Chart } from 'node_modules/chart.js'
+import { Message } from '../../shared/Models/Comments/message.model';
+import { ChatService } from '../../shared/Services/Comments/chat.service';
+import { Commentaire } from '../../shared/Models/Taches/commentaire.model';
+import { CommentaireService } from '../../shared/Services/Taches/commentaire.service';
+import { UserServiceService } from '../../shared/Services/User/user-service.service';
 @Component({
   selector: 'app-task-details',
   templateUrl: './task-details.component.html',
@@ -12,14 +17,40 @@ import { Chart } from 'node_modules/chart.js'
 export class TaskDetailsComponent implements OnInit {
 
   private routeSub: Subscription;
+
+
   constructor(private route: ActivatedRoute,
-    private TacheService: TacheService) { }
+    private TacheService: TacheService,
+    private commentsService: CommentaireService,
+    private UserService: UserServiceService,) {
+
+    /*this.subscribeToEvents();*/}
 
   ngOnInit(): void {
+
+    this.getUserConnected();
     this.getIdUrl();
     this.getTaskDetails();
-    this.Charts();
+    this.ListOfComments();
+    //this.LoadMore();
+    
+    //this.Charts();
   }
+
+  // Get User Connected
+
+  UserIdConnected: string;
+  UserNameConnected: string;
+
+  getUserConnected() {
+
+    this.UserService.getUserProfileObservable().subscribe(res => {
+      this.UserIdConnected = res.id;
+      this.UserNameConnected = res.fullName;
+
+    })
+  }
+
 
   //get id in URl
   TaskId: number;
@@ -114,4 +145,55 @@ export class TaskDetailsComponent implements OnInit {
     });
   }
 
+
+  //Comments
+
+  txtMessage: string = '';
+  messages = new Array<Commentaire>();
+  message: Commentaire = new Commentaire();
+ 
+  //list of comments
+  ListOfComments() {
+    this.commentsService.CommentsList().subscribe(res => {
+      this.messages = res;
+
+
+    })
+
+  
+  }
+
+
+ 
+  //Create Comment
+  sendMessage(): void {
+    if (this.txtMessage) {
+
+      this.message.IdTache = this.tache.id;
+      this.message.textCommentaire = this.txtMessage;
+      this.message.dateTime = new Date();
+      this.message.IdUser = this.UserIdConnected;
+      this.message.nomUser = this.UserNameConnected;
+      this.commentsService.CreateComment(this.message).subscribe(res => {
+
+        this.messages.push(this.message);
+        this.txtMessage = '';
+      })
+     
+
+      //this.chatService.sendMessage(this.message);
+     
+    }
+  }
+/*  private subscribeToEvents(): void {
+
+    this.chatService.messageReceived.subscribe((message: Message) => {
+      this._ngZone.run(() => {
+        if (message.clientuniqueid !== this.uniqueID) {
+          message.type = "received";
+          this.messages.push(message);
+        }
+      });
+    });
+  }  */
 }

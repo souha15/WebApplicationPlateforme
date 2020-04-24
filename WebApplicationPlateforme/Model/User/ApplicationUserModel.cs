@@ -51,6 +51,8 @@ namespace WebApplicationPlateforme.Model.User
         public string HeureDepart { get; set; }
         public string Photo { get; set; }
 
+        public string Role { get; set; }
+
         [ForeignKey("Administration")]
         public int? IdAdministration { get; set; }
 
@@ -60,5 +62,7 @@ namespace WebApplicationPlateforme.Model.User
         public virtual Administration Administration { get; set; }
 
         public virtual Departement Departement { get; set; }
+
+      
     }
 }

@@ -54,9 +54,16 @@
             <div class="col-12">
               <span class="label">المرفقات</span>
               <div class="file-links">
-                <a href="#"><i class="fa fa-file-word fa-2x"></i></a>
-                <a href="#"><i class="fa fa-file-pdf fa-2x"></i></a>
-                <a href="#"><i class="fa fa-table fa-2x"></i></a>
+                <ul *ngFor="let pd of listPjFiltred;">
+                  <li>
+
+                    <a (click)="download(pd.path)"><i class="fa fa-download  fa-2x"></i></a>
+                    {{pd.path}}
+
+
+                  </li>
+                </ul>
+
               </div>
             </div>
             <div class="col-12 text-right">

@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
 using WebApplicationPlateforme.Data;
+using WebApplicationPlateforme.Hubs;
 using WebApplicationPlateforme.Model.User;
 
 namespace WebApplicationPlateforme
@@ -83,6 +84,8 @@ namespace WebApplicationPlateforme
                
                 };
             });
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -137,8 +140,13 @@ namespace WebApplicationPlateforme
                 .AllowAnyMethod()
             );
             app.UseAuthentication();
-           
+
             //app.UseMvc();
+
+            app.UseSignalR(options =>
+            {
+                options.MapHub<MessageHub>("/MessageHub");
+            });
         }
     }
 }

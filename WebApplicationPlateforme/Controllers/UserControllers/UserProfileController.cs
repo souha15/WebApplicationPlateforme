@@ -39,6 +39,57 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
 
             };
         }
-    
-}
+
+        [HttpGet]
+        [Authorize(Roles = "مسؤول النظام", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("ForAdmin")]
+        public string GetForAdmin()
+        {
+            return "Web method for Admin";
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "موظف", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("ForEmployee")]
+        public string GetForEmployee()
+        {
+            return "Web method for Employee";
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "مدير قسم", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("ForDirectorEtab")]
+        public string GetForDirectorEtab()
+        {
+            return "Web method for etablissement Director";
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "مدير ادارة", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("ForDirectorAdmin")]
+        public string GetForDirectorAdmin()
+        {
+            return "Web method for administrative director";
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "مدير عام", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("ForDirectorGeneral")]
+        public string GetForDirectorGeneral()
+        {
+            return "Web method for general director";
+        }
+
+
+      /*  [HttpGet]
+        [Authorize(Roles = "Director,Employee", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("ForDirectorOrEmployee")]
+        public string GetForDirectorOrEmployee()
+        {
+            return "Web method for Director or Employee";
+        }
+
+    */
+
+    }
 }

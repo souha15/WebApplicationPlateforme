@@ -1,8 +1,9 @@
-/*import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from "@angular/common/http";
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 import { Router } from "@angular/router";
+import { error } from "protractor";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -24,6 +25,8 @@ export class AuthInterceptor implements HttpInterceptor {
               localStorage.removeItem('token');
               this.router.navigateByUrl('/user/login');
             }
+            else if (err.status == 401)
+              this.router.navigateByUrl('/forbidden-page')
           }
         )
       )
@@ -31,4 +34,4 @@ export class AuthInterceptor implements HttpInterceptor {
     else
       return next.handle(req.clone());
   }
-}*/
+}

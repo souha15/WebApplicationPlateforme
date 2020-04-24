@@ -5,6 +5,14 @@ a {
   color: #0366d6;
 }
 
+.modal-header .close {
+  padding: 1rem 1rem;
+  margin: -1rem auto -1rem -1rem;
+}
+
+  a:hover {
+    cursor: pointer;
+  }
 td.work {
   display: block;
   margin: auto;
@@ -1326,3 +1334,4 @@ table .show-details {
 .nav-tabs {
   border-bottom: 1px solid #dee2e6;
 }
+

@@ -1,0 +1,61 @@
+
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">تحديث موظف</h3>
+      </header>
+      <div class="tabs">
+        <ul class="nav nav-tabs">
+          <li class="nav-item reg-btn pointer-link"><a class="nav-link active">بيانات الموظف</a></li>
+         
+        </ul>
+        <section class="text-right">
+
+          <div class="reg text-right">
+            <form #form="ngForm" autocomplete="off" (submit)="onsubmit(form)">
+              <div class="form-group">
+
+                <label class="" for="full-name"><i class="fa fa-user"></i></label>
+                <input class="" type="text" name="fullName" placeholder="الاسم بالكامل" id="full-name" #fullName="ngModel" [(ngModel)]="UserService.formData.fullName" required>
+              </div>
+
+              <div class="form-group">
+                <label class="" for="email"><i class="fa fa-envelope"></i></label>
+                <input class="" type="email" name="email" placeholder="البريد الالكتروني" id="email" #email="ngModel" [(ngModel)]="UserService.formData.email" required>
+
+              </div>
+
+              <div class="form-group">
+                <label class="" for="poss"><i class="fa fa-user-circle"></i></label>
+                <input class="" type="text" name="statut" placeholder="الرئيس المباشر" id="poss" #statut="ngModel" [(ngModel)]="UserService.formData.statut" required>
+              </div>
+
+              <div class="form-group">
+                <label class="" for="tele"><i class="fa fa-mobile-alt"></i></label>
+                <input class="" type="tel" name="PhoneNumber" placeholder=" الجوال" id="tele" #phoneNumber="ngModel" [(ngModel)]="UserService.formData.phoneNumber" required>
+              </div>
+              <div class="form-group">
+                <label class="" for="new-user-name"><i class="fa fa-user"></i></label>
+                <input class="" type="text" name="userName" placeholder="اسم المستخدم" id="new-user-name" #userName="ngModel" [(ngModel)]="UserService.formData.userName" required>
+
+              </div>
+
+              <button type="submit" class="enter">تحديث</button>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات في أبو عريش</p>
+</footer>

@@ -7,7 +7,9 @@ import { UserDetail } from '../../shared/Models/User/user-detail.model';
 import { UploadDownloadService } from '../../shared/Services/Taches/upload-download.service';
 import { ProgressStatus } from '../../shared/Interfaces/progress-status';
 import { ProgressStatusEnum } from '../../shared/Enum/progress-status-enum.enum';
-import { HttpEventType } from '@angular/common/http';
+import { HttpEventType, HttpClient } from '@angular/common/http';
+import { PiecesJointes } from '../../shared/Models/Taches/pieces-jointes.model';
+import { PathSharedService } from '../../shared/path-shared.service';
 
 @Component({
   selector: 'app-new-task',
@@ -17,15 +19,17 @@ import { HttpEventType } from '@angular/common/http';
 export class NewTaskComponent implements OnInit {
 
   @Input() public disabled: boolean;
-  @Output() public uploadStatus: EventEmitter<ProgressStatus>;
+  @Output() public uploadStatuss: EventEmitter<ProgressStatus>;
   @ViewChild('inputFile') inputFile: ElementRef;
 
   constructor(private TacheService: TacheService,
     private toastr: ToastrService,
     private UserService: UserServiceService,
-    private service: UploadDownloadService
+    private serviceupload: UploadDownloadService,
+    private http: HttpClient,
+    private rootUrl: PathSharedService
   ) {
-    this.uploadStatus = new EventEmitter<ProgressStatus>();}
+    this.uploadStatuss = new EventEmitter<ProgressStatus>();}
 
   ngOnInit(): void {
 
@@ -103,64 +107,115 @@ export class NewTaskComponent implements OnInit {
     )
   }
 
+  //Files
+
+  public response: { 'dbpathsasstring': '' };
+  public isCreate: boolean;
+  public pj: PiecesJointes = new PiecesJointes();
+  public pjs: PiecesJointes[];
+  public files: string[];
+
+  //get List of Files
+
+  private getFiles() {
+    this.serviceupload.getFiles().subscribe(
+      data => {
+        this.files = data
+
+      }
+    );
+
+  }
+
+  //Get file name for Database
+
+  GetFileName() {
+    let sa: string;
+    let s: any;
+    let finalres: any;
+    let i: number = 0;
+    let tlistnew: any[] = [];
+    for (var k = 0; k < this.files.length; k++) {
+      sa = <string>this.files[k]
+      s = sa.toString().split('uploads\\,', sa.length - 1);
+      finalres = s.toString().split('uploads\\', sa.length - 1);
+
+      tlistnew[i] = finalres[1]
+      i++;
+
+    }
+
+    console.log(tlistnew)
+  }
+
   //Upload
+
+  //Save it ToDatabase
+  Idtransaction: number;
+  url: any;
   public upload(event) {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
-      this.uploadStatus.emit({ status: ProgressStatusEnum.START });
-      this.service.uploadFile(file).subscribe(
+      this.uploadStatuss.emit({ status: ProgressStatusEnum.START });
+      this.serviceupload.uploadFile(file).subscribe(
         data => {
           if (data) {
             switch (data.type) {
               case HttpEventType.UploadProgress:
-                this.uploadStatus.emit({ status: ProgressStatusEnum.IN_PROGRESS, percentage: Math.round((data.loaded / data.total) * 100) });
+                this.uploadStatuss.emit({ status: ProgressStatusEnum.IN_PROGRESS, percentage: Math.round((data.loaded / data.total) * 100) });
                 break;
               case HttpEventType.Response:
                 this.inputFile.nativeElement.value = '';
-                this.uploadStatus.emit({ status: ProgressStatusEnum.COMPLETE });
+                this.uploadStatuss.emit({ status: ProgressStatusEnum.COMPLETE });
                 break;
             }
+            this.getFiles();
+            this.GetFileName();
+
           }
+
         },
+
         error => {
           this.inputFile.nativeElement.value = '';
-          this.uploadStatus.emit({ status: ProgressStatusEnum.ERROR });
+          this.uploadStatuss.emit({ status: ProgressStatusEnum.ERROR });
         }
       );
+
+      this.pj.nomUser = this.tache.creatorName;
+      let datef = Date.now();
+      this.pj.dateTime = new Date(datef);
+      this.pj.dateTime
+      this.pj.path = file.name;
+      this.pj.idTache = this.tacheId;
+      let path = this.rootUrl.getPath();
+
+      this.http.post(path + '/PiecesJointes', this.pj)
+        .subscribe(res => {
+          this.serviceupload.refreshList();
+        });
+
+      this.GetFileName();
     }
   }
-  //list files
-  public files: string[];
-  public fileInDownload: string;
-  public percentage: number;
-  public showProgress: boolean;
-  public showDownloadError: boolean;
-  public showUploadError: boolean;
-  private getFiles() {
-    this.service.getFiles().subscribe(
-      data => {
-        this.files = data;
-      }
-    );
-  }
 
-  public uploadStatuss(event: ProgressStatus) {
-    switch (event.status) {
-      case ProgressStatusEnum.START:
-        this.showUploadError = false;
-        break;
-      case ProgressStatusEnum.IN_PROGRESS:
-        this.showProgress = true;
-        this.percentage = event.percentage;
-        break;
-      case ProgressStatusEnum.COMPLETE:
-        this.showProgress = false;
-        this.getFiles();
-        break;
-      case ProgressStatusEnum.ERROR:
-        this.showProgress = false;
-        this.showUploadError = true;
-        break;
+  //DeleteFile
+
+  onDelete(Id) {
+    if (confirm('هل أنت متأكد من حذف هذا الملف ?')) {
+      this.serviceupload.deletePj(Id)
+        .subscribe(res => {
+          this.serviceupload.refreshList();
+          this.toastr.success("تم الحذف  بنجاح", "نجاح");
+        },
+
+          err => {
+            console.log(err);
+            this.toastr.warning('لم يتم الحذف  ', ' فشل');
+
+          }
+        )
+
     }
   }
 }

@@ -14,6 +14,14 @@ export class UserServiceService {
     private PathService: PathSharedService) { }
 
   readonly BaseURI = this.PathService.getPath();
+  formData: UserDetail;
+  headers = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    })
+  }
+
   formModel = this.fb.group({
    
     UserName: ['', [Validators.minLength(6),Validators.required]],
@@ -105,6 +113,34 @@ export class UserServiceService {
 
   GetUserByUserName(UserName) {
     return this.http.get<UserDetail>(this.BaseURI + '/GetUserName/' + UserName);
+  }
+
+  //Delete Users
+
+  DeleteUser(Id: string) {
+    return this.http.delete(this.BaseURI + '/User/' +Id)
+
+  }
+
+  //Update User
+
+  EditUser() {
+    return this.http.put<UserDetail>(this.BaseURI + '/User/' + this.formData.id, this.formData, this.headers);
+  }
+
+  //Handling Roles
+
+  roleMatch(allowedRoles): boolean {
+    var isMatch = false;
+    var payLoad = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1]));
+    var userRole = payLoad.role;
+    allowedRoles.forEach(element => {
+      if (userRole == element) {
+        isMatch = true;
+        return false;
+      }
+    });
+    return isMatch;
   }
 }
 

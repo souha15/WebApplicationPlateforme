@@ -1,6 +1,4 @@
 
-  <input type="checkbox" id="details">
-  <label for="details" id="details-lab">تفاصيل . . </label>
   <div class="side-menu">
     <h5>
       <span><i class="fa fa-tasks"></i></span>
@@ -23,19 +21,50 @@
       <span class="arrow"><i class="fa fa-chevron-left"></i></span>
     </h5>
     <div>
-      <a href="#">الخطابات</a>
-      <a href="#">الصادر</a>
-      <a href="#">الوارد</a>
+      <a>الخطابات</a>
+      <a>الصادر</a>
+      <a>الوارد</a>
     </div>
 
     <h5 class="accordion">
       <span><i class="fa fa-users"></i></span> الموظفين
       <span class="arrow"><i class="fa fa-chevron-left"></i></span>
     </h5>
-    <div></div>
+    <div>
+      <a [routerLink]="['/users-list']"> قائمة الموظفين </a>
+      <a [routerLink]="['/user-registration']">إضافة موظف </a>
+    </div>
     <h5>
       <span><i class="fa fa-clipboard-list"></i></span> الفعاليات
       <span class="arrow"><i class="fa fa-chevron-left"></i></span>
     </h5>
     <div></div>
-</div>
+
+    <h5>
+      <span><i class="fa fa-wrench"></i></span>
+      إدارة النظام
+      <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+    </h5>
+    <div>
+      
+      <a [routerLink]="['/administration-list']">قائمة الإدارات </a>
+      <a [routerLink]="['/new-administration']">إضافة إدارة </a>
+      <a [routerLink]="['/etablissement-list']">قائمة  الأقسام</a>
+      <a [routerLink]="['/new-etablissement']">إضافة قسم</a>
+
+    </div>
+  </div>
+
+<script>
+  $(document).ready(function () {
+    // Side Menu Accordion 
+    $('.side-menu div:first').css('display', 'block');
+    $('.side-menu h5').click(function () {
+      $(this).next().slideToggle(400);
+      $('.side-menu div').not($(this).next()).slideUp(400);
+    });
+    $('.side-menu h5').click(function () {
+      $('.side-menu h5 .arrow .fa').toggleClass('fa-chevron-left');
+      $('.side-menu h5 .arrow .fa').toggleClass('fa-chevron-down');
+    });
+</script>

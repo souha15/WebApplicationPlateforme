@@ -753,24 +753,6 @@ header {
     margin: auto
 }
 
-/*
-.task-details span {
-    border: 1px solid #999;
-    padding: 8px 0;
-    display: inline-block;
-    margin-left: 15px;
-    border-radius: 10px;
-    text-align: center;
-    min-width: 150px;
-}
-
-.task-details span.label {
-    background: #d5d7dc;
-    color: #276885;
-    font-weight: bold;
-    border: 1px solid #276885;
-}
-*/
 .completed {
     border: 2px solid #080;
     color: #080;
@@ -865,7 +847,6 @@ table .show-details {
     text-align: right;
     padding: 15px 10px;
     background: #F2F2F2;
-    display: none;
     border: 1px solid #999
 }
 
@@ -892,6 +873,22 @@ table .show-details {
 .task-details-box a {
     text-decoration: none;
     color: #f00;
+}
+
+.comment {
+    padding: 5px;
+    background: #d1d1d1;
+    margin-right: 40px;
+    border-radius: 5px;
+}
+
+.comment-form {
+    width: 90%;
+    margin: auto;
+}
+
+.comment-form input[type='text'] {
+    width: 80%
 }
 
 /*****************************

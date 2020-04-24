@@ -1,0 +1,89 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+
+      <h2 class="task-head">تقرير المهام المرسلة</h2>
+      <form action="" class=" mt-4">
+        <div class="form-group form-inline  mb-3 ml-4">
+          <label class="" for="start-date">تاريخ البداية</label>
+          <input type="date" id="start-date" class="form-control mr-2">
+        </div>
+        <div class="form-group form-inline  mb-3 ml-4">
+          <label class="" for="end-date">تاريخ النهاية</label>
+          <input type="date" id="end-date" class="form-control mr-2">
+        </div>
+        <div class="form-group form-inline ml-4">
+
+          <label for="to-employee">إلى الموظف</label>
+          <select name="to-employee" id="to-employee" class="form-control mr-2">
+            <option [ngValue]="undefined" selected disabled>-الموظف-</option>
+            <option *ngFor="let item of UsersList" value="{{item.id}}">{{item.fullName}}</option>
+          </select>
+        </div>
+        <hr>
+        <div class="form-group text-center">
+          <input type="submit" value="إنشاء" class="btn btn-primary form-inline ml-2 mb-3">
+          <input type="reset" value="حذف الحقول" class="btn btn-danger form-inline mb-3">
+        </div>
+      </form>
+      <button class="btn btn-success btn-block" (click)="openPDF()">Open PDF</button>
+      <button class="btn btn-danger btn-block" (click)="downloadPDF()">Download PDF</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="container" id="htmlData" #htmlData>
+  <div class="report-page">
+    <h1 class="text-center">تقرير المهام المرسلة</h1>
+    <div class="text-right">
+      <p class="lead"><span>تاريخ البداية : </span>21/4/2020</p>
+      <p class="lead"><span>تاريخ النهاية : </span>26/4/202</p>
+      <p class="lead"><span>من إدارة : </span>الدعاية والإعلان</p>
+      <p class="lead"><span>إلى الموظف : </span>محمد محمود</p>
+    </div>
+    <table class="table table-striped text-center table-bordered">
+      <thead class="bg-secondary">
+        <tr>
+          <th scope="col">الرقم التسلسلي</th>
+          <th scope="col">رقم المهمة</th>
+          <th scope="col">عنوان المهمة</th>
+          <th scope="col">تاريخ الانشاء</th>
+          <th scope="col">الحالة</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>25</td>
+          <td>تجهيز إعلان محاضرة الشيخ محمد شامي</td>
+          <td>21/4/2020</td>
+          <td>تحت الإجراء</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>26</td>
+          <td>توثيق فعالية</td>
+          <td>21/4/2020</td>
+          <td>منجزة</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>30</td>
+          <td>إرسال تقرير الفنار الختامي</td>
+          <td>21/4/2020</td>
+          <td>غير منجزة</td>
+        </tr>
+      </tbody>
+    </table>
+  </div> <!-- End Page Content -->
+</div> <!-- End Container -->
+<!-- Footer -->
+<footer class="text-center">
+  <p>المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات في أبو عريش</p>
+</footer>

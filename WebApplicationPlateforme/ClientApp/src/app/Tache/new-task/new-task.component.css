@@ -7,3 +7,15 @@
   border-left-style: hidden;
   border-bottom-style: hidden;
 }
+.aaa {
+  background-color: #eb4034;
+  color: #fff;
+  padding: 5px;
+  border-radius: 10px 10px 10px 10px;
+  border: 0;
+  height: auto;
+  width: auto;
+}
+ul {
+  list-style:none
+}

@@ -17,6 +17,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="3.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
@@ -40,12 +41,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\app\shared\Models\Global\" />
+    <Folder Include="ClientApp\src\app\Administration\" />
+    <Folder Include="ClientApp\src\app\Etablissement\" />
     <Folder Include="ClientApp\src\app\shared\Models\User\" />
     <Folder Include="ClientApp\src\app\shared\Models\Taches\" />
     <Folder Include="ClientApp\src\app\shared\Interfaces\" />
     <Folder Include="ClientApp\src\app\shared\Enum\" />
-    <Folder Include="ClientApp\src\app\shared\Services\Global\" />
     <Folder Include="ClientApp\src\app\shared\Services\Taches\" />
     <Folder Include="ClientApp\src\app\Tache\" />
     <Folder Include="ClientApp\src\app\User\" />

@@ -12,59 +12,46 @@
 
 
       <div class="form-group pull-right">
-        <input type="text" class="search form-control" placeholder="ما الذي تبحث عنه ؟">
+        <input type="text" class="search form-control" placeholder="ما الذي تبحث عنه ؟" name="search" [(ngModel)]="filter">
       </div>
       <span class="counter pull-right"></span>
       <table class="table results">
         <thead>
           <tr>
-            <th scope="col">#</th>
             <th scope="col">اسم الموظف</th>
             <th scope="col">الإدارة</th>
             <th scope="col">اسم المدير</th>
+            <th scope="col">البريد الالكتروني</th>
+            <th scope="col">الجوال</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
           </tr>
           <tr class="warning no-result">
             <td colspan="4"><i class="fa fa-exclamation-triangle"></i> لا يوجد نتائج</td>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>محمد</td>
-            <td>المشروعات</td>
-            <td>محمود</td>
-            <td><a class="btn btn-success" href="#">تعديل</a></td>
-            <td><a class="btn btn-danger" href="#">حذف</a></td>
+          <tr *ngFor="let user of allUser | async| orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+            <td>{{user.fullName}}</td>
+            <td>{{user.userName}}</td>
+            <td>{{user.statut}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.phoneNumber}}</td>
+            <td><a class="btn btn-success" (click)="populateForm(user)" [routerLink]="['/user-updating', user.id]"><i class="fa fa-edit"></i>تعديل</a></td>
+            <td><a (click)="deleteUser(user.id)" class="btn btn-danger"><i class="fa fa-trash"></i>حذف</a></td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>سعيد</td>
-            <td>العلاقات العامة</td>
-            <td>علي</td>
-            <td><a class="btn btn-success" href="#">تعديل</a></td>
-            <td><a class="btn btn-danger" href="#">حذف</a></td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>احمد</td>
-            <td>التسويق</td>
-            <td>سعد</td>
-            <td><a class="btn btn-success" href="#">تعديل</a></td>
-            <td><a class="btn btn-danger" href="#">حذف</a></td>
-          </tr>
+
         </tbody>
       </table>
-      <a href="emp-register.html">إضافة موظف جديد <i class="fa fa-user-plus"></i></a>
+
+      <a [routerLink]="['/user-registration']">إضافة موظف جديد <i class="fa fa-user-plus"></i></a>
       <!-- Pagination -->
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-          <li class="page-item"><a class="page-link" href="#">السابق</a></li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><a class="page-link" href="#">التالي</a></li>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </ul>
       </nav>
+
     </div><!-- End col-9 -->
   </div>
 

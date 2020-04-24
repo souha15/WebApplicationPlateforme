@@ -20,7 +20,7 @@ namespace WebApplicationPlateforme.Model.Taches
         public string NomUser { get; set; }
 
         [ForeignKey("Tache")]
-        public int IdTache { get; set; }
+        public int? IdTache { get; set; }
 
         [ForeignKey("ApplicationUser")]
         public string IdUser { get; set; }

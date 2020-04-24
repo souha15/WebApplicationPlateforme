@@ -33,6 +33,18 @@ import { EvaluationService } from './shared/Services/Taches/evaluation.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsersListComponent } from './User/users-list/users-list.component';
 import { PrivilegesService } from './shared/Services/User/privileges.service';
+import { CommentaireService } from './shared/Services/Taches/commentaire.service';
+import { TasksReportsComponent } from './Tache/tasks-reports/tasks-reports.component';
+import { TasksReportsReceivedComponent } from './Tache/tasks-reports-received/tasks-reports-received.component';
+import { AdministrationListComponent } from './Administration/administration-list/administration-list.component';
+import { NewAdministrationComponent } from './Administration/new-administration/new-administration.component';
+import { NewEtablissementComponent } from './Etablissement/new-etablissement/new-etablissement.component';
+import { EtablissementListComponent } from './Etablissement/etablissement-list/etablissement-list.component';
+import { UserUpdatingComponent } from './User/user-updating/user-updating.component';
+import { ForbiddenPageComponent } from './forbidden-page/forbidden-page.component';
+import { AuthInterceptor } from './shared/Services/User/auth/auth.interceptor';
+import { EtablissementService } from './shared/Services/Etablissement/etablissement.service';
+import { AdministrationService } from './shared/Services/Administration/administration.service';
 
 
 @NgModule({
@@ -57,6 +69,14 @@ import { PrivilegesService } from './shared/Services/User/privileges.service';
     TasksListDelayedComponent,
     TasksListCreatedComponent,
     UsersListComponent,
+    TasksReportsComponent,
+    TasksReportsReceivedComponent,
+    AdministrationListComponent,
+    NewAdministrationComponent,
+    NewEtablissementComponent,
+    EtablissementListComponent,
+    UserUpdatingComponent,
+    ForbiddenPageComponent,
 
   ],
   imports: [
@@ -71,34 +91,53 @@ import { PrivilegesService } from './shared/Services/User/privileges.service';
     NgbModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
-      {
-        path: '', component: LoginPageComponent, pathMatch: 'full'},
+      //{ path: '', redirectTo: '/User/login-page', pathMatch:'full' },
+      { path: '', component: LoginPageComponent, pathMatch: 'full' },
       { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+      { path: 'tasks-reports', component: TasksReportsComponent, canActivate: [AuthGuard] },
+      { path: 'tasks-reports-received', component: TasksReportsReceivedComponent, canActivate: [AuthGuard] },
       { path: 'tasks-list-created', component: TasksListCreatedComponent, canActivate: [AuthGuard] },
       { path: 'tasks-list-received', component: TasksListReceivedComponent, canActivate: [AuthGuard] },
       { path: 'tasks-list-done', component: TasksListDoneComponent, canActivate: [AuthGuard] },
-      { path: 'tasks-list-delayed', component: TasksListDelayedComponent, canActivate: [AuthGuard] },   
+      { path: 'tasks-list-delayed', component: TasksListDelayedComponent, canActivate: [AuthGuard] },
       { path: 'user-registration', component: UserRegistrationComponent, canActivate: [AuthGuard] },
-      { path: 'side-menu', component: SideMenuComponent, canActivate: [AuthGuard]  },
-      { path: 'nav-menu', component: NavMenuComponent, canActivate: [AuthGuard] },     
-      { path: 'mailing', component: MailingComponent, canActivate: [AuthGuard]  },
-      { path: 'alerts', component: AlertsComponent, canActivate: [AuthGuard]  },
+      { path: 'side-menu', component: SideMenuComponent, canActivate: [AuthGuard] },
+      { path: 'nav-menu', component: NavMenuComponent, canActivate: [AuthGuard] },
+      { path: 'mailing', component: MailingComponent, canActivate: [AuthGuard] },
+      { path: 'alerts', component: AlertsComponent, canActivate: [AuthGuard] },
       { path: 'completed-task', component: CompletedTaskComponent, canActivate: [AuthGuard] },
       { path: 'completed-task/:id', component: CompletedTaskComponent, canActivate: [AuthGuard] },
-      { path: 'evaluated-task', component: EvaluatedTaskComponent, canActivate: [AuthGuard]  },
-      { path: 'evaluated-task/:id', component: EvaluatedTaskComponent, canActivate: [AuthGuard]  },
+      { path: 'evaluated-task', component: EvaluatedTaskComponent, canActivate: [AuthGuard] },
+      { path: 'evaluated-task/:id', component: EvaluatedTaskComponent, canActivate: [AuthGuard] },
       { path: 'task-details/:id', component: TaskDetailsComponent, canActivate: [AuthGuard] },
       { path: 'task-details', component: TaskDetailsComponent, canActivate: [AuthGuard] },
       { path: 'tasks-list', component: TasksListComponent, canActivate: [AuthGuard] },
       { path: 'new-task', component: NewTaskComponent, canActivate: [AuthGuard] },
       { path: 'main-tasks', component: MainTasksComponent, canActivate: [AuthGuard] },
-      { path: 'user-info', component: UserInfoComponent, canActivate: [AuthGuard]  },
-      { path: 'users-list', component: UsersListComponent, canActivate: [AuthGuard]  },
+      { path: 'user-info', component: UserInfoComponent, canActivate: [AuthGuard] },
+      { path: 'users-list', component: UsersListComponent, canActivate: [AuthGuard]},
+      { path: 'administration-list', component: AdministrationListComponent, canActivate: [AuthGuard]},
+      { path: 'new-administration', component: NewAdministrationComponent, canActivate: [AuthGuard]},
+      { path: 'new-etablissement', component: NewEtablissementComponent, canActivate: [AuthGuard]},
+      { path: 'etablissement-list', component: EtablissementListComponent, canActivate: [AuthGuard]},
+      { path: 'user-updating', component: UserUpdatingComponent, canActivate: [AuthGuard]},
+      { path: 'user-updating/:id', component: UserUpdatingComponent, canActivate: [AuthGuard]},
+      { path: 'forbidden-page', component: ForbiddenPageComponent },
+      //{ path: 'user-updating/:id', component: UserUpdatingComponent, canActivate: [AuthGuard], data: { permittedRoles: ['مسؤول النظام'] } },
+   
 
      
     ])
-  ],
-  providers: [UserServiceService, EvaluationService, PrivilegesService],
+  ],/*,  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  } ,*/
+  providers: [UserServiceService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }, EvaluationService, PrivilegesService, CommentaireService, EtablissementService, AdministrationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

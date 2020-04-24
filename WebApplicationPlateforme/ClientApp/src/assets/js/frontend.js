@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    // Accordion Menu
+    // Side Menu Accordion 
     $('.side-menu div:first').css('display', 'block');
     $('.side-menu h5').click(function () {
         $(this).next().slideToggle(400);
@@ -9,13 +9,7 @@ $(document).ready(function () {
         $('.side-menu h5 .arrow .fa').toggleClass('fa-chevron-left');
         $('.side-menu h5 .arrow .fa').toggleClass('fa-chevron-down');
     });
-
-
-    // Show details button
-    $('table .show-details').click(function () {
-        $('.task-details-box').slideToggle(400);
-    });
-
+    
     // Regiser Page
     $('.tabs .reg-btn').click(function () {
         $('.reg').fadeIn(300).siblings().fadeOut(300);
@@ -58,4 +52,5 @@ $(document).ready(function () {
             $('.no-result').hide();
         }
     });
+        
 });

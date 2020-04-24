@@ -25,14 +25,18 @@
           <span><i class="fa fa-clock"></i></span>
           المهام المتأخرة
         </a>
-        <a href="" class="p-2 flex-fill bd-highlight">
-          <span><i class="fa fa-user-tie"></i></span>
-          الموظفين
+        <a href="" [routerLink]="['/tasks-reports']" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-file-pdf"></i></span>
+          تقارير المهام المرسلة
         </a>
-        <a href="" class="p-2 flex-fill bd-highlight">
-          <span><i class="fa fa-user-cog"></i></span>
-          مدير النظام
+        <a href="" [routerLink]="['/tasks-reports-received']" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-file"></i></span>
+          تقارير المهام الواردة
         </a>
+        <!--<a href="" class="p-2 flex-fill bd-highlight">
+    <span><i class="fa fa-user-cog"></i></span>
+    مدير النظام
+  </a>-->
       </nav>
       <!-- Tasks Page Content -->
       <section class="page-content">

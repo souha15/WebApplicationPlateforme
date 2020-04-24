@@ -64,67 +64,50 @@
               <thead class="thead-dark">
                 <tr>
                   <th scope="col">رقم المهمة</th>
-                  <th scope="col">اسم المهمة</th>                 
+                  <th scope="col">اسم المهمة</th>
                   <th scope="col">أولوية</th>
                   <th scope="col">تاريخ البداية</th>
-                  <th scope="col">المدة باليوم</th>                  
+                  <th scope="col">المدة باليوم</th>
                   <th scope="col">وصف المهمة</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <th scope="row">{{tache.id}}</th>
-                  <td>{{tache.tacheNom}}</td>                  
+                  <td>{{tache.tacheNom}}</td>
                   <td>{{tache.priorite}}</td>
                   <td>{{tache.date}}</td>
-                  <td>{{tache.delai}}</td>                
-                  <td><span class="show-details">اظهار التفاصيل</span></td>
+                  <td>{{tache.delai}}</td>
+                  <td>{{tache.description}}</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div class="task-details-box">
-            <h5 class="head">حجز على العالي</h5>
-            <p class="text-danger"> مراحل المهمة <span><i class="fa fa-chevron-down"></i></span></p>
-            <ul>
+          <br />
+     
+          <div class="pp">
+            <h5 class="head">التعليقات</h5>
+            <div class="scrolbar">
+            <ul *ngFor="let msg of messages">
               <li>
-                <span class="name">جابر دوشي</span>
-                <span class="date">منذ يوم واحد</span>
-                <p>
-                  تم الانشاء <span>
-                    <i class="fa fa-edit
-"></i>
-                  </span>
-                </p>
+                <img src="assets/images/avatar.png" class="user-img" alt="">
+                <b><span class="name">{{msg.nomUser}}</span></b>
+                <span class="date">&nbsp;&nbsp;&nbsp;{{msg.dateTime | date:'short'}}</span>
+                <p class="comment">{{msg.textCommentaire}}  </p>
               </li>
-              <li>
-                <span class="name">جابر دوشي</span>
-                <span class="date">منذ يوم واحد</span>
-                <p>
-                  مكتملة<span>
-                    <i class="fa fa-edit
-"></i>
-                  </span>
-                </p>
-              </li>
-              <li>
-                <span class="name">جابر دوشي</span>
-                <span class="date">منذ يوم واحد</span>
-                <p>
-                  تم اعادة الفتح <span>
-                    <i class="fa fa-edit
-"></i>
-                  </span>
-                </p>
-              </li>
-            </ul>
-            <a href="#">اضف تعليق</a>
-          </div>
 
+            </ul>
+         </div>
+            <div class="comment-form">
+              <input type="text" placeholder="أضف تعليق . ." class="write_msg" [value]="txtMessage"
+                     (input)="txtMessage=$event.target.value" (keydown.enter)="sendMessage()" />
+
+            </div>
+          </div>
         </div>
 
       </div>
-      <!-- Chart for task time -->
+      <!-- Chart for task time 
       <div class="time-chart">
         <div class="container">
           <div class="row">
@@ -137,7 +120,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
     </div>
   </div>
 
