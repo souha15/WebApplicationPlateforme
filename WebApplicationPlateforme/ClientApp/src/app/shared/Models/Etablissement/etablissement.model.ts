@@ -1,5 +1,5 @@
 export class Etablissement {
-  id: number; 
+  id?: number; 
   nom :string;
   description :string;
   nomDirecteur :string;

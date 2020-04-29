@@ -100,7 +100,7 @@ import { AdministrationService } from './shared/Services/Administration/administ
       { path: 'tasks-list-received', component: TasksListReceivedComponent, canActivate: [AuthGuard] },
       { path: 'tasks-list-done', component: TasksListDoneComponent, canActivate: [AuthGuard] },
       { path: 'tasks-list-delayed', component: TasksListDelayedComponent, canActivate: [AuthGuard] },
-      { path: 'user-registration', component: UserRegistrationComponent, canActivate: [AuthGuard] },
+      { path: 'user-registration', component: UserRegistrationComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
       { path: 'side-menu', component: SideMenuComponent, canActivate: [AuthGuard] },
       { path: 'nav-menu', component: NavMenuComponent, canActivate: [AuthGuard] },
       { path: 'mailing', component: MailingComponent, canActivate: [AuthGuard] },
@@ -123,7 +123,7 @@ import { AdministrationService } from './shared/Services/Administration/administ
       { path: 'user-updating', component: UserUpdatingComponent, canActivate: [AuthGuard]},
       { path: 'user-updating/:id', component: UserUpdatingComponent, canActivate: [AuthGuard]},
       { path: 'forbidden-page', component: ForbiddenPageComponent },
-      //{ path: 'user-updating/:id', component: UserUpdatingComponent, canActivate: [AuthGuard], data: { permittedRoles: ['مسؤول النظام'] } },
+      //{ path: 'user-updating/:id', component: UserUpdatingComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
    
 
      

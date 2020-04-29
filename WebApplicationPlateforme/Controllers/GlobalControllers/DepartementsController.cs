@@ -30,7 +30,7 @@ namespace WebApplicationPlateforme.Controllers.GlobalControllers
 
         // GET: api/Departements/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Departement>> GetDepartement(int id)
+        public async Task<ActionResult<Departement>> GetDepartement(int? id)
         {
             var departement = await _context.departements.FindAsync(id);
 
@@ -43,10 +43,10 @@ namespace WebApplicationPlateforme.Controllers.GlobalControllers
         }
 
         // PUT: api/Departements/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDepartement(int id, Departement departement)
+        public async Task<IActionResult> PutDepartement(int? id, Departement departement)
         {
             if (id != departement.Id)
             {
@@ -75,8 +75,8 @@ namespace WebApplicationPlateforme.Controllers.GlobalControllers
         }
 
         // POST: api/Departements
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<Departement>> PostDepartement(Departement departement)
         {
@@ -88,7 +88,7 @@ namespace WebApplicationPlateforme.Controllers.GlobalControllers
 
         // DELETE: api/Departements/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Departement>> DeleteDepartement(int id)
+        public async Task<ActionResult<Departement>> DeleteDepartement(int? id)
         {
             var departement = await _context.departements.FindAsync(id);
             if (departement == null)
@@ -102,7 +102,7 @@ namespace WebApplicationPlateforme.Controllers.GlobalControllers
             return departement;
         }
 
-        private bool DepartementExists(int id)
+        private bool DepartementExists(int? id)
         {
             return _context.departements.Any(e => e.Id == id);
         }

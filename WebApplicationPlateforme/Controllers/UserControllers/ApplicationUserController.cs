@@ -35,6 +35,7 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
         //POST : /api/ApplicationUser/Register
         public async Task<Object> PostApplicationUser(ApplicationUserModel model)
         {
+     
           
             var applicationUser = new ApplicationUser()
             {
@@ -84,7 +85,8 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
             try
             {
                 var result = await _userManager.CreateAsync(applicationUser, model.Password);
-                await _userManager.AddToRoleAsync(applicationUser, model.Role);
+                //await _userManager.AddToRoleAsync(applicationUser, model.Roles);
+                await _userManager.AddToRolesAsync(applicationUser, model.Roles);
                 return Ok(result);
             }
             catch (Exception ex)

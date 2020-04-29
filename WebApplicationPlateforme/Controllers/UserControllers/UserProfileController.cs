@@ -41,7 +41,7 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "مسؤول النظام", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(Roles = "ADMINISTRATEUR", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("ForAdmin")]
         public string GetForAdmin()
         {
@@ -49,7 +49,7 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "موظف", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(Roles = "EMPLOYEE", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("ForEmployee")]
         public string GetForEmployee()
         {
@@ -57,7 +57,7 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "مدير قسم", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(Roles = "DIRECTORE", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("ForDirectorEtab")]
         public string GetForDirectorEtab()
         {
@@ -65,7 +65,7 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "مدير ادارة", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(Roles = "DIRECTORA", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("ForDirectorAdmin")]
         public string GetForDirectorAdmin()
         {
@@ -73,23 +73,32 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "مدير عام", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(Roles = "DIRECTORG", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("ForDirectorGeneral")]
         public string GetForDirectorGeneral()
         {
             return "Web method for general director";
         }
 
-
-      /*  [HttpGet]
-        [Authorize(Roles = "Director,Employee", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [Route("ForDirectorOrEmployee")]
-        public string GetForDirectorOrEmployee()
+       /* [HttpGet]
+        [Authorize(Roles = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("ForAdminis")]
+        public string GetForAdminis()
         {
-            return "Web method for Director or Employee";
+            return "Web method for general director";
         }
+        */
 
-    */
+
+        /*  [HttpGet]
+          [Authorize(Roles = "Director,Employee", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+          [Route("ForDirectorOrEmployee")]
+          public string GetForDirectorOrEmployee()
+          {
+              return "Web method for Director or Employee";
+          }
+
+      */
 
     }
 }

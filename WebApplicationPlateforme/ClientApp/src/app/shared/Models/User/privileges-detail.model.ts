@@ -8,5 +8,5 @@ export class PrivilegesDetail {
   serviceEmployee:number;
   salaire:number;
   performance:number;
-  userId: string;
+  userid: string;
 }

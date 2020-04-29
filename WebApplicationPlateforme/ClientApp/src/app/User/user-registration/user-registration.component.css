@@ -14,3 +14,49 @@ div.form-group label {
   font-weight: bold;
 }
 
+
+label {
+  position: relative;
+  padding: 0 0 0 2rem;
+}
+
+
+/**
+    CheckBox
+
+*/
+input[type=checkbox] {
+  position: absolute;
+  opacity: 0;
+  vertical-align: middle;
+}
+
+  input[type=checkbox] + label::before,
+  input[type=checkbox] + label::after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    display: block;
+  }
+ul#menu li {
+  display: inline;
+}
+  input[type=checkbox] + label::before {
+    left: 0.5rem;
+    top: 0.15rem;
+    width: 0.9rem;
+    height: 0.9rem;
+    border: 0.05rem solid black;
+    background: white;
+  }
+
+  input[type=checkbox]:checked + label::after {
+    left: 0.6rem;
+    top: 0.28rem;
+    height: 0.8rem;
+    border-left: 0.8rem solid #81a0e3;
+  }
+
+  input[type=checkbox]:focus + label::before {
+    outline: 0.05rem dotted;
+  }

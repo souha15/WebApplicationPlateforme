@@ -7,8 +7,8 @@
     </h5>
     <div>
       <a [routerLink]="['/main-tasks']">صفحة ادارة المهام</a>
-      <a [routerLink]="['/new-task']">إضافة مهمة</a>
-      <!--  <a  [routerLink]="['/new-task']" *ngIf="getPriv(UserIdConnected)">إضافة مهمة</a>-->
+      <!--! <a [routerLink]="['/new-task']">إضافة مهمة</a>-->
+      <a [routerLink]="['/new-task']" *ngIf="privtest">إضافة مهمة</a>
       <a [routerLink]="['/tasks-list']">قائمة المهام</a>
       <a [routerLink]="['/tasks-list-received']">المهام  المسندة</a>
       <a [routerLink]="['/tasks-list-created']">المهام المنشأة</a>

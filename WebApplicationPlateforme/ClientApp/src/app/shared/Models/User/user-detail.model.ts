@@ -42,5 +42,4 @@ export class UserDetail {
         IdAdministration : number;
         IdDepartement : number;
 
-     
 }

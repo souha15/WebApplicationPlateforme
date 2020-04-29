@@ -1018,7 +1018,7 @@ table .show-details {
     width: 40px;
     border-radius: 0 5px 5px 0;
 }
-
+.tabs .reg form .form-group select,
 .tabs .reg form .form-group input {
     width: 80%;
     padding: 8px;
@@ -1109,4 +1109,82 @@ table .show-details {
 .counter {
     padding: 8px;
     color: #ccc;
+}
+
+/*---------------------------------
+------ Task-report-data Page ------
+---------------------------------*/
+.report-page {
+    padding: 50px 0;
+}
+
+.report-page h1 {
+
+    margin-bottom: 40px
+}
+
+.report-page h1:after {
+    content: "";
+    width: 120px;
+    height: 2px;
+    background: #000;
+    position: relative;
+    display: block;
+    margin: auto;
+    top: 10px
+}
+
+.report-page p {
+    color: #333
+}
+
+.report-page p span {
+    font-weight: bold;
+    color: #000;
+}
+
+/*----------------------------------
+---------- Forbidden page ----------
+-----------------------------------*/
+.forbidden {
+    font-family: 'Oxanium', cursive;
+
+}
+
+.forbidden h2 {
+    font-size: 35px
+}
+
+.forbidden .text {
+    font-size: 28px;
+}
+
+.forbidden > p {
+    font-size: 150px;
+    padding: 0;
+    margin: 0;
+}
+
+.forbidden > p span {
+    color: #fd0f31;
+}
+
+.forbidden .stop {
+    background: #fff;
+    width: 350px;
+    height: 350px;
+    border: 5px solid #d1d1d2;
+    border-radius: 30%;
+    color: #fd0f31;
+    padding-top: 4%;
+    margin: 20px auto 0;
+}
+
+.forbidden .stop h1 {
+    font-size: 3.5rem;
+}
+
+.forbidden .stop span.icon {
+    font-size: 170px;
+    display: block
 }

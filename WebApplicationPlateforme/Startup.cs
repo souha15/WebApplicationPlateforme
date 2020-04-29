@@ -32,8 +32,8 @@ namespace WebApplicationPlateforme
             //Inject AppSettings
 
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
-            services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
-          
+            services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0)/*.AddJsonOptions(x => { })*/;
+
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<ApplicationDbContext>(
                 options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
@@ -55,7 +55,10 @@ namespace WebApplicationPlateforme
             }
            );
             services.AddCors();
-            services.AddControllersWithViews();
+            //services.AddControllersWithViews();
+            services.AddControllers()
+            .AddNewtonsoftJson();
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

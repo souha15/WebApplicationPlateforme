@@ -102,6 +102,7 @@ export class UserUpdatingComponent implements OnInit {
       Photo: '',
       IdAdministration: null,
       IdDepartement: null,
+     
 
     }
   }

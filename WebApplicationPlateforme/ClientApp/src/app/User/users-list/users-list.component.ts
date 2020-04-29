@@ -131,6 +131,7 @@ export class UsersListComponent implements OnInit {
       Photo: '',
       IdAdministration: null,
       IdDepartement: null,
+  
 
     }
   }

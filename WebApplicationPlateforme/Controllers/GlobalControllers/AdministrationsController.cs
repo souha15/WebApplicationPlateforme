@@ -30,7 +30,7 @@ namespace WebApplicationPlateforme.Controllers.GlobalControllers
 
         // GET: api/Administrations/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Administration>> GetAdministration(int id)
+        public async Task<ActionResult<Administration>> GetAdministration(int? id)
         {
             var administration = await _context.administrations.FindAsync(id);
 
@@ -43,10 +43,10 @@ namespace WebApplicationPlateforme.Controllers.GlobalControllers
         }
 
         // PUT: api/Administrations/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAdministration(int id, Administration administration)
+        public async Task<IActionResult> PutAdministration(int? id, Administration administration)
         {
             if (id != administration.Id)
             {
@@ -75,8 +75,8 @@ namespace WebApplicationPlateforme.Controllers.GlobalControllers
         }
 
         // POST: api/Administrations
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<Administration>> PostAdministration(Administration administration)
         {
@@ -88,7 +88,7 @@ namespace WebApplicationPlateforme.Controllers.GlobalControllers
 
         // DELETE: api/Administrations/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Administration>> DeleteAdministration(int id)
+        public async Task<ActionResult<Administration>> DeleteAdministration(int? id)
         {
             var administration = await _context.administrations.FindAsync(id);
             if (administration == null)
@@ -102,7 +102,7 @@ namespace WebApplicationPlateforme.Controllers.GlobalControllers
             return administration;
         }
 
-        private bool AdministrationExists(int id)
+        private bool AdministrationExists(int? id)
         {
             return _context.administrations.Any(e => e.Id == id);
         }

@@ -48,8 +48,28 @@
                 <input class="" type="text" name="new-user-name" placeholder="اسم المستخدم" id="new-user-name" formControlName="UserName" required>
 
               </div>
+
+              <div class="form-group">
+                <label class="" for="x"><i class="fa fa-building"></i></label>
+                <select class="" name="IdAdministration" formControlName="IdAdministration">
+                  <option [ngValue]="undefined" selected disabled>-الإدارة-</option>
+                  <option *ngFor="let item of AdministrationList" value="{{item.id}}">{{item.nom}}</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="" for="x"><i class="fa fa-building"></i></label>
+                <select class="" name="IdDepartement" formControlName="IdDepartement">
+                  <option [ngValue]="undefined" selected disabled>-الإدارة-</option>
+                  <option *ngFor="let item of EtablissementList" value="{{item.id}}">{{item.nom}}</option>
+                </select>
+
+              </div>
+
               <label class="text-danger" *ngIf="UserService.formModel.get('UserName').touched && UserService.formModel.get('UserName').errors?.required"> هذا الحقل إجباري</label>
               <label class="text-danger" *ngIf="UserService.formModel.get('UserName').touched && UserService.formModel.get('UserName').errors?.minlength"> الحد الأدنى 6 أحرف</label>
+
+
               <div formGroupName="Passwords">
                 <div class="form-group">
                   <label class="" for="new-user-password"><i class="fa fa-key"></i></label>
@@ -65,7 +85,25 @@
                 <label class="text-danger" *ngIf="UserService.formModel.get('Passwords.ConfirmPassword').touched && UserService.formModel.get('Passwords.ConfirmPassword').errors?.required"> هذا الحقل إجباري</label>
                 <label class="text-danger" *ngIf="UserService.formModel.get('Passwords.ConfirmPassword').touched && UserService.formModel.get('Passwords.ConfirmPassword').errors?.passwordMismatch"> كلمة المرور غير متطابقة</label>
               </div>
+
+              <div  class="form-check-inline" *ngIf="roles" >
+                <ul id="menu">
+                  <li *ngFor="let item of roles;let i = index" >
+                    <input type="checkbox" [id]="'roles-'+i" value="{{item.id}}"
+                           [checked]="item.selected" (change)="updateSelectedRoles(i)" name="contacts" id="contacts">
+                    <label [for]="'roles-'+i" *ngIf="item.name=='EMPLOYEE'">موظف</label>
+                    <label [for]="'roles-'+i" *ngIf="item.name=='DIRECTORE'">مدير قسم</label>
+                    <label [for]="'roles-'+i" *ngIf="item.name=='DIRECTORA'">مدير إدارة</label>
+                    <label [for]="'roles-'+i" *ngIf="item.name=='DIRECTORG'">مدير عام</label>
+                    <label [for]="'roles-'+i" *ngIf="item.name=='ADMINISTRATEUR'">مسؤول النظام</label>
+
+                  </li>
+                </ul>
+
+              </div>
+
               <button type="submit" class="enter">تسجيل</button>
+
             </form>
           </div>
 

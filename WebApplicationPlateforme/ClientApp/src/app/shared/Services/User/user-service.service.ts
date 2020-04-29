@@ -29,6 +29,9 @@ export class UserServiceService {
     FullName: ['',  Validators.required],
     PhoneNumber: ['', [Validators.minLength(8), Validators.maxLength(10)]],
     Statut: [''],
+    IdDepartement: [''],
+    IdAdministration: [''],
+    Roles: ['', Validators.required],
     Passwords: this.fb.group({
       Password: ['', [Validators.required, Validators.minLength(6)]],
       ConfirmPassword: ['', Validators.required]
@@ -51,7 +54,7 @@ export class UserServiceService {
   }
 /* User Registration */
   Username: string;
-  register() {
+  register(roles: string[]) {
     var body = {
       
       UserName: this.formModel.value.UserName,
@@ -59,7 +62,11 @@ export class UserServiceService {
       FullName: this.formModel.value.FullName,
       Password: this.formModel.value.Passwords.Password,
       PhoneNumber: this.formModel.value.PhoneNumber,
-      Statut: this.formModel.value.Statut
+      Statut: this.formModel.value.Statut,
+      IdDepartement: this.formModel.value.IdDepartement,
+      IdAdministration: this.formModel.value.IdAdministration,
+      Roles: roles,
+
     };
     this.Username = this.formModel.value.UserName;
     

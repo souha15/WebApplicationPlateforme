@@ -14,30 +14,44 @@ export class SideMenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserConnected();
+ 
   }
 
-  
+
   // Get User Connected
   UserIdConnected: string;
   UserNameConnected: string;
-
+  privtest: boolean = false;
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
 
+      this.privilegesService.GetById(this.UserIdConnected).subscribe(res => {
+        
+        if (res.addTask == 1) 
+          this.privtest = true;
+        console.log(this.privtest)
+      })
+
+     
+    
     })
   }
   //Privilege Test
-  privtest: boolean = false;
-  getPriv(Id:string): boolean {
-    this.privilegesService.GetById(Id).subscribe(res => {
+
+  getPriv(id) {
+    this.privilegesService.GetById(id).subscribe(res => {
       if (res.addTask == 1) {
         this.privtest = true;
+        
       } else
         this.privtest = false;
+   
     })
-    return this.privtest
+    
+    console.log(this.privtest)
   }
+
 }

@@ -20,7 +20,7 @@ namespace WebApplicationPlateforme.Model.User
 
 
         [ForeignKey("ApplicationUser")]
-        public string userId { get; set; }
+        public string userid { get; set; }
 
         public virtual ApplicationUser ApplicationUser { get; set; }
     }
