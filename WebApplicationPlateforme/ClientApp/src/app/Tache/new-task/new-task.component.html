@@ -34,9 +34,9 @@
           تقارير المهام الواردة
         </a>
         <!--<a href="" class="p-2 flex-fill bd-highlight">
-    <span><i class="fa fa-user-cog"></i></span>
-    مدير النظام
-  </a>-->
+          <span><i class="fa fa-user-cog"></i></span>
+          مدير النظام
+        </a>-->
       </nav>
       <h4 class="my-2 task-head">مهمة جديدة</h4>
       <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit()">
@@ -47,12 +47,12 @@
         </div>
         <div class="col-sm-6">
           <label for="date"><span><i class="fa fa-calendar-alt"></i></span>التاريخ </label>
-          <input type="date" id="date" name="date" #date="ngModel" [(ngModel)]="tache.date">
+          <input type="date" id="date" name="date" #date="ngModel" [(ngModel)]="tache.date" required (change)="testdate($event)">
         </div>
 
         <div class="col-sm-6">
           <label for="sort"><span><i class="fa fa-list-ol"></i></span>الاولوية</label>
-          <select id="sort" name="Priorite" #Priorite="ngModel" [(ngModel)]="tache.Priorite">
+          <select id="sort" name="priorite" #priorite="ngModel" [(ngModel)]="tache.priorite" required>
             <option [ngValue]="undefined" selected disabled>-الاولوية-</option>
             <option value="عالية">عالية</option>
             <option value="متوسطة">متوسطة</option>
@@ -61,44 +61,43 @@
         </div>
         <div class="col-sm-6">
           <label for="task"><span><i class="fa fa-calendar-check"></i></span>المهمة</label>
-          <input type="text" id="task" class="t" name="TacheNom" #TacheNom="ngModel" [(ngModel)]="tache.TacheNom">
+          <input type="text" id="task" class="t" name="tacheNom" #tacheNom="ngModel" [(ngModel)]="tache.tacheNom" required (change)="testnom($event)">
         </div>
         <div class="col-12">
           <label for="task-details"><span><i class="fa fa-list"></i></span>وصف المهمة</label>
-          <input type="text" id="task-details" name="Description" #Description="ngModel" [(ngModel)]="tache.Description">
+          <input type="text" id="task-details" name="description" #description="ngModel" [(ngModel)]="tache.description">
         </div>
         <div class="col-sm-4">
           <label for="days"><span><i class="fa fa-calendar-day"></i></span>المدة باليوم</label>
-          <input type="text" id="days" name="Delai" #Delai="ngModel" [(ngModel)]="tache.Delai">
+          <input type="text" id="days" name="delai" #delai="ngModel" [(ngModel)]="tache.delai" required>
         </div>
         <div class="col-sm-8">
           <label for="user"><span><i class="fa fa-user"></i></span>المسند إليه</label>
-          <select id="user" class="" name="Atous" #Atous="ngModel" [(ngModel)]="tache.Atous" (change)="selectInput($event)">
+          <select id="user" class="" name="atous" #atous="ngModel" [(ngModel)]="tache.atous" (change)="selectInput($event)" required>
             <option [ngValue]="undefined" selected disabled>-المسند إليه-</option>
             <option value="all">الجميع</option>
             <option value="employee">موظف</option>
           </select>
 
-          <select name="AffectedName" #AffectedName="ngModel" [(ngModel)]="tache.AffectedName" *ngIf="isEmployeeSelected" (change)="selectInput2($event)">
+          <select name="affectedName" #affectedName="ngModel" [(ngModel)]="tache.affectedName" *ngIf="isEmployeeSelected" (change)="selectInput2($event)" required>
             <option [ngValue]="undefined" selected disabled>-الموظف-</option>
-            <option *ngFor="let item of UsersList" value="{{item.id}}">{{item.fullName}}</option>
+            <ng-container *ngFor="let item of UsersList">
+
+              <option value="{{item.id}}" *ngIf="UserIdConnected!=item.id">{{item.fullName}}</option>
+            </ng-container>
           </select>
 
         </div>
 
         <div class="save">
-          <button type="submit" class="btn btn-success"><span><i class="fa fa-save"></i></span> حفظ</button>
-
+          <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#myModal"><span><i class="fa fa-save"></i></span> حفظ</button>
+          <button type="reset" class="btn btn-danger"><span><i class="fa fa-trash-restore"></i></span> حذف الحقول</button>
         </div>
       </form>
       <form class="task-form form-row">
         <div class="col-sm-8">
           <label for="files" class="files-label"><span><i class="fa fa-paperclip"></i></span>المرفقات <span><i class="fa fa-file-upload"></i></span></label>
           <input type="file" id="files" class="" (change)="upload($event)" #inputFile>
-
-          <p *ngIf="showProgress"> progress <strong>{{percentage}}%</strong></p>
-          <label class="error" [hidden]="!showDownloadError">ci sono stati errori durante il download</label>
-          <label class="error" [hidden]="!showUploadError">ci sono stati errori durante l'upload</label>
           <hr>
 
 
@@ -118,23 +117,52 @@
   </div>
 
 </div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr" *ngIf="testchamp">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4 class="modal-title">بيانات المهمة</h4>
+
+      </div>
+      <div class="modal-body" style="direction:rtl; text-align:right">
+
+        <div class="col-sm-6">
+          <label class="task-det"><span><i class="fa fa-sort-numeric-down"></i></span>رقم المهمة</label>
+          <span class="task-num"> &nbsp; &nbsp;{{CreatedTache.id}}</span>
+        </div>
+
+    
+        <div class="col-sm-6">
+          <label class="task-det"><span><i class="fa fa-tasks"></i></span>&nbsp;   المهمة&nbsp;</label>
+          <span>&nbsp; &nbsp; {{CreatedTache.tacheNom}}</span>
+        </div>
+
+        <div class="col-sm-6">
+          <label class="task-det"><span><i class="fa fa-user"></i></span>&nbsp;المسند إليه&nbsp;</label>
+          <span>&nbsp; &nbsp; {{CreatedTache.createur}}</span>
+        </div>
+
+        <div class="col-sm-6">
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 <!-- Footer -->
 <footer class="text-center">
   <p>المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات في أبو عريش</p>
 </footer>
-<!--     <table class="table table-bordered table-hover">
-            <tr>
 
-              <td>قائمة الملفات</td>
-              <td>حذف </td>
-            </tr>
-
-            <tr *ngFor="let pd of serviceupload.list;">
-
-              <td *ngIf="tacheId == pd.idTache">
-
-                {{pd.path}}
-              </td>
-              <td *ngIf="tacheId == pd.idTache"><a (click)="onDelete(pd.id)" class="aaa"><i class="fa fa-trash"></i> حذف </a></td>
-            </tr>
-          </table>-->

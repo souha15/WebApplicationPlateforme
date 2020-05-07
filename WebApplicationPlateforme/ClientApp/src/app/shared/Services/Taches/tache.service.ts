@@ -29,6 +29,11 @@ export class TacheService {
     return this.http.post<Tache>(this.rootURL + '/Taches', tache, this.headers);
   }
 
+  //Edit Tache
+  EditTache() {
+    return this.http.put(this.rootURL + '/Taches/' + this.formData.id, this.formData, this.headers);
+  }
+
   // List Tache
 
   ListTache(): Observable<Tache[]> {

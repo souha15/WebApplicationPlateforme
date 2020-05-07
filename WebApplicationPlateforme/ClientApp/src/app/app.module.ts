@@ -45,6 +45,7 @@ import { ForbiddenPageComponent } from './forbidden-page/forbidden-page.componen
 import { AuthInterceptor } from './shared/Services/User/auth/auth.interceptor';
 import { EtablissementService } from './shared/Services/Etablissement/etablissement.service';
 import { AdministrationService } from './shared/Services/Administration/administration.service';
+import { TasksUpMenuComponent } from './Tache/tasks-up-menu/tasks-up-menu.component';
 
 
 @NgModule({
@@ -77,6 +78,7 @@ import { AdministrationService } from './shared/Services/Administration/administ
     EtablissementListComponent,
     UserUpdatingComponent,
     ForbiddenPageComponent,
+    TasksUpMenuComponent,
 
   ],
   imports: [
@@ -123,6 +125,7 @@ import { AdministrationService } from './shared/Services/Administration/administ
       { path: 'user-updating', component: UserUpdatingComponent, canActivate: [AuthGuard]},
       { path: 'user-updating/:id', component: UserUpdatingComponent, canActivate: [AuthGuard]},
       { path: 'forbidden-page', component: ForbiddenPageComponent },
+      { path: 'tasks-up-menu', component: TasksUpMenuComponent  },
       //{ path: 'user-updating/:id', component: UserUpdatingComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
    
 

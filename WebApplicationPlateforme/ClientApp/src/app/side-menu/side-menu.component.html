@@ -1,70 +1,71 @@
 
-  <div class="side-menu">
-    <h5>
-      <span><i class="fa fa-tasks"></i></span>
-      إدارة المهام
-      <span class="arrow"><i class="fa fa-chevron-left"></i></span>
-    </h5>
+  <div class="side-menu" id="parent">
+    <!-- card 1 -->
     <div>
-      <a [routerLink]="['/main-tasks']">صفحة ادارة المهام</a>
-      <!--! <a [routerLink]="['/new-task']">إضافة مهمة</a>-->
-      <a [routerLink]="['/new-task']" *ngIf="privtest">إضافة مهمة</a>
-      <a [routerLink]="['/tasks-list']">قائمة المهام</a>
-      <a [routerLink]="['/tasks-list-received']">المهام  المسندة</a>
-      <a [routerLink]="['/tasks-list-created']">المهام المنشأة</a>
-      <a [routerLink]="['/tasks-list-done']">المهام  المنتهية</a>
-      <a [routerLink]="['/tasks-list-delayed']">المهام المتأخرة</a>
+      <h5 id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <span><i class="fa fa-tasks"></i></span>
+        إدارة المهام
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#parent">
+        <a [routerLink]="['/main-tasks']">صفحة ادارة المهام</a>
+        <!--! <a [routerLink]="['/new-task']">إضافة مهمة</a>-->
+        <a [routerLink]="['/new-task']" *ngIf="privtest">إضافة مهمة</a>
+        <a [routerLink]="['/tasks-list']">قائمة المهام</a>
+        <a [routerLink]="['/tasks-list-received']">المهام  المسندة</a>
+        <a [routerLink]="['/tasks-list-created']">المهام المنشأة</a>
+        <a [routerLink]="['/tasks-list-done']">المهام  المنتهية</a>
+        <a [routerLink]="['/tasks-list-delayed']">المهام المتأخرة</a>
+      </div>
     </div>
-    <h5>
-      <span><i class="fa fa-mail-bulk"></i></span>
-      المراسلات
-      <span class="arrow"><i class="fa fa-chevron-left"></i></span>
-    </h5>
+    <!-- card 2 -->
     <div>
-      <a>الخطابات</a>
-      <a>الصادر</a>
-      <a>الوارد</a>
+      <h5 id="headingTwo" class="collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        <span><i class="fa fa-mail-bulk"></i></span>
+        المراسلات
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#parent">
+        <a>الخطابات</a>
+        <a>الصادر</a>
+        <a>الوارد</a>
+      </div>
     </div>
-
-    <h5 class="accordion">
-      <span><i class="fa fa-users"></i></span> الموظفين
-      <span class="arrow"><i class="fa fa-chevron-left"></i></span>
-    </h5>
+    <!-- card 3 -->
     <div>
-      <a [routerLink]="['/users-list']"> قائمة الموظفين </a>
-      <a [routerLink]="['/user-registration']">إضافة موظف </a>
+      <h5 id="headingThree" class="collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        <span><i class="fa fa-users"></i></span> الموظفين
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#parent">
+        <a [routerLink]="['/users-list']"> قائمة الموظفين </a>
+        <a [routerLink]="['/user-registration']">إضافة موظف </a>
+      </div>
     </div>
-    <h5>
-      <span><i class="fa fa-clipboard-list"></i></span> الفعاليات
-      <span class="arrow"><i class="fa fa-chevron-left"></i></span>
-    </h5>
-    <div></div>
-
-    <h5>
-      <span><i class="fa fa-wrench"></i></span>
-      إدارة النظام
-      <span class="arrow"><i class="fa fa-chevron-left"></i></span>
-    </h5>
+    <!-- card 4 -->
     <div>
-      
-      <a [routerLink]="['/administration-list']">قائمة الإدارات </a>
-      <a [routerLink]="['/new-administration']">إضافة إدارة </a>
-      <a [routerLink]="['/etablissement-list']">قائمة  الأقسام</a>
-      <a [routerLink]="['/new-etablissement']">إضافة قسم</a>
+      <h5 id="headingFour" class="collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+        <span><i class="fa fa-clipboard-list"></i></span> الفعاليات
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+      <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#parent">
 
+      </div>
+    </div>
+    <!-- card 5 -->
+    <div>
+      <h5  id="headingFive" class="collapsed"  data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+        <span><i class="fa fa-wrench"></i></span>
+        إدارة النظام
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+      <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#parent">
+
+        <a [routerLink]="['/administration-list']">قائمة الإدارات </a>
+        <a [routerLink]="['/new-administration']">إضافة إدارة </a>
+        <a [routerLink]="['/etablissement-list']">قائمة  الأقسام</a>
+        <a [routerLink]="['/new-etablissement']">إضافة قسم</a>
+
+      </div>
     </div>
   </div>
-
-<script>
-  $(document).ready(function () {
-    // Side Menu Accordion 
-    $('.side-menu div:first').css('display', 'block');
-    $('.side-menu h5').click(function () {
-      $(this).next().slideToggle(400);
-      $('.side-menu div').not($(this).next()).slideUp(400);
-    });
-    $('.side-menu h5').click(function () {
-      $('.side-menu h5 .arrow .fa').toggleClass('fa-chevron-left');
-      $('.side-menu h5 .arrow .fa').toggleClass('fa-chevron-down');
-    });
-</script>

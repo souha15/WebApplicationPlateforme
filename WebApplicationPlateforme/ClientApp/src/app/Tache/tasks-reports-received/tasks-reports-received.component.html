@@ -6,7 +6,7 @@
       <app-side-menu></app-side-menu>
     </div>
     <div class="col-md-9 col-sm-8">
-
+      <app-tasks-up-menu></app-tasks-up-menu>
       <h2 class="task-head">تقرير المهام الواردة</h2>
       <form class=" mt-4">
         <div class="form-group form-inline  mb-3 ml-4">
@@ -86,21 +86,28 @@
     <table class="table table-striped text-center table-bordered">
       <thead class="bg-secondary">
         <tr>
-
-          <th scope="col">رقم المهمة</th>
-          <th scope="col">عنوان المهمة</th>
-          <th scope="col">وصف المهمة</th>
-          <th scope="col">تاريخ الانشاء</th>
           <th scope="col">الحالة</th>
+          <th scope="col">تاريخ الانشاء</th>
+          <th scope="col">وصف المهمة</th>
+          <th scope="col">عنوان المهمة</th>
+          <th scope="col">رقم المهمة</th>
+
+
+
+
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let tache of Genarallist">
-          <th>{{tache.id}}</th>
-          <td>{{tache.tacheNom}}</td>
-          <td>{{tache.description}}</td>
-          <td>{{tache.date}}</td>
           <td>{{tache.etat}}</td>
+          <td>{{tache.date}}</td>
+          <td>{{tache.description}}</td>
+          <td>{{tache.tacheNom}}</td>
+          <th>{{tache.id}}</th>
+
+
+
+
         </tr>
       </tbody>
     </table>

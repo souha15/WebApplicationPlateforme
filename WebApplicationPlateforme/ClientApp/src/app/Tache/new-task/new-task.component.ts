@@ -21,11 +21,11 @@ export class NewTaskComponent implements OnInit {
   @Input() public disabled: boolean;
   @Output() public uploadStatuss: EventEmitter<ProgressStatus>;
   @ViewChild('inputFile') inputFile: ElementRef;
-
+  filter;
   constructor(private TacheService: TacheService,
     private toastr: ToastrService,
     private UserService: UserServiceService,
-    private serviceupload: UploadDownloadService,
+    public serviceupload: UploadDownloadService,
     private http: HttpClient,
     private rootUrl: PathSharedService
   ) {
@@ -64,14 +64,22 @@ export class NewTaskComponent implements OnInit {
 
   // Select Event
 
-  isEmployeeSelected: boolean;
+  isEmployeeSelected: boolean = false;
+  
+  affected: string;
   selectInput(event) {
     let selected = event.target.value;
     if (selected == "employee") {
       this.isEmployeeSelected = true;
+      this.affected ="employee"
+      this.testchamp = true;
+
     } else {
       this.isEmployeeSelected = false;
+      this.affected = "all"
+      this.testchamp = true;
     }
+   
   }
 
   userAffectedName: string;
@@ -87,24 +95,41 @@ export class NewTaskComponent implements OnInit {
   tache: Tache = new Tache();
   CreatedTache: Tache = new Tache();
   tacheId: number;
-
+  testchamp: boolean;
   onSubmit() {
     this.tache.idUserCreator = this.UserIdConnected;
     this.tache.creatorName = this.UserNameConnected;
-    this.tache.etat = "غير منجزة"
+     this.tache.etat = "غير منجزة"
     this.tache.createur = this.userAffectedName;
-    this.TacheService.CreateTache(this.tache).subscribe(
-      (res: any) => {
-        this.CreatedTache = res;
-        this.tacheId = this.CreatedTache.id;
-  
-        this.toastr.success("تم تسجيل المهمة بنجاح", " تسجيل المهمة");
-      },
-      err => {
-        this.toastr.error("فشل تسجيل المهمة"," تسجيل المهمة")
-      }
+    if (this.nomt == null) {
+      this.toastr.warning("اختر اسم المهمة", 'تحذير')
+      this.testchamp = false;
+    } else if (this.datec == null) {
+      this.toastr.warning(" اختر تاريخ بدء المهمة", 'تحذير')
+      this.testchamp = false;
+    } else if (this.affected == "employee" && this.userAffectedName == null) {
+      
+        this.toastr.warning("اختر الموظف المسند اليه المهمة", 'تحذير')
+      this.testchamp = false;
+    } else if (this.affected == null) {
+      this.toastr.warning("اختر  المسند اليه المهمة", 'تحذير')
+      this.testchamp = false;
+    }
+    else {
+      this.testchamp = true;
+      this.TacheService.CreateTache(this.tache).subscribe(
+        (res: any) => {
+          this.CreatedTache = res;
+          this.tacheId = this.CreatedTache.id;
 
-    )
+          this.toastr.success("تم تسجيل المهمة بنجاح", " تسجيل المهمة");
+        },
+        err => {
+          this.toastr.error("فشل تسجيل المهمة", " تسجيل المهمة")
+        }
+
+      )
+    }
   }
 
   //Files
@@ -217,5 +242,24 @@ export class NewTaskComponent implements OnInit {
         )
 
     }
+  }
+
+  //Test Date
+
+  datecreation: Date;
+  datec: any;
+ 
+  testdate(event) {
+    this.datecreation = new Date(event.target.value);
+    this.datecreation.toDateString();
+    this.datec = this.datecreation.toLocaleDateString();
+  }
+
+
+  //test Nom
+  nomt: string;
+  testnom(event) {
+    this.nomt = event.target.value;
+    this.nomt.toString();
   }
 }

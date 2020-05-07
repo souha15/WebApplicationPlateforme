@@ -6,7 +6,7 @@
       <app-side-menu></app-side-menu>
     </div>
     <div class="col-md-9 col-sm-8">
-
+      <app-tasks-up-menu></app-tasks-up-menu>
       <h2 class="task-head">تقرير المهام المرسلة</h2>
       <form class=" mt-4">
         <div class="form-group form-inline  mb-3 ml-4">
@@ -34,7 +34,7 @@
         <hr>
         <div class="form-group text-center">
           <input type="submit" value="إنشاء" class="btn btn-primary form-inline ml-2 mb-3" (click)="formRapport()">
-          <input type="reset" value="حذف الحقول" class="btn btn-danger form-inline mb-3" (click)="clear()" >
+          <input type="reset" value="حذف الحقول" class="btn btn-danger form-inline mb-3" (click)="clear()">
 
         </div>
       </form>
@@ -45,28 +45,28 @@
           <a (click)="openPDF()" class="btn"><span><i class="fa fa-print fa-2x"></i></span></a>
         </div>
         <table class="table table-striped text-center table-bordered">
-            <thead class="bg-secondary">
-              <tr>
+          <thead class="bg-secondary">
+            <tr>
 
-                <th scope="col">رقم المهمة</th>
-                <th scope="col">عنوان المهمة</th>
-                <th scope="col">وصف المهمة</th>
-                <th scope="col">تاريخ الانشاء</th>
-                <th scope="col">الحالة</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let tache of Genarallist">
-                <th>{{tache.id}}</th>
-                <td>{{tache.tacheNom}}</td>
-                <td>{{tache.description}}</td>
-                <td>{{tache.date}}</td>
-                <td>{{tache.etat}}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div> <!-- End Page Content -->
-      </div>
+              <th scope="col">رقم المهمة</th>
+              <th scope="col">عنوان المهمة</th>
+              <th scope="col">وصف المهمة</th>
+              <th scope="col">تاريخ الانشاء</th>
+              <th scope="col">الحالة</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tache of Genarallist">
+              <th>{{tache.id}}</th>
+              <td>{{tache.tacheNom}}</td>
+              <td>{{tache.description}}</td>
+              <td>{{tache.date}}</td>
+              <td>{{tache.etat}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div> <!-- End Page Content -->
+    </div>
 
   </div>
 
@@ -86,21 +86,21 @@
     <table class="table table-striped text-center table-bordered">
       <thead class="bg-secondary">
         <tr>
-       
-          <th scope="col">رقم المهمة</th>
-          <th scope="col">عنوان المهمة</th>
-          <th scope="col">وصف المهمة</th>
-          <th scope="col">تاريخ الانشاء</th>
+
           <th scope="col">الحالة</th>
+          <th scope="col">تاريخ الانشاء</th>
+          <th scope="col">وصف المهمة</th>
+          <th scope="col">عنوان المهمة</th>
+          <th scope="col">رقم المهمة</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let tache of Genarallist">
-          <th>{{tache.id}}</th>      
-          <td>{{tache.tacheNom}}</td>
-          <td>{{tache.description}}</td>
-          <td>{{tache.date}}</td>
           <td>{{tache.etat}}</td>
+          <td>{{tache.date}}</td>
+          <td>{{tache.description}}</td>
+          <td>{{tache.tacheNom}}</td>
+          <th>{{tache.id}}</th>
         </tr>
       </tbody>
     </table>

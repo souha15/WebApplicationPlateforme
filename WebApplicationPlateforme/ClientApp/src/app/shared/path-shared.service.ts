@@ -8,6 +8,7 @@ export class PathSharedService {
   constructor() { }
 
   getPath() {
-    return 'https://localhost:44384/api'
+   return 'http://localhost:49944/api'
+   // return 'http://2rtq.w.time4vps.cloud/api'
   }
 }

@@ -3,6 +3,8 @@ import { TacheService } from '../../shared/Services/Taches/tache.service';
 import { Tache } from '../../shared/Models/Taches/tache.model';
 import { Observable } from 'rxjs';
 import { UserServiceService } from '../../shared/Services/User/user-service.service';
+import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -13,13 +15,15 @@ import { UserServiceService } from '../../shared/Services/User/user-service.serv
 export class TasksListReceivedComponent implements OnInit {
 
   constructor(private TacheService: TacheService,
-    private UserService: UserServiceService,) { }
+    private UserService: UserServiceService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
  
     this.getUserConnected();
     //this.listtache();
     this.filtredDataTache();
+    this.resetForm();
   }
 
   //Tache list
@@ -40,7 +44,7 @@ export class TasksListReceivedComponent implements OnInit {
       this.tacheliste = res
 
       if (this.tacheliste != null) {
-        this.filtredtachelist = this.tacheliste.filter(item => item.affectedName == this.UserIdConnected)
+        this.filtredtachelist = this.tacheliste.filter(item => item.affectedName == this.UserIdConnected || item.atous == 'all')
  
       }
     });
@@ -68,5 +72,63 @@ export class TasksListReceivedComponent implements OnInit {
       this.UserIdConnected = res.id;    
 
     })
+  }
+
+  //edit etat
+  etat: string;
+  populateForm(edittache: Tache) {
+    this.TacheService.formData = Object.assign({}, edittache)
+    this.etat = edittache.etat
+
+  }
+
+  edittache: Tache = new Tache();
+  updateRecord(form: NgForm) {
+    this.edittache = Object.assign(this.edittache, form.value);
+
+    this.TacheService.EditTache().subscribe(res => {
+      this.toastr.success('تم التحديث بنجاح', 'نجاح')
+      this.resetForm();
+      this.filtredDataTache();
+    },
+      err => {
+        this.toastr.error('لم يتم التحديث  ', ' فشل');
+      }
+
+
+    )
+  }
+
+  onSubmit(form: NgForm) {
+    this.updateRecord(form)
+  }
+
+  //Reset Form
+
+  resetForm(form?: NgForm) {
+
+    if (form != null)
+      form.resetForm();
+    this.TacheService.formData = {
+      id: null,
+      date: '',
+      priorite: '',
+      tacheNom: '',
+      description: '',
+      delai: '',
+      atous: '',
+      createur: '',
+      etat: '',
+      type: '',
+      sousProjet: '',
+      Attribut1: '',
+      Attribut2: '',
+      Attribut3: '',
+      Attribut4: null,
+      creatorName: '',
+      idUserCreator: '',
+      affectedName: '',
+
+    }
   }
 }

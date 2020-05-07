@@ -7,7 +7,7 @@
     </div>
 
     <div class="col-md-9 col-sm-8">
-
+      <app-tasks-up-menu></app-tasks-up-menu>
       <h2 class="task-head">قائمة المهام</h2>
       <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
       <div class="tabel-cont">
@@ -45,16 +45,12 @@
               <td>{{tache.description}}</td>
               <td [ngClass]="{
 
-  'work': tache.etat === 'تحت الإجراء',
-  'done': tache.etat === 'منجزة',
-  'notdone': tache.etat === 'غير منجزة'
-}">
-                {{tache.etat}}
+    'work': tache.etat === 'تحت الإجراء',
+    'done': tache.etat === 'منجزة',
+    'notdone': tache.etat === 'غير منجزة'
+  }">
+                <a (click)="populateForm(tache)" data-toggle="modal" data-target="#myModal">{{tache.etat}} </a>
 
-                <!-- <span class="task-st in-work" *ngIf="tache.etat == 'تحت الإجراء'">{{tache.etat}}</span>
-                <span class="task-st done" *ngIf="tache.etat == 'منجزة'">{{tache.etat}}</span>
-                <span class="task-st not-done" *ngIf="tache.etat == 'غير منجزة'">{{tache.etat}}</span>
-                 -->
               </td>
             </tr>
 
@@ -74,6 +70,46 @@
   </div>
 
 </div>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4 class="modal-title">تحديث حالة المهمة</h4>
+
+      </div>
+      <div class="modal-body" style="direction:rtl; text-align:right">
+        <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+          <label for="user"><span><i class="fa fa-check"></i></span>حالة المهمة</label>
+          <select id="user" class="" name="etat" #etat="ngModel" [(ngModel)]="TacheService.formData.etat">
+            <option [ngValue]="undefined" selected disabled>-حالة المهمة-</option>
+            <option value="تحت الإجراء">تحت الإجراء</option>
+            <option value="منجزة">منجزة</option>
+            <option value="غير منجزة">غير منجزة</option>
+
+          </select>
+
+          <div class="save">
+            <button type="submit" class="btn btn-success"><span><i class="fa fa-edit"></i></span>تحديث</button>
+
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <!-- Footer -->
 <footer class="text-center">
   <p>المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات في أبو عريش</p>
