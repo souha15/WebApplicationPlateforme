@@ -44,7 +44,8 @@ namespace WebApplicationPlateforme
                  */
             services.AddIdentityCore<ApplicationUser>()
                 .AddRoles<IdentityRole>()
-        .AddEntityFrameworkStores<ApplicationDbContext>();
+        .AddEntityFrameworkStores<ApplicationDbContext>()
+           .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
             {

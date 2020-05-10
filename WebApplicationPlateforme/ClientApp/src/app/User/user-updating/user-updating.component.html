@@ -11,45 +11,135 @@
         <h3 class="task-head">تحديث موظف</h3>
       </header>
       <div class="tabs">
-        <ul class="nav nav-tabs">
-          <li class="nav-item reg-btn pointer-link"><a class="nav-link active">بيانات الموظف</a></li>
-         
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">بيانات الموظف</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">الصلاحيات</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">تغيير كلمة المرور</a>
+          </li>
+
         </ul>
-        <section class="text-right">
+        <div class="tab-content">
+          <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="reg text-right">
+              <form #form="ngForm" autocomplete="off" (submit)="onsubmit(form)">
+                <div class="form-group">
 
-          <div class="reg text-right">
-            <form #form="ngForm" autocomplete="off" (submit)="onsubmit(form)">
-              <div class="form-group">
+                  <label class="" for="full-name"><i class="fa fa-user"></i></label>
+                  <input class="" type="text" name="fullName" placeholder="الاسم بالكامل" id="full-name" #fullName="ngModel" [(ngModel)]="UserService.formData.fullName" required>
+                </div>
 
-                <label class="" for="full-name"><i class="fa fa-user"></i></label>
-                <input class="" type="text" name="fullName" placeholder="الاسم بالكامل" id="full-name" #fullName="ngModel" [(ngModel)]="UserService.formData.fullName" required>
-              </div>
+                <div class="form-group">
+                  <label class="" for="email"><i class="fa fa-envelope"></i></label>
+                  <input class="" type="email" name="email" placeholder="البريد الالكتروني" id="email" #email="ngModel" [(ngModel)]="UserService.formData.email" required>
 
-              <div class="form-group">
-                <label class="" for="email"><i class="fa fa-envelope"></i></label>
-                <input class="" type="email" name="email" placeholder="البريد الالكتروني" id="email" #email="ngModel" [(ngModel)]="UserService.formData.email" required>
+                </div>
 
-              </div>
 
-              <div class="form-group">
-                <label class="" for="poss"><i class="fa fa-user-circle"></i></label>
-                <input class="" type="text" name="statut" placeholder="الرئيس المباشر" id="poss" #statut="ngModel" [(ngModel)]="UserService.formData.statut" required>
-              </div>
+                <div class="form-group">
+                  <label class="" for="x"><i class="fa fa-user-circle"></i></label>
+                  <select class="" name="poss" #statut="ngModel" [(ngModel)]="UserService.formData.statut">
+                    <option [ngValue]="undefined" selected disabled>-الرئيس المباشر-</option>
+                    <option *ngFor="let item of UsersList" value="{{item.fullName}}">{{item.fullName}}</option>
+                  </select>
 
-              <div class="form-group">
-                <label class="" for="tele"><i class="fa fa-mobile-alt"></i></label>
-                <input class="" type="tel" name="PhoneNumber" placeholder=" الجوال" id="tele" #phoneNumber="ngModel" [(ngModel)]="UserService.formData.phoneNumber" required>
-              </div>
-              <div class="form-group">
-                <label class="" for="new-user-name"><i class="fa fa-user"></i></label>
-                <input class="" type="text" name="userName" placeholder="اسم المستخدم" id="new-user-name" #userName="ngModel" [(ngModel)]="UserService.formData.userName" required>
+                </div>
 
-              </div>
+                <div class="form-group">
+                  <label class="" for="tele"><i class="fa fa-mobile-alt"></i></label>
+                  <input class="" type="tel" name="PhoneNumber" placeholder=" الجوال" id="tele" #phoneNumber="ngModel" [(ngModel)]="UserService.formData.phoneNumber" required>
+                </div>
+                <div class="form-group">
+                  <label class="" for="new-user-name"><i class="fa fa-user"></i></label>
+                  <input class="" type="text" name="userName" placeholder="اسم المستخدم" id="new-user-name" #userName="ngModel" [(ngModel)]="UserService.formData.userName" required>
 
-              <button type="submit" class="enter">تحديث</button>
-            </form>
+                </div>
+
+
+                <div class="form-group">
+                  <label class="" for="x"><i class="fa fa-building"></i></label>
+                  <select class="" name="IdAdministration" #IdAdministration="ngModel" [(ngModel)]="UserService.formData.IdAdministration">
+                    <option [ngValue]="undefined" selected disabled>-الإدارة-</option>
+                    <option *ngFor="let item of AdministrationList" value="{{item.id}}">{{item.nom}}</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="" for="x"><i class="fa fa-building"></i></label>
+                  <select class="" name="IdDepartement" #IdDepartement="ngModel" [(ngModel)]="UserService.formData.IdDepartement">
+                    <option [ngValue]="undefined" selected disabled>-الإدارة-</option>
+                    <option *ngFor="let item of EtablissementList" value="{{item.id}}">{{item.nom}}</option>
+                  </select>
+
+                </div>
+
+
+
+                <button type="submit" class="enter">تحديث</button>
+              </form>
+            </div>
           </div>
-        </section>
+
+          <!--Privilesges-->
+
+          <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="terms text-right">
+              <form class="terms-form" #form="ngForm" autocomplete="off" (submit)="onSubmitPrivileges(form)">
+
+                <div class="form-group">
+                  <input type="checkbox" name="settings" id="tasks-manage" (change)='onSelect1($event)' #settings="ngModel" [(ngModel)]="privilegesService.formData.settings" [checked]="Privileges.settings == '1'">
+                  <label for="tasks-manage">نظام إدارة المهام</label>
+                  <input type="checkbox" name="addTask" id="add-task" (change)='onSelect2($event)' #addTask="ngModel" [(ngModel)]="privilegesService.formData.addTask" [checked]="Privileges.addTask == '1'">
+                  <label for="add-task">إضافة مهمة</label>
+                  <input type="checkbox" name="Rapport" id="tasks-report" (change)='onSelect3($event)' #Rapport="ngModel" [(ngModel)]="privilegesService.formData.Rapport" [checked]="Privileges.Rapport == '1'">
+                  <label for="tasks-report">تقارير</label>
+                </div>
+                <div class="form-group">
+                  <input type="checkbox" name="commAd" id="contacts" (change)='onSelect4($event)' #commAd="ngModel" [(ngModel)]="privilegesService.formData.commAd" [checked]="Privileges.commAd == '1'">
+                  <label for="contacts">نظام الاتصالات الادارية</label>
+                  <input type="checkbox" name="appel" id="contacts-1" (change)='onSelect5($event)' #appel="ngModel" [(ngModel)]="privilegesService.formData.appel" [checked]="Privileges.appel == '1'">
+                  <label for="contacts-1">نظام اتصال 1</label>
+                </div>
+                <div class="form-group">
+                  <input type="checkbox" name="serviceEmployee" id="employers" (change)='onSelect6($event)' #serviceEmployee="ngModel" [(ngModel)]="privilegesService.formData.serviceEmployee" [checked]="Privileges.serviceEmployee == '1'">
+                  <label for="employers">نظام شؤون الموظفين</label>
+                  <input type="checkbox" name="salaire" id="emp-salary" (change)='onSelect7($event)' #salaire="ngModel" [(ngModel)]="privilegesService.formData.salaire" [checked]="Privileges.salaire == '1'">
+                  <label for="emp-salary">الرواتب</label>
+                  <input type="checkbox" name="performance" id="emp-work" (change)='onSelect8($event)' #performance="ngModel" [(ngModel)]="privilegesService.formData.performance" [checked]="Privileges.performance == '1'">
+                  <label for="emp-work">الأداء</label>
+                </div>
+                <div class="form-group">
+                  <input class="btn" type="submit" value="تسجيل">
+                </div>
+              </form>
+
+            </div>
+          </div>
+          <!--Password Change-->
+
+          <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+            <div class="reg text-right">
+              <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+                <div class="form-group">
+                  <label class="" for="email"><i class="fa fa-key"></i></label>
+                  <input #Password="ngModel" name="Password" [(ngModel)]="userdetail.Password" type="password" id="password" class="form-control" placeholder="كلمة المرور  الجديدة" required>
+
+                </div>
+
+                <button type="submit" class="enter">تغيير </button>
+
+
+              </form>
+              </div>
+            </div>
+
+          </div>
       </div>
     </div><!-- End col-9 -->
   </div>

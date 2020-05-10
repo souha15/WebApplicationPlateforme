@@ -51,7 +51,7 @@ export class NavMenuComponent implements OnInit {
 
   onLogout() {
     localStorage.removeItem("token");
-    this.router.navigateByUrl('/User/login-page');
+    this.router.navigateByUrl('/user-register');
   }
 
 

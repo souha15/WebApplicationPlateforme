@@ -2,7 +2,7 @@ export class PrivilegesDetail {
   id: string;
   settings:number;
   addTask:number;
-  Rapport:number;
+  rapport:number;
   commAd:number;
   appel:number;
   serviceEmployee:number;

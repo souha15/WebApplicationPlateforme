@@ -7,37 +7,8 @@
     </div>
 
     <div class="col-md-9 col-sm-8">
-      <!-- Second Navbar -->
-      <nav class="d-flex p-0 bd-highlight tasks-nav mt-2">
-        <a [routerLink]="['/main-tasks']" href="" class="p-2 flex-fill bd-highlight active">
-          <span><i class="fa fa-home"></i></span>
-          الرئيسية
-        </a>
-        <a [routerLink]="['/new-task']" href="" class="p-2 flex-fill bd-highlight">
-          <span><i class="fa fa-calendar-plus"></i></span>
-          إضافة مهمة
-        </a>
-        <a [routerLink]="['/tasks-list-received']" href="" class="p-2 flex-fill bd-highlight">
-          <span><i class="fa fa-tasks"></i></span>
-          المهام الواردة
-        </a>
-        <a [routerLink]="['/tasks-list-delayed']" href="" class="p-2 flex-fill bd-highlight">
-          <span><i class="fa fa-clock"></i></span>
-          المهام المتأخرة
-        </a>
-        <a href="" [routerLink]="['/tasks-reports']" class="p-2 flex-fill bd-highlight">
-          <span><i class="fa fa-file-text"></i></span>
-          تقارير المهام المرسلة
-        </a>
-        <a href="" [routerLink]="['/tasks-reports-received']" class="p-2 flex-fill bd-highlight">
-          <span><i class="fa fa-file"></i></span>
-          تقارير المهام الواردة
-        </a>
-        <!--<a href="" class="p-2 flex-fill bd-highlight">
-          <span><i class="fa fa-user-cog"></i></span>
-          مدير النظام
-        </a>-->
-      </nav>
+      <app-tasks-up-menu></app-tasks-up-menu>
+
       <h4 class="my-2 task-head">مهمة جديدة</h4>
       <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit()">
 
@@ -89,12 +60,6 @@
 
         </div>
 
-        <div class="save">
-          <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#myModal"><span><i class="fa fa-save"></i></span> حفظ</button>
-          <button type="reset" class="btn btn-danger"><span><i class="fa fa-trash-restore"></i></span> حذف الحقول</button>
-        </div>
-      </form>
-      <form class="task-form form-row">
         <div class="col-sm-8">
           <label for="files" class="files-label"><span><i class="fa fa-paperclip"></i></span>المرفقات <span><i class="fa fa-file-upload"></i></span></label>
           <input type="file" id="files" class="" (change)="upload($event)" #inputFile>
@@ -111,6 +76,14 @@
             </li>
           </ul>
         </div>
+        <!--data-toggle="modal" data-target="#myModal"-->
+        <div class="save">
+          <button type="submit" class="btn btn-success"><span><i class="fa fa-save"></i></span> حفظ</button>
+          <button type="reset" class="btn btn-danger" (click)="vider()"><span><i class="fa fa-trash-restore"></i></span> حذف الحقول</button>
+        </div>
+      </form>
+      <form class="task-form form-row">
+
       </form>
 
     </div><!-- End col-9 -->

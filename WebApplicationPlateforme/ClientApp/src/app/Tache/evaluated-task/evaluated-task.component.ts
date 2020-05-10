@@ -63,4 +63,12 @@ export class EvaluatedTaskComponent implements OnInit {
     return Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate())) / (1000 * 60 * 60 * 24));
   }
 
+  etat: string;
+  details: Tache = new Tache();
+  populateForm(edittache: Tache) {
+    this.TacheService.formData = Object.assign({}, edittache)
+    this.etat = edittache.etat
+    this.details = Object.assign({}, edittache);
+
+  }
 }

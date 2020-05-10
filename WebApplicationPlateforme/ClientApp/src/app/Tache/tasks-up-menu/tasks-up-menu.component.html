@@ -15,11 +15,11 @@
     <span><i class="fa fa-clock"></i></span>
     المهام المتأخرة
   </a>
-  <a href="" [routerLink]="['/tasks-reports']" class="p-2 flex-fill bd-highlight">
-    <span><i class="fa fa-file-pdf"></i></span>
+  <a href="" [routerLink]="['/tasks-reports']" class="p-2 flex-fill bd-highlight" *ngIf="privtestR">
+    <span><i class="fa fa-file"></i></span>
     تقارير المهام المرسلة
   </a>
-  <a href="" [routerLink]="['/tasks-reports-received']" class="p-2 flex-fill bd-highlight">
+  <a href="" [routerLink]="['/tasks-reports-received']" class="p-2 flex-fill bd-highlight" *ngIf="privtestR">
     <span><i class="fa fa-file"></i></span>
     تقارير المهام الواردة
   </a>

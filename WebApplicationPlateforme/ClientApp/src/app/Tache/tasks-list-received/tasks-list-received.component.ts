@@ -76,9 +76,11 @@ export class TasksListReceivedComponent implements OnInit {
 
   //edit etat
   etat: string;
+  details: Tache = new Tache();
   populateForm(edittache: Tache) {
     this.TacheService.formData = Object.assign({}, edittache)
     this.etat = edittache.etat
+    this.details = Object.assign({},edittache);
 
   }
 

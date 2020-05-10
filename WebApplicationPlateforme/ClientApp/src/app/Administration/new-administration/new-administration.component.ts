@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UserServiceService } from '../../shared/Services/User/user-service.service';
 import { UserDetail } from '../../shared/Models/User/user-detail.model';
 import { Administration } from '../../shared/Models/Administration/administration.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-new-administration',
@@ -20,6 +21,7 @@ export class NewAdministrationComponent implements OnInit {
   ngOnInit(): void {
     
     this.getUsersList();
+  
   
   }
 
@@ -41,15 +43,24 @@ export class NewAdministrationComponent implements OnInit {
   CreatedAdministration: Administration = new Administration();
   adminId: number;
 
-  onSubmit() {
-    
-   
-    this.AdministrativeSevice.AddAdministration(this.admin).subscribe(
-      (res: any) => {
+
+  
+
+  onSubmit(form:NgForm) {
+
+    if (this.nomAd == null) {
+      this.toastr.warning(" اكتب اسم الإدارة", "فشل")
+    }
+    else {
+
+      this.AdministrativeSevice.AddAdministration(this.admin).subscribe(
+        (res: any) => {
+          this.vider(form);
         this.CreatedAdministration = res;
         this.adminId = this.CreatedAdministration.id;
 
-        this.toastr.success("تم تسجيل الإدارة بنجاح", " تسجيل الإدارة");
+          this.toastr.success("تم تسجيل الإدارة بنجاح", " تسجيل الإدارة");
+  
       },
       err => {
         this.toastr.error("فشل تسجيل الإدارة", " تسجيل الإدارة")
@@ -57,5 +68,33 @@ export class NewAdministrationComponent implements OnInit {
 
     )
   }
+  }
 
+  //Test champs nom si vide
+  nomAd: string;
+  testnom(event) {
+    this.nomAd = event.target.value;
+     this.nomAd.toString();
+  }
+
+  //ResetForm
+
+  resetForm(form?: NgForm) {
+
+    if (form != null) 
+      form.resetForm();
+    
+    this.AdministrativeSevice.formData = {
+      id: null,
+      nom: '',
+      description: '',
+      nomDirecteur:''
+
+    }
+   
+  }
+
+  vider(form: NgForm) {
+    form.reset();
+  }
 }

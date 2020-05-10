@@ -46,6 +46,8 @@ import { AuthInterceptor } from './shared/Services/User/auth/auth.interceptor';
 import { EtablissementService } from './shared/Services/Etablissement/etablissement.service';
 import { AdministrationService } from './shared/Services/Administration/administration.service';
 import { TasksUpMenuComponent } from './Tache/tasks-up-menu/tasks-up-menu.component';
+import { UserRegisterComponent } from './user-register/user-register.component';
+import { UserChangePaswordComponent } from './User/user-change-pasword/user-change-pasword.component';
 
 
 @NgModule({
@@ -79,6 +81,8 @@ import { TasksUpMenuComponent } from './Tache/tasks-up-menu/tasks-up-menu.compon
     UserUpdatingComponent,
     ForbiddenPageComponent,
     TasksUpMenuComponent,
+    UserRegisterComponent,
+    UserChangePaswordComponent,
 
   ],
   imports: [
@@ -95,7 +99,10 @@ import { TasksUpMenuComponent } from './Tache/tasks-up-menu/tasks-up-menu.compon
     RouterModule.forRoot([
       //{ path: '', redirectTo: '/User/login-page', pathMatch:'full' },
       { path: '', component: LoginPageComponent, pathMatch: 'full' },
+     // { path: '', component: UserRegisterComponent, pathMatch: 'full' },
+      { path: 'user-register', component: UserRegisterComponent },
       { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+      { path: 'user-change-pasword', component: UserChangePaswordComponent, canActivate: [AuthGuard] },
       { path: 'tasks-reports', component: TasksReportsComponent, canActivate: [AuthGuard] },
       { path: 'tasks-reports-received', component: TasksReportsReceivedComponent, canActivate: [AuthGuard] },
       { path: 'tasks-list-created', component: TasksListCreatedComponent, canActivate: [AuthGuard] },

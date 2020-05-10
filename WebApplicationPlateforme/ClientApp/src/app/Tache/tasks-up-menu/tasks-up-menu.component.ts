@@ -23,6 +23,9 @@ export class TasksUpMenuComponent implements OnInit {
   UserIdConnected: string;
   UserNameConnected: string;
   privtest: boolean = false;
+  privtestR: boolean = false;
+  addTask: any;
+  rapport: any;
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
@@ -30,19 +33,26 @@ export class TasksUpMenuComponent implements OnInit {
       this.UserNameConnected = res.fullName;
 
       this.privilegesService.GetById(this.UserIdConnected).subscribe(res => {
-
-        if (res.addTask == 1)
+        this.addTask = res.addTask;
+        this.rapport = res.rapport
+        if (this.addTask == 1) {
           this.privtest = true;
-        console.log(this.privtest)
+        }
+
+
+        if (this.rapport == 1) {
+          this.privtestR = true;
+        }
+       
       })
-
-
-
     })
+
   }
+
+
   //Privilege Test
 
-  getPriv(id) {
+ /* getPriv(id) {
     this.privilegesService.GetById(id).subscribe(res => {
       if (res.addTask == 1) {
         this.privtest = true;
@@ -53,5 +63,5 @@ export class TasksUpMenuComponent implements OnInit {
     })
 
     console.log(this.privtest)
-  }
+  }*/
 }

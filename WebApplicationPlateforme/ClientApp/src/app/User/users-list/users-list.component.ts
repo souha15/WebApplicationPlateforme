@@ -3,6 +3,7 @@ import { UserServiceService } from '../../shared/Services/User/user-service.serv
 import { UserDetail } from '../../shared/Models/User/user-detail.model';
 import { Observable } from 'rxjs';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-users-list',
@@ -11,11 +12,13 @@ import { NgForm } from '@angular/forms';
 })
 export class UsersListComponent implements OnInit {
 
-  constructor(private UserService: UserServiceService) { }
+  constructor(private UserService: UserServiceService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.ShowUsersList();
     this.resetForm();
+
   }
 
 
@@ -40,27 +43,20 @@ export class UsersListComponent implements OnInit {
   
 //DeleteUser
   deleteUser(Id: string) {
-    this.UserService.DeleteUser(Id).subscribe(res => {
-      console.log(res)
-    })
-  }
+    if (confirm('هل أنت متأكد من حذف هذا السجل؟')) {
+      this.UserService.DeleteUser(Id).subscribe(res => {
+        this.ShowUsersList();
+          this.toastr.success("تم الحذف  بنجاح", "نجاح");
+        },
 
-  //UpdateUsrr
+          err => {
+            console.log(err);
+            this.toastr.warning('لم يتم الحذف  ', ' فشل');
+          }
+        )
 
-  updateUser() {
-    let Id = "cfc44601-660d-4270-9517-9bfb5bcf1bab";
-    let user: UserDetail = new UserDetail();
-    this.UserService.GetUserById(Id).subscribe(res => {
-      user = res;
-      user.fullName = "souha00158";
-      this.UserService.EditUser().subscribe(res => {
-      user.fullName = "souha00158";
-        console.log(res)
-      })
-    })
-   
-
-
+    }
+ 
   }
 
   populateForm(userdetail: UserDetail) {

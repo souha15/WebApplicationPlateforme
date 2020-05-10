@@ -3,6 +3,7 @@ import { PathSharedService } from '../../path-shared.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Tache } from '../../Models/Taches/tache.model';
 import { Observable } from 'rxjs';
+import { timeout } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class TacheService {
 
   //Create Tache
 
-  CreateTache(tache : Tache) {
+  CreateTache(tache: Tache) {
     return this.http.post<Tache>(this.rootURL + '/Taches', tache, this.headers);
   }
 

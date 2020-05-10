@@ -26,7 +26,7 @@ namespace WebApplicationPlateforme.Model.Taches
         public string Attribut2 { get; set; }
         public string Attribut3 { get; set; }
         public int Attribut4 { get; set; }
-
+        //public string[] PiecesJointes { get; set; }
         public string CreatorName { get; set; }
     
 

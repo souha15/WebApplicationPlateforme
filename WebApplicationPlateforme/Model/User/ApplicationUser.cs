@@ -13,6 +13,7 @@ namespace WebApplicationPlateforme.Model.User
        
         public string RegistreCivil { get; set; }
         public string FullNameEnglish { get; set; }
+  
         public string FullName { get; set; }
         public string adresse { get; set; }
     

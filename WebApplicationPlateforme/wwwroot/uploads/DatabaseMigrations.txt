@@ -1,0 +1,42 @@
+Add-Migration "MigrationPrivileges"
+Update-Database
+
+--- nUserModel : 
+                UserName 
+                Email
+                RegistreCivil 
+                FullNameEnglish
+                FullName
+                adresse
+                PhoneNumber
+                Tel
+                Statut
+                Nationalite
+                Religion
+                Sexe
+                DateNaissance
+                LieuNaissance
+                Passeport
+                TypeSang
+                Num
+                Emploi
+                Rang
+                TypeEmploi
+                Administration
+                Departement
+                Unite
+                Qualification
+                TypeQualification
+                FaculteEcole
+                DateQualification
+                Specialite
+                Paysetude
+                Mention
+                Classement
+                Degre
+                Salaire
+                Indemnite
+                AutreIndemnite
+                HeureArrive
+                HeureDepart
+                Photo

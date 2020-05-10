@@ -40,13 +40,18 @@ export class PrivilegesService {
 
   //Put Tache
 
-  PutPrivilegeObservable(privileges: PrivilegesDetail, Id: number) {
+  PutPrivilegeObservable(privileges: PrivilegesDetail, Id: string) {
     return this.http.put<PrivilegesDetail>(this.rootURL + '/Privileges/' + Id, privileges, this.headers);
   }
 
   PutPrivilege(Id) {
     return this.http.put(this.rootURL + '/Privileges/' + this.formData.id, this.formData, this.headers);
   }
+
+  EditPrivilege() {
+    return this.http.put <PrivilegesDetail>(this.rootURL + '/Privileges/' + this.formData.id, this.formData, this.headers);
+  }
+
 
   //Get Tache By Id
 

@@ -126,7 +126,40 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
                 return BadRequest(new { message = "Username or password is incorrect." });
         }
 
+        [HttpPost]
+        [Route("ChangePassword")]
+        //POST : /api/ApplicationUser/Register
+        public async Task<IActionResult> ChangePassword(ApplicationUserModel model)
+        {
+            var user = await _userManager.FindByIdAsync(model.Id);
+            /*   if(user!= null  && await _userManager.CheckPasswordAsync(user, model.Password)) { 
+              user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, model.Password);
+              var result = await _userManager.UpdateAsync(user);
+              var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+              }
 
-    
-}
+              else 
+              {
+                  return NotFound();
+              }*/
+            if (user==null) {
+                return NotFound();
+            }
+
+            user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, model.Password);
+            var result = await _userManager.UpdateAsync(user);
+            var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+            
+            if(!result.Succeeded) 
+            {
+                
+            }
+
+            return Ok();
+
+        }
+
+
+
+    }
 }

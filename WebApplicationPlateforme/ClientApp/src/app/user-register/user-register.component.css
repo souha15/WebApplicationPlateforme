@@ -1,0 +1,109 @@
+.tabs .nav {
+}
+
+  .tabs .nav li a {
+    color: #fff;
+    padding: 8px 10px;
+    background: #33a1ce;
+    text-decoration: none
+  }
+
+    .tabs .nav li a.active,
+    .tabs .nav li a:hover {
+      background: #276985;
+      color: #fff
+    }
+
+.tabs section {
+  direction: rtl;
+}
+
+.tabs .reg form {
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 5px;
+  text-align: center;
+}
+
+  .tabs .reg form .form-group label {
+    display: inline-block;
+    padding: 9px 0px;
+    text-align: center;
+    background: #91c3d8;
+    width: 40px;
+    border-radius: 0 5px 5px 0;
+  }
+
+  .tabs .reg form .form-group select,
+  .tabs .reg form .form-group input {
+    width: 80%;
+    padding: 8px;
+    border-radius: 5px 0 0 5px;
+    display: inline-block;
+    border: 1px solid #91c3d8;
+  }
+
+@media (min-width:767px) {
+  .tabs form {
+    margin: auto
+  }
+
+  .tabs .reg form .form-group {
+    width: 45%;
+    float: right
+  }
+}
+
+.tabs .reg form .form-group input[type='submit'] {
+  width: 50%;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+@media (max-width:500px) {
+  .reg form .form-group input[type='submit'] {
+    width: 100%
+  }
+}
+
+.terms-form {
+  padding: 20px 0;
+  margin-top: 5px
+}
+
+  .terms-form label {
+    font-size: 25px;
+    margin-right: 25px;
+    cursor: pointer;
+  }
+
+    .terms-form label::before {
+      content: "";
+      position: relative;
+      width: 22px;
+      height: 22px;
+      background: #91c3d8;
+      display: inline-block;
+      left: 10px;
+      top: 2px;
+    }
+
+  .terms-form input[type='checkbox'] {
+    display: none;
+  }
+
+    .terms-form input[type='checkbox']:checked + label::before {
+      font-family: 'Font Awesome 5 Free';
+      content: "\f14a";
+      display: inline-block;
+      background: transparent;
+      color: #0697d4;
+    }
+
+.tabs .terms-form .form-group input[type='submit'] {
+  width: 50%;
+  border-radius: 10px;
+  font-size: 20px;
+  background: #276985;
+  color: #fff
+}

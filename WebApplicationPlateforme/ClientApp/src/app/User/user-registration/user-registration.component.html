@@ -1,4 +1,5 @@
 
+
 <app-nav-menu></app-nav-menu>
 <!-- Page Content -->
 <div class="content">
@@ -11,134 +12,151 @@
         <h3 class="task-head">تسجيل موظف</h3>
       </header>
       <div class="tabs">
-        <ul class="nav nav-tabs">
-          <li class="nav-item reg-btn pointer-link"><a class="nav-link active">بيانات الموظف</a></li>
-          <li class="nav-item terms-btn pointer-link"><a class="nav-link">الصلاحيات</a></li>
-        </ul>
-        <section class="text-right">
-
-          <div class="reg text-right">
-            <form [formGroup]="UserService.formModel" autocomplete="off" (submit)="onSubmit()">
-
-              <div class="form-group">
-
-                <label class="" for="full-name"><i class="fa fa-user"></i></label>
-                <input class="" type="text" name="full-name" placeholder="الاسم بالكامل" id="full-name" formControlName="FullName" required>
-              </div>
-              <label class="text-danger" *ngIf="UserService.formModel.get('FullName').touched && UserService.formModel.get('FullName').errors?.required"> هذا الحقل إجباري</label>
-              <div class="form-group">
-                <label class="" for="email"><i class="fa fa-envelope"></i></label>
-                <input class="" type="email" name="email" placeholder="البريد الالكتروني" id="email" formControlName="Email" required>
-
-              </div>
-              <label class="text-danger" *ngIf="UserService.formModel.get('Email').touched && UserService.formModel.get('Email').errors?.required"> هذا الحقل إجباري</label>
-              <label class="text-danger" *ngIf="UserService.formModel.get('Email').touched && UserService.formModel.get('Email').errors?.email"> عنوان البريد الإلكتروني غير صالح</label>
-
-              <div class="form-group">
-                <label class="" for="poss"><i class="fa fa-user-circle"></i></label>
-                <input class="" type="text" name="poss" placeholder="الرئيس المباشر" id="poss" formControlName="Statut" required>
-              </div>
-
-              <div class="form-group">
-                <label class="" for="tele"><i class="fa fa-mobile-alt"></i></label>
-                <input class="" type="tel" name="mobile" placeholder=" الجوال" id="tele" formControlName="PhoneNumber" required>
-              </div>
-              <div class="form-group">
-                <label class="" for="new-user-name"><i class="fa fa-user"></i></label>
-                <input class="" type="text" name="new-user-name" placeholder="اسم المستخدم" id="new-user-name" formControlName="UserName" required>
-
-              </div>
-
-              <div class="form-group">
-                <label class="" for="x"><i class="fa fa-building"></i></label>
-                <select class="" name="IdAdministration" formControlName="IdAdministration">
-                  <option [ngValue]="undefined" selected disabled>-الإدارة-</option>
-                  <option *ngFor="let item of AdministrationList" value="{{item.id}}">{{item.nom}}</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label class="" for="x"><i class="fa fa-building"></i></label>
-                <select class="" name="IdDepartement" formControlName="IdDepartement">
-                  <option [ngValue]="undefined" selected disabled>-الإدارة-</option>
-                  <option *ngFor="let item of EtablissementList" value="{{item.id}}">{{item.nom}}</option>
-                </select>
-
-              </div>
-
-              <label class="text-danger" *ngIf="UserService.formModel.get('UserName').touched && UserService.formModel.get('UserName').errors?.required"> هذا الحقل إجباري</label>
-              <label class="text-danger" *ngIf="UserService.formModel.get('UserName').touched && UserService.formModel.get('UserName').errors?.minlength"> الحد الأدنى 6 أحرف</label>
-
-
-              <div formGroupName="Passwords">
-                <div class="form-group">
-                  <label class="" for="new-user-password"><i class="fa fa-key"></i></label>
-                  <input class="" type="password" name="new-user-password" placeholder="كلمة المرور" id="new-user-password" formControlName="Password" required>
-
-                </div>
-                <label class="text-danger" *ngIf="UserService.formModel.get('Passwords.Password').touched && UserService.formModel.get('Passwords.Password').errors?.required"> هذا الحقل إجباري</label>
-                <div class="form-group">
-                  <label class="" for="new-user-password2"><i class="fa fa-key"></i></label>
-                  <input class="" type="password" name="new-user-password" placeholder="تأكيد كلمة المرور" id="new-user-password2" formControlName="ConfirmPassword" required>
-
-                </div>
-                <label class="text-danger" *ngIf="UserService.formModel.get('Passwords.ConfirmPassword').touched && UserService.formModel.get('Passwords.ConfirmPassword').errors?.required"> هذا الحقل إجباري</label>
-                <label class="text-danger" *ngIf="UserService.formModel.get('Passwords.ConfirmPassword').touched && UserService.formModel.get('Passwords.ConfirmPassword').errors?.passwordMismatch"> كلمة المرور غير متطابقة</label>
-              </div>
-
-              <div  class="form-check-inline" *ngIf="roles" >
-                <ul id="menu">
-                  <li *ngFor="let item of roles;let i = index" >
-                    <input type="checkbox" [id]="'roles-'+i" value="{{item.id}}"
-                           [checked]="item.selected" (change)="updateSelectedRoles(i)" name="contacts" id="contacts">
-                    <label [for]="'roles-'+i" *ngIf="item.name=='EMPLOYEE'">موظف</label>
-                    <label [for]="'roles-'+i" *ngIf="item.name=='DIRECTORE'">مدير قسم</label>
-                    <label [for]="'roles-'+i" *ngIf="item.name=='DIRECTORA'">مدير إدارة</label>
-                    <label [for]="'roles-'+i" *ngIf="item.name=='DIRECTORG'">مدير عام</label>
-                    <label [for]="'roles-'+i" *ngIf="item.name=='ADMINISTRATEUR'">مسؤول النظام</label>
-
-                  </li>
-                </ul>
-
-              </div>
-
-              <button type="submit" class="enter">تسجيل</button>
-
-            </form>
-          </div>
-
-          <div class="terms text-right" style="display: none">
-            <form class="terms-form" #form="ngForm" autocomplete="off" (submit)="onSubmitPrivileges()">
-              <div class="form-group">
-                <input type="checkbox" name="tasks-manage" id="tasks-manage"  (change)='onSelect1($event)'>
-                <label for="tasks-manage">نظام إدارة المهام</label>
-                <input type="checkbox" name="add-task" id="add-task" (change)='onSelect2($event)'>
-                <label for="add-task">إضافة مهمة</label>
-                <input type="checkbox" name="tasks-report" id="tasks-report" (change)='onSelect3($event)'>
-                <label for="tasks-report">تقارير</label>
-              </div>
-              <div class="form-group">
-                <input type="checkbox" name="contacts" id="contacts" (change)='onSelect4($event)'>
-                <label for="contacts">نظام الاتصالات الادارية</label>
-                <input type="checkbox" name="contacts" id="contacts-1" (change)='onSelect5($event)'>
-                <label for="contacts-1">نظام اتصال 1</label>
-              </div>
-              <div class="form-group">
-                <input type="checkbox" name="" id="employers" (change)='onSelect6($event)'>
-                <label for="employers">نظام شؤون الموظفين</label>
-                <input type="checkbox" name="" id="emp-salary" (change)='onSelect7($event)'>
-                <label for="emp-salary">الرواتب</label>
-                <input type="checkbox" name="" id="emp-work" (change)='onSelect8($event)'>
-                <label for="emp-work">الأداء</label>
-              </div>
-              <div class="form-group">
-                <input class="btn" type="submit" value="تسجيل">
-              </div>
-            </form>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">بيانات الموظف</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">الصلاحيات</a>
+          </li>
+      
        
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+
+          <!--Users Informations-->
+
+          <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="reg text-right">
+              <form [formGroup]="UserService.formModel" autocomplete="off" (submit)="onSubmit()">
+
+                <div class="form-group">
+
+                  <label class="" for="full-name"><i class="fa fa-user"></i></label>
+                  <input class="" type="text" name="full-name" placeholder="الاسم بالكامل" id="full-name" formControlName="FullName" required>
+                </div>
+                <label class="text-danger" *ngIf="UserService.formModel.get('FullName').touched && UserService.formModel.get('FullName').errors?.required"> هذا الحقل إجباري</label>
+                <div class="form-group">
+                  <label class="" for="email"><i class="fa fa-envelope"></i></label>
+                  <input class="" type="email" name="email" placeholder="البريد الالكتروني" id="email" formControlName="Email" required>
+
+                </div>
+                <label class="text-danger" *ngIf="UserService.formModel.get('Email').touched && UserService.formModel.get('Email').errors?.required"> هذا الحقل إجباري</label>
+                <label class="text-danger" *ngIf="UserService.formModel.get('Email').touched && UserService.formModel.get('Email').errors?.email"> عنوان البريد الإلكتروني غير صالح</label>
+
+                <div class="form-group">
+                  <label class="" for="poss"><i class="fa fa-user-circle"></i></label>
+                  <input class="" type="text" name="poss" placeholder="الرئيس المباشر" id="poss" formControlName="Statut" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="" for="tele"><i class="fa fa-mobile-alt"></i></label>
+                  <input class="" type="tel" name="mobile" placeholder=" الجوال" id="tele" formControlName="PhoneNumber" required>
+                </div>
+                <div class="form-group">
+                  <label class="" for="new-user-name"><i class="fa fa-user"></i></label>
+                  <input class="" type="text" name="new-user-name" placeholder="اسم المستخدم" id="new-user-name" formControlName="UserName" required>
+
+                </div>
+
+                <div class="form-group">
+                  <label class="" for="x"><i class="fa fa-building"></i></label>
+                  <select class="" name="IdAdministration" formControlName="IdAdministration">
+                    <option [ngValue]="undefined" selected disabled>-الإدارة-</option>
+                    <option *ngFor="let item of AdministrationList" value="{{item.id}}">{{item.nom}}</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="" for="x"><i class="fa fa-building"></i></label>
+                  <select class="" name="IdDepartement" formControlName="IdDepartement">
+                    <option [ngValue]="undefined" selected disabled>-الإدارة-</option>
+                    <option *ngFor="let item of EtablissementList" value="{{item.id}}">{{item.nom}}</option>
+                  </select>
+
+                </div>
+
+                <label class="text-danger" *ngIf="UserService.formModel.get('UserName').touched && UserService.formModel.get('UserName').errors?.required"> هذا الحقل إجباري</label>
+                <label class="text-danger" *ngIf="UserService.formModel.get('UserName').touched && UserService.formModel.get('UserName').errors?.minlength"> الحد الأدنى 6 أحرف</label>
+
+
+                <div formGroupName="Passwords">
+                  <div class="form-group">
+                    <label class="" for="new-user-password"><i class="fa fa-key"></i></label>
+                    <input class="" type="password" name="new-user-password" placeholder="كلمة المرور" id="new-user-password" formControlName="Password" required>
+
+                  </div>
+                  <label class="text-danger" *ngIf="UserService.formModel.get('Passwords.Password').touched && UserService.formModel.get('Passwords.Password').errors?.required"> هذا الحقل إجباري</label>
+                  <div class="form-group">
+                    <label class="" for="new-user-password2"><i class="fa fa-key"></i></label>
+                    <input class="" type="password" name="new-user-password" placeholder="تأكيد كلمة المرور" id="new-user-password2" formControlName="ConfirmPassword" required>
+
+                  </div>
+                  <label class="text-danger" *ngIf="UserService.formModel.get('Passwords.ConfirmPassword').touched && UserService.formModel.get('Passwords.ConfirmPassword').errors?.required"> هذا الحقل إجباري</label>
+                  <label class="text-danger" *ngIf="UserService.formModel.get('Passwords.ConfirmPassword').touched && UserService.formModel.get('Passwords.ConfirmPassword').errors?.passwordMismatch"> كلمة المرور غير متطابقة</label>
+                </div>
+
+                <div class="form-check-inline" *ngIf="roles">
+                  <ul id="menu">
+                    <li *ngFor="let item of roles;let i = index">
+                      <input type="checkbox" [id]="'roles-'+i" value="{{item.id}}"
+                             [checked]="item.selected" (change)="updateSelectedRoles(i)" name="contacts" id="contacts">
+                      <label [for]="'roles-'+i" *ngIf="item.name=='EMPLOYEE'">موظف</label>
+                      <label [for]="'roles-'+i" *ngIf="item.name=='DIRECTORE'">مدير قسم</label>
+                      <label [for]="'roles-'+i" *ngIf="item.name=='DIRECTORA'">مدير إدارة</label>
+                      <label [for]="'roles-'+i" *ngIf="item.name=='DIRECTORG'">مدير عام</label>
+                      <label [for]="'roles-'+i" *ngIf="item.name=='ADMINISTRATEUR'">مسؤول النظام</label>
+
+                    </li>
+                  </ul>
+
+                </div>
+
+                <button type="submit" class="enter">تسجيل</button>
+
+              </form>
+            </div>
           </div>
 
-        </section>
+
+          <!--Privilesges-->
+
+          <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="terms text-right">
+              <form class="terms-form" #form="ngForm" autocomplete="off" (submit)="onSubmitPrivileges()">
+                <div class="form-group">
+                  <input type="checkbox" name="tasks-manage" id="tasks-manage" (change)='onSelect1($event)'>
+                  <label for="tasks-manage">نظام إدارة المهام</label>
+                  <input type="checkbox" name="add-task" id="add-task" (change)='onSelect2($event)'>
+                  <label for="add-task">إضافة مهمة</label>
+                  <input type="checkbox" name="tasks-report" id="tasks-report" (change)='onSelect3($event)'>
+                  <label for="tasks-report">تقارير</label>
+                </div>
+                <div class="form-group">
+                  <input type="checkbox" name="contacts" id="contacts" (change)='onSelect4($event)'>
+                  <label for="contacts">نظام الاتصالات الادارية</label>
+                  <input type="checkbox" name="contacts" id="contacts-1" (change)='onSelect5($event)'>
+                  <label for="contacts-1">نظام اتصال 1</label>
+                </div>
+                <div class="form-group">
+                  <input type="checkbox" name="" id="employers" (change)='onSelect6($event)'>
+                  <label for="employers">نظام شؤون الموظفين</label>
+                  <input type="checkbox" name="" id="emp-salary" (change)='onSelect7($event)'>
+                  <label for="emp-salary">الرواتب</label>
+                  <input type="checkbox" name="" id="emp-work" (change)='onSelect8($event)'>
+                  <label for="emp-work">الأداء</label>
+                </div>
+                <div class="form-group">
+                  <input class="btn" type="submit" value="تسجيل">
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
       </div>
     </div><!-- End col-9 -->
   </div>

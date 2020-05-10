@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -81,6 +82,13 @@ namespace WebApplicationPlateforme.Controllers.TachesControllers
         public async Task<ActionResult<Tache>> PostTache(Tache tache)
         {
             _context.tache.Add(tache);
+           // var tacheId = tache.Id;
+       
+         /*   tache.attachments.forEache(Attachment =>
+            {
+                Attachment.setTacheId(tache.id);
+                _context.File.add(file);
+            });*/
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetTache", new { id = tache.Id }, tache);

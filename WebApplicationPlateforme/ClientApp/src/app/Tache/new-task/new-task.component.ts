@@ -49,7 +49,8 @@ export class NewTaskComponent implements OnInit {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
           
-    })  
+    })
+    
   }
 
   //Get Users List
@@ -90,13 +91,25 @@ export class NewTaskComponent implements OnInit {
 
     })
   }
+
+  vider() {
+    this.tacheId = null;
+    if (this.serviceupload.list.length != 0) {
+      this.serviceupload.list.length = 0;
+    }
+    this.tache = new Tache();
+    console.log(this.tache)
+    this.ngOnInit();
+  }
   //Create Tache
 
   tache: Tache = new Tache();
+  attachments: File[] = [];
   CreatedTache: Tache = new Tache();
   tacheId: number;
   testchamp: boolean;
   onSubmit() {
+
     this.tache.idUserCreator = this.UserIdConnected;
     this.tache.creatorName = this.UserNameConnected;
      this.tache.etat = "غير منجزة"
@@ -117,19 +130,41 @@ export class NewTaskComponent implements OnInit {
     }
     else {
       this.testchamp = true;
-      this.TacheService.CreateTache(this.tache).subscribe(
+       this.TacheService.CreateTache(this.tache).subscribe(
         (res: any) => {
           this.CreatedTache = res;
-          this.tacheId = this.CreatedTache.id;
+           this.tacheId = this.CreatedTache.id;
 
-          this.toastr.success("تم تسجيل المهمة بنجاح", " تسجيل المهمة");
+           this.pj.nomUser = this.tache.creatorName;
+           let datef = Date.now();
+           this.pj.dateTime = new Date(datef);
+           this.pj.dateTime
+           
+           this.pj.idTache = this.tacheId;
+           let path = this.rootUrl.getPath();
+           this.fileslist.forEach(item => {
+             this.pj.path = item;
+             console.log(item)
+             this.http.post(path + '/PiecesJointes', this.pj)
+               .subscribe(res => {
+                 this.serviceupload.refreshList();
+                 this.GetFileName();
+               });
+           })
+        
+
+           console.log(this.tache)
+           this.toastr.success("تم تسجيل المهمة بنجاح", " تسجيل المهمة");
+          
         },
         err => {
           this.toastr.error("فشل تسجيل المهمة", " تسجيل المهمة")
         }
 
       )
+      
     }
+
   }
 
   //Files
@@ -146,7 +181,7 @@ export class NewTaskComponent implements OnInit {
     this.serviceupload.getFiles().subscribe(
       data => {
         this.files = data
-
+       
       }
     );
 
@@ -170,7 +205,7 @@ export class NewTaskComponent implements OnInit {
 
     }
 
-    console.log(tlistnew)
+ 
   }
 
   //Upload
@@ -178,11 +213,13 @@ export class NewTaskComponent implements OnInit {
   //Save it ToDatabase
   Idtransaction: number;
   url: any;
+  file: any;
+  fileslist: string[]=[];
   public upload(event) {
     if (event.target.files && event.target.files.length > 0) {
-      const file = event.target.files[0];
+      this.file = event.target.files[0];
       this.uploadStatuss.emit({ status: ProgressStatusEnum.START });
-      this.serviceupload.uploadFile(file).subscribe(
+      this.serviceupload.uploadFile(this.file).subscribe(
         data => {
           if (data) {
             switch (data.type) {
@@ -196,31 +233,20 @@ export class NewTaskComponent implements OnInit {
             }
             this.getFiles();
             this.GetFileName();
-
+           
+            
+        
           }
 
         },
-
+    
         error => {
           this.inputFile.nativeElement.value = '';
           this.uploadStatuss.emit({ status: ProgressStatusEnum.ERROR });
         }
       );
-
-      this.pj.nomUser = this.tache.creatorName;
-      let datef = Date.now();
-      this.pj.dateTime = new Date(datef);
-      this.pj.dateTime
-      this.pj.path = file.name;
-      this.pj.idTache = this.tacheId;
-      let path = this.rootUrl.getPath();
-
-      this.http.post(path + '/PiecesJointes', this.pj)
-        .subscribe(res => {
-          this.serviceupload.refreshList();
-        });
-
-      this.GetFileName();
+      this.fileslist.push(this.file.name);
+      console.log(this.fileslist)
     }
   }
 

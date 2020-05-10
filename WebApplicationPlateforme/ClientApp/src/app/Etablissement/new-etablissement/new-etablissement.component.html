@@ -28,37 +28,34 @@
 
       </nav>
       <h4 class="my-2 task-head"> قسم جديد</h4>
-      <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit()">
+      <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
 
         <div class="col-sm-6">
-          <label><span><i class="fa fa-sort-numeric-down"></i></span>رقم القسم</label>
-          <span class="task-num">{{etaId}}</span>
-        </div>
-        <div class="col-sm-6">
           <label for="task"><span><i class="fa fa-calendar-check"></i></span>القسم</label>
-          <input type="text" id="task" class="t" name="nom" #nom="ngModel" [(ngModel)]="eta.nom">
+          <input type="text" id="task" class="t" name="nom" #nom="ngModel" [(ngModel)]="eta.nom" (change)="testnom($event)">
         </div>
         <div class="col-12">
           <label for="task-details"><span><i class="fa fa-list"></i></span>وصف القسم</label>
           <input type="text" id="task-details" name="description" #description="ngModel" [(ngModel)]="eta.description">
         </div>
-     
 
-        <div class="col-sm-4">
-          <label for="days"><span><i class="fa fa-user"></i></span>مدير القسم</label>
-          <select name="nomDirecteur" #nomDirecteur="ngModel" [(ngModel)]="eta.nomDirecteur">
-            <option [ngValue]="undefined" selected disabled>-مدير القسم-</option>
-            <option *ngFor="let item of UsersList" value="{{item.fullName}}">{{item.fullName}}</option>
-          </select>
-        </div>
-        <div class="col-sm-8">
+        <div class="col-sm-6">
           <label for="user"><span><i class="fa fa-building"></i></span>الإدارة</label>
           <select id="user" class="" name="idAdministration" #idAdministration="ngModel" [(ngModel)]="eta.idAdministration" (change)="selectInput($event)">
             <option [ngValue]="undefined" selected disabled>-الإدارة-</option>
             <option *ngFor="let item of AdministrationList" value="{{item.id}}">{{item.nom}}</option>
           </select>
         </div>
-                
+
+        <div class="col-sm-6">
+          <label for="days"><span><i class="fa fa-user"></i></span>مدير القسم</label>
+          <select name="nomDirecteur" #nomDirecteur="ngModel" [(ngModel)]="eta.nomDirecteur">
+            <option [ngValue]="undefined" selected disabled>-مدير القسم-</option>
+            <option *ngFor="let item of UsersList" value="{{item.fullName}}">{{item.fullName}}</option>
+          </select>
+        </div>
+
+
 
         <div class="save">
           <button type="submit" class="btn btn-success"><span><i class="fa fa-save"></i></span> حفظ</button>

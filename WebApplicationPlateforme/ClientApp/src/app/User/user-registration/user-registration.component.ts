@@ -33,8 +33,17 @@ export class UserRegistrationComponent implements OnInit {
     this.GetEtablisssementList();
     this.GetAdmninstrativeList();
     this.getRoles();
+    this.getUsersList();
   }
 
+  //Get Users List
+  UsersList: UserDetail[] = [];
+  getUsersList() {
+    this.UserService.GetUsersList().subscribe(res => {
+      this.UsersList = res
+    })
+      
+  }
   // Get Roles List
 
   roles: any[];
@@ -56,7 +65,16 @@ export class UserRegistrationComponent implements OnInit {
   updateSelectedRoles(index) {
     this.roles[index].selected = !this.roles[index].selected;
     var x = this.roles.filter(x => x.selected).map(y => y.Name);
-    console.log(x)
+    
+  }
+
+  //disable checkboxes wehen one of them selected
+
+  isChecked;
+  isCheckedName;
+  onChange(e) {
+    this.isChecked = !this.isChecked;
+    this.isCheckedName = e.target.name;
   }
 
   // Get Etablissement List
@@ -245,7 +263,7 @@ export class UserRegistrationComponent implements OnInit {
     this.privilege.appel = this.appel;
     this.privilege.commAd = this.commAd;
     this.privilege.performance = this.performance;
-    this.privilege.Rapport = this.Rapport;
+    this.privilege.rapport = this.Rapport;
     this.privilege.salaire = this.salaire;
     this.privilege.serviceEmployee = this.serviceEmployee;
     this.privilege.settings = this.settings;

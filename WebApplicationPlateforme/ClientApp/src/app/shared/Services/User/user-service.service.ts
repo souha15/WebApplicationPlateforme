@@ -149,5 +149,11 @@ export class UserServiceService {
     });
     return isMatch;
   }
+
+  //Change Password
+  ChangePassword(user: UserDetail) {
+    return this.http.post(this.BaseURI + '/ApplicationUser/ChangePassword', user, this.headers);
+
+  }
 }
 
