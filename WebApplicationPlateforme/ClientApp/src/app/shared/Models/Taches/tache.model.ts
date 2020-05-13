@@ -13,7 +13,7 @@ export class Tache {
   Attribut1: string;
   Attribut2: string;
   Attribut3: string;
-  Attribut4 : number;
+  attribut4 : number;
   creatorName: string;
   idUserCreator: string;
   affectedName: string;

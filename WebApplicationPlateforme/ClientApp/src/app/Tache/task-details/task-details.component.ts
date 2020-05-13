@@ -22,9 +22,10 @@ export class TaskDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private TacheService: TacheService,
     private commentsService: CommentaireService,
-    private UserService: UserServiceService,) {
+    private UserService: UserServiceService, ) {
 
-    /*this.subscribeToEvents();*/}
+    /*this.subscribeToEvents();*/
+}
 
   ngOnInit(): void {
 
@@ -33,7 +34,7 @@ export class TaskDetailsComponent implements OnInit {
     this.getTaskDetails();
     this.ListOfComments();
     //this.LoadMore();
-    
+
     //this.Charts();
   }
 
@@ -60,14 +61,14 @@ export class TaskDetailsComponent implements OnInit {
       this.TaskId = params['id']
     });
 
-   
+
   }
 
   // getTask
   getTaskDetails() {
     this.TacheService.GetById(this.TaskId).subscribe(res => {
       this.tache = res
-    
+
     })
   }
   ngOnDestroy() {
@@ -151,13 +152,18 @@ export class TaskDetailsComponent implements OnInit {
   txtMessage: string = '';
   messages = new Array<Commentaire>();
   message: Commentaire = new Commentaire();
- 
+  listmessage: Commentaire[] = [];
   //list of comments
   ListOfComments() {
     this.commentsService.CommentsList().subscribe(res => {
-      this.messages = res;
-
-
+      this.listmessage = res;
+      console.log(this.listmessage)
+      this.messages = this.listmessage.filter(item =>
+        item.idTache == this.tache.id
+      );
+      console.log(this.tache.id)
+      console.log(typeof this.tache.id)
+      console.log(this.messages)
     })
 
   
@@ -169,10 +175,10 @@ export class TaskDetailsComponent implements OnInit {
   sendMessage(): void {
     if (this.txtMessage) {
 
-      this.message.IdTache = this.tache.id;
+      this.message.idTache = this.tache.id;
       this.message.textCommentaire = this.txtMessage;
       this.message.dateTime = new Date();
-      this.message.IdUser = this.UserIdConnected;
+      this.message.idUser = this.UserIdConnected;
       this.message.nomUser = this.UserNameConnected;
       this.commentsService.CreateComment(this.message).subscribe(res => {
 

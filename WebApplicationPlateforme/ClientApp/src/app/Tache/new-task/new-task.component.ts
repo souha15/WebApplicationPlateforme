@@ -22,6 +22,7 @@ export class NewTaskComponent implements OnInit {
   @Output() public uploadStatuss: EventEmitter<ProgressStatus>;
   @ViewChild('inputFile') inputFile: ElementRef;
   filter;
+  userDetails;
   constructor(private TacheService: TacheService,
     private toastr: ToastrService,
     private UserService: UserServiceService,
@@ -33,21 +34,35 @@ export class NewTaskComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.UserService.getUserProfile().subscribe(
+      res => {
+        this.userDetails = res;
+
+      },
+      err => {
+        console.log(err);
+      },
+    );
+
     this.getUserConnected();
     this.getUsersList();
     this.getFiles();
+ 
   }
 
   // Get User Connected
 
   UserIdConnected: string;
   UserNameConnected: string;
+  adminisgtrationName: any;
 
   getUserConnected() {
     
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
+      this.adminisgtrationName = res.idAdministration;
+      console.log(this.adminisgtrationName)
           
     })
     
@@ -108,11 +123,15 @@ export class NewTaskComponent implements OnInit {
   CreatedTache: Tache = new Tache();
   tacheId: number;
   testchamp: boolean;
+
   onSubmit() {
 
     this.tache.idUserCreator = this.UserIdConnected;
     this.tache.creatorName = this.UserNameConnected;
-     this.tache.etat = "غير منجزة"
+    this.tache.etat = "غير منجزة"
+    this.tache.attribut4 = this.adminisgtrationName;
+    
+
     this.tache.createur = this.userAffectedName;
     if (this.nomt == null) {
       this.toastr.warning("اختر اسم المهمة", 'تحذير')

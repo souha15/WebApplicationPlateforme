@@ -19,14 +19,24 @@
         </div>
         <div class="form-group form-inline ml-4">
 
-          <label for="department" class="">من الإدارة</label>
-          <select name="department" id="department" class="form-control  mr-2 ml-3" (change)="selectAdmin($event)">
+
+          <label for="user">الإدارة/الموظف</label>
+          <select name="department" id="department" class="form-control  mr-2 ml-3" (change)="selectInput($event)">
+            <option [ngValue]="undefined" selected disabled>-الإدارة/الموظف-</option>
+            <option value="all">من الإدارة</option>
+            <option value="employee">إلى الموظف</option>
+          </select>
+
+
+
+          <select name="department" id="department" class="form-control  mr-2 ml-3" (change)="selectAdmin($event)" *ngIf="isAdminSelected">
             <option [ngValue]="undefined" selected disabled>-من الإدارة-</option>
             <option *ngFor="let item of administrationList" value="{{item.id}}">{{item.nom}}</option>
           </select>
 
-          <label for="to-employee">إلى الموظف</label>
-          <select name="to-employee" id="to-employee" class="form-control mr-2" (change)="selectEmployee($event)">
+
+
+          <select name="to-employee" id="to-employee" class="form-control mr-2" (change)="selectEmployee($event)" *ngIf="isEmployeeSelected">
             <option [ngValue]="undefined" selected disabled>- إلى الموظف-</option>
             <option *ngFor="let item of UsersList" value="{{item.id}}">{{item.fullName}}</option>
           </select>

@@ -36,6 +36,8 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
                 user.Email,
                 user.UserName,
                 user.Id,
+                user.IdAdministration,
+                user.IdDepartement,
                
                 
 

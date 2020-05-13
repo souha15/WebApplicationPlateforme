@@ -48,8 +48,12 @@
                 <label class="text-danger" *ngIf="UserService.formModel.get('Email').touched && UserService.formModel.get('Email').errors?.email"> عنوان البريد الإلكتروني غير صالح</label>
 
                 <div class="form-group">
-                  <label class="" for="poss"><i class="fa fa-user-circle"></i></label>
-                  <input class="" type="text" name="poss" placeholder="الرئيس المباشر" id="poss" formControlName="Statut" required>
+                  <label class="" for="x"><i class="fa fa-user-circle"></i></label>
+                  <select class="" name="poss" formControlName="Statut">
+                    <option [ngValue]="undefined" selected disabled>-الرئيس المباشر-</option>
+                    <option *ngFor="let item of UsersList" value="{{item.fullName}}">{{item.fullName}}</option>
+                  </select>
+
                 </div>
 
                 <div class="form-group">

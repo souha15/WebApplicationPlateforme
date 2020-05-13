@@ -10,7 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Serialization;
 using System;
+using System.IO;
 using System.Text;
 using WebApplicationPlateforme.Data;
 using WebApplicationPlateforme.Hubs;
@@ -30,10 +32,12 @@ namespace WebApplicationPlateforme
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+         
             //Inject AppSettings
 
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
-            services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0)/*.AddJsonOptions(x => { })*/;
+            services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0).AddNewtonsoftJson();/*.AddJsonOptions(x => { })*/;
 
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<ApplicationDbContext>(
@@ -112,6 +116,14 @@ namespace WebApplicationPlateforme
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+            //Path for files 
+
+            if (string.IsNullOrWhiteSpace(env.WebRootPath)) env.WebRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+
+
+
+
             app.UseForwardedHeaders();
             if (env.IsDevelopment())
             {

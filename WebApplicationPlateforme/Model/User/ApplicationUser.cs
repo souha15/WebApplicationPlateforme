@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -49,6 +50,7 @@ namespace WebApplicationPlateforme.Model.User
         public string HeureDepart { get; set; }
         public string Photo { get; set; }
 
+        [JsonProperty(PropertyName = "IdAdministration")]
         [ForeignKey("Administration")]
         public int? IdAdministration { get; set; }
 

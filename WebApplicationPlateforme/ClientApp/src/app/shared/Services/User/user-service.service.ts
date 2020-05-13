@@ -26,7 +26,7 @@ export class UserServiceService {
    
     UserName: ['', [Validators.minLength(6),Validators.required]],
     Email: ['', [Validators.email, Validators.required]],
-    FullName: ['',  Validators.required],
+    fullName: ['',  Validators.required],
     PhoneNumber: ['', [Validators.minLength(8), Validators.maxLength(10)]],
     Statut: [''],
     IdDepartement: [''],
@@ -59,7 +59,7 @@ export class UserServiceService {
       
       UserName: this.formModel.value.UserName,
       Email: this.formModel.value.Email,
-      FullName: this.formModel.value.FullName,
+      fullName: this.formModel.value.FullName,
       Password: this.formModel.value.Passwords.Password,
       PhoneNumber: this.formModel.value.PhoneNumber,
       Statut: this.formModel.value.Statut,

@@ -3,6 +3,6 @@ export class Commentaire {
   textCommentaire: string;
   dateTime: Date;
   nomUser: string;;
-  IdTache: number;
-  IdUser: string;
+  idTache: number;
+  idUser: string;
 }

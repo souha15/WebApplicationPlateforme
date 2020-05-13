@@ -170,14 +170,14 @@ export class TasksReportsReceivedComponent implements OnInit {
   filtredtachelist: Tache[] = [];
   formRapport() {
 
-    if (this.employee == null) {
+    if (this.adminOremp == null) {
 
-      this.toastr.warning("اختر اسم الموظف", 'تحذير')
+      this.toastr.warning("اختر اسم الموظف/الإدارة", 'تحذير')
+      if (this.employee == null || this.admin == null) {
 
-    } else if (this.admin == null) {
+        this.toastr.warning("اختر اسم الموظف/الإدارة", 'تحذير')
 
-      this.toastr.error("اختر اسم الإدارة", 'تحذير')
-
+      }
     } else if (this.datedepart == null) {
       this.toastr.error("اختر تاريخ البدء", 'تحذير')
 
@@ -206,28 +206,51 @@ export class TasksReportsReceivedComponent implements OnInit {
         //Received list
    
         this.filtredtachelist = this.ListeTache.filter(item => item.affectedName == this.UserIdConnected)
+        if (this.employee != null) {
+          this.forEmployeelist = this.filtredtachelist.filter(item =>
+            item.affectedName == this.employee
 
-        this.forEmployeelist = this.filtredtachelist.filter(item =>
-          item.affectedName == this.employee 
+          );
+          this.forEmployeelist.forEach(element => {
+            var date = new Date(element.date)
+            date.toLocaleDateString();
+            if (date >= this.datedepart && date <= this.datefin) {
+              this.Genarallist.push(element);
 
-        );
-        this.forEmployeelist.forEach(element => {
-          var date = new Date(element.date)
-          date.toLocaleDateString();
-          if (date >= this.datedepart && date <= this.datefin) {
-            this.Genarallist.push(element);
-           
-            this.show = true;
-            
-          
-          }/*if(this.Genarallist == null) {
+              this.show = true;
+
+
+            }/*if(this.Genarallist == null) {
             this.toastr.error(" لا يوجد بيانات بهذه المواصفات", "")
           }*/
-         
-        
-        })
-    
-      
+
+
+          })
+
+        }
+        if (this.admin != null) {
+          this.forEmployeelist = this.filtredtachelist.filter(item =>
+            item.attribut4 == this.admin
+
+          );
+          this.forEmployeelist.forEach(element => {
+            var date = new Date(element.date)
+            date.toLocaleDateString();
+            if (date >= this.datedepart && date <= this.datefin) {
+              this.Genarallist.push(element);
+
+              this.show = true;
+
+
+            }
+            /*if(this.Genarallist == null) {
+              this.toastr.error(" لا يوجد بيانات بهذه المواصفات", "")
+            }*/
+
+
+          })
+
+        }
       });
     
     }
@@ -240,5 +263,28 @@ export class TasksReportsReceivedComponent implements OnInit {
       console.log(this.forEmployeelist)*/    
 
     }
-      
+
+  isEmployeeSelected: boolean = false;
+  isAdminSelected: boolean = false;
+  testchamp: boolean;
+  affected: string;
+  adminOremp: string;
+  selectInput(event) {
+    let selected = event.target.value;
+    this.adminOremp = selected;
+    this.adminOremp.toString();
+    if (selected == "employee") {
+      this.isEmployeeSelected = true;
+      this.isAdminSelected = false;
+      this.affected = "employee"
+      this.testchamp = true;
+
+    } else {
+      this.isAdminSelected = true;
+      this.isEmployeeSelected = false;
+      this.affected = "all"
+      this.testchamp = true;
+    }
+
+  }
 }

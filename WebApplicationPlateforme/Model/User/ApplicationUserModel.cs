@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -55,6 +56,7 @@ namespace WebApplicationPlateforme.Model.User
         public string[] Roles { get; set; }
 
         [ForeignKey("Administration")]
+        [JsonProperty(PropertyName = "IdAdministration")]
         public int? IdAdministration { get; set; }
 
         [ForeignKey("Departement")]

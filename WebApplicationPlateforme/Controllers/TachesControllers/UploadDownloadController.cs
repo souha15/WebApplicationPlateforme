@@ -28,6 +28,7 @@ namespace WebApplicationPlateforme.Controllers.TachesControllers
         public async Task<IActionResult> Upload(IFormFile file)
         {
             var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+
             if (!Directory.Exists(uploads))
             {
                 Directory.CreateDirectory(uploads);
