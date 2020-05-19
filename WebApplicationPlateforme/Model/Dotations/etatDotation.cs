@@ -10,5 +10,6 @@ namespace WebApplicationPlateforme.Model.Dotations
         public int Id { get; set; }
         public string nom { get; set; }
         public string Description { get; set; }
+
     }
 }

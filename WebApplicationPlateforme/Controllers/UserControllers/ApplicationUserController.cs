@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using WebApplicationPlateforme.Data;
 using WebApplicationPlateforme.Model.User;
 
 namespace WebApplicationPlateforme.Controllers.UserControllers
@@ -22,12 +23,13 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
         private UserManager<ApplicationUser> _userManager;
         // private SignInManager<ApplicationUser> _singInManager;
         private readonly ApplicationSettings _appSettings;
-
+  
         public ApplicationUserController(UserManager<ApplicationUser> userManager, IOptions<ApplicationSettings> appSettings/*, SignInManager<ApplicationUser> signInManager*/)
         {
             _userManager = userManager;
             //_singInManager = signInManager;
             _appSettings = appSettings.Value;
+            
         }
 
         [HttpPost]

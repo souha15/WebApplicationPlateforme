@@ -1335,3 +1335,100 @@ table .show-details {
   border-bottom: 1px solid #dee2e6;
 }
 
+
+/*------------------------------
+-------- Finance Main Page -----
+-------------------------------*/
+.boxes.finance .box {
+  min-height: 326px
+}
+
+/*------------------------------
+---- Finance Register Page -----
+-------------------------------*/
+.stop-form label {
+  min-width: 126px
+}
+
+.stop-form select,
+.stop-form input[type='text'],
+.stop-form input[type='number'] {
+  width: 200px;
+}
+
+/*--------------------------------
+-- Finance Renter Register Page --
+---------------------------------*/
+.renter input[type='text'] {
+  width: 30%;
+}
+
+.file-label {
+  background: #dee6e5 !important;
+  cursor: pointer
+}
+
+  .file-label:hover {
+    background: #cdcecd !important
+  }
+
+/*---------------------------------
+---- Calling Save Page ------------
+---------------------------------*/
+.stop-form .notes-area {
+  margin-bottom: -20px;
+  height: 60px;
+  border-radius: 10px
+}
+
+.stop-form input[type='datetime-local'] {
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  width: 240px;
+}
+
+/****** Mailing Page ******/
+.content .box .sympol {
+  display: inline-block
+}
+
+.content .box.mails h4 {
+  background: #FEC109;
+}
+
+.content .box.mails .sympol {
+  color: #FEC109;
+}
+
+.content .box.inbox h4 {
+  background: #8bc34a;
+}
+
+.content .box.inbox .sympol {
+  color: #8bc34a;
+}
+
+.content .box.outgoing h4 {
+  background: #5cbced;
+}
+
+.content .box.outgoing .sympol {
+  color: #5cbced;
+}
+
+.content .box.forms h4 {
+  background: #FE5822;
+}
+
+.content .box.forms .sympol {
+  color: #FE5822;
+}
+
+.content .box ul li a{
+  margin-bottom: 10px;
+  padding: 0;
+  text-align: right;
+  font-size: 18px;
+  color: #276985;
+}

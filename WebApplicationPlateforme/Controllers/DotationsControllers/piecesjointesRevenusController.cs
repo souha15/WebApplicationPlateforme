@@ -14,9 +14,9 @@ namespace WebApplicationPlateforme.Controllers.DotationsControllers
     [ApiController]
     public class piecesjointesRevenusController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly FinanceContext _context;
 
-        public piecesjointesRevenusController(ApplicationDbContext context)
+        public piecesjointesRevenusController(FinanceContext context)
         {
             _context = context;
         }

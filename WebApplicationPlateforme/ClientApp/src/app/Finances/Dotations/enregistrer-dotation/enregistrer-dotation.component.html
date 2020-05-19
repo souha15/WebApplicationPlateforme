@@ -1,0 +1,90 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <!-- Second Navbar -->
+      <app-menu-finance></app-menu-finance>
+      <!-- Tasks Page Content -->
+      <section class="page-content">
+        <h4 class="my-2 task-head">تسجيل وقف</h4>
+        <form  class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+              <input type="hidden" name="id" [value]="dotationService.formData.id" />
+              <div class="col-sm-6">
+                <label for="stop-name"><span><i class="fa fa-sort-numeric-down"></i></span>اسم الوقف</label>
+                <input type="text" id="stop-name" name="nom" #nom="ngModel" [(ngModel)]="dotation.nom" required />
+                <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="alert alert-danger">
+
+                  <div *ngIf="nom.errors.required">
+                    مطلوب اسم.
+                  </div>
+                </div>
+              </div>
+          <div class="col-sm-6">
+            <label for="stop-date"><span><i class="fa fa-calendar-alt"></i></span>تاريخ الانشاء </label>
+            <input type="date" id="stop-date" name="date" #date="ngModel" [(ngModel)]="dotation.date">
+          </div>
+
+          <div class="col-sm-6">
+            <label for="stop-sort"><span><i class="fa fa-list-ol"></i></span>نوع الوقف</label>
+            <select id="stop-sort" name="type" #type="ngModel" [(ngModel)]="dotation.type">
+              <option [ngValue]="undefined" selected disabled>-نوع الوقف-</option>
+              <option *ngFor="let item of types" value="{{item.nom}}">{{item.nom}}</option>
+            </select>
+          </div>
+          <div class="col-sm-6">
+            <label for="stop-status"><span><i class="fa fa-list-ol"></i></span>حالة الوقف</label>
+            <select id="stop-status" name="etat" #etat="ngModel" [(ngModel)]="dotation.etat">
+              <option [ngValue]="undefined" selected disabled>-حالة الوقف-</option>
+              <option *ngFor="let item of etats" value="{{item.nom}}">{{item.nom}}</option>
+            </select>
+          </div>
+          <div class="col-sm-6">
+            <label for="stop-address"><span><i class="fa fa-map-marker-alt"></i></span>عنوان الوقف</label>
+            <input type="text" id="stop-address" class="" name="adresse" #adresse="ngModel" [(ngModel)]="dotation.adresse">
+          </div>
+          <div class="col-sm-6">
+            <label for="stop-units"><span><i class="fa fa-building"></i></span>عدد الوحدات</label>
+            <input type="text" id="stop-units" class="" name="compteurElec" #nbunite="ngModel" [(ngModel)]="dotation.nbunite">
+          </div>
+          <div class="col-sm-6">
+            <label for="stop-counters"><span><i class="fa fa-building"></i></span>عدادات الكهرباء</label>
+            <input type="text" id="stop-counters" class="" name="compteurElec" #compteurElec="ngModel" [(ngModel)]="dotationService.formData.compteurElec">
+         
+          </div>
+          <div class="col-sm-6">
+            <label for="counter-num"><span><i class="fa fa-bolt"></i></span>رقم العداد</label>
+            <input type="text" id="counter-num" class=""  name="numCompteur" #numCompteur="ngModel" [(ngModel)]="dotation.numCompteur">
+          </div>
+          <div class="col-sm-6">
+            <label for="stop-taker"><span><i class="fa fa-user"></i></span>محصل الوقف</label>
+            <select id="stop-status" name="comptable" #comptable="ngModel" [(ngModel)]="dotation.comptable">
+              <option [ngValue]="undefined" selected disabled>-محصل الوقف-</option>
+              <option *ngFor="let item of user" value="{{item.fullName}}">{{item.fullName}}</option>
+            </select>
+          </div>
+          <div class="col-sm-6">
+            <label for="stop-office"><span><i class="fa fa-home"></i></span>مكتب الوقف</label>
+            <select id="stop-status" name="idAgence" #idAgence="ngModel" [(ngModel)]="dotation.idAgence">
+              <option [ngValue]="undefined" selected disabled>-مكتب الوقف-</option>
+              <option *ngFor="let item of agence" value="{{item.id}}">{{item.nom}}</option>
+            </select>
+          </div>
+          <div class="mx-auto my-3">
+            <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save"></i></span> حفظ</button>
+            <button class="btn btn-secondary px-2"><span class="ml-4"><i class="fa fa-print"></i></span> طباعة</button>
+          </div>
+        </form>
+      </section>
+    </div><!-- End col-9 -->
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات في أبو عريش</p>
+</footer>

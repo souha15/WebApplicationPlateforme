@@ -14,9 +14,9 @@ namespace WebApplicationPlateforme.Controllers.DotationsControllers
     [ApiController]
     public class typeUnitesController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly FinanceContext _context;
 
-        public typeUnitesController(ApplicationDbContext context)
+        public typeUnitesController(FinanceContext context)
         {
             _context = context;
         }

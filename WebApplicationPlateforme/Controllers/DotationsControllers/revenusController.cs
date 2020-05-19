@@ -14,9 +14,9 @@ namespace WebApplicationPlateforme.Controllers.DotationsControllers
     [ApiController]
     public class revenusController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly FinanceContext _context;
 
-        public revenusController(ApplicationDbContext context)
+        public revenusController(FinanceContext context)
         {
             _context = context;
         }

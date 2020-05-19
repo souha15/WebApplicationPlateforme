@@ -14,9 +14,9 @@ namespace WebApplicationPlateforme.Controllers.DotationsControllers
     [ApiController]
     public class piecesjointesLocatairesController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly FinanceContext _context;
 
-        public piecesjointesLocatairesController(ApplicationDbContext context)
+        public piecesjointesLocatairesController(FinanceContext context)
         {
             _context = context;
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -27,17 +28,17 @@ namespace WebApplicationPlateforme.Model.Dotations
         public string attribut3 { get; set; } 
         public string attribue4 { get; set; }
 
+        public string dateenreg { get; set; }
         public string CreatorName { get; set; }
 
 
         [ForeignKey("ApplicationUser")]
         public string idUserCreator { get; set; }
 
-       
-
-
-
+        public int idAgence { get; set; }
+      
         public virtual ApplicationUser ApplicationUser { get; set; }
+        public virtual agenceImmob AgenceImmob { get; set; }
 
     }
 }

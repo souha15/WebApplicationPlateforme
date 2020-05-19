@@ -14,9 +14,9 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
     [ApiController]
     public class PrivilegesController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly FinanceContext _context;
 
-        public PrivilegesController(ApplicationDbContext context)
+        public PrivilegesController(FinanceContext context)
         {
             _context = context;
         }

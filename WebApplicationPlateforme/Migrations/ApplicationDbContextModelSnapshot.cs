@@ -219,9 +219,544 @@ namespace WebApplicationPlateforme.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("WebApplicationPlateforme.Model.Global.Administration", b =>
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Dotations.agenceImmob", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("CreatorName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adresse")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("fax")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomResponsable")
+                        .HasColumnType("text");
+
+                    b.Property<string>("phoneNumber")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tel")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ville")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.ToTable("agenceImmobs");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Dotations.depotRevenus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("depotRevenus");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Dotations.dotation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int?>("AgenceImmobId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CreatorName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adresse")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribue4")
+                        .HasColumnType("text");
+
+                    b.Property<int>("attribut1")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("comptable")
+                        .HasColumnType("text");
+
+                    b.Property<string>("compteurElec")
+                        .HasColumnType("text");
+
+                    b.Property<string>("date")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etat")
+                        .HasColumnType("text");
+
+                    b.Property<int>("idAgence")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nbunite")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("numCompteur")
+                        .HasColumnType("text");
+
+                    b.Property<string>("officeImmobiler")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AgenceImmobId");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.ToTable("dotations");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Dotations.etatDotation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("etatDotations");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Dotations.etatUnite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("etatUnites");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Dotations.locataire", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("CreatorName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adresse")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribue4")
+                        .HasColumnType("text");
+
+                    b.Property<int>("attribut1")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("cin")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dotationName")
+                        .HasColumnType("text");
+
+                    b.Property<int>("idDotation")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<int>("idunite")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("nationnalite")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("profession")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tel")
+                        .HasColumnType("text");
+
+                    b.Property<string>("uniteName")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idDotation");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.HasIndex("idunite");
+
+                    b.ToTable("locataires");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Dotations.locationUnite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("CreatorName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datedebutcontrat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("delaicontrat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<int>("idlocataire")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("idunite")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("locataireName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("moisdelocation")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomunite")
+                        .HasColumnType("text");
+
+                    b.Property<string>("numcontrat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("prixlocationmois")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.HasIndex("idlocataire");
+
+                    b.HasIndex("idunite");
+
+                    b.ToTable("locationUnites");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Dotations.piecesjointesLocataire", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("date")
+                        .HasColumnType("text");
+
+                    b.Property<int>("idlocataire")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("nomLocataire")
+                        .HasColumnType("text");
+
+                    b.Property<string>("path")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idlocataire");
+
+                    b.ToTable("piecesjointesLocataires");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Dotations.piecesjointesRevenus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("date")
+                        .HasColumnType("text");
+
+                    b.Property<int>("idrevenus")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("path")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idrevenus");
+
+                    b.ToTable("PiecesjointesRevenus");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Dotations.revenus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("attribue4")
+                        .HasColumnType("text");
+
+                    b.Property<int>("attribut1")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateRevenus")
+                        .HasColumnType("text");
+
+                    b.Property<string>("deposant")
+                        .HasColumnType("text");
+
+                    b.Property<string>("description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("detailDepot")
+                        .HasColumnType("text");
+
+                    b.Property<int>("idlocataire")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("locataireName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("prixService")
+                        .HasColumnType("text");
+
+                    b.Property<string>("prixlocation")
+                        .HasColumnType("text");
+
+                    b.Property<string>("prixpaye")
+                        .HasColumnType("text");
+
+                    b.Property<string>("serviceRevenus")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idlocataire");
+
+                    b.ToTable("revenus");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Dotations.servicesRevenus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("prix")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("servicesRevenus");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Dotations.typeDotation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("typeDotations");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Dotations.typeUnite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("typeUnites");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Dotations.unite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("CreatorName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribue4")
+                        .HasColumnType("text");
+
+                    b.Property<int>("attribut1")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("bureau")
+                        .HasColumnType("text");
+
+                    b.Property<string>("chambre")
+                        .HasColumnType("text");
+
+                    b.Property<string>("compteurElc")
+                        .HasColumnType("text");
+
+                    b.Property<string>("compteureau")
+                        .HasColumnType("text");
+
+                    b.Property<string>("cuisine")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dotationName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etat")
+                        .HasColumnType("text");
+
+                    b.Property<int>("idDotation")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("numRevenus")
+                        .HasColumnType("text");
+
+                    b.Property<string>("prix")
+                        .HasColumnType("text");
+
+                    b.Property<string>("salon")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.Property<string>("wc")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idDotation");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.ToTable("unites");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Global.Administration", b =>
+                {
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
@@ -242,7 +777,7 @@ namespace WebApplicationPlateforme.Migrations
 
             modelBuilder.Entity("WebApplicationPlateforme.Model.Global.Departement", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
@@ -276,7 +811,7 @@ namespace WebApplicationPlateforme.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("IdTache")
+                    b.Property<int?>("IdTache")
                         .HasColumnType("integer");
 
                     b.Property<string>("IdUser")
@@ -425,6 +960,146 @@ namespace WebApplicationPlateforme.Migrations
                     b.ToTable("tache");
                 });
 
+            modelBuilder.Entity("WebApplicationPlateforme.Model.User.ApplicationUserModel", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("AutreIndemnite")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Classement")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DateNaissance")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DateQualification")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Degre")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Emploi")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FaculteEcole")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FullNameEnglish")
+                        .HasColumnType("text");
+
+                    b.Property<string>("HeureArrive")
+                        .HasColumnType("text");
+
+                    b.Property<string>("HeureDepart")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("IdAdministration")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("IdDepartement")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Indemnite")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LieuNaissance")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Mention")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Nationalite")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NomAdministration")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NomDepartement")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Num")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Passeport")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Paysetude")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Photo")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Qualification")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Rang")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RegistreCivil")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Religion")
+                        .HasColumnType("text");
+
+                    b.Property<string[]>("Roles")
+                        .HasColumnType("text[]");
+
+                    b.Property<string>("Salaire")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Sexe")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Specialite")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Statut")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Tel")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TypeEmploi")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TypeQualification")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TypeSang")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Unite")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adresse")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdAdministration");
+
+                    b.HasIndex("IdDepartement");
+
+                    b.ToTable("ApplicationUserModel");
+                });
+
             modelBuilder.Entity("WebApplicationPlateforme.Model.User.Privileges", b =>
                 {
                     b.Property<string>("Id")
@@ -454,12 +1129,12 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<int>("settings")
                         .HasColumnType("integer");
 
-                    b.Property<string>("userId")
+                    b.Property<string>("userid")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("userId");
+                    b.HasIndex("userid");
 
                     b.ToTable("privileges");
                 });
@@ -637,6 +1312,102 @@ namespace WebApplicationPlateforme.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Dotations.agenceImmob", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Dotations.dotation", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.Dotations.agenceImmob", "AgenceImmob")
+                        .WithMany()
+                        .HasForeignKey("AgenceImmobId");
+
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Dotations.locataire", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.Dotations.dotation", "dotation")
+                        .WithMany()
+                        .HasForeignKey("idDotation")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
+
+                    b.HasOne("WebApplicationPlateforme.Model.Dotations.unite", "unite")
+                        .WithMany()
+                        .HasForeignKey("idunite")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Dotations.locationUnite", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
+
+                    b.HasOne("WebApplicationPlateforme.Model.Dotations.locataire", "locataire")
+                        .WithMany()
+                        .HasForeignKey("idlocataire")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApplicationPlateforme.Model.Dotations.unite", "unite")
+                        .WithMany()
+                        .HasForeignKey("idunite")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Dotations.piecesjointesLocataire", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.Dotations.locataire", "locataire")
+                        .WithMany()
+                        .HasForeignKey("idlocataire")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Dotations.piecesjointesRevenus", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.Dotations.revenus", "revenus")
+                        .WithMany()
+                        .HasForeignKey("idrevenus")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Dotations.revenus", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.Dotations.locataire", "locataire")
+                        .WithMany()
+                        .HasForeignKey("idlocataire")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Dotations.unite", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.Dotations.dotation", "dotation")
+                        .WithMany()
+                        .HasForeignKey("idDotation")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
+                });
+
             modelBuilder.Entity("WebApplicationPlateforme.Model.Global.Departement", b =>
                 {
                     b.HasOne("WebApplicationPlateforme.Model.Global.Administration", "Administration")
@@ -650,9 +1421,7 @@ namespace WebApplicationPlateforme.Migrations
                 {
                     b.HasOne("WebApplicationPlateforme.Model.Taches.Tache", "Tache")
                         .WithMany()
-                        .HasForeignKey("IdTache")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdTache");
 
                     b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
                         .WithMany()
@@ -688,11 +1457,22 @@ namespace WebApplicationPlateforme.Migrations
                         .HasForeignKey("IdUserCreator");
                 });
 
+            modelBuilder.Entity("WebApplicationPlateforme.Model.User.ApplicationUserModel", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.Global.Administration", "Administration")
+                        .WithMany()
+                        .HasForeignKey("IdAdministration");
+
+                    b.HasOne("WebApplicationPlateforme.Model.Global.Departement", "Departement")
+                        .WithMany()
+                        .HasForeignKey("IdDepartement");
+                });
+
             modelBuilder.Entity("WebApplicationPlateforme.Model.User.Privileges", b =>
                 {
                     b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("userId");
+                        .HasForeignKey("userid");
                 });
 
             modelBuilder.Entity("WebApplicationPlateforme.Model.User.ApplicationUser", b =>

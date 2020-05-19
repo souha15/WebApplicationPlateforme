@@ -48,6 +48,35 @@ import { AdministrationService } from './shared/Services/Administration/administ
 import { TasksUpMenuComponent } from './Tache/tasks-up-menu/tasks-up-menu.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { UserChangePaswordComponent } from './User/user-change-pasword/user-change-pasword.component';
+import { EnregistrerDotationComponent } from './Finances/Dotations/enregistrer-dotation/enregistrer-dotation.component';
+import { ListeDotationComponent } from './Finances/Dotations/liste-dotation/liste-dotation.component';
+import { DotationDetailsComponent } from './Finances/Dotations/dotation-details/dotation-details.component';
+import { DotationEditComponent } from './Finances/Dotations/dotation-edit/dotation-edit.component';
+import { UniteEditComponent } from './Finances/Unites/unite-edit/unite-edit.component';
+import { UniteDetailsComponent } from './Finances/Unites/unite-details/unite-details.component';
+import { EnregistrerUniteComponent } from './Finances/Unites/enregistrer-unite/enregistrer-unite.component';
+import { ListeUniteComponent } from './Finances/Unites/liste-unite/liste-unite.component';
+import { ListeLocataireComponent } from './Finances/Locataires/liste-locataire/liste-locataire.component';
+import { EditLocataireComponent } from './Finances/Locataires/edit-locataire/edit-locataire.component';
+import { LocataireDetailsComponent } from './Finances/Locataires/locataire-details/locataire-details.component';
+import { RevenusDetailsComponent } from './Finances/Revenus/revenus-details/revenus-details.component';
+import { RevenusListComponent } from './Finances/Revenus/revenus-list/revenus-list.component';
+import { EnregistrerRevenusComponent } from './Finances/Revenus/enregistrer-revenus/enregistrer-revenus.component';
+import { EditRevenusComponent } from './Finances/Revenus/edit-revenus/edit-revenus.component';
+import { EnregistrerLocataireComponent } from './Finances/Locataires/enregistrer-locataire/enregistrer-locataire.component';
+import { DepotRevenusComponent } from './Finances/Parametrage/depot-revenus/depot-revenus.component';
+import { ServiceRevenusComponent } from './Finances/Parametrage/service-revenus/service-revenus.component';
+import { TypedotationComponent } from './Finances/Parametrage/typedotation/typedotation.component';
+import { EtatdotationComponent } from './Finances/Parametrage/etatdotation/etatdotation.component';
+import { EtatuniteComponent } from './Finances/Parametrage/etatunite/etatunite.component';
+import { TypeuniteComponent } from './Finances/Parametrage/typeunite/typeunite.component';
+import { MenuFinanceComponent } from './Finances/Main/menu-finance/menu-finance.component';
+import { MainFinancePageComponent } from './Finances/Main/main-finance-page/main-finance-page.component';
+import { MainFarametrageFinancePageComponent } from './Finances/Parametrage/main-farametrage-finance-page/main-farametrage-finance-page.component';
+import { TypeDotationService } from './shared/Services/Dotations/type-dotation.service';
+import { EtatDotationService } from './shared/Services/Dotations/etat-dotation.service';
+import { BureauImmobPageComponent } from './Finances/Parametrage/bureau-immob-page/bureau-immob-page.component';
+import { AgenceImmobService } from './shared/Services/Dotations/agence-immob.service';
 
 
 @NgModule({
@@ -83,6 +112,32 @@ import { UserChangePaswordComponent } from './User/user-change-pasword/user-chan
     TasksUpMenuComponent,
     UserRegisterComponent,
     UserChangePaswordComponent,
+    EnregistrerDotationComponent,
+    ListeDotationComponent,
+    DotationDetailsComponent,
+    DotationEditComponent,
+    UniteEditComponent,
+    UniteDetailsComponent,
+    EnregistrerUniteComponent,
+    ListeUniteComponent,
+    ListeLocataireComponent,
+    EditLocataireComponent,
+    LocataireDetailsComponent,
+    RevenusDetailsComponent,
+    RevenusListComponent,
+    EnregistrerRevenusComponent,
+    EditRevenusComponent,
+    EnregistrerLocataireComponent,
+    DepotRevenusComponent,
+    ServiceRevenusComponent,
+    TypedotationComponent,
+    EtatdotationComponent,
+    EtatuniteComponent,
+    TypeuniteComponent,
+    MenuFinanceComponent,
+    MainFinancePageComponent,
+    MainFarametrageFinancePageComponent,
+    BureauImmobPageComponent,
 
   ],
   imports: [
@@ -132,7 +187,37 @@ import { UserChangePaswordComponent } from './User/user-change-pasword/user-chan
       { path: 'user-updating', component: UserUpdatingComponent, canActivate: [AuthGuard]},
       { path: 'user-updating/:id', component: UserUpdatingComponent, canActivate: [AuthGuard]},
       { path: 'forbidden-page', component: ForbiddenPageComponent },
-      { path: 'tasks-up-menu', component: TasksUpMenuComponent  },
+
+      //Finanace Project
+
+  { path: 'liste-dotation', component: ListeDotationComponent },
+  { path: 'dotation-details', component: DotationDetailsComponent  },
+  { path: 'dotation-edit', component: DotationEditComponent   },
+  { path: 'unite-edit', component: UniteEditComponent },
+  { path: 'unite-details', component: UniteDetailsComponent },
+  { path: 'enregistrer-unite', component: EnregistrerUniteComponent  },
+  { path: 'liste-unite', component: ListeUniteComponent  },
+  { path: 'liste-locataire', component: ListeLocataireComponent  },
+  { path: 'edit-locataire', component: EditLocataireComponent },
+  { path: 'locataire-details', component: LocataireDetailsComponent },
+  { path: 'revenus-details', component: RevenusDetailsComponent  },
+  { path: 'revenus-list', component: RevenusListComponent },
+  { path: 'enregistrer-revenus', component: EnregistrerRevenusComponent },
+  { path: 'edit-revenus', component: EditRevenusComponent },
+  { path: 'enregistrer-locataire', component: EnregistrerLocataireComponent },
+  { path: 'depot-revenus', component: DepotRevenusComponent },
+  { path: 'service-revenus', component: ServiceRevenusComponent },
+  { path: 'typedotation', component: TypedotationComponent},
+  { path: 'etatdotation', component: EtatdotationComponent },
+  { path: 'etatunite', component: EtatuniteComponent },
+  { path: 'enregistrer-dotation', component: EnregistrerDotationComponent },
+      { path: 'typeunite', component: TypeuniteComponent },
+      { path: 'menu-finance', component: MenuFinanceComponent },
+      { path: 'main-finance-page', component: MainFinancePageComponent },
+      { path: 'main-farametrage-finance-page', component: MainFarametrageFinancePageComponent },
+      { path: 'bureau-immob-page', component: BureauImmobPageComponent },
+
+     
       //{ path: 'user-updating/:id', component: UserUpdatingComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
    
 
@@ -147,7 +232,7 @@ import { UserChangePaswordComponent } from './User/user-change-pasword/user-chan
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }, EvaluationService, PrivilegesService, CommentaireService, EtablissementService, AdministrationService],
+  }, EvaluationService, PrivilegesService, CommentaireService, EtablissementService, AdministrationService, TypeDotationService, EtatDotationService, AgenceImmobService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

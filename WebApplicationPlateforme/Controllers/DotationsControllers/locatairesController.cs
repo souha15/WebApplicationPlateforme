@@ -14,9 +14,9 @@ namespace WebApplicationPlateforme.Controllers.DotationsControllers
     [ApiController]
     public class locatairesController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly FinanceContext _context;
 
-        public locatairesController(ApplicationDbContext context)
+        public locatairesController(FinanceContext context)
         {
             _context = context;
         }

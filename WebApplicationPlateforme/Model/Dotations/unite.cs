@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplicationPlateforme.Model.User;
 
 namespace WebApplicationPlateforme.Model.Dotations
 {
@@ -31,7 +32,17 @@ namespace WebApplicationPlateforme.Model.Dotations
         [ForeignKey("dotation")]
         public int idDotation { get; set; }
 
-   
+
+        public string dateenreg { get; set; }
+
+        public string CreatorName { get; set; }
+
+
+        [ForeignKey("ApplicationUser")]
+        public string idUserCreator { get; set; }
+
+
+        public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual dotation dotation { get; set; }
     }
 }

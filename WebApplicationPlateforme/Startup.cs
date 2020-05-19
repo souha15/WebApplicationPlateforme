@@ -42,15 +42,19 @@ namespace WebApplicationPlateforme
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<ApplicationDbContext>(
                 options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+                
+            services.AddEntityFrameworkNpgsql()
+               .AddDbContext<FinanceContext>(
+               options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
             /* services.AddDefaultIdentity<ApplicationUser>()
                  .AddEntityFrameworkStores<ApplicationDbContext>();
                  */
-            services.AddIdentityCore<ApplicationUser>()
+           services.AddIdentityCore<ApplicationUser>()
                 .AddRoles<IdentityRole>()
         .AddEntityFrameworkStores<ApplicationDbContext>()
            .AddDefaultTokenProviders();
-
+           
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = false;
