@@ -11,13 +11,7 @@ export class Locataire {
         attribut2 :string;
         attribut3 :string;
         attribue4 :string;
-        dotationName :string;
-        uniteName :string;
-        idDotation: number;
-  idunite: number;
-
-  creatorName: string;
-  idUserCreator: string;
-
-  dateenreg: string;
+        creatorName: string;
+        idUserCreator: string;
+        dateenreg: string;
 }

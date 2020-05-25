@@ -1,9 +1,0 @@
-Generate Component
-ng g c User-Register --module app
-Generate Service
-ng generate service shared/Services/User/Role
-Generate Model
-ng generate class shared/Models/User/Role --type=model
-Generate Model
-Generate Interface 
-ng g i interfaces/interface-1

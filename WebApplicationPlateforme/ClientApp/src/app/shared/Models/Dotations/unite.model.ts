@@ -18,8 +18,8 @@ export class Unite {
         dotationName:string;
         idDotation: number;
         creatorName: string;
-  idUserCreator: string;
-  dateenreg: string;
+        idUserCreator: string;
+        dateenreg: string;
 
 
 }

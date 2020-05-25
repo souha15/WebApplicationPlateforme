@@ -27,6 +27,8 @@ namespace WebApplicationPlateforme.Data
       
         public string WebRootPath { get; internal set; }
         public DbSet<WebApplicationPlateforme.Model.User.ApplicationUserModel> ApplicationUserModel { get; set; }
+        public DbSet<WebApplicationPlateforme.Model.Dotations.locationUnite> locationUnite { get; set; }
+        public DbSet<WebApplicationPlateforme.Model.Dotations.contratLocation> contratLocation { get; set; }
 
        
         /* public DbSet<BureauImmob> bureauImmobs { get; set; }

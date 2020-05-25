@@ -17,7 +17,7 @@ namespace WebApplicationPlateforme.Model.Dotations
         public string moisdelocation { get; set; }
 
         public string locataireName { get; set; }
-
+        
 
         [ForeignKey("locataire")]
         public int idlocataire { get; set; }
@@ -26,7 +26,11 @@ namespace WebApplicationPlateforme.Model.Dotations
         [ForeignKey("unite")]
         public int idunite { get; set; }
 
+        [ForeignKey("dotation")]
+        public int iddotation { get; set; }
         public string nomunite { get; set; }
+
+        public string nomdotation { get; set; }
 
         public string CreatorName { get; set; }
 
@@ -39,6 +43,7 @@ namespace WebApplicationPlateforme.Model.Dotations
 
 
         public virtual unite unite { get; set; }
+        public virtual dotation dotation { get; set; }
 
         public virtual locataire locataire { get; set; }
     }

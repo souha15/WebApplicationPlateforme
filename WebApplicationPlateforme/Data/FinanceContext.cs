@@ -30,5 +30,7 @@ namespace WebApplicationPlateforme.Data
         public DbSet<locationUnite> locationUnites { get; set; }
 
         public DbSet<Privileges> privileges { get; set; }
+        public DbSet<contratLocation> contratLocations { get; set; }
+        public DbSet<LesServices> lesServices { get; set; }
     }
 }

@@ -11,29 +11,39 @@
       <!-- Tasks Page Content -->
       <section class="page-content">
         <h4 class="my-2 task-head">تسجيل وقف</h4>
-        <form  class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
-              <input type="hidden" name="id" [value]="dotationService.formData.id" />
-              <div class="col-sm-6">
-                <label for="stop-name"><span><i class="fa fa-sort-numeric-down"></i></span>اسم الوقف</label>
-                <input type="text" id="stop-name" name="nom" #nom="ngModel" [(ngModel)]="dotation.nom" required />
-                <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="alert alert-danger">
+        <form class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+          <input type="hidden" name="id" [value]="dotationService.formData.id" />
+          <div class="col-sm-6">
+            <label for="stop-name"><span><i class="fa fa-sort-numeric-down"></i></span>اسم الوقف</label>
+            <input type="text" id="stop-name" name="nom" #nom="ngModel" [(ngModel)]="dotation.nom" required />
 
-                  <div *ngIf="nom.errors.required">
-                    مطلوب اسم.
-                  </div>
-                </div>
-              </div>
+            <div *ngIf="nom.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+
+
+              مطلوب اسم.
+
+            </div>
+          </div>
           <div class="col-sm-6">
             <label for="stop-date"><span><i class="fa fa-calendar-alt"></i></span>تاريخ الانشاء </label>
-            <input type="date" id="stop-date" name="date" #date="ngModel" [(ngModel)]="dotation.date">
+            <input type="date" id="stop-date" name="date" #date="ngModel" [(ngModel)]="dotation.date" required>
+            <div *ngIf="date.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+
+
+              مطلوب تاريخ الانشاء.
+
+            </div>
           </div>
 
           <div class="col-sm-6">
             <label for="stop-sort"><span><i class="fa fa-list-ol"></i></span>نوع الوقف</label>
-            <select id="stop-sort" name="type" #type="ngModel" [(ngModel)]="dotation.type">
+            <select id="stop-sort" name="type" #type="ngModel" [(ngModel)]="dotation.type" required>
               <option [ngValue]="undefined" selected disabled>-نوع الوقف-</option>
               <option *ngFor="let item of types" value="{{item.nom}}">{{item.nom}}</option>
             </select>
+            <div *ngIf="type.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب نوع الوقف.
+            </div>
           </div>
           <div class="col-sm-6">
             <label for="stop-status"><span><i class="fa fa-list-ol"></i></span>حالة الوقف</label>
@@ -52,12 +62,12 @@
           </div>
           <div class="col-sm-6">
             <label for="stop-counters"><span><i class="fa fa-building"></i></span>عدادات الكهرباء</label>
-            <input type="text" id="stop-counters" class="" name="compteurElec" #compteurElec="ngModel" [(ngModel)]="dotationService.formData.compteurElec">
-         
+            <input type="text" id="stop-counters" class="" name="compteurElec" #compteurElec="ngModel" [(ngModel)]="dotation.compteurElec">
+
           </div>
           <div class="col-sm-6">
             <label for="counter-num"><span><i class="fa fa-bolt"></i></span>رقم العداد</label>
-            <input type="text" id="counter-num" class=""  name="numCompteur" #numCompteur="ngModel" [(ngModel)]="dotation.numCompteur">
+            <input type="text" id="counter-num" class="" name="numCompteur" #numCompteur="ngModel" [(ngModel)]="dotation.numCompteur">
           </div>
           <div class="col-sm-6">
             <label for="stop-taker"><span><i class="fa fa-user"></i></span>محصل الوقف</label>
@@ -75,7 +85,8 @@
           </div>
           <div class="mx-auto my-3">
             <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save"></i></span> حفظ</button>
-            <button class="btn btn-secondary px-2"><span class="ml-4"><i class="fa fa-print"></i></span> طباعة</button>
+            <button class="btn btn-danger px-2 ml-3" type="reset"><span class="ml-4"><i class="fa fa-trash"></i></span>حذف الحقول</button>
+            <button class="btn btn-secondary px-2" (click)="openPDF()" type="button"><span class="ml-4"><i class="fa fa-print"></i></span> طباعة</button>
           </div>
         </form>
       </section>
@@ -88,3 +99,61 @@
 <footer class="text-center">
   <p>المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات في أبو عريش</p>
 </footer>
+<div class="content" id="htmlData" style="display: none;">
+  <section class="page-content">
+    <h4 class="my-2 task-head">بيانات وحدة مسجلة</h4>
+
+    <div class="task-form form-row stop-form">
+
+      <div class="col-sm-6">
+        <label><span></span>اسم الوقف</label>
+        <span>{{dotation.nom}}</span>
+      </div>
+      <div class="col-sm-6">
+        <label><span></span>تاريخ الانشاء </label>
+        <span>{{dotation.date}}</span>
+      </div>
+
+      <div class="col-sm-6">
+        <label><span></span>نوع الوقف</label>
+        <span>{{dotation.type}}</span>
+      </div>
+      <div class="col-sm-6">
+        <label><span></span>حالة الوقف</label>
+        <span>{{dotation.etat}}</span>
+      </div>
+
+      <div class="col-sm-6">
+        <label><span></span>عنوان الوقف</label>
+        <span>{{dotation.adresse}}</span>
+      </div>
+
+      <div class="col-sm-6">
+        <label><span></span>عدد الوحدات</label>
+        <span>{{dotation.nbunite}}</span>
+      </div>
+
+      <div class="col-sm-6">
+        <label><span></span>عدادات الكهرباء</label>
+        <span>{{dotation.compteurElec}}</span>
+      </div>
+
+      <div class="col-sm-6">
+        <label><span></span>رقم العداد</label>
+        <span>{{dotation.numCompteur}}</span>
+      </div>
+
+      <div class="col-sm-6">
+        <label><span></span>محصل الوقف</label>
+        <span>{{dotation.comptable}}</span>
+      </div>
+
+      <div class="col-sm-6">
+        <label><span></span> مكتب الوقف</label>
+        <span>{{AgencyName}}</span>
+      </div>
+
+    </div>
+
+  </section>
+</div>

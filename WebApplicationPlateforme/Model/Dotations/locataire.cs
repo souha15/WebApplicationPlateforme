@@ -23,16 +23,7 @@ namespace WebApplicationPlateforme.Model.Dotations
         public string attribut3 { get; set; }
         public string attribue4 { get; set; }
 
-        public string dotationName { get; set; }
-        public string uniteName { get; set; }
-
-
-        [ForeignKey("dotation")]
-        public int idDotation { get; set; }
-
-        [ForeignKey("unite")]
-        public int idunite { get; set; }
-
+        public string dateenreg { get; set; }
         public string CreatorName { get; set; }
 
 
@@ -41,8 +32,5 @@ namespace WebApplicationPlateforme.Model.Dotations
 
 
         public virtual ApplicationUser ApplicationUser { get; set; }
-
-        public virtual dotation dotation { get; set; }
-        public virtual unite unite { get; set; }
     }
 }

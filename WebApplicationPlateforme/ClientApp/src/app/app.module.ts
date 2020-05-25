@@ -77,6 +77,12 @@ import { TypeDotationService } from './shared/Services/Dotations/type-dotation.s
 import { EtatDotationService } from './shared/Services/Dotations/etat-dotation.service';
 import { BureauImmobPageComponent } from './Finances/Parametrage/bureau-immob-page/bureau-immob-page.component';
 import { AgenceImmobService } from './shared/Services/Dotations/agence-immob.service';
+import { TypeUniteService } from './shared/Services/Dotations/type-unite.service';
+import { EtatUniteService } from './shared/Services/Dotations/etat-unite.service';
+import { ServiceRevenusService } from './shared/Services/Dotations/service-revenus.service';
+import { UniteService } from './shared/Services/Dotations/unite.service';
+import { LocataireService } from './shared/Services/Dotations/locataire.service';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -144,6 +150,7 @@ import { AgenceImmobService } from './shared/Services/Dotations/agence-immob.ser
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    NgSelectModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     Ng2SearchPipeModule,
@@ -202,7 +209,8 @@ import { AgenceImmobService } from './shared/Services/Dotations/agence-immob.ser
   { path: 'locataire-details', component: LocataireDetailsComponent },
   { path: 'revenus-details', component: RevenusDetailsComponent  },
   { path: 'revenus-list', component: RevenusListComponent },
-  { path: 'enregistrer-revenus', component: EnregistrerRevenusComponent },
+      { path: 'enregistrer-revenus', component: EnregistrerRevenusComponent },
+      { path: 'enregistrer-revenus/:id', component: EnregistrerRevenusComponent},
   { path: 'edit-revenus', component: EditRevenusComponent },
   { path: 'enregistrer-locataire', component: EnregistrerLocataireComponent },
   { path: 'depot-revenus', component: DepotRevenusComponent },
@@ -232,7 +240,21 @@ import { AgenceImmobService } from './shared/Services/Dotations/agence-immob.ser
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }, EvaluationService, PrivilegesService, CommentaireService, EtablissementService, AdministrationService, TypeDotationService, EtatDotationService, AgenceImmobService],
+  },
+    EvaluationService,
+    PrivilegesService,
+    CommentaireService,
+    EtablissementService,
+    AdministrationService,
+    TypeDotationService,
+    EtatDotationService,
+    AgenceImmobService,
+    TypeUniteService,
+    EtatUniteService,
+    ServiceRevenusService,
+    UniteService,
+    LocataireService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

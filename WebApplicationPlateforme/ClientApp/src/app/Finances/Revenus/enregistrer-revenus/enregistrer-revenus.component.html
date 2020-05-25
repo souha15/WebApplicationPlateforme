@@ -1,1 +1,183 @@
-<p>enregistrer-revenus works!</p>
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <!-- Second Navbar -->
+      <!-- Tasks Page Content -->
+      <section class="page-content">
+        <h4 class="my-2 task-head">  تسجيل إيداع</h4>
+        <form class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+          <div class="col-sm-12 unit-details mb-3">
+            <label for="rooms"><span><i class="fa fa-building"></i></span>الوقف</label>
+            <span style="color:#6e6a6a;font-weight:bold">{{locataireName}}</span>
+
+            <label for="rooms"><span><i class="fa fa-user fa-lg"></i></span>المستأجر</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span style="color:#6e6a6a;font-weight:bold">{{unitenumRevenus}}</span>
+
+            <label for="rooms"><span><i class="fa fa-home"></i></span>الوحدة</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span style="color:#6e6a6a;font-weight:bold">{{dotationName}}</span>
+
+          </div>
+
+
+          <div class="col-sm-12 unit-details mb-3">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+            <label for="rooms"><span><i class="fa fa-euro-sign"></i></span>المبلغ</label>
+            <input type="text" id="rooms" style="width: 80px" name="prixTot" #prixTot="ngModel" [(ngModel)]="revenus.prixTot" required />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <div *ngIf="prixTot.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب المبلغ.
+            </div>
+
+            <label for="rooms"><span><i class="fa fa-euro-sign"></i></span>الإيجار المتفق عليه</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span style="color:#6e6a6a;font-weight:bold">{{prixlocation}}</span>
+
+          </div>
+
+          <div class="col-md-5 mb-3">
+            <label for="month"><span><i class="fa fa-calendar-alt fa-lg"></i></span>الشهر</label>
+            <select id="month" name="mois" #mois="ngModel" [(ngModel)]="revenus.mois" required>
+              <option value="1">يناير</option>
+              <option value="2">فبرياير</option>
+              <option value="3">مارس</option>
+              <option value="4">أبريل</option>
+              <option value="5">مايو</option>
+              <option value="6">يونيو</option>
+              <option value="7">يوليو</option>
+              <option value="8">أغسطس</option>
+              <option value="9">سبتمبر</option>
+              <option value="10">أكتوبر</option>
+              <option value="11">نوفمبر</option>
+              <option value="12">ديسمبر</option>
+            </select>
+            <div *ngIf="mois.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب  الشهر.
+            </div>
+          </div>
+
+          <div class="col-md-5 mb-3">
+            <label for="month"><span><i class="fa fa-calendar-alt fa-lg"></i></span>السنة</label>
+            <select id="month" name="attribut2" #attribut2="ngModel" [(ngModel)]="revenus.attribut2" required>
+              <option value="2020">2020</option>
+              <option value="2021">2021</option>
+              <option value="2022">2022</option>
+              <option value="2023">2023</option>
+              <option value="2024">2024</option>
+              <option value="2025">2025</option>
+              <option value="2026">2026</option>
+              <option value="2027">2027</option>
+              <option value="2028">2028</option>
+              <option value="2029">2029</option>
+              <option value="2030">2030</option>
+              <option value="2031">2031</option>
+              <option value="2032">2032</option>
+              <option value="2033">2033</option>
+              <option value="2034">2034</option>
+              <option value="2035">2035</option>
+              <option value="2036">2036</option>
+              <option value="2037">2037</option>
+              <option value="2038">2038</option>
+              <option value="2039">2039</option>
+              <option value="2040">2040</option>
+            </select>
+            <div *ngIf="attribut2.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب  السنة.
+            </div>
+          </div>
+
+           <!--- <div class="col-md-5 mb-3">
+              <label for="cost1"><span><i class="fa fa-coins fa-lg"></i></span>المبلغ</label>
+              <input type="text" id="cost1" />
+            </div>-->
+
+            <div class="col-md-5 mb-3">
+              <label for="deposit"><span><i class="fa fa-archive fa-lg"></i></span>بيانات الايداع</label>
+              <select id="deposit" name="infoDepot" #infoDepot="ngModel" [(ngModel)]="revenus.infoDepot" required>
+                <option value="cheque"> شيك</option>
+                <option value="cash">كاش </option>
+              </select>
+            </div>
+
+
+            <div class="col-md-7 mb-3">
+              <label for="service"><span><i class="fa fa-calendar-alt fa-lg"></i></span>التاريخ والوقت</label>
+              <input type="datetime-local" id="" name="dateTemps" #dateTemps="ngModel" [(ngModel)]="revenus.dateTemps" required>
+              <div *ngIf="dateTemps.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب التاريخ والوقت.
+              </div>
+              <input type="text" name="deposant" id="" placeholder="المودع" #deposant="ngModel" [(ngModel)]="revenus.deposant" required>
+              <div *ngIf="deposant.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب  المودع.
+              </div>
+            </div>
+
+            <div class="col-sm-3 mb-3">
+              <label for="service"><span><i class="fa fa-coins fa-lg"></i></span>مستحقات الخدمات</label>
+            </div>
+            <div class="col-sm-5 counters">
+
+              <ng-select [items]="items"
+                         bindLabel="nom"
+                         bindValue="id"
+                         [multiple]="true"
+                         placeholder="Select user or add custom tag"
+                         [(ngModel)]="selected"
+                         (change)="getValues($event)">
+                <br />
+              </ng-select>
+
+            </div>
+
+            <div class="row">
+
+              <div class="col-sm-4 counters">
+                <label for="cost1" class="label"><span><i class="fa fa-tint"></i></span>الماء</label>
+                <input type="text" id="cost1" style="width: 60px" name="attribut3" #attribut3="ngModel" [(ngModel)]="revenus.attribut3" required/>
+              </div>
+              <div class="col-sm-4 counters">
+                <label for="rooms"><span><i class="fa fa-bolt"></i></span>الكهرباء</label>
+                <input type="text" id="cost1" style="width: 60px" name="attribut4" #attribut4="ngModel" [(ngModel)]="revenus.attribut4" required/>
+              </div>
+              <div class="col-md-4 counters">
+                <label for="cost1"><span><i class="fa fa-coins fa-lg"></i></span>المبلغ   </label>
+                <input type="text" id="cost1" style="width: 60px" />
+              </div>
+            </div>
+
+
+            <div class="col-12 mb-3">
+              <label for=""><span><i class="fa fa-paperclip fa-lg"></i></span>المرفقات</label>
+              <input type="file" id="deposit-paper">
+              <label for="deposit-paper" class="file-label"><span><i class="fa fa-file-alt fa-lg"></i></span> الايداع <span class="mr-4"><i class="fa fa-upload"></i></span></label>
+              <input type="file" id="file2">
+              <label for="file2" class="file-label"><span><i class="fa fa-file-alt fa-lg"></i></span> السندات <span class="mr-4"><i class="fa fa-upload"></i></span></label>
+              <input type="file" id="file3">
+              <label for="file3" class="file-label"><span><i class="fa fa-file-alt fa-lg"></i></span> الكشف <span class="mr-4"><i class="fa fa-upload"></i></span></label>
+            </div>
+            <div class="col-12 mb-3">
+              <label for="notes"><span><i class="fa fa-paperclip fa-lg"></i></span>ملاحظات</label>
+              <textarea class="notes-area" name="notes" id="notes" cols="45" rows="2"></textarea>
+            </div>
+            <div class="mx-auto my-3">
+              <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save fa-lg"></i></span> حفظ</button>
+              <button class="btn btn-secondary px-2"><span class="ml-4"><i class="fa fa-print fa-lg"></i></span> طباعة</button>
+            </div>
+        </form>
+    </section>
+  </div><!-- End col-9 -->
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات في أبو عريش</p>
+</footer>
