@@ -1,3 +1,4 @@
+using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
 using System;
+using Hangfire;
+using Hangfire.MemoryStorage;
 using System.IO;
 using System.Text;
 using WebApplicationPlateforme.Data;
@@ -33,7 +36,15 @@ namespace WebApplicationPlateforme
         public void ConfigureServices(IServiceCollection services)
         {
 
-         
+            //Inject Hangfire
+            services.AddHangfire(config =>
+            config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+            .UseSimpleAssemblyNameTypeSerializer()
+            .UseDefaultTypeSerializer()
+            .UseMemoryStorage()
+            );
+
+            services.AddHangfireServer();
             //Inject AppSettings
 
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
@@ -118,7 +129,7 @@ namespace WebApplicationPlateforme
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IBackgroundJobClient backgroundJobClient, IRecurringJobManager recurringJobManager)
         {
 
             //Path for files 
@@ -127,7 +138,12 @@ namespace WebApplicationPlateforme
 
 
 
+            app.UseHangfireDashboard();
 
+            backgroundJobClient.Enqueue(() => Console.WriteLine("hello Hanfire Job"));
+
+            recurringJobManager.AddOrUpdate("Run every minute", () => Console.WriteLine("test reccuring job"),"* * * * *");
+            //Cron.Monthly
             app.UseForwardedHeaders();
             if (env.IsDevelopment())
             {
@@ -186,6 +202,8 @@ namespace WebApplicationPlateforme
             {
                 options.MapHub<MessageHub>("/MessageHub");
             });
+
+
         }
     }
 }

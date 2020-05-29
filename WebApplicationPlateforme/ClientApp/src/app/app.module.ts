@@ -83,6 +83,7 @@ import { ServiceRevenusService } from './shared/Services/Dotations/service-reven
 import { UniteService } from './shared/Services/Dotations/unite.service';
 import { LocataireService } from './shared/Services/Dotations/locataire.service';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { DepotRevenusService } from './shared/Services/Dotations/depot-revenus.service';
 
 
 @NgModule({
@@ -254,6 +255,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ServiceRevenusService,
     UniteService,
     LocataireService,
+    DepotRevenusService,
   ],
   bootstrap: [AppComponent]
 })

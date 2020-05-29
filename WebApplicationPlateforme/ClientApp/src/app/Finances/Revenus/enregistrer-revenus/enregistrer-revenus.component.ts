@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '../../../shared/Models/Dotations/location.model';
@@ -15,6 +15,17 @@ import { Revenus } from '../../../shared/Models/Dotations/revenus.model';
 import { NgForm } from '@angular/forms';
 import { LesServicesService } from '../../../shared/Services/Dotations/les-services.service';
 import { LesServices } from '../../../shared/Models/Dotations/les-services.model';
+import { ProgressStatus } from '../../../shared/Interfaces/progress-status';
+import { UploadDownloadService } from '../../../shared/Services/Taches/upload-download.service';
+import { PiecesJointesRevenus } from '../../../shared/Models/Dotations/pieces-jointes-revenus.model';
+import { ProgressStatusEnum } from '../../../shared/Enum/progress-status-enum.enum';
+import { HttpEventType, HttpClient } from '@angular/common/http';
+import * as jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import { PathSharedService } from '../../../shared/path-shared.service';
+import { DepotRevenus } from '../../../shared/Models/Dotations/depot-revenus.model';
+import { DepotRevenusService } from '../../../shared/Services/Dotations/depot-revenus.service';
+
 
 @Component({
   selector: 'app-enregistrer-revenus',
@@ -23,7 +34,15 @@ import { LesServices } from '../../../shared/Models/Dotations/les-services.model
 })
 export class EnregistrerRevenusComponent implements OnInit {
 
+  @ViewChild('htmlData') htmlData: ElementRef;
+  @Input() public disabled: boolean;
+  @Output() public uploadStatuss: EventEmitter<ProgressStatus>;
+  @ViewChild('inputFile') inputFile: ElementRef;
+  @ViewChild('inputFile1') inputFile1: ElementRef;
+  @ViewChild('inputFile2') inputFile2: ElementRef;
+
   private routeSub: Subscription;
+
   constructor(private route: ActivatedRoute,
     private LocationService: LocationService,
     private toastr: ToastrService,
@@ -33,17 +52,34 @@ export class EnregistrerRevenusComponent implements OnInit {
     private locataireService: LocataireService,
     private serviceRevenusService: ServiceRevenusService,
     private revenusService: RevenusService,
-    private lesServicesServices: LesServicesService
-  ) { }
+    private lesServicesServices: LesServicesService,
+    public serviceupload: UploadDownloadService,
+    private rootUrl: PathSharedService,
+    private depotService: DepotRevenusService,
+    private http: HttpClient,
+  ) { this.uploadStatuss = new EventEmitter<ProgressStatus>();}
 
   ngOnInit(): void {
     this.getIdUrl();
     this.getLocationDetails();
     this.GetRevenusServicesList();
     this.getUserConnected();
+    this.getFiles();
+    this.depotRevenusList();
+ 
+  
   }
 
 
+  // Depot Revenus List
+  depot: DepotRevenus[] = [];
+  depotRevenusList() {
+    this.depotService.Get().subscribe(res => {
+      this.depot=res
+    })
+  }
+  //Location Detais
+  
   LocationId: number;
   tache: Location = new Location();
   getIdUrl() {
@@ -55,7 +91,14 @@ export class EnregistrerRevenusComponent implements OnInit {
 
   }
 
-
+  //Get services list
+  getServicesList() {
+    this.lesServicesServices.Get().subscribe(res => {
+      this.listS = res
+  
+    }
+    )
+  }
   // Get User Connected
 
   UserIdConnected: string;
@@ -142,10 +185,14 @@ export class EnregistrerRevenusComponent implements OnInit {
   Createdrevenus: Revenus = new Revenus();
   MesServices: LesServices = new LesServices();
   MesServices2: LesServices = new LesServices();
-
+  MesServices3: LesServices = new LesServices();
+  somme: number;
+  prixser: number;
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
-  revenusId : number;
+  revenusId: number;
+  listS: LesServices[] = [];
+  filtredlistS: LesServices[] = [];
   onSubmit(form: NgForm) {
     this.revenus.creatorName = this.UserNameConnected;
     this.revenus.idUserCreator = this.UserIdConnected;
@@ -167,9 +214,12 @@ export class EnregistrerRevenusComponent implements OnInit {
       this.revenusService.Add(this.revenus).subscribe(res => {
         this.Createdrevenus = res
         this.revenusId = res.id
+
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
 
         this.selected.forEach(item => {
+          this.prixser = +item.prix;
+          this.somme = this.somme + this.prixser;
           this.MesServices.date = this.date;
           this.MesServices.idRevenus = this.revenusId;
           this.MesServices.nomServices = item.nom;
@@ -179,19 +229,326 @@ export class EnregistrerRevenusComponent implements OnInit {
           })
         })
 
+
+        if (this.eau != '') {}
         this.MesServices2.date = this.date;
         this.MesServices2.idRevenus = this.revenusId;
         this.MesServices2.nomServices = "الماء"
-        this.MesServices2.prixService = this.Createdrevenus.attribut3;
+        this.MesServices2.prixService = this.eau;
+        let eaun=+this.eau
+        this.somme = this.somme + eaun;
         this.lesServicesServices.Add(this.MesServices2).subscribe(res => {
 
         })
+
+        if (this.elec != '') {
+          this.MesServices3.date = this.date;
+          this.MesServices3.idRevenus = this.revenusId;
+          this.MesServices3.nomServices = "الكهرباء"
+          this.MesServices3.prixService = this.elec;
+          let elecn = +this.elec
+          this.somme = this.somme + elecn;
+          this.lesServicesServices.Add(this.MesServices3).subscribe(res => {
+
+          })
+        }
+
+        this.lesServicesServices.Get().subscribe(res => {
+          this.listS = res
+          console.log(this.listS)
+          this.filtredlistS = this.listS.filter(item => item.idRevenus == this.revenusId)
+          console.log(this.filtredlistS)
+        })
+
+        //upload1
+
+        this.pj.idrevenus = this.revenusId;
+        this.pj.date = this.date;
+        this.pj.type = 'الايداع'
+        let path = this.rootUrl.getPath();
+        this.fileslist.forEach(item => {
+          this.pj.path = item;
+          this.http.post(path + '/piecesjointesRevenus', this.pj)
+            .subscribe(res => {
+              this.serviceupload.refreshListR();
+              this.GetFileName();
+            })
+        })
+        //upload 2
+        this.pj1.idrevenus = this.revenusId;
+        this.pj1.date = this.date;
+        this.pj1.type = 'السندات'
+        let path1 = this.rootUrl.getPath();
+        this.fileslist1.forEach(item => {
+          this.pj1.path = item;
+          this.http.post(path1 + '/piecesjointesRevenus', this.pj1)
+            .subscribe(res => {
+              this.serviceupload.refreshListR();
+              this.GetFileName();
+            })
+        })
+        //upload 3
+
+        this.pj2.idrevenus = this.revenusId;
+        this.pj2.date = this.date;
+        this.pj2.type = 'الكشف'
+        let path2 = this.rootUrl.getPath();
+        this.fileslist2.forEach(item => {
+          this.pj2.path = item;
+          this.http.post(path2 + '/piecesjointesRevenus', this.pj2)
+            .subscribe(res => {
+              this.serviceupload.refreshListR();
+              this.GetFileName();
+            })
+        })
+
+
+
+        
       },
         err => {
           console.log(err);
           this.toastr.warning('لم تتم الإضافة', ' فشل');
         }
       )
+
+
     }
   }
+
+  eau: string;
+  testeau(event) {
+    this.eau = event.target.value
+    this.eau.toString();
+  }
+
+  elec: string;
+  testelec(event) {
+    this.elec = event.target.value
+    this.elec.toString();
+  }
+
+
+  //Files
+
+
+  public response: { 'dbpathsasstring': '' };
+  public isCreate: boolean;
+  public pj: PiecesJointesRevenus = new PiecesJointesRevenus();
+  public pjs: PiecesJointesRevenus[];
+  public pj1: PiecesJointesRevenus = new PiecesJointesRevenus();
+  public pjs1: PiecesJointesRevenus[];
+  public pj2: PiecesJointesRevenus = new PiecesJointesRevenus();
+  public pjs2: PiecesJointesRevenus[];
+  public files: string[];
+
+  //get List of Files
+
+  private getFiles() {
+    this.serviceupload.getFiles().subscribe(
+      data => {
+        this.files = data
+
+      }
+    );
+
+  }
+
+  GetFileName() {
+    let sa: string;
+    let s: any;
+    let finalres: any;
+    let i: number = 0;
+    let tlistnew: any[] = [];
+    for (var k = 0; k < this.files.length; k++) {
+      sa = <string>this.files[k]
+      s = sa.toString().split('uploads\\,', sa.length - 1);
+      finalres = s.toString().split('uploads\\', sa.length - 1);
+
+      tlistnew[i] = finalres[1]
+      i++;
+
+    }
+
+
+  }
+
+  //upload 1
+
+
+  url: any;
+  file: any;
+  fileslist: string[] = [];
+  public upload1(event) {
+    if (event.target.files && event.target.files.length > 0) {
+      this.file = event.target.files[0];
+      this.uploadStatuss.emit({ status: ProgressStatusEnum.START });
+      this.serviceupload.uploadFile(this.file).subscribe(
+        data => {
+          if (data) {
+            switch (data.type) {
+              case HttpEventType.UploadProgress:
+                this.uploadStatuss.emit({ status: ProgressStatusEnum.IN_PROGRESS, percentage: Math.round((data.loaded / data.total) * 100) });
+                break;
+              case HttpEventType.Response:
+                this.inputFile.nativeElement.value = '';
+                this.uploadStatuss.emit({ status: ProgressStatusEnum.COMPLETE });
+                break;
+            }
+            this.getFiles();
+            this.GetFileName();
+
+
+
+          }
+
+        },
+
+        error => {
+          this.inputFile.nativeElement.value = '';
+          this.uploadStatuss.emit({ status: ProgressStatusEnum.ERROR });
+        }
+      );
+      this.fileslist.push(this.file.name);
+      console.log(this.fileslist)
+    }
+  }
+
+
+  // upload 1
+
+
+  url1: any;
+  file1: any;
+  fileslist1: string[] = [];
+  public upload2(event) {
+    if (event.target.files && event.target.files.length > 0) {
+      this.file1 = event.target.files[0];
+      this.uploadStatuss.emit({ status: ProgressStatusEnum.START });
+      this.serviceupload.uploadFile(this.file1).subscribe(
+        data => {
+          if (data) {
+            switch (data.type) {
+              case HttpEventType.UploadProgress:
+                this.uploadStatuss.emit({ status: ProgressStatusEnum.IN_PROGRESS, percentage: Math.round((data.loaded / data.total) * 100) });
+                break;
+              case HttpEventType.Response:
+                this.inputFile.nativeElement.value = '';
+                this.uploadStatuss.emit({ status: ProgressStatusEnum.COMPLETE });
+                break;
+            }
+            this.getFiles();
+            this.GetFileName();
+
+
+
+          }
+
+        },
+
+        error => {
+          this.inputFile.nativeElement.value = '';
+          this.uploadStatuss.emit({ status: ProgressStatusEnum.ERROR });
+        }
+      );
+      this.fileslist1.push(this.file1.name);
+      console.log(this.fileslist1)
+    }
+  }
+
+
+  // upload 3
+
+  url2: any;
+  file2: any;
+  fileslist2: string[] = [];
+  public upload3(event) {
+    if (event.target.files && event.target.files.length > 0) {
+      this.file2 = event.target.files[0];
+      this.uploadStatuss.emit({ status: ProgressStatusEnum.START });
+      this.serviceupload.uploadFile(this.file2).subscribe(
+        data => {
+          if (data) {
+            switch (data.type) {
+              case HttpEventType.UploadProgress:
+                this.uploadStatuss.emit({ status: ProgressStatusEnum.IN_PROGRESS, percentage: Math.round((data.loaded / data.total) * 100) });
+                break;
+              case HttpEventType.Response:
+                this.inputFile.nativeElement.value = '';
+                this.uploadStatuss.emit({ status: ProgressStatusEnum.COMPLETE });
+                break;
+            }
+            this.getFiles();
+            this.GetFileName();
+
+
+
+          }
+
+        },
+
+        error => {
+          this.inputFile.nativeElement.value = '';
+          this.uploadStatuss.emit({ status: ProgressStatusEnum.ERROR });
+        }
+      );
+      this.fileslist2.push(this.file2.name);
+      console.log(this.fileslist2)
+    }
+  }
+
+  //DeleteFile
+
+
+  onDelete(Id) {
+    if (confirm('هل أنت متأكد من حذف هذا الملف ?')) {
+      this.serviceupload.deletePjR(Id)
+        .subscribe(res => {
+          this.serviceupload.refreshListR();
+          this.toastr.success("تم الحذف  بنجاح", "نجاح");
+        },
+
+          err => {
+            console.log(err);
+            this.toastr.warning('لم يتم الحذف  ', ' فشل');
+
+          }
+        )
+
+    }
+  }
+
+  //impression
+  path: string;
+  public openPDF() {
+    this.lesServicesServices.Get().subscribe(res => {
+      this.listS = res
+      console.log(this.listS)
+      this.filtredlistS = this.listS.filter(item => item.idRevenus == this.revenusId)
+      console.log(this.revenusId)
+      console.log(this.filtredlistS)
+    }
+    )
+    var data = document.getElementById('htmlData');
+    data.style.display = "block";
+    html2canvas(data).then(canvas => {
+      // Few necessary setting options
+      data.style.display = "none"
+      var imgWidth = 208;
+      var pageHeight = 295;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      var heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
+
+      var position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      this.path = "Revenus" + this.revenus.id + ".pdf"
+      pdf.save(this.path); // Generated PDF
+
+    });
+
+  }
+
 }

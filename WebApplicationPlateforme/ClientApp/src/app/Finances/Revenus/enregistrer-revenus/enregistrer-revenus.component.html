@@ -93,86 +93,95 @@
             </div>
           </div>
 
-           <!--- <div class="col-md-5 mb-3">
-              <label for="cost1"><span><i class="fa fa-coins fa-lg"></i></span>المبلغ</label>
-              <input type="text" id="cost1" />
-            </div>-->
+          <!--- <div class="col-md-5 mb-3">
+             <label for="cost1"><span><i class="fa fa-coins fa-lg"></i></span>المبلغ</label>
+             <input type="text" id="cost1" />
+           </div>-->
 
-            <div class="col-md-5 mb-3">
-              <label for="deposit"><span><i class="fa fa-archive fa-lg"></i></span>بيانات الايداع</label>
-              <select id="deposit" name="infoDepot" #infoDepot="ngModel" [(ngModel)]="revenus.infoDepot" required>
-                <option value="cheque"> شيك</option>
-                <option value="cash">كاش </option>
-              </select>
+          <div class="col-md-5 mb-3">
+            <label for="deposit"><span><i class="fa fa-archive fa-lg"></i></span>بيانات الايداع</label>
+            <select id="deposit" name="infoDepot" #infoDepot="ngModel" [(ngModel)]="revenus.infoDepot" required>
+              <option [ngValue]="undefined" selected disabled>-بيانات الايداع-</option>
+              <option *ngFor="let item of depot" value="{{item.nom}}">{{item.nom}}</option>
+            </select>
+          </div>
+
+
+          <div class="col-md-7 mb-3">
+            <label for="service"><span><i class="fa fa-calendar-alt fa-lg"></i></span>التاريخ والوقت</label>
+            <input type="datetime-local" id="" name="dateTemps" #dateTemps="ngModel" [(ngModel)]="revenus.dateTemps" required>
+            <div *ngIf="dateTemps.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب التاريخ والوقت.
+            </div>
+            <input type="text" name="deposant" id="" placeholder="المودع" #deposant="ngModel" [(ngModel)]="revenus.deposant" required>
+            <div *ngIf="deposant.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب  المودع.
+            </div>
+          </div>
+
+          <div class="col-sm-3 mb-3">
+            <label for="service"><span><i class="fa fa-coins fa-lg"></i></span>مستحقات الخدمات</label>
+          </div>
+          <div class="col-sm-5 counters">
+
+            <ng-select [items]="items"
+                       bindLabel="nom"
+                       bindValue="id"
+                       [multiple]="true"
+                       placeholder="الخدمات"
+                       [(ngModel)]="selected"
+                       (change)="getValues($event)"
+                       >
+              <br />
+            </ng-select>
+
+          </div>
+
+          <div class="row">
+
+            <div class="col-sm-6 counters">
+              <label for="cost1" class="label"><span><i class="fa fa-tint"></i></span>الماء</label>
+              <input type="text" id="cost1" style="width: 60px" (change)="testeau($event)" required />
+            </div>
+            <div class="col-sm-6 counters">
+              <label for="rooms"><span><i class="fa fa-bolt"></i></span>الكهرباء</label>
+              <input type="text" id="cost1" style="width: 60px" (change)="testelec($event)" required />
             </div>
 
-
-            <div class="col-md-7 mb-3">
-              <label for="service"><span><i class="fa fa-calendar-alt fa-lg"></i></span>التاريخ والوقت</label>
-              <input type="datetime-local" id="" name="dateTemps" #dateTemps="ngModel" [(ngModel)]="revenus.dateTemps" required>
-              <div *ngIf="dateTemps.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
-                مطلوب التاريخ والوقت.
-              </div>
-              <input type="text" name="deposant" id="" placeholder="المودع" #deposant="ngModel" [(ngModel)]="revenus.deposant" required>
-              <div *ngIf="deposant.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
-                مطلوب  المودع.
-              </div>
-            </div>
-
-            <div class="col-sm-3 mb-3">
-              <label for="service"><span><i class="fa fa-coins fa-lg"></i></span>مستحقات الخدمات</label>
-            </div>
-            <div class="col-sm-5 counters">
-
-              <ng-select [items]="items"
-                         bindLabel="nom"
-                         bindValue="id"
-                         [multiple]="true"
-                         placeholder="Select user or add custom tag"
-                         [(ngModel)]="selected"
-                         (change)="getValues($event)">
-                <br />
-              </ng-select>
-
-            </div>
-
-            <div class="row">
-
-              <div class="col-sm-4 counters">
-                <label for="cost1" class="label"><span><i class="fa fa-tint"></i></span>الماء</label>
-                <input type="text" id="cost1" style="width: 60px" name="attribut3" #attribut3="ngModel" [(ngModel)]="revenus.attribut3" required/>
-              </div>
-              <div class="col-sm-4 counters">
-                <label for="rooms"><span><i class="fa fa-bolt"></i></span>الكهرباء</label>
-                <input type="text" id="cost1" style="width: 60px" name="attribut4" #attribut4="ngModel" [(ngModel)]="revenus.attribut4" required/>
-              </div>
-              <div class="col-md-4 counters">
-                <label for="cost1"><span><i class="fa fa-coins fa-lg"></i></span>المبلغ   </label>
-                <input type="text" id="cost1" style="width: 60px" />
-              </div>
-            </div>
+          </div>
 
 
-            <div class="col-12 mb-3">
-              <label for=""><span><i class="fa fa-paperclip fa-lg"></i></span>المرفقات</label>
-              <input type="file" id="deposit-paper">
-              <label for="deposit-paper" class="file-label"><span><i class="fa fa-file-alt fa-lg"></i></span> الايداع <span class="mr-4"><i class="fa fa-upload"></i></span></label>
-              <input type="file" id="file2">
-              <label for="file2" class="file-label"><span><i class="fa fa-file-alt fa-lg"></i></span> السندات <span class="mr-4"><i class="fa fa-upload"></i></span></label>
-              <input type="file" id="file3">
-              <label for="file3" class="file-label"><span><i class="fa fa-file-alt fa-lg"></i></span> الكشف <span class="mr-4"><i class="fa fa-upload"></i></span></label>
-            </div>
-            <div class="col-12 mb-3">
-              <label for="notes"><span><i class="fa fa-paperclip fa-lg"></i></span>ملاحظات</label>
-              <textarea class="notes-area" name="notes" id="notes" cols="45" rows="2"></textarea>
-            </div>
-            <div class="mx-auto my-3">
-              <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save fa-lg"></i></span> حفظ</button>
-              <button class="btn btn-secondary px-2"><span class="ml-4"><i class="fa fa-print fa-lg"></i></span> طباعة</button>
-            </div>
+          <div class="col-12 mb-3">
+            <label for=""><span><i class="fa fa-paperclip fa-lg"></i></span>المرفقات</label>
+            <input type="file" id="deposit-paper" (change)="upload1($event)" #inputFile>
+            <label for="deposit-paper" class="file-label"><span><i class="fa fa-file-alt fa-lg"></i></span> الايداع <span class="mr-4"><i class="fa fa-upload"></i></span></label>
+            <input type="file" id="file2" (change)="upload2($event)" #inputFile>
+            <label for="file2" class="file-label"><span><i class="fa fa-file-alt fa-lg"></i></span> السندات <span class="mr-4"><i class="fa fa-upload"></i></span></label>
+            <input type="file" id="file3" (change)="upload3($event)" #inputFile>
+            <label for="file3" class="file-label"><span><i class="fa fa-file-alt fa-lg"></i></span> الكشف <span class="mr-4"><i class="fa fa-upload"></i></span></label>
+
+            <ul *ngFor="let pd of serviceupload.listR;">
+              <li *ngIf="revenusId == pd.idrevenus">
+                <a *ngIf="revenusId == pd.idrevenus" (click)="onDelete(pd.id)" class="aaa"><i class="fa fa-trash"></i>  </a>
+                <a>
+                  {{pd.path}}
+                </a>
+              </li>
+            </ul>
+
+          </div>
+          <div class="col-12 mb-3">
+            <label for="notes"><span><i class="fa fa-paperclip fa-lg"></i></span>ملاحظات</label>
+            <textarea class="notes-area" name="restePrixTotaleLocation" id="notes" cols="45" rows="2" #restePrixTotaleLocation="ngModel" [(ngModel)]="revenus.restePrixTotaleLocation"></textarea>
+          </div>
+          <div class="mx-auto my-3">
+            <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save fa-lg"></i></span> حفظ</button>
+            <button class="btn btn-danger px-2 ml-3" type="reset"><span class="ml-4"><i class="fa fa-trash"></i></span>حذف الحقول</button>
+            <button class="btn btn-secondary px-2" (click)="openPDF()" type="button"><span class="ml-4"><i class="fa fa-print fa-lg"></i></span> طباعة</button>
+          </div>
         </form>
-    </section>
-  </div><!-- End col-9 -->
+      </section>
+    </div><!-- End col-9 -->
 
   </div>
 
@@ -181,3 +190,86 @@
 <footer class="text-center">
   <p>المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات في أبو عريش</p>
 </footer>
+<div class="content" id="htmlData" style="display: none;">
+  <section class="page-content">
+    <h4 class="my-2 task-head">بيانات الإيداع</h4>
+
+    <div class="task-form form-row stop-form">
+      
+      <div class="col-sm-12 unit-details mb-3">
+        <label for="rooms">الوقف</label>
+        <span style="color:#6e6a6a;font-weight:bold">{{locataireName}}</span>
+
+        <label for="rooms">المستأجر</label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <span style="color:#6e6a6a;font-weight:bold">{{unitenumRevenus}}</span>
+
+        <label for="rooms">الوحدة</label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="color:#6e6a6a;font-weight:bold">{{dotationName}}</span>
+
+      </div>
+
+
+        <div class="col-sm-12 unit-details mb-3">
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+          <label for="rooms">المبلغ</label>
+          <span style="color:#6e6a6a;font-weight:bold">{{revenus.prixTot}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+          <label for="rooms">الإيجار المتفق عليه</label>&nbsp;&nbsp;&nbsp;&nbsp;
+          <span style="color:#6e6a6a;font-weight:bold">{{prixlocation}}</span>
+
+        </div>
+
+        <div class="col-md-5 mb-3">
+          <label for="month">الشهر</label>
+
+            <span style="color:#6e6a6a;font-weight:bold">{{revenus.mois}}</span>
+         </div>
+
+        <div class="col-md-5 mb-3">
+          <label for="month">السنة</label>
+
+            <span style="color:#6e6a6a;font-weight:bold">{{revenus.attribut2}}</span>
+
+     
+        </div>
+
+        <div class="col-md-5 mb-3">
+          <label for="deposit">بيانات الايداع</label>
+            <span style="color:#6e6a6a;font-weight:bold">{{revenus.infoDepot}}</span>          
+        </div>
+
+
+        <div class="col-md-7 mb-3">
+          <label for="service">التاريخ والوقت</label>
+          <span style="color:#6e6a6a;font-weight:bold">{{revenus.deposant}}</span>
+
+          <label for="service">المودع</label>
+          <span style="color:#6e6a6a;font-weight:bold">{{revenus.dateTemps}}</span>
+        </div>
+
+        <div class="col-sm-3 mb-3">
+          <label for="service">مستحقات الخدمات</label>
+
+          <ul *ngFor="let pd of filtredlistS">
+            <li>      
+              <a>
+                &nbsp;&nbsp; {{pd.nomServices}} &nbsp;&nbsp;
+              </a>
+              <a>  : &nbsp;&nbsp;{{pd.prixService}}&nbsp;&nbsp;</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-12 mb-3">
+          <label for="notes">ملاحظات</label>
+          <span style="color:#6e6a6a;font-weight:bold">{{revenus.restePrixTotaleLocation}}</span>
+        </div>  
+
+    </div>
+
+  </section>
+</div>
