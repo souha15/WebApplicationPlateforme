@@ -10,7 +10,7 @@
       <app-main-farametrage-finance-page></app-main-farametrage-finance-page>
       <!-- Tasks Page Content -->
       <section class="page-content">
-        <h4 class="my-2 task-head">تسجيل نوع الوقف </h4>
+        <h4 class="my-2 task-head">تسجيل مكتب الوقف </h4>
         <div class="row">
           <div class="col-sm-6">
             <div>
@@ -91,6 +91,8 @@
                     </th>
                     <th scope="col">رقم جوال</th>
                     <th></th>
+                    <th></th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -100,7 +102,9 @@
                     <td (click)="populateForm(dotation)">{{dotation.nomResponsable}}</td>
                     <td (click)="populateForm(dotation)">{{dotation.tel}}</td>
 
-                    <td><a (click)="onDelete(dotation.id)" class="btn btn-danger"><i class="fa fa-trash"></i>حذف</a></td>
+                    <td><a (click)="onDelete(dotation.id)"><i class="fa fa-trash" style="color:red;"></i></a></td>
+                    <td><a (click)="populateForm(dotation)"><i class="fa fa-edit" style="color:green;"></i></a></td>
+                    <td><a (click)="populateForm(dotation)" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye" style="color:dodgerblue;"></i></a></td>
 
 
                   </tr>
@@ -130,3 +134,61 @@
   <p>المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات في أبو عريش</p>
 </footer>
 
+<div id="myModal" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4 class="modal-title">بيانات مكتب الوقف</h4>
+
+      </div>
+      <div class="modal-body" style="direction:rtl; text-align:right">
+        <form class="task-form form-row stop-form">
+        
+          <div class="col-sm-6">
+            <label><span><i class="fa fa-home"></i></span>الإسم</label>
+            <span>{{dotshow.nom}}</span>
+          </div>
+
+          <div class="col-sm-6">
+            <label for="date"><span><i class="fa fa-user"></i></span> المسؤول </label>
+            <span>{{dotshow.nomResponsable}}</span>
+          </div>
+
+
+          <div class="col-sm-6">
+            <label for="date"><span><i class="fa fa-phone"></i></span>رقم جوال </label>
+            <span>{{dotshow.tel}}</span>
+          </div>
+
+          <div class="col-sm-6">
+            <label for="date"><span><i class="fa fa-fax"></i></span>فاكس </label>
+            <span>{{dotshow.fax}}</span>
+          </div>
+
+          <div class="col-sm-6">
+            <label for="date"><span><i class="fa fa-phone"></i></span>هاتف</label>
+            <span>{{dotshow.phoneNumber}}</span>
+          </div>
+
+          <div class="col-sm-6">
+            <label for="date"><span><i class="fa fa-address-card"></i></span>العنوان</label>
+            <span>{{dotshow.adresse}}</span>
+          </div>
+
+          <div class="col-sm-6">
+            <label for="date"><span><i class="fa fa-map-marker-alt"></i></span>المدينة</label>
+            <span>{{dotshow.ville}}</span>
+          </div>
+
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>

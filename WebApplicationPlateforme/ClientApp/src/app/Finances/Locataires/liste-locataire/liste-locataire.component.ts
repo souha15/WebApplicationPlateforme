@@ -75,6 +75,7 @@ export class ListeLocataireComponent implements OnInit {
 
     this.locataireService.Edit().subscribe(res => {
       this.toastr.success('تم التحديث بنجاح', 'نجاح')
+      form.resetForm();
       this.LocataireList();
     },
       err => {

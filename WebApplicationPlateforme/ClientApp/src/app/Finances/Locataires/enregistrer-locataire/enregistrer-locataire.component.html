@@ -22,7 +22,7 @@
             <div *ngIf="nom.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
               مطلوب اسم.
             </div>
-            <input type="text" class="mb-2" placeholder="الهوية" name="cin" #cin="ngModel" [(ngModel)]="locataire.cin" required />
+            <input type="text" class="mb-2" placeholder="الهوية" name="cin" #cin="ngModel" [(ngModel)]="locataire.cin" required maxlength="10" (change)="testcin($event)"/>
             <div *ngIf="cin.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
               مطلوب هوية.
             </div>
@@ -68,30 +68,30 @@
 
       <div class="col-sm-6">
         <label><span></span>الاسم</label>
-        <span>{{locataire.nom}}</span>
+        <span>{{locataireI.nom}}</span>
       </div>
       <div class="col-sm-6">
         <label><span></span>الهوية </label>
-        <span>{{locataire.cin}}</span>
+        <span>{{locataireI.cin}}</span>
       </div>
 
       <div class="col-sm-6">
         <label><span></span>الجنسية</label>
-        <span>{{locataire.nationnalite}}</span>
+        <span>{{locataireI.nationnalite}}</span>
       </div>
       <div class="col-sm-6">
         <label><span></span>العمل</label>
-        <span>{{locataire.profession}}</span>
+        <span>{{locataireI.profession}}</span>
       </div>
 
       <div class="col-sm-6">
         <label><span></span>العنوان</label>
-        <span>{{locataire.adresse}}</span>
+        <span>{{locataireI.adresse}}</span>
       </div>
 
       <div class="col-sm-6">
         <label><span></span>الجوال</label>
-        <span>{{locataire.tel}}</span>
+        <span>{{locataireI.tel}}</span>
       </div>
 
     </div>

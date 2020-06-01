@@ -132,16 +132,16 @@
           </div>
           <div class="col-sm-6">
             <label for="stop-units"><span><i class="fa fa-building"></i></span>عدد الوحدات</label>
-            <input type="text" id="stop-units" class="" name="compteurElec" #nbunite="ngModel" [(ngModel)]="dotationService.formData.nbunite">
+            <input type="text" id="stop-units" class="" name="nbunite" #nbunite="ngModel" [(ngModel)]="dotationService.formData.nbunite">
           </div>
           <div class="col-sm-6">
-            <label for="stop-counters"><span><i class="fa fa-building"></i></span>عدادات الكهرباء</label>
+            <label for="stop-counters"><span><i class="fa fa-bolt"></i></span>عدادالكهرباء</label>
             <input type="text" id="stop-counters" class="" name="compteurElec" #compteurElec="ngModel" [(ngModel)]="dotationService.formData.compteurElec">
 
           </div>
           <div class="col-sm-6">
-            <label for="counter-num"><span><i class="fa fa-bolt"></i></span>رقم العداد</label>
-            <input type="text" id="counter-num" class="" name="numCompteur" #numCompteur="ngModel" [(ngModel)]="dotationService.formData.numCompteur">
+            <label for="counter-num"><span><i class="fa fa-tint"></i></span>عداد الماء</label>
+            <input type="text" id="counter-num" class=""  name="attribut2" #attribut2="ngModel" [(ngModel)]="dotationService.formData.attribut2">
           </div>
           <div class="col-sm-6">
             <label for="stop-taker"><span><i class="fa fa-user"></i></span>محصل الوقف</label>
@@ -159,6 +159,7 @@
           </div>
           <div class="mx-auto my-3">
             <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save"></i></span> حفظ</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">خروج</button>
           </div>
         </form>
       </div>
@@ -220,14 +221,14 @@
           </div>
 
           <div class="col-sm-6">
-            <label for="date"><span><i class="fa fa-bolt"></i></span>عدادات الكهرباء</label>
+            <label for="date"><span><i class="fa fa-bolt"></i></span>عداد الكهرباء</label>
             <span>{{details.compteurElec}}</span>
           </div>
 
 
           <div class="col-sm-6">
-            <label for="date"><span><i class="fa fa-bolt"></i></span>رقم العداد</label>
-            <span>{{details.numCompteur}}</span>
+            <label for="date"><span><i class="fa fa-bolt"></i></span>عداد الماء</label>
+            <span>{{details.attribut2}}</span>
           </div>
 
           <div class="col-sm-6">

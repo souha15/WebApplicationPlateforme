@@ -26,9 +26,9 @@ export class ListeUniteComponent implements OnInit {
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.getUserConnected();
-    this.EtatList();
+    this.getUserConnected();  
     this.TypeList();
+    this.EtatList();
     this.DotationList();
     this.resetForm();
     this.Unitelist();
@@ -147,10 +147,38 @@ export class ListeUniteComponent implements OnInit {
 
 
   uniteI: Unite = new Unite();
+  impressionTest: boolean = true;
+  dotationname: string;
   agencename: string;
   populateForm(unite: Unite) {
     this.uniteService.formData = Object.assign({}, unite)
-    this.uniteI = Object.assign({}, unite);  
+    this.uniteI = Object.assign({}, unite);
+    if (this.uniteI.type != 'وحدة سكنية') { this.impressionTest = false; }
+    else { this.impressionTest = true }
+
+    this.dotationService.GetById(this.uniteI.idDotation).subscribe(res => {
+      this.dotationname = res.nom
+    })
+
+
+    if (this.uniteI.chambre == null) {
+      this.uniteI.chambre = '0'
+    }
+    if (this.uniteI.wc == null) {
+      this.uniteI.wc = '0'
+    }
+    if (this.uniteI.salon == null) {
+      this.uniteI.salon = '0'
+
+    }
+
+    if (this.uniteI.bureau == null) {
+      this.uniteI.bureau = '0'
+    }
+
+    if (this.uniteI.cuisine == null) {
+      this.uniteI.cuisine = '0'
+    }
 
   }
 
@@ -160,7 +188,7 @@ export class ListeUniteComponent implements OnInit {
 
     this.uniteService.Edit().subscribe(res => {
       this.toastr.success('تم التحديث بنجاح', 'نجاح')
-    
+      form.resetForm();
       this.Unitelist();
     },
       err => {
@@ -175,4 +203,12 @@ export class ListeUniteComponent implements OnInit {
     this.updateRecord(form)
   }
 
+  homeisSelected: boolean = true;
+  typeUnite(event) {
+    if (event.target.value != 'وحدة سكنية') {
+      this.homeisSelected = false
+    }
+    else
+      this.homeisSelected = true
+  }
 }

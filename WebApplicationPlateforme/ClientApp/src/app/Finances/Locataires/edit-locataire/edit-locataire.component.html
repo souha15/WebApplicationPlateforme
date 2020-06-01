@@ -30,7 +30,7 @@
 
           <div class="col-md-6">
             <label for="building"><span><i class="fa fa-building fa-lg"></i></span>العقار المؤجر</label>
-            <select id="building" name="idunite" #idunite="ngModel" [(ngModel)]="location.idunite" required>
+            <select id="building" name="idunite" #idunite="ngModel" [(ngModel)]="location.idunite" required (change)="selectInput2($event)">
               <option [ngValue]="undefined" selected disabled>-العقار المؤجر-</option>
               <option *ngFor="let item of uniteList" value="{{item.id}}">{{item.numRevenus}}</option>
             </select>
@@ -67,7 +67,7 @@
           <div class="col-md-6">
             <div *ngIf="locexists">
               <label for="renter"><span><i class="fa fa-user fa-lg"></i></span>المستأجر</label>
-              <select id="building" name="idlocataire" #idlocataire="ngModel" [(ngModel)]="location.idlocataire" required>
+              <select id="building" name="idlocataire" #idlocataire="ngModel" [(ngModel)]="location.idlocataire" required (change)="selectInput3($event)">
                 <option [ngValue]="undefined" selected disabled>-المستأجر-</option>
                 <option *ngFor="let item of Locataire" value="{{item.id}}">{{item.nom}}</option>
               </select>
@@ -137,11 +137,11 @@
             <label for="renter"><span><i class="fa fa-user fa-lg"></i></span>المستأجر</label>
           </div>
           <div class="col-9 renter">
-            <input type="text" id="renter" class="mb-2" placeholder="الاسم" name="nom" #nom="ngModel" [(ngModel)]="locataire.nom" required />
+            <input type="text" id="renter" class="mb-2" placeholder="الاسم" name="nom" #nom="ngModel" [(ngModel)]="locataire.nom" required/>
             <div *ngIf="nom.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
               مطلوب اسم.
             </div>
-            <input type="text" class="mb-2" placeholder="الهوية" name="cin" #cin="ngModel" [(ngModel)]="locataire.cin" required />
+            <input type="text" class="mb-2" placeholder="الهوية" name="cin" #cin="ngModel" [(ngModel)]="locataire.cin" required (change)="testcin($event)" />
             <div *ngIf="cin.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
               مطلوب هوية.
             </div>
@@ -168,7 +168,7 @@
           <div class="mx-auto my-3">
             <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save fa-lg"></i></span> حفظ</button>
             <button class="btn btn-danger px-2 ml-3" type="reset"><span class="ml-4"><i class="fa fa-trash"></i></span>حذف الحقول</button>
-
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">خروج</button>
           </div>
         </form>
       </div>
@@ -186,35 +186,35 @@
 
       <div class="col-sm-6">
         <label><span></span>اسم الوقف</label>
-        <span>{{dotationname}}</span>
+        <span>{{locationI.nomdotation}}</span>
       </div>
       <div class="col-sm-6">
         <label><span></span>رقم العقد الالكتروني </label>
-        <span>{{location.numcontrat}}</span>
+        <span>{{locationI.numcontrat}}</span>
       </div>
 
       <div class="col-sm-6">
         <label><span></span>العقار المؤجر</label>
-        <span>{{unitename}}</span>
+        <span>{{locationI.nomunite}}</span>
       </div>
       <div class="col-sm-6">
         <label><span></span>الايجار الشهري</label>
-        <span>{{location.prixlocationmois}}</span>
+        <span>{{locationI.prixlocationmois}}</span>
       </div>
 
       <div class="col-sm-6">
         <label><span></span>تاريخ بداية العقد</label>
-        <span>{{location.datedebutcontrat}}</span>
+        <span>{{locationI.datedebutcontrat}}</span>
       </div>
 
       <div class="col-sm-6">
         <label><span></span>مدة العقد بالشهر</label>
-        <span>{{location.delaicontrat}}</span>
+        <span>{{locationI.delaicontrat}}</span>
       </div>
 
       <div class="col-sm-6">
         <label><span></span>المستأجر</label>
-        <span>{{locaname}}</span>
+        <span>{{locationI.locataireName}}</span>
       </div>
 
  

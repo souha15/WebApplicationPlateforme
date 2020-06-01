@@ -66,6 +66,7 @@ export class EnregistrerRevenusComponent implements OnInit {
     this.getUserConnected();
     this.getFiles();
     this.depotRevenusList();
+    this.CalculRetard()
  
   
   }
@@ -179,6 +180,71 @@ export class EnregistrerRevenusComponent implements OnInit {
     
   }
 
+  //Retard
+  prixpaye: number;
+  retardTest(event) {
+    this.prixpaye = +event.target.value;
+
+  }
+
+  // Calcul Retard
+
+  LocationRetard: Location = new Location();
+  currentdate = new Date();
+  currentmonth: any;
+  currentyear: any;
+  debutContrat: any;
+  AnneedebutContrat:any
+  MoisdebutContrat: any;
+  revenusRetardList: Revenus[] = [];
+  FiltredrevenusRetardList: Revenus[] = [];
+  nbmonths: any;
+  nbMoisNonPaye: number;
+  dette: number;
+  CalculRetard() {
+    this.LocationService.GetById(+this.LocationId).subscribe(res => {
+      this.LocationRetard = res;
+
+      //Get current Month and year 
+      this.currentmonth = this.currentdate.getMonth() + 1;
+      this.currentyear = this.currentdate.getFullYear();
+   
+      //Get Location Month and year
+      this.debutContrat = this.LocationRetard.datedebutcontrat
+      let newDate = new Date(this.debutContrat);
+      this.MoisdebutContrat = newDate.getMonth() + 1
+      this.AnneedebutContrat = newDate.getFullYear();
+
+     
+     var months;
+      months = (this.currentyear - this.AnneedebutContrat) * 12;
+      months -= this.MoisdebutContrat;
+      months += this.currentmonth;
+      months <= 0 ? 0 : months;
+      this.nbmonths = months + 1;
+      
+
+      //Filtering
+      this.revenusService.Get().subscribe(res => {
+
+        this.revenusRetardList = res
+
+        this.FiltredrevenusRetardList = this.revenusRetardList.filter(item => item.idunite == this.LocationRetard.idunite && item.idLocataire == this.LocationRetard.idlocataire)
+        if (this.FiltredrevenusRetardList.length < this.nbmonths) {
+          this.nbMoisNonPaye = this.nbmonths - this.FiltredrevenusRetardList.length
+          this.dette = +this.LocationRetard.prixlocationmois * this.nbMoisNonPaye;
+          this.revenus.restePrixTotaleLocation = this.dette.toString();
+
+        }
+
+        
+      }
+        )
+
+
+    });
+  }
+
 
   //onSubmit
   revenus: Revenus = new Revenus();
@@ -186,7 +252,7 @@ export class EnregistrerRevenusComponent implements OnInit {
   MesServices: LesServices = new LesServices();
   MesServices2: LesServices = new LesServices();
   MesServices3: LesServices = new LesServices();
-  somme: number;
+  reste: number;
   prixser: number;
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
@@ -205,6 +271,11 @@ export class EnregistrerRevenusComponent implements OnInit {
     this.revenus.nomLocataire = this.locataireName;
     this.revenus.numRevenusUnite = this.unitenumRevenus;
     this.revenus.prixLocation = this.prixlocation;
+    this.reste = +this.prixlocation - this.prixpaye;
+    let calc: number;
+    calc = +this.dette - +this.prixlocation;
+    this.dette = calc
+    this.revenus.restePrixTotaleLocation = this.dette.toString();
 
     if (form.invalid) {
       this.isValidFormSubmitted = false;
@@ -212,42 +283,54 @@ export class EnregistrerRevenusComponent implements OnInit {
     } else {
       this.isValidFormSubmitted = true
       this.revenusService.Add(this.revenus).subscribe(res => {
-        this.Createdrevenus = res
+        
         this.revenusId = res.id
+
+        this.Createdrevenus.mois = this.revenus.mois
+        this.Createdrevenus.attribut2 = this.revenus.attribut2
+        this.Createdrevenus.prixTot = this.revenus.prixTot
+        this.Createdrevenus.infoDepot = this.revenus.infoDepot
+        this.Createdrevenus.deposant = this.revenus.deposant
+        this.Createdrevenus.dateTemps = this.revenus.dateTemps
+       // this.Createdrevenus.restePrixTotaleLocation = this.dette.toString();
+        this.dette = calc
 
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
 
         this.selected.forEach(item => {
           this.prixser = +item.prix;
-          this.somme = this.somme + this.prixser;
+          
           this.MesServices.date = this.date;
           this.MesServices.idRevenus = this.revenusId;
           this.MesServices.nomServices = item.nom;
-          this.MesServices.prixService = item.prix;
+          this.MesServices.prixService = item.prix;         
           this.lesServicesServices.Add(this.MesServices).subscribe(res => {
            
           })
+
+    
         })
 
+
+        //Eau
 
         if (this.eau != '') {}
         this.MesServices2.date = this.date;
         this.MesServices2.idRevenus = this.revenusId;
         this.MesServices2.nomServices = "الماء"
-        this.MesServices2.prixService = this.eau;
-        let eaun=+this.eau
-        this.somme = this.somme + eaun;
+        this.MesServices2.prixService = this.eau;     
         this.lesServicesServices.Add(this.MesServices2).subscribe(res => {
-
+     
         })
 
+        //Electricité 
         if (this.elec != '') {
           this.MesServices3.date = this.date;
           this.MesServices3.idRevenus = this.revenusId;
           this.MesServices3.nomServices = "الكهرباء"
           this.MesServices3.prixService = this.elec;
           let elecn = +this.elec
-          this.somme = this.somme + elecn;
+      
           this.lesServicesServices.Add(this.MesServices3).subscribe(res => {
 
           })
@@ -272,6 +355,7 @@ export class EnregistrerRevenusComponent implements OnInit {
             .subscribe(res => {
               this.serviceupload.refreshListR();
               this.GetFileName();
+            
             })
         })
         //upload 2
@@ -285,6 +369,7 @@ export class EnregistrerRevenusComponent implements OnInit {
             .subscribe(res => {
               this.serviceupload.refreshListR();
               this.GetFileName();
+              
             })
         })
         //upload 3
@@ -299,12 +384,14 @@ export class EnregistrerRevenusComponent implements OnInit {
             .subscribe(res => {
               this.serviceupload.refreshListR();
               this.GetFileName();
+          
             })
         })
 
+     
 
-
-        
+        form.resetForm();
+      
       },
         err => {
           console.log(err);

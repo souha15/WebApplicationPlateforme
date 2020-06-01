@@ -39,7 +39,7 @@
 
           <div class="col-sm-6">
             <label for="unit-sort"><span><i class="fa fa-building"></i></span>نوع الوحدة</label>
-            <select id="unit-sort" name="type" #type="ngModel" [(ngModel)]="unite.type" required>
+            <select id="unit-sort" name="type" #type="ngModel" [(ngModel)]="unite.type" required (change)="typeUnite($event)">
               <option [ngValue]="undefined" selected disabled>-نوع الوحدة-</option>
               <option *ngFor="let item of types" value="{{item.nom}}">{{item.nom}}</option>
             </select>
@@ -56,7 +56,7 @@
 
             </select>
           </div>
-          <div class="col-sm-12 unit-details mb-3">
+          <div class="col-sm-12 unit-details mb-3" *ngIf="homeisSelected">
             <label for="rooms">غرفة</label>
             <input name="etat" #chambre="ngModel" [(ngModel)]="unite.chambre" type="text" id="rooms" style="width: 60px">&nbsp;&nbsp;&nbsp;&nbsp;
             <label for="rooms">حمام</label>
@@ -125,7 +125,7 @@
         <label><span></span>حالة الوحدة</label>
         <span>{{uniteI.etat}}</span>
       </div>
-      <div class="col-sm-12 unit-details mb-3">
+      <div class="col-sm-12 unit-details mb-3" *ngIf="impressionTest">
         <label>غرفة</label>
         <span class="px-2 ml-2">{{uniteI.chambre}}</span>
         <label>حمام</label>

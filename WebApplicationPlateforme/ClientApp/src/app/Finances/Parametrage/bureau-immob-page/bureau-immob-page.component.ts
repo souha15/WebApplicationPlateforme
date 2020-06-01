@@ -75,9 +75,11 @@ export class BureauImmobPageComponent implements OnInit {
   }
 
   //PopulateForm
+  dotshow: AgenceImmob = new AgenceImmob();
 
   populateForm(dotation: AgenceImmob) {
     this.dotationService.formData = Object.assign({}, dotation);
+    this.dotshow = Object.assign({}, dotation)
 
   }
 

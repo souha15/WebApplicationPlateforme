@@ -26,14 +26,14 @@
                   <span class="glyphicon sort-icon" *ngIf="key =='date'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                 </th>
                 <th scope="col" (click)="sort('type')">
-                  نوع الوقف
+                  نوع الوحدة
                   <span class="glyphicon sort-icon" *ngIf="key =='type'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                 </th>
                 <th scope="col" (click)="sort('etat')">
                   <p style="color:white">
                     <span class="glyphicon sort-icon" *ngIf="key =='etat'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                   </p>
-                  حالة الوقف
+                  حالة الوحدة
                 </th>
 
                 <th scope="col" (click)="sort('comptable')">
@@ -88,7 +88,7 @@
 
         <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-        <h4 class="modal-title">تحديث الوقف</h4>
+        <h4 class="modal-title">تحديث الوحدة</h4>
 
       </div>
       <div class="modal-body" style="direction:rtl; text-align:right">
@@ -120,7 +120,7 @@
 
           <div class="col-sm-6">
             <label for="unit-sort"><span><i class="fa fa-building"></i></span>نوع الوحدة</label>
-            <select id="unit-sort" name="type" #type="ngModel" [(ngModel)]="uniteService.formData.type" required>
+            <select id="unit-sort" name="type" #type="ngModel" [(ngModel)]="uniteService.formData.type" required (change)="typeUnite($event)">
               <option [ngValue]="undefined" selected disabled>-نوع الوحدة-</option>
               <option *ngFor="let item of types" value="{{item.nom}}">{{item.nom}}</option>
             </select>
@@ -131,13 +131,13 @@
 
           <div class="col-sm-6">
             <label for="unit-status"><span><i class="fa fa-edit"></i></span>حالة الوحدة</label>
-            <select id="unit-status" name="etat" #etat="ngModel" [(ngModel)]="uniteService.formData.etat">
+            <select id="unit-status" name="etat" #etat="ngModel" [(ngModel)]="uniteService.formData.etat" required>
               <option [ngValue]="undefined" selected disabled>-حالة الوحدة-</option>
               <option *ngFor="let item of etats" value="{{item.nom}}">{{item.nom}}</option>
 
             </select>
           </div>
-          <div class="col-sm-12 unit-details mb-3">
+          <div class="col-sm-12 unit-details mb-3" *ngIf="homeisSelected">
             <label for="rooms">غرفة</label>
             <input name="etat" #chambre="ngModel" [(ngModel)]="uniteService.formData.chambre" type="text" id="rooms" style="width: 60px">&nbsp;&nbsp;&nbsp;&nbsp;
             <label for="rooms">حمام</label>
@@ -168,7 +168,7 @@
 
           <div class="mx-auto my-3">
             <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save"></i></span> حفظ</button>
-
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">خروج</button>
           </div>
         </form>
       </div>
@@ -195,7 +195,7 @@
 
           <div class="col-sm-6">
             <label><span></span>الوقف</label>
-            <span>{{uniteI.idDotation}}</span>
+            <span>{{dotationname}}</span>
           </div>
           <div class="col-sm-6">
             <label><span></span>رقم الوحدة </label>
@@ -210,7 +210,7 @@
             <label><span></span>حالة الوحدة</label>
             <span>{{uniteI.etat}}</span>
           </div>
-          <div class="col-sm-12 unit-details mb-3">
+          <div class="col-sm-12 unit-details mb-3" *ngIf="impressionTest">
             <label>غرفة</label>
             <span class="px-2 ml-2">{{uniteI.chambre}}</span>
             <label>حمام</label>

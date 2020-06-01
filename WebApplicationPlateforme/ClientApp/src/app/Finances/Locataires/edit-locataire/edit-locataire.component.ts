@@ -78,8 +78,14 @@ export class EditLocataireComponent implements OnInit {
 
   isDotationSelected: boolean = false;
   dotationid: string;
+
   selectInput(event) {
     this.dotationid = event.target.value;
+    this.dotationService.GetById(+this.dotationid).subscribe(res => {
+      this.location.nomdotation=res.nom
+  
+
+    })
     if (this.dotationid != null) {
       this.uniteService.Get().subscribe(res => {
         this.uniteListG = res
@@ -89,6 +95,26 @@ export class EditLocataireComponent implements OnInit {
       })
 
     }
+  }
+
+  uniteid: string;
+  selectInput2(event) {
+    this.uniteid = event.target.value;
+    this.uniteService.GetById(+this.uniteid).subscribe(res => {
+      this.location.nomunite = res.numRevenus
+
+
+    })
+  }
+
+  locataireid: string;
+  selectInput3(event) {
+    this.locataireid = event.target.value;
+    this.locataireService.GetById(+this.locataireid).subscribe(res => {
+      this.location.locataireName = res.nom
+
+
+    })
   }
   // Get Unite List
 
@@ -146,6 +172,7 @@ export class EditLocataireComponent implements OnInit {
   public pjC: ContratLocation = new ContratLocation();
   public pjsC: ContratLocation[];
   location: Location = new Location();
+  locationI: Location = new Location();
   iddot: number;
   idunite: number;
   idloc: number;
@@ -171,6 +198,23 @@ export class EditLocataireComponent implements OnInit {
         this.iddot = res.iddotation;
         this.idunite = res.idunite;
         this.idloc = res.idlocataire;
+
+        this.locationI.id = this.location.id;
+        this.locationI.datedebutcontrat = this.location.datedebutcontrat;
+        this.locationI.creatorName = this.location.creatorName
+        this.locationI.dateenreg = this.location.dateenreg
+        this.locationI.delaicontrat = this.location.delaicontrat
+        this.locationI.iddotation = this.location.iddotation
+        this.locationI.idlocataire = this.location.idlocataire
+        this.locationI.idunite = this.location.idunite
+        this.locationI.idUserCreator = this.location.idUserCreator
+        this.locationI.locataireName = this.location.locataireName
+        this.locationI.moisdelocation = this.location.moisdelocation
+        this.locationI.nomdotation = this.location.nomdotation
+        this.locationI.nomunite = this.location.nomunite
+        this.locationI.numcontrat = this.location.numcontrat
+        this.locationI.prixlocationmois = this.location.prixlocationmois
+
         this.dotationService.GetById(this.iddot).subscribe(res => {
           this.dotationname = res.nom;
         })
@@ -208,6 +252,7 @@ export class EditLocataireComponent implements OnInit {
             });
         })
 
+        form.resetForm();
       },
         err => {
           console.log(err);
@@ -238,6 +283,28 @@ export class EditLocataireComponent implements OnInit {
 
     }
   }
+
+
+  //Test Cin
+  LocatList: Locataire[] = [];
+  LocatListf: Locataire[] = [];
+  cini: string;
+  cinexist: boolean;
+  testcin(event) {
+    this.cini = event.target.value;
+    this.cini.toString();
+    this.locataireService.Get().subscribe(res => {
+      this.LocatList = res
+      this.LocatListf = this.LocatList.filter(item => item.cin == this.cini)
+      if (this.LocatListf.length == 0) {
+        this.cinexist = true
+
+      } else {
+        this.cinexist = false
+      }
+    })
+
+  }
   //Create Locataire
 
   locataire: Locataire = new Locataire();
@@ -256,44 +323,50 @@ export class EditLocataireComponent implements OnInit {
       this.isValidFormSubmitted = false;
 
     } else {
+    
+      if (this.cinexist) {
+          this.isValidFormSubmitted = true
+          this.locataireService.Add(this.locataire).subscribe(
+            res => {
 
-      this.isValidFormSubmitted = true
+              this.locataireId = res.id;
+              this.locatairenom = res.nom;
+              this.cint = res.cin
+              this.toastr.success("تمت الإضافة بنجاح", "نجاح");
 
-      this.locataireService.Add(this.locataire).subscribe(
-        res => {
+              this.locataireService.Get().subscribe(res => {
+                this.locataireList = res
+                this.Locataire = this.locataireList.filter(item => item.cin == this.cint);
 
-          this.locataireId = res.id;
-          this.locatairenom = res.nom;
-          this.cint = res.cin
-          this.toastr.success("تمت الإضافة بنجاح", "نجاح");
-
-          this.locataireService.Get().subscribe(res => {
-            this.locataireList = res
-            this.Locataire = this.locataireList.filter(item => item.cin == this.cint);             
-                console.log(this.Locataire)
-            this.locexists = true;
-          })
-          // Create file
-          this.pj.idlocataire = this.locataireId;
-          this.pj.nomLocataire = this.locatairenom;
-          this.pj.date = this.date;
-          this.pj.type = "cin"
-          let path = this.rootUrl.getPath();
-          this.fileslist.forEach(item => {
-            this.pj.path = item;
-            this.http.post(path + '/piecesjointesLocataires', this.pj)
-              .subscribe(res => {
-                this.serviceupload.refreshListL();
-                this.GetFileName();
-              });
-          })
-
-        },
-        err => {
-          console.log(err);
-          this.toastr.warning('لم تتم الإضافة', ' فشل');
+                this.locexists = true;
+              })
+              // Create file
+              this.pj.idlocataire = this.locataireId;
+              this.pj.nomLocataire = this.locatairenom;
+              this.pj.date = this.date;
+              this.pj.type = "cin"
+              let path = this.rootUrl.getPath();
+              this.fileslist.forEach(item => {
+                this.pj.path = item;
+                this.http.post(path + '/piecesjointesLocataires', this.pj)
+                  .subscribe(res => {
+                    this.serviceupload.refreshListL();
+                    this.GetFileName();
+                  });
+              })
+              form.resetForm();
+            },
+            err => {
+              console.log(err);
+              this.toastr.warning('لم تتم الإضافة', ' فشل');
+            }
+          )
+        } else {
+          
+            this.toastr.warning('لم تتم الإضافة رقم الهوية موجود', ' فشل');
+      
         }
-      )
+    
     }
   }
 

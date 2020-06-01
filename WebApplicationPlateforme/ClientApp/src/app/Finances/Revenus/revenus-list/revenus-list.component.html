@@ -214,7 +214,7 @@
 
           <div class="col-12 mb-3">
             <label for="notes"><span><i class="fa fa-paperclip fa-lg"></i></span>ملاحظات</label>
-            <textarea class="notes-area" name="restePrixTotaleLocation" id="notes" cols="45" rows="2" #restePrixTotaleLocation="ngModel" [(ngModel)]="revenusService.formData.restePrixTotaleLocation"></textarea>
+            <textarea class="notes-area" name="attribut3" id="notes" cols="45" rows="2" #attribut3="ngModel" [(ngModel)]="revenusService.formData.attribut3"></textarea>
           </div>
           <div class="mx-auto my-3">
             <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save fa-lg"></i></span> حفظ</button>
@@ -312,31 +312,70 @@
             </ul>
           </div>
 
-
-
-          <div class="col-sm-3 mb-3">
-            <label for="service">المرفقات</label>
-
-            <div class="file-links">
-              <ul *ngFor="let pd of listPjFiltred;">
-                <li>
-
-                  <a (click)="download(pd.path)"><i class="fa fa-download  fa-2x"></i></a>
-                  {{pd.path}}
-
-
-                </li>
-              </ul>
-
+          <div class="row">
+            <div class="col-sm-3 mb-3">
+              <label for="service"> المرفقات </label>
             </div>
-          </div>
 
-          <div class="col-12 mb-3">
-            <label for="notes">ملاحظات</label>
-            <span style="color:#6e6a6a;font-weight:bold">{{details.restePrixTotaleLocation}}</span>
-          </div>
+              <div class="col-sm-3 mb-3">
+                <label for="service"> الايداع </label>
 
-        </div>
+        
+                  <ul *ngFor="let pd of listPjFiltredI;">
+                    <li>
+
+                      <a (click)="download(pd.path)"><i class="fa fa-download  fa-2x"></i></a>
+                      {{pd.path}}
+
+
+                    </li>
+                  </ul>
+
+               
+              </div>
+
+
+
+              <div class="col-sm-3 mb-3">
+                <label for="service">السندات </label>
+
+                
+                  <ul *ngFor="let pd of listPjFiltredS;">
+                    <li>
+
+                      <a (click)="download(pd.path)"><i class="fa fa-download  fa-2x"></i></a>
+                      {{pd.path}}
+
+
+                    </li>
+                  </ul>
+
+             
+              </div>
+
+
+              <div class="col-sm-3 mb-3">
+                <label for="service"> الكشف  </label>
+
+           
+                  <ul *ngFor="let pd of listPjFiltredK;">
+                    <li>
+
+                      <a (click)="download(pd.path)"><i class="fa fa-download  fa-2x"></i></a>
+                      {{pd.path}}
+
+
+                    </li>
+                  </ul>
+
+              </div>
+            </div>
+            <div class="col-12 mb-3">
+              <label for="notes">ملاحظات</label>
+              <span style="color:#6e6a6a;font-weight:bold">{{details.attribut3}}</span>
+            </div>
+
+          </div>
        
 
       </div>

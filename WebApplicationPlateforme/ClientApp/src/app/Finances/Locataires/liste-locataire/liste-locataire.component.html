@@ -10,7 +10,7 @@
       <app-dotation-edit></app-dotation-edit>
       <!-- Tasks Page Content -->
       <section class="page-content">
-        <h4 class="my-2 task-head">قائمة الأوقاف</h4>
+        <h4 class="my-2 task-head">قائمة المستأجرين</h4>
         <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
         <div class="tabel-cont">
           <table class="table table-striped table-hover sortable">
@@ -91,7 +91,7 @@
 
         <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-        <h4 class="modal-title">تحديث الوقف</h4>
+        <h4 class="modal-title">تحديث المستأجر</h4>
 
       </div>
       <div class="modal-body" style="direction:rtl; text-align:right">
@@ -105,7 +105,7 @@
               <div *ngIf="nom.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
                 مطلوب اسم.
               </div>
-              <input type="text" class="mb-2" placeholder="الهوية" name="cin" #cin="ngModel" [(ngModel)]="locataireService.formData.cin" required />
+              <input type="text" class="mb-2" placeholder="الهوية" name="cin" #cin="ngModel" [(ngModel)]="locataireService.formData.cin" required maxlength="10"/>
               <div *ngIf="cin.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
                 مطلوب هوية.
               </div>
@@ -114,9 +114,10 @@
               <input type="text" class="mb-2" placeholder="العنوان" name="adresse" #adresse="ngModel" [(ngModel)]="locataireService.formData.adresse" />
               <input type="text" class="mb-2" placeholder="الجوال" name="tel" #tel="ngModel" [(ngModel)]="locataireService.formData.tel" />
             </div>         
-          <div class="mx-auto my-3">
-            <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save"></i></span> حفظ</button>
-          </div>
+            <div class="mx-auto my-3">
+              <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save"></i></span> حفظ</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">خروج</button>
+            </div>
         </form>
       </div>
     </div>
@@ -134,7 +135,7 @@
 
         <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-        <h4 class="modal-title">بيانات الوقف</h4>
+        <h4 class="modal-title">بيانات المستأجر</h4>
 
       </div>
       <div class="modal-body" style="direction:rtl; text-align:right">
@@ -169,7 +170,7 @@
           </div>
 
           <div class="col-12">
-            <label><span></span>الهوية</label>
+            <label><span></span> نسخة من الهوية</label>
             <div class="file-links">
               <ul *ngFor="let pd of listPjFiltred;">
                 <li>

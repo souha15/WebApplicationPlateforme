@@ -93,6 +93,8 @@ export class EnregistrerDotationComponent implements OnInit {
   }
 
   dotation: Dotation = new Dotation();
+  Cdotation: Dotation = new Dotation();
+
   isValidFormSubmitted = false;
   onSubmit(form: NgForm) {
     this.dotation.creatorName = this.UserNameConnected;
@@ -108,13 +110,29 @@ export class EnregistrerDotationComponent implements OnInit {
 
     this.dotationService.Add(this.dotation).subscribe(
       res => {
-
+        this.Cdotation.nom = this.dotation.nom
+        this.Cdotation.attribut2 = this.dotation.attribut2
+        this.Cdotation.id = this.dotation.id
+        this.Cdotation.adresse = this.dotation.adresse
+        this.Cdotation.comptable = this.dotation.comptable
+        this.Cdotation.creatorName = this.dotation.creatorName
+        this.Cdotation.idUserCreator = this.dotation.idUserCreator
+        this.Cdotation.idAgence = this.dotation.idAgence
+        this.Cdotation.dateenreg = this.dotation.dateenreg
+        this.Cdotation.compteurElec = this.dotation.compteurElec
+        this.Cdotation.numCompteur = this.dotation.numCompteur
+        this.Cdotation.date = this.dotation.date
+        this.Cdotation.etat = this.dotation.etat
+        this.Cdotation.type = this.dotation.type
+        this.Cdotation.nbunite = this.dotation.nbunite
+        this.Cdotation.officeImmobiler = this.dotation.officeImmobiler
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         this.AgenceService.GetById(this.dotation.idAgence).subscribe(res => {
           this.AgencyName = res.nom
+        
         })
-        //form.resetForm();
-
+      
+        form.resetForm();
       },
       err => {
         console.log(err);
@@ -165,7 +183,7 @@ export class EnregistrerDotationComponent implements OnInit {
   //Pdf
   path: string;
   public openPDF() {
-
+    console.log(this.Cdotation)
     var data = document.getElementById('htmlData');
     data.style.display = "block";
     html2canvas(data).then(canvas => {

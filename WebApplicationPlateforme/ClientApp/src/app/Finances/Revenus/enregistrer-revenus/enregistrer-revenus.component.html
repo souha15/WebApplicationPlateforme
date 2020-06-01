@@ -14,30 +14,32 @@
 
           <div class="col-sm-12 unit-details mb-3">
             <label for="rooms"><span><i class="fa fa-building"></i></span>الوقف</label>
+            <span style="color:#6e6a6a;font-weight:bold">{{dotationName}}</span>
+
+            <label for="rooms"><span><i class="fa fa-user fa-lg"></i></span>المستأجر</label>
             <span style="color:#6e6a6a;font-weight:bold">{{locataireName}}</span>
 
-            <label for="rooms"><span><i class="fa fa-user fa-lg"></i></span>المستأجر</label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <label for="rooms"><span><i class="fa fa-home"></i></span>الوحدة</label>
             <span style="color:#6e6a6a;font-weight:bold">{{unitenumRevenus}}</span>
 
-            <label for="rooms"><span><i class="fa fa-home"></i></span>الوحدة</label>&nbsp;&nbsp;&nbsp;&nbsp;
-            <span style="color:#6e6a6a;font-weight:bold">{{dotationName}}</span>
 
           </div>
 
 
           <div class="col-sm-12 unit-details mb-3">
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            
+            <label for="rooms"><span><i class="fa fa-euro-sign"></i></span>المتأخرات</label>
+            <span  class="task-num">{{dette}}</span>
 
             <label for="rooms"><span><i class="fa fa-euro-sign"></i></span>المبلغ</label>
-            <input type="text" id="rooms" style="width: 80px" name="prixTot" #prixTot="ngModel" [(ngModel)]="revenus.prixTot" required />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" id="rooms" style="width: 80px" name="prixTot" #prixTot="ngModel" [(ngModel)]="revenus.prixTot" required (change)="retardTest($event)" />
 
             <div *ngIf="prixTot.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
               مطلوب المبلغ.
             </div>
 
-            <label for="rooms"><span><i class="fa fa-euro-sign"></i></span>الإيجار المتفق عليه</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <label for="rooms"><span><i class="fa fa-euro-sign"></i></span>الإيجار المتفق عليه</label>
             <span style="color:#6e6a6a;font-weight:bold">{{prixlocation}}</span>
 
           </div>
@@ -66,27 +68,15 @@
           <div class="col-md-5 mb-3">
             <label for="month"><span><i class="fa fa-calendar-alt fa-lg"></i></span>السنة</label>
             <select id="month" name="attribut2" #attribut2="ngModel" [(ngModel)]="revenus.attribut2" required>
+
+              <option value="2018">2018</option>
+              <option value="2019">2019</option>
               <option value="2020">2020</option>
               <option value="2021">2021</option>
               <option value="2022">2022</option>
               <option value="2023">2023</option>
               <option value="2024">2024</option>
               <option value="2025">2025</option>
-              <option value="2026">2026</option>
-              <option value="2027">2027</option>
-              <option value="2028">2028</option>
-              <option value="2029">2029</option>
-              <option value="2030">2030</option>
-              <option value="2031">2031</option>
-              <option value="2032">2032</option>
-              <option value="2033">2033</option>
-              <option value="2034">2034</option>
-              <option value="2035">2035</option>
-              <option value="2036">2036</option>
-              <option value="2037">2037</option>
-              <option value="2038">2038</option>
-              <option value="2039">2039</option>
-              <option value="2040">2040</option>
             </select>
             <div *ngIf="attribut2.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
               مطلوب  السنة.
@@ -94,9 +84,9 @@
           </div>
 
           <!--- <div class="col-md-5 mb-3">
-             <label for="cost1"><span><i class="fa fa-coins fa-lg"></i></span>المبلغ</label>
-             <input type="text" id="cost1" />
-           </div>-->
+    <label for="cost1"><span><i class="fa fa-coins fa-lg"></i></span>المبلغ</label>
+    <input type="text" id="cost1" />
+  </div>-->
 
           <div class="col-md-5 mb-3">
             <label for="deposit"><span><i class="fa fa-archive fa-lg"></i></span>بيانات الايداع</label>
@@ -113,25 +103,31 @@
             <div *ngIf="dateTemps.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
               مطلوب التاريخ والوقت.
             </div>
+
+          </div>
+
+          <div class="col-sm-5 mb-3">
+            <label for="service"><span><i class="fa fa-coins fa-lg"></i></span>مستحقات الخدمات</label>
+          </div>
+
+          <div class="col-md-7 mb-3">
+            <label for="service"><span><i class="fa fa-user"></i></span>المودع</label>
             <input type="text" name="deposant" id="" placeholder="المودع" #deposant="ngModel" [(ngModel)]="revenus.deposant" required>
             <div *ngIf="deposant.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
               مطلوب  المودع.
             </div>
           </div>
 
-          <div class="col-sm-3 mb-3">
-            <label for="service"><span><i class="fa fa-coins fa-lg"></i></span>مستحقات الخدمات</label>
-          </div>
+
           <div class="col-sm-5 counters">
 
             <ng-select [items]="items"
                        bindLabel="nom"
                        bindValue="id"
                        [multiple]="true"
-                       placeholder="الخدمات"
+                       placeholder="مستحقات الخدمات"
                        [(ngModel)]="selected"
-                       (change)="getValues($event)"
-                       >
+                       (change)="getValues($event)">
               <br />
             </ng-select>
 
@@ -141,11 +137,11 @@
 
             <div class="col-sm-6 counters">
               <label for="cost1" class="label"><span><i class="fa fa-tint"></i></span>الماء</label>
-              <input type="text" id="cost1" style="width: 60px" (change)="testeau($event)" required />
+              <input type="text" id="cost1" style="width: 80px" (change)="testeau($event)" required />
             </div>
             <div class="col-sm-6 counters">
               <label for="rooms"><span><i class="fa fa-bolt"></i></span>الكهرباء</label>
-              <input type="text" id="cost1" style="width: 60px" (change)="testelec($event)" required />
+              <input type="text" id="cost1" style="width: 80px" (change)="testelec($event)" required />
             </div>
 
           </div>
@@ -172,7 +168,7 @@
           </div>
           <div class="col-12 mb-3">
             <label for="notes"><span><i class="fa fa-paperclip fa-lg"></i></span>ملاحظات</label>
-            <textarea class="notes-area" name="restePrixTotaleLocation" id="notes" cols="45" rows="2" #restePrixTotaleLocation="ngModel" [(ngModel)]="revenus.restePrixTotaleLocation"></textarea>
+            <textarea class="notes-area" name="attribut3" id="notes" cols="45" rows="2" #attribut3="ngModel" [(ngModel)]="revenus.attribut3"></textarea>
           </div>
           <div class="mx-auto my-3">
             <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save fa-lg"></i></span> حفظ</button>
@@ -216,7 +212,7 @@
           <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 
           <label for="rooms">المبلغ</label>
-          <span style="color:#6e6a6a;font-weight:bold">{{revenus.prixTot}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span style="color:#6e6a6a;font-weight:bold">{{Createdrevenus.prixTot}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
           <label for="rooms">الإيجار المتفق عليه</label>&nbsp;&nbsp;&nbsp;&nbsp;
           <span style="color:#6e6a6a;font-weight:bold">{{prixlocation}}</span>
@@ -226,29 +222,29 @@
         <div class="col-md-5 mb-3">
           <label for="month">الشهر</label>
 
-            <span style="color:#6e6a6a;font-weight:bold">{{revenus.mois}}</span>
+          <span style="color:#6e6a6a;font-weight:bold">{{Createdrevenus.mois}}</span>
          </div>
 
         <div class="col-md-5 mb-3">
           <label for="month">السنة</label>
 
-            <span style="color:#6e6a6a;font-weight:bold">{{revenus.attribut2}}</span>
+          <span style="color:#6e6a6a;font-weight:bold">{{Createdrevenus.attribut2}}</span>
 
      
         </div>
 
         <div class="col-md-5 mb-3">
           <label for="deposit">بيانات الايداع</label>
-            <span style="color:#6e6a6a;font-weight:bold">{{revenus.infoDepot}}</span>          
+          <span style="color:#6e6a6a;font-weight:bold">{{Createdrevenus.infoDepot}}</span>          
         </div>
 
 
         <div class="col-md-7 mb-3">
           <label for="service">التاريخ والوقت</label>
-          <span style="color:#6e6a6a;font-weight:bold">{{revenus.deposant}}</span>
+          <span style="color:#6e6a6a;font-weight:bold">{{Createdrevenus.deposant}}</span>
 
           <label for="service">المودع</label>
-          <span style="color:#6e6a6a;font-weight:bold">{{revenus.dateTemps}}</span>
+          <span style="color:#6e6a6a;font-weight:bold">{{Createdrevenus.dateTemps}}</span>
         </div>
 
         <div class="col-sm-3 mb-3">
@@ -266,7 +262,7 @@
 
         <div class="col-12 mb-3">
           <label for="notes">ملاحظات</label>
-          <span style="color:#6e6a6a;font-weight:bold">{{revenus.restePrixTotaleLocation}}</span>
+          <span style="color:#6e6a6a;font-weight:bold">{{Createdrevenus.restePrixTotaleLocation}}</span>
         </div>  
 
     </div>

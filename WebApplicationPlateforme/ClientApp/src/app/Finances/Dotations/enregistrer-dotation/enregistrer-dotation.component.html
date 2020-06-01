@@ -57,17 +57,17 @@
             <input type="text" id="stop-address" class="" name="adresse" #adresse="ngModel" [(ngModel)]="dotation.adresse">
           </div>
           <div class="col-sm-6">
-            <label for="stop-units"><span><i class="fa fa-building"></i></span>عدد الوحدات</label>
-            <input type="text" id="stop-units" class="" name="compteurElec" #nbunite="ngModel" [(ngModel)]="dotation.nbunite">
+            <label for="stop-units"><span><i class="fa fa-home"></i></span>عدد الوحدات</label>
+            <input type="text" id="stop-units" class="" name="nbunite" #nbunite="ngModel" [(ngModel)]="dotation.nbunite">
           </div>
           <div class="col-sm-6">
-            <label for="stop-counters"><span><i class="fa fa-building"></i></span>عدادات الكهرباء</label>
+            <label for="stop-counters"><span><i class="fa fa-bolt"></i></span>عداد الكهرباء</label>
             <input type="text" id="stop-counters" class="" name="compteurElec" #compteurElec="ngModel" [(ngModel)]="dotation.compteurElec">
 
           </div>
           <div class="col-sm-6">
-            <label for="counter-num"><span><i class="fa fa-bolt"></i></span>رقم العداد</label>
-            <input type="text" id="counter-num" class="" name="numCompteur" #numCompteur="ngModel" [(ngModel)]="dotation.numCompteur">
+            <label for="counter-num"><span><i class="fa fa-tint"></i></span>عداد الماء</label>
+            <input type="text" id="counter-num" class="" name="attribut2" #attribut2="ngModel" [(ngModel)]="dotation.attribut2">
           </div>
           <div class="col-sm-6">
             <label for="stop-taker"><span><i class="fa fa-user"></i></span>محصل الوقف</label>
@@ -107,45 +107,45 @@
 
       <div class="col-sm-6">
         <label><span></span>اسم الوقف</label>
-        <span>{{dotation.nom}}</span>
+        <span>{{Cdotation.nom}}</span>
       </div>
       <div class="col-sm-6">
         <label><span></span>تاريخ الانشاء </label>
-        <span>{{dotation.date}}</span>
+        <span>{{Cdotation.date}}</span>
       </div>
 
       <div class="col-sm-6">
         <label><span></span>نوع الوقف</label>
-        <span>{{dotation.type}}</span>
+        <span>{{Cdotation.type}}</span>
       </div>
       <div class="col-sm-6">
         <label><span></span>حالة الوقف</label>
-        <span>{{dotation.etat}}</span>
+        <span>{{Cdotation.etat}}</span>
       </div>
 
       <div class="col-sm-6">
         <label><span></span>عنوان الوقف</label>
-        <span>{{dotation.adresse}}</span>
+        <span>{{Cdotation.adresse}}</span>
       </div>
 
       <div class="col-sm-6">
         <label><span></span>عدد الوحدات</label>
-        <span>{{dotation.nbunite}}</span>
+        <span>{{Cdotation.nbunite}}</span>
       </div>
 
       <div class="col-sm-6">
-        <label><span></span>عدادات الكهرباء</label>
-        <span>{{dotation.compteurElec}}</span>
+        <label><span></span>عداد الكهرباء</label>
+        <span>{{Cdotation.compteurElec}}</span>
       </div>
 
       <div class="col-sm-6">
-        <label><span></span>رقم العداد</label>
-        <span>{{dotation.numCompteur}}</span>
+        <label><span></span>عداد الماء</label>
+        <span>{{Cdotation.attribut2}}</span>
       </div>
 
       <div class="col-sm-6">
         <label><span></span>محصل الوقف</label>
-        <span>{{dotation.comptable}}</span>
+        <span>{{Cdotation.comptable}}</span>
       </div>
 
       <div class="col-sm-6">

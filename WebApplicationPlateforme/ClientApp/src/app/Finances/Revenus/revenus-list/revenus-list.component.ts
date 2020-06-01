@@ -1,16 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '../../../shared/Models/Dotations/location.model';
+
 import { LocationService } from '../../../shared/Services/Dotations/location.service';
 import { ToastrService } from 'ngx-toastr';
-import { UserServiceService } from '../../../shared/Services/User/user-service.service';
-import { UniteService } from '../../../shared/Services/Dotations/unite.service';
-import { DotationService } from '../../../shared/Services/Dotations/dotation.service';
 import { LocataireService } from '../../../shared/Services/Dotations/locataire.service';
-import { ServiceRevenusService } from '../../../shared/Services/Dotations/service-revenus.service';
 import { RevenusService } from '../../../shared/Services/Dotations/revenus.service';
-import { ServicesRevenus } from '../../../shared/Models/Dotations/services-revenus.model';
 import { Revenus } from '../../../shared/Models/Dotations/revenus.model';
 import { NgForm } from '@angular/forms';
 import { LesServicesService } from '../../../shared/Services/Dotations/les-services.service';
@@ -20,8 +13,6 @@ import { UploadDownloadService } from '../../../shared/Services/Taches/upload-do
 import { PiecesJointesRevenus } from '../../../shared/Models/Dotations/pieces-jointes-revenus.model';
 import { ProgressStatusEnum } from '../../../shared/Enum/progress-status-enum.enum';
 import { HttpEventType, HttpClient } from '@angular/common/http';
-import * as jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 import { PathSharedService } from '../../../shared/path-shared.service';
 import { DepotRevenusService } from '../../../shared/Services/Dotations/depot-revenus.service';
 import { DepotRevenus } from '../../../shared/Models/Dotations/depot-revenus.model';
@@ -96,7 +87,11 @@ export class RevenusListComponent implements OnInit {
   filtredlistS: LesServices[] = [];
   listPj: PiecesJointesRevenus[] = [];
   listPjFiltred: PiecesJointesRevenus[] = [];
+  listPjFiltredS: PiecesJointesRevenus[] = [];
+  listPjFiltredK: PiecesJointesRevenus[] = [];
+  listPjFiltredI: PiecesJointesRevenus[] = [];
   details: Revenus = new Revenus();
+
   populateForm(locataire: Revenus) {
     this.revenusService.formData = Object.assign({}, locataire)
     this.details = Object.assign({}, locataire);
@@ -104,7 +99,9 @@ export class RevenusListComponent implements OnInit {
       this.listPj = res
       this.details = Object.assign({}, locataire);
       this.listPjFiltred = this.listPj.filter(item => item.idrevenus == this.details.id)
-
+      this.listPjFiltredI = this.listPjFiltred.filter(item => item.type == 'الايداع')
+      this.listPjFiltredS = this.listPjFiltred.filter(item => item.type == 'السندات')
+      this.listPjFiltredK = this.listPjFiltred.filter(item => item.type == 'الكشف')
     })
 
     this.lesServicesServices.Get().subscribe(res => {

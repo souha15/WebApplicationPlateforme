@@ -30,8 +30,7 @@ export class EnregistrerLocataireComponent implements OnInit {
     public serviceupload: UploadDownloadService,
     private http: HttpClient,
     private rootUrl: PathSharedService,
-    private toastr: ToastrService)
-  {
+    private toastr: ToastrService) {
     this.uploadStatuss = new EventEmitter<ProgressStatus>();
   }
 
@@ -54,11 +53,34 @@ export class EnregistrerLocataireComponent implements OnInit {
     })
   }
 
+  LocatList: Locataire[] = [];
+  LocatListf: Locataire[] = [];
+  cin: string;
+  cinexist: boolean;
+  testcin(event){
+    this.cin = event.target.value;
+    this.cin.toString();
+    this.locataireService.Get().subscribe(res => {
+      this.LocatList = res
+      this.LocatListf = this.LocatList.filter(item => item.cin == this.cin)
+      if (this.LocatListf.length == 0) {
+        this.cinexist = true
+
+      } else
+      {
+      this.cinexist = false
+      }
+    })
+ 
+}
+
   //Create Locataire
 
   locataire: Locataire = new Locataire();
+  locataireI: Locataire = new Locataire();
   Createdlocataire: Locataire = new Locataire();
   date = new Date().toLocaleDateString();
+
   locataireId: number;
   locatairenom: string;
   isValidFormSubmitted = false;
@@ -67,42 +89,60 @@ export class EnregistrerLocataireComponent implements OnInit {
     this.locataire.idUserCreator = this.UserIdConnected;
     this.locataire.dateenreg = this.date;
 
+
     if (form.invalid) {
       this.isValidFormSubmitted = false;
 
     } else {
+  
+        if (this.cinexist) {
+          this.isValidFormSubmitted = true
 
-      this.isValidFormSubmitted = true
+          this.locataireService.Add(this.locataire).subscribe(
+            res => {
 
-      this.locataireService.Add(this.locataire).subscribe(
-        res => {
-        
-          this.locataireId = res.id;
-          this.locatairenom = res.nom;
-          this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+              this.locataireId = res.id;
+              this.locatairenom = res.nom;
 
-          // Create file
-          this.pj.idlocataire = this.locataireId;
-          this.pj.nomLocataire = this.locatairenom;
-          this.pj.date = this.date;
-          this.pj.type="cin"
-          let path = this.rootUrl.getPath();
-          this.fileslist.forEach(item => {
-            this.pj.path = item;       
-            this.http.post(path + '/piecesjointesLocataires', this.pj)
-              .subscribe(res => {
-                this.serviceupload.refreshListL();
-                this.GetFileName();
-              });
-          })
+              this.locataireI.id = this.locataire.id
+              this.locataireI.adresse = this.locataire.adresse
+              this.locataireI.nom = this.locataire.nom
+              this.locataire.tel = this.locataire.tel
+              this.locataireI.cin = this.locataire.cin
+              this.locataireI.nationnalite = this.locataire.nationnalite
+              this.locataireI.profession = this.locataire.profession
+              this.toastr.success("تمت الإضافة بنجاح", "نجاح");
 
-        },
-        err => {
-          console.log(err);
-          this.toastr.warning('لم تتم الإضافة', ' فشل');
+              // Create file
+              this.pj.idlocataire = this.locataireId;
+              this.pj.nomLocataire = this.locatairenom;
+              this.pj.date = this.date;
+              this.pj.type = "cin"
+              let path = this.rootUrl.getPath();
+              this.fileslist.forEach(item => {
+                this.pj.path = item;
+                this.http.post(path + '/piecesjointesLocataires', this.pj)
+                  .subscribe(res => {
+                    this.serviceupload.refreshListL();
+                    this.GetFileName();
+                  });
+              })
+
+              form.resetForm();
+
+
+            },
+            err => {
+              console.log(err);
+              this.toastr.warning('لم تتم الإضافة', ' فشل');
+            }
+          )
+        } else {
+          this.toastr.warning('لم تتم الإضافة رقم الهوية موجود', ' فشل');
         }
-      )
-    }
+ 
+      }
+        
   }
 
   //Impression
