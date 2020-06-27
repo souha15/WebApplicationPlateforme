@@ -21,6 +21,7 @@ using WebApplicationPlateforme.Data;
 using WebApplicationPlateforme.Hubs;
 using WebApplicationPlateforme.Model.User;
 
+
 namespace WebApplicationPlateforme
 {
     public class Startup
@@ -49,6 +50,7 @@ namespace WebApplicationPlateforme
 
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
             services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0).AddNewtonsoftJson();/*.AddJsonOptions(x => { })*/;
+      
 
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<ApplicationDbContext>(
@@ -57,11 +59,10 @@ namespace WebApplicationPlateforme
             services.AddEntityFrameworkNpgsql()
                .AddDbContext<FinanceContext>(
                options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-
             /* services.AddDefaultIdentity<ApplicationUser>()
                  .AddEntityFrameworkStores<ApplicationDbContext>();
                  */
-           services.AddIdentityCore<ApplicationUser>()
+            services.AddIdentityCore<ApplicationUser>()
                 .AddRoles<IdentityRole>()
         .AddEntityFrameworkStores<ApplicationDbContext>()
            .AddDefaultTokenProviders();

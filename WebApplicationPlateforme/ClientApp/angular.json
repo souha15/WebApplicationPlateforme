@@ -29,7 +29,7 @@
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
-
+              "src/assets/js/frontend.js"
             ]
           },
           "configurations": {

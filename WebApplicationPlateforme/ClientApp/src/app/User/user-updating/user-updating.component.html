@@ -100,20 +100,6 @@
                   <label for="tasks-report">تقارير</label>
                 </div>
                 <div class="form-group">
-                  <input type="checkbox" name="commAd" id="contacts" (change)='onSelect4($event)' #commAd="ngModel" [(ngModel)]="privilegesService.formData.commAd" [checked]="Privileges.commAd == '1'">
-                  <label for="contacts">نظام الاتصالات الادارية</label>
-                  <input type="checkbox" name="appel" id="contacts-1" (change)='onSelect5($event)' #appel="ngModel" [(ngModel)]="privilegesService.formData.appel" [checked]="Privileges.appel == '1'">
-                  <label for="contacts-1">نظام اتصال 1</label>
-                </div>
-                <div class="form-group">
-                  <input type="checkbox" name="serviceEmployee" id="employers" (change)='onSelect6($event)' #serviceEmployee="ngModel" [(ngModel)]="privilegesService.formData.serviceEmployee" [checked]="Privileges.serviceEmployee == '1'">
-                  <label for="employers">نظام شؤون الموظفين</label>
-                  <input type="checkbox" name="salaire" id="emp-salary" (change)='onSelect7($event)' #salaire="ngModel" [(ngModel)]="privilegesService.formData.salaire" [checked]="Privileges.salaire == '1'">
-                  <label for="emp-salary">الرواتب</label>
-                  <input type="checkbox" name="performance" id="emp-work" (change)='onSelect8($event)' #performance="ngModel" [(ngModel)]="privilegesService.formData.performance" [checked]="Privileges.performance == '1'">
-                  <label for="emp-work">الأداء</label>
-                </div>
-                <div class="form-group">
                   <input class="btn" type="submit" value="تسجيل">
                 </div>
               </form>

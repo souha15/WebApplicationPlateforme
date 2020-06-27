@@ -34,8 +34,6 @@ namespace WebApplicationPlateforme.Model.Taches
         public string IdUserCreator { get; set; }
 
        public string AffectedName { get; set; }
-
-
   
         public virtual ApplicationUser ApplicationUser { get; set; }
     }

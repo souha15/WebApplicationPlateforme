@@ -1,0 +1,379 @@
+
+  <body>
+    <style>
+      /*-- Transaction1 Page Style --*/
+      .page-content {
+        direction: rtl;
+      }
+
+      .box-menu {
+        position: fixed;
+        top: 140px;
+        left: 25px;
+        padding: 0;
+        width: 200px;
+        border: 1px solid #108199;
+        z-index: 99999;
+        display: none;
+      }
+
+        .box-menu a {
+          display: block;
+          text-decoration: none;
+          text-align: center;
+          width: 100%;
+          padding: 6px 0;
+          border-bottom: 1px solid #d1d1d1;
+          background-color: #fff;
+          color: #108199;
+        }
+
+          .box-menu a:hover {
+            background-color: #108199;
+            color: #fff;
+          }
+    </style>
+    <app-nav-menu></app-nav-menu>
+    <!-- Page Content -->
+    <div class="content">
+      <div class="row">
+        <div class="col-md-3 col-sm-4">
+          <app-side-menu></app-side-menu>
+        </div>
+        <div class="col-md-9 col-sm-8">
+
+
+          <header>
+            <h3 class="task-head">تسجيل معاملة واردة</h3>
+          </header>
+          <!-- Transaction1 Page Content -->
+          <div class="tabs">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">بيانات المعاملة</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">الضم و الاحالة</a>
+              </li>
+
+
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+
+              <!--Users Informations-->
+
+              <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="terms text-right">
+                  <div class="buttons text-left mt-4">
+                    <a href="" class="btn tab-btn" data-toggle="modal" data-target="#myModal1">
+                      <span><i class="fa fa-user"></i></span>
+                      تسجيل فرد
+                    </a>
+                    <a href="" class="btn tab-btn" data-toggle="modal" data-target="#myModal2">
+                      <span><i class="fa fa-building"></i></span>
+                      تسجيل جهة
+                    </a>
+                  </div>
+                  <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)" class="task-form form-row stop-form" #formP="ngForm">
+                    <div class="col-sm-12">
+                      <label for="reg-date"><span><i class="fa fa-envelope-open-text"></i></span>نوع الوارد  </label>
+                      &nbsp; &nbsp; <input type="radio" name="typeRecue" value="organisation" (click)="setradio('organisation')" ngModel required>&nbsp; &nbsp; جهة
+                      &nbsp; &nbsp; <input type="radio" name="typeRecue" value="particulier" (click)="setradio('particulier')" [checked]='true' ngModel required>&nbsp; &nbsp;فرد
+                    </div>
+
+
+
+                    <div class="col-sm-6">
+                      <label for="reg-date"><span><i class="fa fa-calendar-alt"></i></span>تاريخ التسجيل </label>
+                      <input type="date" id="reg-date" name="date" #date="ngModel" [(ngModel)]="tr.date" required>
+                    </div>
+
+                    <div *ngIf="date.invalid && form.submitted && !isValidFormSubmittedTR" class="alert alert-danger">
+                      مطلوب تاريخ التسجيل .
+                    </div>
+
+                    <div class="col-sm-6" *ngIf="isSelected('organisation')">
+                      <label for="from"><span><i class="fa fa-building"></i></span>من الجهة</label>
+                      <select id="from" name="idOrg" #idOrg="ngModel" [(ngModel)]="tr.idOrg" required (change)="orgName($event)">
+                        <option [ngValue]="undefined" selected disabled>-الجهة-</option>
+                        <option *ngFor="let item of ListOrg" value="{{item.id}}">{{item.shortnom}}</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="priority"><span><i class="fa fa-list-ol"></i></span>الأولوية</label>
+                      <select id="priority" name="priorite" #priorite="ngModel" [(ngModel)]="tr.priorite">
+                        <option [ngValue]="undefined" selected disabled>-الأولوية-</option>
+                        <option value="عادي" selected="selected">عادي</option>
+                        <option value="عاجل">عاجل</option>
+                        <option value="عاجل جد">عاجل جدا</option>
+                        <option value="فوري">فوري</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="secret"><span><i class="fa fa-mask"></i></span>درجة السرية</label>
+                      <select id="secret" name="securite" #securite="ngModel" [(ngModel)]="tr.securite">
+                        <option [ngValue]="undefined" selected disabled>-درجة السرية-</option>
+                        <option value="سري">سري</option>
+                        <option value="سري للغاية">سري للغاية</option>
+                        <option value="عادي">عادي</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="user"><span><i class="fa fa-user"></i></span>صاحب المعاملة</label>
+                      <select id="from" name="idProp" #idProp="ngModel" [(ngModel)]="tr.idProp" required (change)="propName($event)">
+                        <option [ngValue]="undefined" selected disabled>-صاحب المعاملة-</option>
+                        <option *ngFor="let item of ListProp" value="{{item.id}}">{{item.nom}} {{item.prenom}}</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="user-mob"><span><i class="fa fa-mobile-alt"></i></span>رقم الجوال</label>
+                      <input type="text" id="user-mob" class="form-control" name="tel" #tel="ngModel" [(ngModel)]="tr.tel">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="user-mob"><span><i class="fa fa-book"></i></span>السجل المدني</label>
+                      <input type="text" id="user-mob" class="form-control" name="registreCivil" #registreCivil="ngModel" [(ngModel)]="tr.registreCivil">
+                    </div>
+                    <div class="col-sm-6" *ngIf="isSelected('organisation')">
+                      <label for="user-mob"><span><i class="fa fa-id-card"></i></span>رقم صادر الجهة</label>
+                      <input type="text" id="user-mob" class="form-control" name="numAutorite" #numAutorite="ngModel" [(ngModel)]="tr.numAutorite">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="user-mob"><span><i class="fa fa-paperclip"></i></span>عدد المرفقات</label>
+                      <input type="text" id="user-mob" class="form-control" name="nbPjNumerique" #nbPjNumerique="ngModel" [(ngModel)]="tr.nbPjNumerique">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="topic">الموضوع</label>
+                      <textarea class="form-control" id="topic" cols="30" rows="2" placeholder="الموضوع" name="sujet" #sujet="ngModel" [(ngModel)]="tr.sujet"></textarea>
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="files2" class="files-label">
+                        <ul class="d-flex list-unstyled">
+                          <li class="upload-symbol">
+                            <i class="fa fa-cloud-upload-alt fa-3x"></i>
+                          </li>
+                          <li class="flex-fill">
+                            <p>اسحب الملفات هنا</p>
+                            <span>أو انقر للاختيار يدويا</span>
+                          </li>
+                        </ul>
+                      </label>
+                      <input type="file" id="files2" class="" (change)="upload($event)" #inputFile>
+                    </div>
+                    <div class="col-sm-6">
+
+                      <ul *ngFor="let pd of serviceupload.listTr;" style="list-style: none">
+                        <li *ngIf="Idtransaction == pd.idtransaction">
+                          <a *ngIf="Idtransaction == pd.idtransaction" (click)="onDelete(pd.id)" class="aaa"><i class="fa fa-trash"></i>  </a>
+                          <a>
+                            {{pd.path}}
+
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+
+     
+                  </form>
+                </div>
+              </div>
+
+
+              <!--Privilesges-->
+
+              <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="terms text-right">
+                  <form class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+                    <div class="col-sm-6">
+
+                      <label for="user-mob"><span><i class="fa fa-exchange-alt"></i></span>الاحالة</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <input type="radio" id="rad1" aria-label="Radio button for following text input" name="affectationtest" value="org" (click)="setradio1('org')"  ngModel>
+                            <label for="rad1" class="mr-2 mb-0">إحالة إلى الإدارة</label>
+                          </div>
+                          <div class="input-group-text">
+                            <input type="radio" id="rad2" aria-label="Radio button for following text input" name="affectationtest" value="emp" (click)="setradio1('emp')" ngModel>
+                            <label for="rad2" class="mr-2 mb-0">إحالة إلى موظف</label>
+                          </div>
+                        </div>
+                      </div>
+                      <br />
+                    </div>
+                    <div class="col-sm-6" *ngIf="!isSelected1('org')">
+
+                      <label for="from2">توجيه لموظف</label>
+                      <select  id="from2" name="iduserAffected" #iduserAffected="ngModel" [(ngModel)]="affectation.iduserAffected" (change)="testemp($event)">
+                        <option [ngValue]="undefined" selected disabled>-الموظف المحال إليه-</option>
+                        <option *ngFor="let item of UsersList" value="{{item.id}}">{{item.fullName}}</option>
+                      </select>
+
+                    </div>
+
+                    <div class="col-sm-6" *ngIf="isSelected1('org')">
+
+                      <label for="from2">إحالة إلى الإدارة</label>
+                      <select id="from2" name="attribut1" #attribut1="ngModel" [(ngModel)]="affectation.attribut1" (change)="testorg($event)">
+                        <option [ngValue]="undefined" selected disabled>-الجهة المحال إليها-</option>
+                        <option *ngFor="let item of AdministrationList" value="{{item.id}}">{{item.nom}}</option>
+                      </select>
+
+                    </div>
+                    <div class="col-sm-6 mt-3">
+                      <h4><span class='ml-3 my-4'><i class="fa fa-plus"></i></span>الضم</h4>
+                      <label for="mess-num">رقم الخطاب الوارد</label>
+                      <input id="mess-num" class="form-control" type="text" placeholder="رقم الخطاب الوارد" name="idTrOne" #idTrOne="ngModel" [(ngModel)]="liaison.idTrOne" (change)="testli($event)">
+                    </div>
+                    <div class="col-sm-6">
+                      <h4>المعاملات المرتبطة</h4>
+                      <label for="tr-search" style="text-align: center"><span><i class="fa fa-search"></i></span></label>
+                      <input id='tr-search' class="form-control" type="text" placeholder="بحث" [(ngModel)]="filter" name="search">
+                      <div class="tabel-cont">
+                        <table class="table table-striped table-hover sortable">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th scope="col" (click)="sort('id')">
+                                #
+                                <span class="glyphicon sort-icon" *ngIf="key =='id'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                              </th>
+
+                              <th scope="col" (click)="sort('sujet')">
+                                الموضوع
+                                <span class="glyphicon sort-icon" *ngIf="key =='sujet'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                              </th>
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let dot of listTr |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 2, currentPage: p }" (click)="rowclick(dot)">
+                              <th>{{dot.id}}</th>
+                              <td>{{dot.sujet}}</td>
+                            </tr>
+
+                          </tbody>
+
+
+                        </table>
+                      </div>
+
+                      <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                        </ul>
+                      </nav>
+                    </div>
+
+                    <div class="col-12 my-3 text-left">
+                      <button class="btn btn-success px-2 ml-3" type="submit"><span class="ml-2"><i class="fa fa-save"></i></span> تسجيل</button>
+                      <button type="reset" class="btn btn-danger px-2"><span class="ml-2"><i class="fa fa-eraser"></i></span> افراغ الحقول</button>
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- End col-9 -->
+
+      </div>
+
+    </div>
+    <!-- Footer -->
+    <footer class="text-center">
+      <p>المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات في أبو عريش</p>
+    </footer>
+
+
+    <!--Proprietaire-->
+
+    <div id="myModal1" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+      <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            <h4 class="modal-title"> تسجيل فرد</h4>
+
+          </div>
+          <div class="modal-body" style="direction:rtl; text-align:right">
+            <form class="task-form form-row stop-form" #formP="ngForm" autocomplete="off" (submit)="onSubmitProp(formP)">
+
+              <div class="col-3">
+                <label for="renter"><span><i class="fa fa-user"></i></span>صاحب المعاملة</label>
+              </div>
+              <div class="col-9 renter">
+                <input type="text" id="renter" class="mb-2" placeholder="الإسم " name="nom" #nom="ngModel" [(ngModel)]="prop.nom" required />
+                <div *ngIf="nom.errors?.required && formP.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                  مطلوب اسم.
+                </div>
+                <input type="text" class="mb-2" placeholder="اللقب" name="prenom" #prenom="ngModel" [(ngModel)]="prop.prenom" required />
+
+                <input type="text" class="mb-2" placeholder="الهوية" name="cin" #cin="ngModel" [(ngModel)]="prop.cin" (change)="testcin($event)" />
+                <input type="text" class="mb-2" placeholder="الهاتف" name="tel" #tel="ngModel" [(ngModel)]="prop.tel" />
+                <input type="text" class="mb-2" placeholder="العنوان" name="addresse" #addresse="ngModel" [(ngModel)]="prop.addresse" />
+                <input type="text" class="mb-2" placeholder="البريد الإلكتروني" name="email" #email="ngModel" [(ngModel)]="prop.email" />
+              </div>
+
+              <div class="mx-auto my-3">
+                <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save fa-lg"></i></span> حفظ</button>
+                <button class="btn btn-danger px-2 ml-3" type="reset"><span class="ml-4"><i class="fa fa-trash"></i></span>حذف الحقول</button>
+
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!--Organisation-->
+
+    <div id="myModal2" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+      <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            <h4 class="modal-title">تسجيل جهة</h4>
+
+          </div>
+          <div class="modal-body" style="direction:rtl; text-align:right">
+            <form class="task-form form-row stop-form" #formO="ngForm" autocomplete="off" (submit)="onSubmitO(formO)">
+
+              <div class="col-3">
+                <label for="renter"><span><i class="fa fa-home"></i></span>الجهة</label>
+              </div>
+              <div class="col-9 renter">
+                <input type="text" id="renter" class="mb-2" placeholder="الإسم المختصر" name="shortnom" #shortnom="ngModel" [(ngModel)]="organisme.shortnom" required />
+                <div *ngIf="shortnom.errors?.required && formO.submitted && !isValidFormSubmittedO" class="alert alert-danger">
+                  مطلوب اسم.
+                </div>
+                <input type="text" class="mb-2" placeholder="الإسم الكامل" name="nomcomplet" #nomcomplet="ngModel" [(ngModel)]="organisme.nomcomplet" required />
+
+                <input type="text" class="mb-2" placeholder="الهاتف" name="tel" #tel="ngModel" [(ngModel)]="organisme.tel" />
+                <input type="text" class="mb-2" placeholder="العنوان" name="addresse" #addresse="ngModel" [(ngModel)]="organisme.addresse" />
+                <input type="text" class="mb-2" placeholder="الفاكس" name="fax" #fax="ngModel" [(ngModel)]="organisme.fax" />
+                <input type="text" class="mb-2" placeholder="البريد الإلكتروني" name="email" #email="ngModel" [(ngModel)]="organisme.email" />
+              </div>
+
+              <div class="mx-auto my-3">
+                <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save fa-lg"></i></span> حفظ</button>
+                <button class="btn btn-danger px-2 ml-3" type="reset"><span class="ml-4"><i class="fa fa-trash"></i></span>حذف الحقول</button>
+
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </body>

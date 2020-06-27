@@ -61,7 +61,7 @@ export class NewTaskComponent implements OnInit {
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-      this.adminisgtrationName = res.idAdministration;
+     
       console.log(this.adminisgtrationName)
           
     })

@@ -7,6 +7,7 @@ import { PiecesJointesLocataire } from '../../Models/Dotations/pieces-jointes-lo
 import { PiecesJointesRevenus } from '../../Models/Dotations/pieces-jointes-revenus.model';
 import { PiecesjointerevenusService } from '../Dotations/piecesjointerevenus.service';
 import { ContratLocation } from '../../Models/Dotations/contrat-location.model';
+import { PiecesJointesTr } from '../../Models/AdministrativeCommunication/pieces-jointes-tr.model';
 
 @Injectable({
   providedIn: 'root'
@@ -87,6 +88,10 @@ export class UploadDownloadService {
     return this.httpClient.post(this.rootURL + '/contratLocations', this.apiFileUrl)
   }
 
+  savefileTr() {
+    return this.httpClient.post(this.rootURL + '/PiecesJointesTrs', this.apiFileUrl)
+  }
+
   // Get list of files from DataBase
 
   getall() {
@@ -105,6 +110,10 @@ export class UploadDownloadService {
     return this.httpClient.get<ContratLocation[]>(this.rootURL + '/contratLocations');
   }
 
+  getallTr() {
+    return this.httpClient.get<PiecesJointesTr[]>(this.rootURL + '/PiecesJointesTrs');
+  }
+
   list: PiecesJointes[];
 
   refreshList() {
@@ -116,6 +125,7 @@ export class UploadDownloadService {
   listL: PiecesJointesLocataire[];
   listR: PiecesJointesRevenus[];
   listC: ContratLocation[];
+  listTr: PiecesJointesTr[];
   refreshListL() {
     this.httpClient.get(this.rootURL + '/piecesjointesLocataires')
       .toPromise()
@@ -134,6 +144,13 @@ export class UploadDownloadService {
       .then(res => this.listC = res as ContratLocation[]);
   }
 
+
+  refreshListTr() {
+    this.httpClient.get(this.rootURL + '/PiecesJointesTrs')
+      .toPromise()
+      .then(res => this.listTr = res as PiecesJointesTr[]);
+  }
+
   Search(): Observable<PiecesJointes[]> {
     return this.httpClient.get<PiecesJointes[]>(this.rootURL + '/PiecesJointes');
   }
@@ -150,6 +167,11 @@ export class UploadDownloadService {
     return this.httpClient.get<ContratLocation[]>(this.rootURL + '/contratLocations');
   }
 
+
+
+  SearchTr(): Observable<PiecesJointesTr[]> {
+    return this.httpClient.get<PiecesJointesTr[]>(this.rootURL + '/PiecesJointesTrs');
+  }
   //Delete Piece Jointe
 
   deletePj(id) {
@@ -166,5 +188,10 @@ export class UploadDownloadService {
 
   deletePjC(id) {
     return this.httpClient.delete(this.rootURL + '/contratLocations/' + id);
+  }
+
+
+  deletePjTr(id) {
+    return this.httpClient.delete(this.rootURL + '/PiecesJointesTrs/' + id);
   }
 }

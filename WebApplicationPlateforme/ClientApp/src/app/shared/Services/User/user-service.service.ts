@@ -59,7 +59,7 @@ export class UserServiceService {
       
       UserName: this.formModel.value.UserName,
       Email: this.formModel.value.Email,
-      fullName: this.formModel.value.FullName,
+      fullName: this.formModel.value.fullName,
       Password: this.formModel.value.Passwords.Password,
       PhoneNumber: this.formModel.value.PhoneNumber,
       Statut: this.formModel.value.Statut,

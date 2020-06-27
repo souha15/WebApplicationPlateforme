@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplicationPlateforme.Model.AdministrativeCommunication;
 
 namespace WebApplicationPlateforme.Data
 {
@@ -32,5 +33,15 @@ namespace WebApplicationPlateforme.Data
         public DbSet<Privileges> privileges { get; set; }
         public DbSet<contratLocation> contratLocations { get; set; }
         public DbSet<LesServices> lesServices { get; set; }
+        public DbSet<Proprietaire> proprietaires { get; set; }
+        public DbSet<Organisme> organismes { get; set; }
+        public DbSet<Liaison> liaisons { get; set; }
+
+        public DbSet<Transaction> transactions { get; set; }
+        public DbSet<PiecesJointesAffected> piecesJointesAffecteds { get; set; }
+        public DbSet<PiecesJointesTr> piecesJointesTrs { get; set; }
+        public DbSet<TrAffectation> trAffectations { get; set; }
+        public DbSet<Receptioncs> receptioncs { get; set; }
+
     }
 }

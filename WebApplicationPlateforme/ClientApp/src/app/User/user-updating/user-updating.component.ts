@@ -169,7 +169,7 @@ export class UserUpdatingComponent implements OnInit {
       HeureArrive: '',
       HeureDepart: '',
       Photo: '',
-      idAdministration: null,
+      IdAdministration: null,
       IdDepartement: null,
      
 

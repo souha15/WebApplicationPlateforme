@@ -39,7 +39,7 @@ export class UserDetail {
         HeureArrive : string;
         HeureDepart : string;
         Photo : string;
-        idAdministration : number;
+        IdAdministration : number;
         IdDepartement : number;
 
 }

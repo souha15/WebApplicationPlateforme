@@ -11,10 +11,10 @@
         <div class="row">
           <div class="col-md">
             <div class="box mails">
-              <h4>الخطابات</h4>
+              <h4>المراسلات </h4>
               <div class="row">
                 <div class="col text-center px-2 py-3">
-                  <p class="txt">جميع نماذج الخطابات</p>
+                  <a [routerLink]="['/main-page-ac']" class="txt">الرئيسية</a>
                 </div>
                 <div class="col text-center px-2 py-3">
                   <span class="sympol"><i class="fa fa-mail-bulk fa-3x"></i></span>
@@ -27,8 +27,10 @@
                 <div class="col">
                   <div class="txt  text-right px-2 py-3">
                     <ul>
-                      <li>أرشيف الخطابات الواردة</li>
-                      <li>سجل الوارد</li>
+                      <li><a [routerLink]="['/enregistrer-tr-recue']">تسجيل وارد عام  </a></li>
+                      <li><a [routerLink]="['/my-liste-tr']"> المعاملات الواردة </a></li>
+                      <li><a [routerLink]="['/transactions-rlist']"> صندوق الوراد </a></li>
+                 
                     </ul>
                   </div>
                 </div>
@@ -58,14 +60,14 @@
               </div>
             </div>
             <div class="box forms">
-              <h4>النماذج</h4>
+              <h4>التقارير</h4>
               <div class="row">
                 <div class="col ">
                   <div class=" px-2 py-3">
                     <ul>
-                      <li>شهادات الاسلام</li>
-                      <li>الاستمارات والتزكيات</li>
-                      <li>نماذج متنوعة</li>
+                      <li> تقارير المعاملات الواردة</li>
+                      <li>تقارير المعاملات الصادرة</li>
+                      
                     </ul>
                   </div>
                 </div>

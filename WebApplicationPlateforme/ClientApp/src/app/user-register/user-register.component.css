@@ -1,6 +1,14 @@
 .tabs .nav {
 }
-
+.inventory-body {
+  position: fixed;
+  min-width: 100%;
+  background: url("/assets/images/bg1.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  background-size: cover;
+}
   .tabs .nav li a {
     color: #fff;
     padding: 8px 10px;

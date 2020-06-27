@@ -140,6 +140,7 @@ export class UserRegistrationComponent implements OnInit {
               this.UserService.formModel.reset();
               this.username = this.UserService.Username;
               this.GetUserByUserName(this.username)
+              this.onSubmitPrivileges();
               this.toastr.success('تم إنشاء المستخدم', 'تم التسجيل بنجاح');
             } else {
               res.errors.forEach(element => {
@@ -259,25 +260,62 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   onSubmitPrivileges() {
-    this.privilege.addTask = this.addTask;
-    this.privilege.appel = this.appel;
-    this.privilege.commAd = this.commAd;
-    this.privilege.performance = this.performance;
-    this.privilege.rapport = this.Rapport;
-    this.privilege.salaire = this.salaire;
-    this.privilege.serviceEmployee = this.serviceEmployee;
-    this.privilege.settings = this.settings;
-    this.privilege.userid = this.userId
-    this.privilege.id = this.userId
-    this.privilegesService.CreatePrivilege(this.privilege).subscribe(
+
+    var x = this.roles.filter(x => x.selected).map(y => y.name);
+    // var x = this.roles.filter(x => x.selected).map(y=>y.name)
+    console.log(x)
+    this.UserService.register(x).subscribe(
       (res: any) => {
-        this.toastr.success('تمت إضافة الامتيازات بنجاح', 'إضافة الامتيازات');
+        if (res.succeeded) {
+          this.UserService.formModel.reset();
+          this.username = this.UserService.Username;
+        
+          
+            if (this.username != '') {
+              this.UserService.GetUserByUserName(this.username).subscribe(res => {
+                this.user = res
+                //this.privilege.userId = this.user.id;
+                this.userId = this.user.id
+                this.privilege.addTask = this.addTask;
+                this.privilege.appel = this.appel;
+                this.privilege.commAd = this.commAd;
+                this.privilege.performance = this.performance;
+                this.privilege.rapport = this.Rapport;
+                this.privilege.salaire = this.salaire;
+                this.privilege.serviceEmployee = this.serviceEmployee;
+                this.privilege.settings = this.settings;
+                this.privilege.userid = this.userId
+                this.privilege.id = this.userId
+                this.privilegesService.CreatePrivilege(this.privilege).subscribe(
+                  (res: any) => {
+                    this.toastr.success('تم إنشاء المستخدم', 'تم التسجيل بنجاح');
+                  },
+                  err => {
+                    this.toastr.error(err, 'فشل في إضافة الامتيازات');
+                  })
+              })
+            }        
+
+        } else {
+          res.errors.forEach(element => {
+            switch (element.code) {
+              case 'DuplicateUserName':
+                this.toastr.error('اسم المستخدم مسجل من قبل', 'فشل في التسجيل');
+                break;
+
+              default:
+                this.toastr.error(element.description, 'فشل في التسجيل');
+                break;
+            }
+          });
+        }
+
       },
       err => {
-        this.toastr.error(err, 'فشل في إضافة الامتيازات');
+        console.log(err);
       }
+    );
 
-    )
 
   }
 }

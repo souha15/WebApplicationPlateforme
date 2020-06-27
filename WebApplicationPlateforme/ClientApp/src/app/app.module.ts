@@ -84,7 +84,26 @@ import { UniteService } from './shared/Services/Dotations/unite.service';
 import { LocataireService } from './shared/Services/Dotations/locataire.service';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { DepotRevenusService } from './shared/Services/Dotations/depot-revenus.service';
-
+import { OrganismeComponent } from './AdministrativeCommunication/ParametrageCA/organisme/organisme.component';
+import { ProprietaireComponent } from './AdministrativeCommunication/ParametrageCA/proprietaire/proprietaire.component';
+import { EnregistrerTRRecueComponent } from './AdministrativeCommunication/Transaction/Recue/enregistrer-tr-recue/enregistrer-tr-recue.component';
+import { MyListeTrComponent } from './AdministrativeCommunication/Transaction/Recue/my-liste-tr/my-liste-tr.component';
+import { MyListeTrEmiseComponent } from './AdministrativeCommunication/Transaction/Emise/my-liste-tr-emise/my-liste-tr-emise.component';
+import { EnregistrerTREComponent } from './AdministrativeCommunication/Transaction/Emise/enregistrer-tre/enregistrer-tre.component';
+import { EnregistrerTRIComponent } from './AdministrativeCommunication/Transaction/Interne/enregistrer-tri/enregistrer-tri.component';
+import { MyListeTrIComponent } from './AdministrativeCommunication/Transaction/Interne/my-liste-tr-i/my-liste-tr-i.component';
+import { MyListeDecisionComponent } from './AdministrativeCommunication/Transaction/Decision/my-liste-decision/my-liste-decision.component';
+import { EnregistrerDecisionComponent } from './AdministrativeCommunication/Transaction/Decision/enregistrer-decision/enregistrer-decision.component';
+import { ACMenuComponent } from './AdministrativeCommunication/ParametrageCA/acmenu/acmenu.component';
+import { ListeOrganismeComponent } from './AdministrativeCommunication/ParametrageCA/liste-organisme/liste-organisme.component';
+import { ListeProprietaireComponent } from './AdministrativeCommunication/ParametrageCA/liste-proprietaire/liste-proprietaire.component';
+import { MainPageACComponent } from './AdministrativeCommunication/Main-Menu/main-page-ac/main-page-ac.component';
+import { MainPageAC2Component } from './AdministrativeCommunication/Main-Menu/main-page-ac2/main-page-ac2.component';
+import { TransactionsRListComponent } from './AdministrativeCommunication/Transaction/Recue/transactions-rlist/transactions-rlist.component';
+import { EnregDefRComponent } from './AdministrativeCommunication/Transaction/Recue/enreg-def-r/enreg-def-r.component';
+import { EnregTempRComponent } from './AdministrativeCommunication/Transaction/Recue/enreg-temp-r/enreg-temp-r.component';
+import { EnregRComponent } from './AdministrativeCommunication/Transaction/Recue/enreg-r/enreg-r.component';
+import { AfftectedToMyAdminRComponent } from './AdministrativeCommunication/Transaction/Recue/afftected-to-my-admin-r/afftected-to-my-admin-r.component';
 
 @NgModule({
   declarations: [
@@ -145,6 +164,26 @@ import { DepotRevenusService } from './shared/Services/Dotations/depot-revenus.s
     MainFinancePageComponent,
     MainFarametrageFinancePageComponent,
     BureauImmobPageComponent,
+    OrganismeComponent,
+    ProprietaireComponent,
+    EnregistrerTRRecueComponent,
+    MyListeTrComponent,
+    MyListeTrEmiseComponent,
+    EnregistrerTREComponent,
+    EnregistrerTRIComponent,
+    MyListeTrIComponent,
+    MyListeDecisionComponent,
+    EnregistrerDecisionComponent,
+    ACMenuComponent,
+    ListeOrganismeComponent,
+    ListeProprietaireComponent,
+    MainPageACComponent,
+    MainPageAC2Component,
+    TransactionsRListComponent,
+    EnregDefRComponent,
+    EnregTempRComponent,
+    EnregRComponent,
+    AfftectedToMyAdminRComponent,
 
   ],
   imports: [
@@ -156,6 +195,7 @@ import { DepotRevenusService } from './shared/Services/Dotations/depot-revenus.s
     BrowserAnimationsModule,
     Ng2SearchPipeModule,
     Ng2OrderModule,
+ 
     NgxPaginationModule,
     NgbModule,
     ToastrModule.forRoot(),
@@ -187,46 +227,67 @@ import { DepotRevenusService } from './shared/Services/Dotations/depot-revenus.s
       { path: 'new-task', component: NewTaskComponent, canActivate: [AuthGuard] },
       { path: 'main-tasks', component: MainTasksComponent, canActivate: [AuthGuard] },
       { path: 'user-info', component: UserInfoComponent, canActivate: [AuthGuard] },
-      { path: 'users-list', component: UsersListComponent, canActivate: [AuthGuard]},
-      { path: 'administration-list', component: AdministrationListComponent, canActivate: [AuthGuard]},
-      { path: 'new-administration', component: NewAdministrationComponent, canActivate: [AuthGuard]},
-      { path: 'new-etablissement', component: NewEtablissementComponent, canActivate: [AuthGuard]},
-      { path: 'etablissement-list', component: EtablissementListComponent, canActivate: [AuthGuard]},
-      { path: 'user-updating', component: UserUpdatingComponent, canActivate: [AuthGuard]},
-      { path: 'user-updating/:id', component: UserUpdatingComponent, canActivate: [AuthGuard]},
+      { path: 'users-list', component: UsersListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'administration-list', component: AdministrationListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }},
+      { path: 'new-administration', component: NewAdministrationComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }},
+      { path: 'new-etablissement', component: NewEtablissementComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }},
+      { path: 'etablissement-list', component: EtablissementListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }},
+      { path: 'user-updating', component: UserUpdatingComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }},
+      { path: 'user-updating/:id', component: UserUpdatingComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }},
       { path: 'forbidden-page', component: ForbiddenPageComponent },
 
       //Finanace Project
 
-  { path: 'liste-dotation', component: ListeDotationComponent },
-  { path: 'dotation-details', component: DotationDetailsComponent  },
-  { path: 'dotation-edit', component: DotationEditComponent   },
-  { path: 'unite-edit', component: UniteEditComponent },
-  { path: 'unite-details', component: UniteDetailsComponent },
-  { path: 'enregistrer-unite', component: EnregistrerUniteComponent  },
-  { path: 'liste-unite', component: ListeUniteComponent  },
-  { path: 'liste-locataire', component: ListeLocataireComponent  },
-  { path: 'edit-locataire', component: EditLocataireComponent },
-  { path: 'locataire-details', component: LocataireDetailsComponent },
-  { path: 'revenus-details', component: RevenusDetailsComponent  },
-  { path: 'revenus-list', component: RevenusListComponent },
-      { path: 'enregistrer-revenus', component: EnregistrerRevenusComponent },
-      { path: 'enregistrer-revenus/:id', component: EnregistrerRevenusComponent},
-  { path: 'edit-revenus', component: EditRevenusComponent },
-  { path: 'enregistrer-locataire', component: EnregistrerLocataireComponent },
-  { path: 'depot-revenus', component: DepotRevenusComponent },
-  { path: 'service-revenus', component: ServiceRevenusComponent },
-  { path: 'typedotation', component: TypedotationComponent},
-  { path: 'etatdotation', component: EtatdotationComponent },
-  { path: 'etatunite', component: EtatuniteComponent },
-  { path: 'enregistrer-dotation', component: EnregistrerDotationComponent },
-      { path: 'typeunite', component: TypeuniteComponent },
-      { path: 'menu-finance', component: MenuFinanceComponent },
-      { path: 'main-finance-page', component: MainFinancePageComponent },
-      { path: 'main-farametrage-finance-page', component: MainFarametrageFinancePageComponent },
-      { path: 'bureau-immob-page', component: BureauImmobPageComponent },
+      { path: 'liste-dotation', component: ListeDotationComponent, canActivate: [AuthGuard]  },
+      { path: 'dotation-details', component: DotationDetailsComponent, canActivate: [AuthGuard]  },
+      { path: 'dotation-edit', component: DotationEditComponent, canActivate: [AuthGuard]    },
+      { path: 'unite-edit', component: UniteEditComponent, canActivate: [AuthGuard]  },
+      { path: 'unite-details', component: UniteDetailsComponent, canActivate: [AuthGuard]  },
+      { path: 'enregistrer-unite', component: EnregistrerUniteComponent, canActivate: [AuthGuard]   },
+      { path: 'liste-unite', component: ListeUniteComponent, canActivate: [AuthGuard]  },
+      { path: 'liste-locataire', component: ListeLocataireComponent, canActivate: [AuthGuard]  },
+      { path: 'edit-locataire', component: EditLocataireComponent, canActivate: [AuthGuard]  },
+      { path: 'locataire-details', component: LocataireDetailsComponent, canActivate: [AuthGuard]  },
+      { path: 'revenus-details', component: RevenusDetailsComponent, canActivate: [AuthGuard]   },
+      { path: 'revenus-list', component: RevenusListComponent, canActivate: [AuthGuard]  },
+      { path: 'enregistrer-revenus', component: EnregistrerRevenusComponent, canActivate: [AuthGuard]  },
+      { path: 'enregistrer-revenus/:id', component: EnregistrerRevenusComponent, canActivate: [AuthGuard] },
+      { path: 'edit-revenus', component: EditRevenusComponent, canActivate: [AuthGuard]  },
+      { path: 'enregistrer-locataire', component: EnregistrerLocataireComponent, canActivate: [AuthGuard]  },
+      { path: 'depot-revenus', component: DepotRevenusComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }  },
+      { path: 'service-revenus', component: ServiceRevenusComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }  },
+      { path: 'typedotation', component: TypedotationComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'etatdotation', component: EtatdotationComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }  },
+      { path: 'etatunite', component: EtatuniteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }  },
+      { path: 'enregistrer-dotation', component: EnregistrerDotationComponent, canActivate: [AuthGuard]  },
+      { path: 'typeunite', component: TypeuniteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'menu-finance', component: MenuFinanceComponent, canActivate: [AuthGuard]  },
+      { path: 'main-finance-page', component: MainFinancePageComponent, canActivate: [AuthGuard]  },
+      { path: 'main-farametrage-finance-page', component: MainFarametrageFinancePageComponent, canActivate: [AuthGuard]  },
+      { path: 'bureau-immob-page', component: BureauImmobPageComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }  },
 
-     
+
+      //Communication Administrative
+      { path: 'organisme', component: OrganismeComponent, canActivate: [AuthGuard]  },
+      { path: 'proprietaire', component: ProprietaireComponent, canActivate: [AuthGuard]  },
+      { path: 'enregistrer-tr-recue', component: EnregistrerTRRecueComponent, canActivate: [AuthGuard]  },
+      { path: 'my-liste-tr', component: MyListeTrComponent, canActivate: [AuthGuard]  },
+      { path: 'my-liste-tr-emise', component: MyListeTrEmiseComponent, canActivate: [AuthGuard]  },
+      { path: 'enregistrer-tre', component: EnregistrerTREComponent, canActivate: [AuthGuard]  },
+      { path: 'enregistrer-tri', component: EnregistrerTRIComponent, canActivate: [AuthGuard]  },
+      { path: 'my-liste-tr-i', component: MyListeTrIComponent, canActivate: [AuthGuard]  },
+      { path: 'my-liste-decision', component: MyListeDecisionComponent, canActivate: [AuthGuard]  },
+      { path: 'acmenu', component: ACMenuComponent, canActivate: [AuthGuard]  },
+      { path: 'enregistrer-decision', component: EnregistrerDecisionComponent, canActivate: [AuthGuard]  },
+      { path: 'liste-organisme', component: ListeOrganismeComponent, canActivate: [AuthGuard]  },
+      { path: 'liste-proprietaire', component: ListeProprietaireComponent, canActivate: [AuthGuard] },
+      { path: 'main-page-ac', component: MainPageACComponent, canActivate: [AuthGuard] },
+      { path: 'main-page-ac2', component: MainPageAC2Component, canActivate: [AuthGuard] },
+      { path: 'transactions-rlist', component: TransactionsRListComponent, canActivate: [AuthGuard] },
+{ path: 'enreg-def-r' , component: EnregDefRComponent, canActivate: [AuthGuard] },
+{ path:'enreg-temp-r' , component: EnregTempRComponent, canActivate: [AuthGuard] },
+{ path:'enreg-r' , component: EnregRComponent, canActivate: [AuthGuard] },
+{ path: 'afftected-to-my-admin-r', component: AfftectedToMyAdminRComponent , canActivate: [AuthGuard] },
       //{ path: 'user-updating/:id', component: UserUpdatingComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
    
 

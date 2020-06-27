@@ -54,6 +54,7 @@ namespace WebApplicationPlateforme.Model.User
         [ForeignKey("Administration")]
         public int? IdAdministration { get; set; }
 
+        [JsonProperty(PropertyName = "IdDepartement")]
         [ForeignKey("Departement")]
         public int? IdDepartement { get; set; }
 

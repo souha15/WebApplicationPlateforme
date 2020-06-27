@@ -125,7 +125,7 @@ export class UsersListComponent implements OnInit {
       HeureArrive: '',
       HeureDepart: '',
       Photo: '',
-      idAdministration: null,
+      IdAdministration: null,
       IdDepartement: null,
   
 

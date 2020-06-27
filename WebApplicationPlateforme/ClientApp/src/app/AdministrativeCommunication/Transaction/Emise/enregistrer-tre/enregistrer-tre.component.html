@@ -1,0 +1,58 @@
+
+<body>
+  <style>
+    /*-- Transaction1 Page Style --*/
+    .page-content {
+      direction: rtl;
+    }
+
+    .box-menu {
+      position: fixed;
+      top: 140px;
+      left: 25px;
+      padding: 0;
+      width: 200px;
+      border: 1px solid #108199;
+      z-index: 99999;
+      display: none;
+    }
+
+      .box-menu a {
+        display: block;
+        text-decoration: none;
+        text-align: center;
+        width: 100%;
+        padding: 6px 0;
+        border-bottom: 1px solid #d1d1d1;
+        background-color: #fff;
+        color: #108199;
+      }
+
+        .box-menu a:hover {
+          background-color: #108199;
+          color: #fff;
+        }
+  </style>
+  <app-nav-menu></app-nav-menu>
+  <!-- Page Content -->
+  <div class="content">
+    <div class="row">
+      <div class="col-md-3 col-sm-4">
+        <app-side-menu></app-side-menu>
+      </div>
+      <div class="col-md-9 col-sm-8">
+        <app-main-page-ac2></app-main-page-ac2>
+        <!-- Tasks Page Content -->
+        <!-- Transaction1 Page Content -->
+        <section class="page-content">
+        </section>
+      </div><!-- End col-9 -->
+
+    </div>
+
+  </div>
+  <!-- Footer -->
+  <footer class="text-center">
+    <p>المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات في أبو عريش</p>
+  </footer>
+</body>
