@@ -1,0 +1,95 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">تقديم طلب إجازة</h3>
+      </header>
+      <div class="leave-request">
+        <form class="form-row task-form service-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+          <div class="col-sm-6">
+            <label><span><i class="fa fa-sort-numeric-down"></i></span>رصيد إجازة عادية</label>
+            <span class="task-num">{{soldeconge}}</span>
+          </div>
+
+          <div class="col-sm-6">
+            <label><span><i class="fa fa-sort-numeric-down"></i></span>رصيد إجازة متفرقة</label>
+            <span class="task-num"></span>
+          </div>
+
+
+          <div class="col-md-6">
+            <label for="leave-type">نوع الاجازة</label>
+            <select id="leave-type" name="type" #type="ngModel" [(ngModel)]="conge.type" required>
+              <option [ngValue]="undefined" selected disabled>-اختر-</option>
+              <option value="اجازة عادية">اجازة عادية</option>
+              <option value="اجازة أيام متفرقة">اجازة أيام متفرقة</option>
+              <option value="تمديد اجازة">تمديد اجازة</option>
+            </select>
+          </div>
+          <div *ngIf="type.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+            مطلوب نوع الاجازة.
+
+          </div>
+
+          <div class="col-md-6">
+            <label for="leave-date-start">تاريخ بداية الاجازة</label>
+            <input type="date" id="leave-date-start" name="datedebut" #datedebut="ngModel" [(ngModel)]="conge.datedebut" (change)="tdatedebut($event)" required>
+          </div>
+
+          <div *ngIf="datedebut.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+
+
+            مطلوب تاريخ بداية الاجازة.
+
+          </div>
+
+          <div class="col-md-6">
+            <label for="leave-date-end">تاريخ نهاية الاجازة</label>
+            <input type="date" id="leave-date-end" name="datefin" #datefin="ngModel" [(ngModel)]="conge.datefin" (change)="tdatefin($event)" required>
+          </div>
+
+          <div *ngIf="datefin.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+
+
+            مطلوب تاريخ نهاية الاجازة.
+
+          </div>
+
+          <div class="col-sm-6">
+            <label for="replace-emp">الموظف المعوض</label>
+            <select id="stop-status" name="idremplacant" #idremplacant="ngModel" [(ngModel)]="conge.idremplacant" (change)="getRemplacant($event)">
+              <option [ngValue]="undefined" selected disabled>-الموظف المعوض-</option>
+              <option *ngFor="let item of user" value="{{item.id}}">{{item.fullName}}</option>
+            </select>
+          </div>
+
+
+          <div class="col-md-6">
+            <label for="emp-mobile">جوال</label>
+            <input type="text" id="emp-mobile" name="tel" #tel="ngModel" [(ngModel)]="conge.tel">
+          </div>
+          <div class="col-md-6">
+            <label for="emp-address">عنوان الموظف خلال الاجازة</label>
+            <input type="text" id="emp-address" name="adr" #adr="ngModel" [(ngModel)]="conge.adr">
+          </div>
+         
+          <div class="col-12 text-left">
+            <input class="btn btn-primary px-4" type="submit" value="تقديم">
+          </div>
+        </form>
+      </div>
+
+
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات في أبو عريش</p>
+</footer>

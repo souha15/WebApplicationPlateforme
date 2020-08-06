@@ -10,7 +10,7 @@
       <app-tasks-up-menu></app-tasks-up-menu>
 
       <h4 class="my-2 task-head">مهمة جديدة</h4>
-      <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit()">
+      <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
 
         <div class="col-sm-6">
           <label><span><i class="fa fa-sort-numeric-down"></i></span>رقم المهمة</label>
@@ -20,7 +20,9 @@
           <label for="date"><span><i class="fa fa-calendar-alt"></i></span>التاريخ </label>
           <input type="date" id="date" name="date" #date="ngModel" [(ngModel)]="tache.date" required (change)="testdate($event)">
         </div>
-
+        <div *ngIf="date.invalid && form.submitted && !isValidFormSubmittedTR" class="alert alert-danger">
+          مطلوب تاريخ  بدء المهمة .
+        </div>
         <div class="col-sm-6">
           <label for="sort"><span><i class="fa fa-list-ol"></i></span>الاولوية</label>
           <select id="sort" name="priorite" #priorite="ngModel" [(ngModel)]="tache.priorite" required>
@@ -34,6 +36,10 @@
           <label for="task"><span><i class="fa fa-calendar-check"></i></span>المهمة</label>
           <input type="text" id="task" class="t" name="tacheNom" #tacheNom="ngModel" [(ngModel)]="tache.tacheNom" required (change)="testnom($event)">
         </div>
+        <div *ngIf="tacheNom.invalid && form.submitted && !isValidFormSubmittedTR" class="alert alert-danger">
+          مطلوب اسم المهمة .
+        </div>
+
         <div class="col-12">
           <label for="task-details"><span><i class="fa fa-list"></i></span>وصف المهمة</label>
           <input type="text" id="task-details" name="description" #description="ngModel" [(ngModel)]="tache.description">

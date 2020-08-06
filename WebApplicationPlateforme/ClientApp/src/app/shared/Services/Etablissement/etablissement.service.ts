@@ -50,4 +50,8 @@ export class EtablissementService {
   DeleteEtablissement(id) {
     return this.http.delete(this.rootURL + '/Departements/' + id);
   }
+
+  PutObservable(Transaction: Etablissement) {
+    return this.http.put<Etablissement>(this.rootURL + '/Departements/' + Transaction.id, Transaction, this.headers);
+  }
 }

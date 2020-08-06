@@ -11,11 +11,12 @@
         <div class="row">
           <div class="col-md">
             <div class="box tasks">
-              <h4>المهام</h4>
+              <h4>طلبات الموظفين</h4>
               <div class="row">
                 <div class="col text-center px-2 py-3">
-                  <span class="num">03</span>
-                  <p class="show">عرض</p>
+                  <span class="num">{{nbRequests}}</span>
+                  <br />
+                  <a class="show" [routerLink]="['/menurequests']">عرض</a>
                 </div>
                 <div class="col text-center px-2 py-4">
                   <span class="sympol"><i class="fa fa-tasks fa-3x"></i></span>

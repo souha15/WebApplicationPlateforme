@@ -8,9 +8,9 @@
         <span class="arrow"><i class="fa fa-chevron-left"></i></span>
       </h5>
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#parent">
-        <a [routerLink]="['/main-tasks']">صفحة ادارة المهام</a>
+        <a [routerLink]="['/main-tasks']" *ngIf="privtestTasks">صفحة ادارة المهام</a>
         <!--! <a [routerLink]="['/new-task']">إضافة مهمة</a>-->
-        <a [routerLink]="['/new-task']" *ngIf="privtest">إضافة مهمة</a>
+        <a [routerLink]="['/new-task']" *ngIf="privtestaddTask">إضافة مهمة</a>
         <a [routerLink]="['/tasks-list']">قائمة المهام</a>
         <a [routerLink]="['/tasks-list-received']">المهام  المسندة</a>
         <a [routerLink]="['/tasks-list-created']">المهام المنشأة</a>
@@ -26,11 +26,35 @@
         <span class="arrow"><i class="fa fa-chevron-left"></i></span>
       </h5>
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#parent">
-        <a>الخطابات</a>
-        <a>الصادر</a>
-        <a>الوارد</a>
+
+        <a href="" [routerLink]="['/my-liste-tr']">الوارد</a>
+        <a href="" [routerLink]="['/my-liste-tr-emise']">الصادر</a>
+        <a href="" [routerLink]="['/my-liste-tr-i']"> الداخلية</a>
+        <a href="" [routerLink]="['/mailing']">التقارير</a>
       </div>
     </div>
+
+    <div>
+      <h5 id="headingSix" class="collapsed" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+        <span><i class="fa fa-laptop"></i></span>    الخدمات الإلكترونية
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+      <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#parent">
+        <a [routerLink]="['/demande-conge']">تقديم طلب إجازة</a>
+        <a [routerLink]="['/my-list-conge']">طلبات الاجازات</a>
+        <a [routerLink]="['/suivie-conge']">تتبع طلب إجازة</a>
+        <a [routerLink]="['/permission-add']">تقديم طلب إذن</a>
+        <a [routerLink]="['/permission-list']">طلبات لاذن</a>
+        <a [routerLink]="['/recrutement-add']">تقديم طلب انتداب</a>
+        <a [routerLink]="['/recrutement-list']">طلبات الانتدابات</a>
+        <a [routerLink]="['/suivie-conge']">تتبع طلب انتداب</a>
+        <a [routerLink]="['/equipement-add']">تقديم طلب عهدة</a>
+        <a [routerLink]="['/equipement-list']"> طلبات العهد</a>
+        <a> طلب مشهد براتب</a>
+      </div>
+    </div>
+
+
     <!-- card 3 -->
     <div>
       <h5 id="headingThree" class="collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -39,7 +63,10 @@
       </h5>
       <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#parent">
         <a [routerLink]="['/users-list']"> قائمة الموظفين </a>
-        <a [routerLink]="['/user-registration']">إضافة موظف </a>
+        <a [routerLink]="['/users-list']">إنشاء مستخدم </a>
+        <a [routerLink]="['/user-registration']">
+          إنشاء حساب
+        </a>
       </div>
     </div>
     <!-- card 4 -->
@@ -49,12 +76,13 @@
         <span class="arrow"><i class="fa fa-chevron-left"></i></span>
       </h5>
       <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#parent">
-
+        <a [routerLink]="['/event-register']">تسجيل فعالية </a>
+        <a [routerLink]="['/event-list']"> قائمة الفعاليات </a>
       </div>
     </div>
     <!-- card 5 -->
     <div>
-      <h5  id="headingFive" class="collapsed"  data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+      <h5 id="headingFive" class="collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
         <span><i class="fa fa-wrench"></i></span>
         إدارة النظام
         <span class="arrow"><i class="fa fa-chevron-left"></i></span>
@@ -67,8 +95,9 @@
         <a [routerLink]="['/new-etablissement']">إضافة قسم</a>
         <a [routerLink]="['/typedotation']">إدارة الأوقاف</a>
         <a [routerLink]="['/organisme']">إدارة المعاملات</a>
-  
-
+        <a [routerLink]="['/beneficiaire-c']">إدارة الفعاليات</a>
+        <a [routerLink]="['/nom-equipement']">إسم  العهد</a>
+        <a [routerLink]="['/type-equipement']">نوع العهد</a>
       </div>
     </div>
   </div>

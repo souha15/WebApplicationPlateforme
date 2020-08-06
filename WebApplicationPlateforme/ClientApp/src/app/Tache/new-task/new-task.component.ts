@@ -10,6 +10,7 @@ import { ProgressStatusEnum } from '../../shared/Enum/progress-status-enum.enum'
 import { HttpEventType, HttpClient } from '@angular/common/http';
 import { PiecesJointes } from '../../shared/Models/Taches/pieces-jointes.model';
 import { PathSharedService } from '../../shared/path-shared.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-new-task',
@@ -109,12 +110,10 @@ export class NewTaskComponent implements OnInit {
 
   vider() {
     this.tacheId = null;
-    if (this.serviceupload.list.length != 0) {
-      this.serviceupload.list.length = 0;
+    if (this.serviceupload.list.length > 0) {
+      this.serviceupload.list.pop();
     }
-    this.tache = new Tache();
-    console.log(this.tache)
-    this.ngOnInit();
+
   }
   //Create Tache
 
@@ -123,8 +122,8 @@ export class NewTaskComponent implements OnInit {
   CreatedTache: Tache = new Tache();
   tacheId: number;
   testchamp: boolean;
-
-  onSubmit() {
+  isValidFormSubmittedTR = false;
+  onSubmit(form: NgForm) {
 
     this.tache.idUserCreator = this.UserIdConnected;
     this.tache.creatorName = this.UserNameConnected;
@@ -133,21 +132,22 @@ export class NewTaskComponent implements OnInit {
     
 
     this.tache.createur = this.userAffectedName;
-    if (this.nomt == null) {
-      this.toastr.warning("اختر اسم المهمة", 'تحذير')
-      this.testchamp = false;
-    } else if (this.datec == null) {
-      this.toastr.warning(" اختر تاريخ بدء المهمة", 'تحذير')
-      this.testchamp = false;
-    } else if (this.affected == "employee" && this.userAffectedName == null) {
+
+    if (form.invalid) {
+      this.isValidFormSubmittedTR = false;
+    }
+
+     if (this.affected == "employee" && this.userAffectedName == null) {
       
-        this.toastr.warning("اختر الموظف المسند اليه المهمة", 'تحذير')
+      this.toastr.warning("اختر الموظف المسند اليه المهمة", 'تحذير')
       this.testchamp = false;
-    } else if (this.affected == null) {
+     }
+     else if (this.affected == null) {
       this.toastr.warning("اختر  المسند اليه المهمة", 'تحذير')
       this.testchamp = false;
     }
-    else {
+     else {
+       this.isValidFormSubmittedTR = true;
       this.testchamp = true;
        this.TacheService.CreateTache(this.tache).subscribe(
         (res: any) => {
@@ -172,7 +172,8 @@ export class NewTaskComponent implements OnInit {
            })
         
 
-           console.log(this.tache)
+           form.resetForm();
+           
            this.toastr.success("تم تسجيل المهمة بنجاح", " تسجيل المهمة");
           
         },

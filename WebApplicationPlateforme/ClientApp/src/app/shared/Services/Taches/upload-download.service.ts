@@ -8,6 +8,8 @@ import { PiecesJointesRevenus } from '../../Models/Dotations/pieces-jointes-reve
 import { PiecesjointerevenusService } from '../Dotations/piecesjointerevenus.service';
 import { ContratLocation } from '../../Models/Dotations/contrat-location.model';
 import { PiecesJointesTr } from '../../Models/AdministrativeCommunication/pieces-jointes-tr.model';
+import { PiecesJointesEv } from '../../Models/Evenements/pieces-jointes-ev.model';
+import { PiecesJointesRc } from '../../Models/RH/pieces-jointes-rc.model';
 
 @Injectable({
   providedIn: 'root'
@@ -71,6 +73,15 @@ export class UploadDownloadService {
 
   //Save file
 
+  savefileRc() {
+    return this.httpClient.post(this.rootURL + '/PiecesJointesRcs', this.apiFileUrl)
+  }
+
+  savefileEv() {
+    return this.httpClient.post(this.rootURL + '/PiecesJointesEvents', this.apiFileUrl)
+  }
+
+
   savefile() {
     return this.httpClient.post(this.rootURL + '/PiecesJointes', this.apiFileUrl)
   }
@@ -91,8 +102,24 @@ export class UploadDownloadService {
   savefileTr() {
     return this.httpClient.post(this.rootURL + '/PiecesJointesTrs', this.apiFileUrl)
   }
+  
+  savefileTrE() {
+    return this.httpClient.post(this.rootURL + '/PiecesJointeEs', this.apiFileUrl)
+  }
 
+  savefileTrI() {
+    return this.httpClient.post(this.rootURL + '/PiecesJointesIs', this.apiFileUrl)
+  }
   // Get list of files from DataBase
+  
+  getallRc() {
+    return this.httpClient.get<PiecesJointesRc[]>(this.rootURL + '/PiecesJointesRcs');
+  }
+
+
+  getallEv() {
+    return this.httpClient.get<PiecesJointes[]>(this.rootURL + '/PiecesJointesEvents');
+  }
 
   getall() {
     return this.httpClient.get<PiecesJointes[]>(this.rootURL + '/PiecesJointes');
@@ -113,6 +140,14 @@ export class UploadDownloadService {
   getallTr() {
     return this.httpClient.get<PiecesJointesTr[]>(this.rootURL + '/PiecesJointesTrs');
   }
+  
+  getallTrE() {
+    return this.httpClient.get<PiecesJointesTr[]>(this.rootURL + '/PiecesJointeEs');
+  }
+
+  getallTrI() {
+    return this.httpClient.get<PiecesJointesTr[]>(this.rootURL + '/PiecesJointesIs');
+  }
 
   list: PiecesJointes[];
 
@@ -120,12 +155,29 @@ export class UploadDownloadService {
     this.httpClient.get(this.rootURL + '/PiecesJointes')
       .toPromise()
       .then(res => this.list = res as PiecesJointes[]);
+  } 
+
+  listRc: PiecesJointesRc[];
+
+  refreshListRc() {
+    this.httpClient.get(this.rootURL + '/PiecesJointesRcs')
+      .toPromise()
+      .then(res => this.listRc = res as PiecesJointesRc[]);
   }
 
   listL: PiecesJointesLocataire[];
   listR: PiecesJointesRevenus[];
   listC: ContratLocation[];
   listTr: PiecesJointesTr[];
+  listEv: PiecesJointesEv[];
+
+  refreshListEv() {
+    this.httpClient.get(this.rootURL + '/PiecesJointesEvents')
+      .toPromise()
+      .then(res => this.listEv = res as PiecesJointesEv[]);
+  }
+
+
   refreshListL() {
     this.httpClient.get(this.rootURL + '/piecesjointesLocataires')
       .toPromise()
@@ -151,6 +203,33 @@ export class UploadDownloadService {
       .then(res => this.listTr = res as PiecesJointesTr[]);
   }
 
+ 
+
+  refreshListTrE() {
+    this.httpClient.get(this.rootURL + '/PiecesJointeEs')
+      .toPromise()
+      .then(res => this.listTr = res as PiecesJointesTr[]);
+  }
+
+  refreshListTrI() {
+    this.httpClient.get(this.rootURL + '/PiecesJointesIs')
+      .toPromise()
+      .then(res => this.listTr = res as PiecesJointesTr[]);
+  }
+
+  
+
+  SearchRc(): Observable<PiecesJointesRc[]> {
+    return this.httpClient.get<PiecesJointesRc[]>(this.rootURL + '/PiecesJointesRcs');
+
+
+  }
+
+  SearchEv(): Observable<PiecesJointesEv[]> {
+    return this.httpClient.get<PiecesJointesEv[]>(this.rootURL + '/PiecesJointesEvents');
+
+
+  }
   Search(): Observable<PiecesJointes[]> {
     return this.httpClient.get<PiecesJointes[]>(this.rootURL + '/PiecesJointes');
   }
@@ -167,12 +246,30 @@ export class UploadDownloadService {
     return this.httpClient.get<ContratLocation[]>(this.rootURL + '/contratLocations');
   }
 
-
+  
 
   SearchTr(): Observable<PiecesJointesTr[]> {
     return this.httpClient.get<PiecesJointesTr[]>(this.rootURL + '/PiecesJointesTrs');
   }
+
+  SearchTrE(): Observable<PiecesJointesTr[]> {
+    return this.httpClient.get<PiecesJointesTr[]>(this.rootURL + '/PiecesJointeEs');
+  }
+
+  SearchTrI(): Observable<PiecesJointesTr[]> {
+    return this.httpClient.get<PiecesJointesTr[]>(this.rootURL + '/PiecesJointesIs');
+  }
   //Delete Piece Jointe
+  
+  
+  deletePjRc(id) {
+    return this.httpClient.delete(this.rootURL + '/PiecesJointesRcs/' + id);
+  }
+
+
+  deletePjEv(id) {
+    return this.httpClient.delete(this.rootURL + '/PiecesJointesEvents/' + id);
+  }
 
   deletePj(id) {
     return this.httpClient.delete(this.rootURL + '/PiecesJointes/' + id);
@@ -193,5 +290,13 @@ export class UploadDownloadService {
 
   deletePjTr(id) {
     return this.httpClient.delete(this.rootURL + '/PiecesJointesTrs/' + id);
+  }
+
+  deletePjTrE(id) {
+    return this.httpClient.delete(this.rootURL + '/PiecesJointeEs/' + id);
+  }
+
+  deletePjTrI(id) {
+    return this.httpClient.delete(this.rootURL + '/PiecesJointesIs/' + id);
   }
 }

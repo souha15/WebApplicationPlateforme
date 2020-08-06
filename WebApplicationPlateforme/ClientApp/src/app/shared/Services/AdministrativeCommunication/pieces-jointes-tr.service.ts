@@ -60,4 +60,49 @@ export class PiecesJointesTrService {
   GetByIdPjTR(Id) {
     return this.http.get<PiecesJointesTr>(this.rootURL + '/PiecesJointesTrs/' + Id);
   }
+
+
+/*****/
+
+  //Create PiecesJointesTr
+
+  CreatePjTE(PiecesJointesTr: PiecesJointesTr) {
+    return this.http.post<PiecesJointesTr>(this.rootURL + '/PiecesJointeEs', PiecesJointesTr, this.headers);
+  }
+
+  //Edit PiecesJointesTr
+  EditPjTE() {
+    return this.http.put(this.rootURL + '/PiecesJointeEs/' + this.formData.id, this.formData, this.headers);
+  }
+
+  // List PiecesJointesTr
+
+  ListPjTE(): Observable<PiecesJointesTr[]> {
+    return this.http.get<PiecesJointesTr[]>(this.rootURL + '/PiecesJointeEs');
+  }
+
+  //Delete PiecesJointesTr
+
+  DeletePjTE(id) {
+    return this.http.delete(this.rootURL + '/PiecesJointeEs/' + id);
+  }
+
+  //Put PiecesJointesTr
+
+  PutObservablePjTE(PiecesJointesTr: PiecesJointesTr, Id: number) {
+    return this.http.put<PiecesJointesTr>(this.rootURL + '/PiecesJointeEs/' + Id, PiecesJointesTr, this.headers);
+  }
+
+  PutPjTE(Id) {
+    return this.http.put(this.rootURL + '/PiecesJointeEs/' + this.formData.id, this.formData, this.headers);
+  }
+
+  //Get PiecesJointesTr By Id
+
+  GetByIdPjTE(Id) {
+    return this.http.get<PiecesJointesTr>(this.rootURL + '/PiecesJointeEs/' + Id);
+  }
+
+/*****/
+
 }

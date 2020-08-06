@@ -1,0 +1,57 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">قائمة الفعاليات</h3>
+      </header>
+      <div class="events-list">
+        <div class="form-group pull-right">
+          <input type="text" class="search form-control" placeholder="ما الذي تبحث عنه ؟" [(ngModel)]="filter">
+        </div>
+        <span class="counter pull-right"></span>
+        <div class="tabel-cont">
+          <table class="table table-striped results sortable">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">م</th>
+                <th scope="col">المشروع</th>
+                <th scope="col">نوع النشاط</th>
+                <th scope="col">التاريخ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ev of EvList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }" [routerLink]="['/event-details', ev.id]">
+                <th scope="row">{{ev.id}}</th>
+                <td>{{ev.projet}}</td>
+                <td>{{ev.typeAct}}</td>
+                <td>{{ev.datetime}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </ul>
+        </nav>
+        <!--  <div class="print-link text-left">
+      <a href="#" class="print"><span><i class="fa fa-print fa-2x"></i></span></a>
+    </div>
+    -->
+      </div>
+    
+    </div><!-- End col-9 -->
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات في أبو عريش</p>
+</footer>
+

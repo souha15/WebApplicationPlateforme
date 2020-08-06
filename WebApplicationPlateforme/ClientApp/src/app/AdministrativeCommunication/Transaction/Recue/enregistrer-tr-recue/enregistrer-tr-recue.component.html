@@ -91,10 +91,6 @@
                       <input type="date" id="reg-date" name="date" #date="ngModel" [(ngModel)]="tr.date" required>
                     </div>
 
-                    <div *ngIf="date.invalid && form.submitted && !isValidFormSubmittedTR" class="alert alert-danger">
-                      مطلوب تاريخ التسجيل .
-                    </div>
-
                     <div class="col-sm-6" *ngIf="isSelected('organisation')">
                       <label for="from"><span><i class="fa fa-building"></i></span>من الجهة</label>
                       <select id="from" name="idOrg" #idOrg="ngModel" [(ngModel)]="tr.idOrg" required (change)="orgName($event)">
@@ -309,7 +305,7 @@
               </div>
               <div class="col-9 renter">
                 <input type="text" id="renter" class="mb-2" placeholder="الإسم " name="nom" #nom="ngModel" [(ngModel)]="prop.nom" required />
-                <div *ngIf="nom.errors?.required && formP.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                <div *ngIf="nom.errors?.required && formP.submitted && !isValidFormSubmittedP" class="alert alert-danger">
                   مطلوب اسم.
                 </div>
                 <input type="text" class="mb-2" placeholder="اللقب" name="prenom" #prenom="ngModel" [(ngModel)]="prop.prenom" required />

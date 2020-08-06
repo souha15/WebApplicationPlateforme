@@ -36,8 +36,13 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
                 user.Email,
                 user.UserName,
                 user.Id,
-                user.IdAdministration,
-                user.IdDepartement,
+                user.idAdministration,
+                user.idDepartement,
+                user.registreCivil,
+                user.num,
+                user.soldeconge,
+                user.attribut1,
+                user.directeur,
                
                 
 

@@ -30,7 +30,7 @@ export class ProprietaireComponent implements OnInit {
       res => {
         this.UserIdConnected = res.id;
         this.UserNameConnected = res.fullName;
-        this.adminisgtrationName = res.IdAdministration;
+        this.adminisgtrationName = res.idAdministration;
 
 
       })

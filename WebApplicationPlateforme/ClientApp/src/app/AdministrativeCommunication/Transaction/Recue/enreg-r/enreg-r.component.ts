@@ -518,6 +518,8 @@ export class EnregRComponent implements OnInit {
               this.tr.etat = "غير مستلمة"
               this.tr.attribut2 = this.date;
               this.transactionService.PutObservable(this.tr).subscribe(res => {
+                this.FiltredList = []
+            
                 this.TransactionList();
                 this.toastr.success("تمت إحالة المعاملة بنجاح", "نجاح");
                 //Create File

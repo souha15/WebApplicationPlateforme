@@ -59,5 +59,91 @@ export class LiaisonService {
   GetById(Id) {
     return this.http.get<Liaison>(this.rootURL + '/Liaisons/' + Id);
   }
+
+/*********/
+
+  //Create Liaison
+
+  CreateE(Liaison: Liaison) {
+    return this.http.post<Liaison>(this.rootURL + '/LiaisonEs', Liaison, this.headers);
+  }
+
+  //Edit Liaison
+  EditE() {
+    return this.http.put(this.rootURL + '/LiaisonEs/' + this.formData.id, this.formData, this.headers);
+  }
+
+  // List Liaison
+
+  ListE(): Observable<Liaison[]> {
+    return this.http.get<Liaison[]>(this.rootURL + '/LiaisonEs');
+  }
+
+  //Delete Liaison
+
+  DeleteE(id) {
+    return this.http.delete(this.rootURL + '/LiaisonEs/' + id);
+  }
+
+  //Put Liaison
+
+  PutObservableE(Liaison: Liaison, Id: number) {
+    return this.http.put<Liaison>(this.rootURL + '/LiaisonEs/' + Id, Liaison, this.headers);
+  }
+
+  PutE(Id) {
+    return this.http.put(this.rootURL + '/LiaisonEs/' + this.formData.id, this.formData, this.headers);
+  }
+
+  //Get Liaison By Id
+
+  GetByIdE(Id) {
+    return this.http.get<Liaison>(this.rootURL + '/LiaisonEs/' + Id);
+  }
+
+/*********/
+
+  /*********/
+
+  //Create Liaison
+
+  CreateI(Liaison: Liaison) {
+    return this.http.post<Liaison>(this.rootURL + '/LiaisonIs', Liaison, this.headers);
+  }
+
+  //Edit Liaison
+  EditI() {
+    return this.http.put(this.rootURL + '/LiaisonIs/' + this.formData.id, this.formData, this.headers);
+  }
+
+  // List Liaison
+
+  ListI(): Observable<Liaison[]> {
+    return this.http.get<Liaison[]>(this.rootURL + '/LiaisonIs');
+  }
+
+  //Delete Liaison
+
+  DeleteI(id) {
+    return this.http.delete(this.rootURL + '/LiaisonIs/' + id);
+  }
+
+  //Put Liaison
+
+  PutObservableI(Liaison: Liaison, Id: number) {
+    return this.http.put<Liaison>(this.rootURL + '/LiaisonIs/' + Id, Liaison, this.headers);
+  }
+
+  PutI(Id) {
+    return this.http.put(this.rootURL + '/LiaisonIs/' + this.formData.id, this.formData, this.headers);
+  }
+
+  //Get Liaison By Id
+
+  GetByIdI(Id) {
+    return this.http.get<Liaison>(this.rootURL + '/LiaisonIs/' + Id);
+  }
+
+/*********/
 }
 

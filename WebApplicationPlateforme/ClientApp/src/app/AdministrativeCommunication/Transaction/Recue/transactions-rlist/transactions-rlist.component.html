@@ -50,10 +50,10 @@
             <span><i class="fa fa-save"></i></span>
             قائمة المعاملات الواردة المسجلة
           </a>
-          <a href="" [routerLink]="['/afftected-to-my-admin-r']" class="p-2 flex-fill bd-highlight">
+        <!--  <a href="" [routerLink]="['/afftected-to-my-admin-r']" class="p-2 flex-fill bd-highlight">
             <span><i class="fa fa-building"></i></span>
             قائمة المعاملات الواردة لإدارتي
-          </a>
+          </a>-->
           <a href="" [routerLink]="['/enreg-temp-r']" class="p-2 flex-fill bd-highlight">
             <span><i class="fa fa-clock"></i></span>
             قائمة المعاملات المحفوظة مؤقتا
@@ -73,17 +73,28 @@
                 <span><i class="fa fa-pencil-alt"></i></span>
               </div>
               <div class="text">
-                <p>معاملات مستلمة /غير مستلمة</p>
-                <span>10</span>
+                <p>معاملات الواردة المستلمة </p>
+                <span>{{receptiontr}}</span>
               </div>
             </div>
+
+            <div class="p-2 flex-fill bd-highlight item">
+              <div class="sympol">
+                <span><i class="fa fa-pencil-alt"></i></span>
+              </div>
+              <div class="text">
+                <p>معاملات الصادرة المستلمة </p>
+                <span>{{receptionte}}</span>
+              </div>
+            </div>
+
             <div class="p-2 flex-fill bd-highlight item">
               <div class="sympol">
                 <span><i class="fa fa-clipboard-check"></i></span>
               </div>
               <div class="text">
                 <p>عدد المعاملات الواردة</p>
-                <span>5</span>
+                <span>{{emise}}</span>
               </div>
             </div>
             <div class="p-2 flex-fill bd-highlight item">
@@ -92,7 +103,7 @@
               </div>
               <div class="text">
                 <p>عدد المعاملات الصادرة</p>
-                <span>3</span>
+                <span>{{recue}}</span>
               </div>
             </div>
             <div class="p-2 flex-fill bd-highlight item">
@@ -104,15 +115,7 @@
                 <span>3</span>
               </div>
             </div>
-            <div class="p-2 flex-fill bd-highlight item">
-              <div class="sympol">
-                <span><i class="fa fa-clipboard-list"></i></span>
-              </div>
-              <div class="text">
-                <p>قرار وتعميم</p>
-                <span>3</span>
-              </div>
-            </div>
+
           </div>
 
           <!-- Charts -->
@@ -121,16 +124,11 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="chart text-center py-4 px-3">
-                    <h6>مقارنة بين المهمات التي أنشئت والتي تم إنهاؤها</h6>
-                    <canvas id="chart1"></canvas>
+                    <h6>المعاملات  الواردة المستلمة /غير المستلمة</h6>
+                    <canvas id="canvas"></canvas>
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="chart text-center py-4 px-3">
-                    <h6>المهمات التي تم إنجازها لهذا العام</h6>
-                    <canvas id="chart2"></canvas>
-                  </div>
-                </div>
+      
               </div>
             </div>
           </div>

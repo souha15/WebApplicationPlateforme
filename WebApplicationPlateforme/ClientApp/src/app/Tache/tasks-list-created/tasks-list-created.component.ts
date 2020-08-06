@@ -25,24 +25,14 @@ export class TasksListCreatedComponent implements OnInit {
   //Tache list
 
   tacheliste: Tache[] = [];
-
-
-  listtache() {
-    this.TacheService.ListTache().subscribe(res => {
-      this.tacheliste = res
-    })
-  }
-
   filtredtachelist: Tache[] = [];
 
   filtredDataTache() {
     this.TacheService.ListTache().subscribe(res => {
       this.tacheliste = res
-
-      if (this.tacheliste != null) {
+     
         this.filtredtachelist = this.tacheliste.filter(item => item.idUserCreator == this.UserIdConnected)
-
-      }
+     
     });
 
 

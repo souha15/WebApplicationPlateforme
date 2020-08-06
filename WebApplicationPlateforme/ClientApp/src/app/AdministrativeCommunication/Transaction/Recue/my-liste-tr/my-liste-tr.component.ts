@@ -197,24 +197,25 @@ export class MyListeTrComponent implements OnInit {
         this.Globallist.forEach(element => {
           this.affFiltredTr = [];
           last = [];
-         
+
           this.ListAffectation = this.GlobalAffectationList.filter(item => item.idTransaction == element.id);
-        
+
 
           //get the last affected transaction to our user 
 
           last = this.ListAffectation.map(el => el.idTransaction).lastIndexOf(element.id);
-         
-      
+
+          if (last != -1) {
           if (this.ListAffectation[last].iduserAffected == this.UserIdConnected) {
-   
+
             this.transactionService.GetById(this.ListAffectation[last].idTransaction).subscribe(res => {
               if (res.attribut6 == "الأصل")
-              this.FiltredList.push(res)
-              
+                this.FiltredList.push(res)
 
-            })          
-          }     
+
+            })
+          }
+        }
            })
       })         
       
@@ -277,7 +278,10 @@ export class MyListeTrComponent implements OnInit {
   populateForm(transaction: Transaction) {
     this.transactionService.formData = Object.assign({}, transaction);
     this.tr = Object.assign({}, transaction)
-    this.barcodevalue = this.tr.id + this.tr.date + this.tr.nbPjNumerique
+    let d: string;
+    d = this.tr.dateenreg.replace(/\//g, '')
+
+    this.barcodevalue = this.tr.id + d 
     //Files
 
     this.serviceupload.SearchTr().subscribe(res => {
@@ -330,12 +334,12 @@ export class MyListeTrComponent implements OnInit {
         // User Affected
       this.UserService.GetUserById(last.iduserAffected).subscribe(res => {
         this.affected = res.fullName
-        this.administrationService.GetById(res.IdAdministration).subscribe(res => {
+        this.administrationService.GetById(res.idAdministration).subscribe(res => {
           this.AdministrationName = res.nom
      
         })
 
-        this.etablissementService.GetById(res.IdDepartement).subscribe(res => {
+        this.etablissementService.GetById(res.idDepartement).subscribe(res => {
           this.etabname1 = res.nom
         })
       })
@@ -343,13 +347,13 @@ export class MyListeTrComponent implements OnInit {
       //User Qui affecte
       this.UserService.GetUserById(last.idUserQuiAffecte).subscribe(res => {
         this.affecter = res.fullName
-        this.administrationService.GetById(res.IdAdministration).subscribe(res => {
+        this.administrationService.GetById(res.idAdministration).subscribe(res => {
           this.adminisgtrationName = res.nom
          
 
         })
      
-        this.etablissementService.GetById(res.IdDepartement).subscribe(res => {
+        this.etablissementService.GetById(res.idDepartement).subscribe(res => {
           this.etabname2 = res.nom
         })
       })

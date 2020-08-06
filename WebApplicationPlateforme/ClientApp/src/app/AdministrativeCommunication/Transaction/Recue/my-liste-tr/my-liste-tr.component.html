@@ -479,7 +479,7 @@
                   <tbody>
                     <tr *ngFor="let aff of FAffListSR">
                       <th scope="row">1</th>
-                      <td>{{aff.dateenreg}}</td>
+                      <td>{{aff.datenereg}}</td>
                       <td>{{aff.nomUserQuiAffecte}}</td>
                       <td *ngIf="aff.iduserAffected">{{getkeymapuser(aff.iduserAffected)}}</td>
                       <td *ngIf="aff.iduserAffected">{{getKeymapreceptionUser2(aff.iduserAffected)}}</td>
@@ -569,13 +569,20 @@
 
 <!--Css Impression-->
 
-
+<div style="text-align:center;display: none;" id="htmlData2">
+  <ngx-barcode6 [bc-format]="'MSI'"
+                [bc-value]="barcodevalue"
+                [bc-display-value]="true"
+                [bc-width]="1" [bc-height]="40">
+  </ngx-barcode6>
+</div>
 <!--Impression Tr-->
 <div class="tr-print" id="htmlData" style="display: none;">
   <header class="printed-header">
     <div></div>
     <h2>وارد عام</h2>
     <span class="date">التاريخ {{date}}</span>
+    
   </header>
   <main class="text-right">
     <div class="row">
@@ -743,7 +750,13 @@
         <td>{{dateaffectation}}</td>
       </tr>
     </table>
-    <div class="parcode">الباركود</div>
+    <div class="parcode">
+      <ngx-barcode6 [bc-format]="'MSI'"
+                    [bc-value]="barcodevalue"
+                    [bc-display-value]="true"
+                    [bc-width]="1" [bc-height]="40">
+      </ngx-barcode6>
+    </div>
   </main>
 </div>
 
@@ -759,7 +772,15 @@
   </header>
   <main class="text-right">
     <h2 class="underline">داخلية</h2>
-    <span class="par-code">الباركود</span>
+    <div class="row">
+      <span class="par-code">
+        <ngx-barcode6 [bc-format]="'MSI'"
+                      [bc-value]="barcodevalue"
+                      [bc-display-value]="true"
+                      [bc-width]="1" [bc-height]="40">
+        </ngx-barcode6>
+      </span>
+    </div>
     <div class="row">
       <div class="col-6">
         <p>

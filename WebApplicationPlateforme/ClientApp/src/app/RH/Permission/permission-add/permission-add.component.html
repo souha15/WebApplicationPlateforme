@@ -1,0 +1,40 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">تقديم طلب إذن</h3>
+      </header>
+      <div class="permision">
+        <form class="task-form form-row service-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+          <div class="col-md-4">
+            <label for="permision-hours">عدد ساعات الاذن</label>
+            <input type="text" id="permision-hours" name="nbheure" #nbheure="ngModel" [(ngModel)]="per.nbheure" required>
+          </div>
+          <div *ngIf="nbheure.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+            مطلوب عدد ساعات الاذن.
+
+          </div>
+          <div class="col-md-8">
+            <label for="permision-details">تفاصيل الاذن</label>
+            <textarea class="form-control" id="permision-details"
+                      placeholder="اكتب بايجاز سبب الاذن" name="attribut2" #attribut2="ngModel" [(ngModel)]="per.attribut2"></textarea>
+          </div>
+          <div class="col-12 text-left mt-3">
+            <input class="btn btn-primary px-4" type="submit" value="ارسال">
+          </div>
+        </form>
+      </div>
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات في أبو عريش</p>
+</footer>

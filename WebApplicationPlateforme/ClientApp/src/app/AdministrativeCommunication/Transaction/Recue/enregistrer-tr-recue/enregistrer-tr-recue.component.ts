@@ -161,10 +161,9 @@ export class EnregistrerTRRecueComponent implements OnInit {
       res => {
         this.UserIdConnected = res.id;
         this.UserNameConnected = res.fullName;
-   
-
-     
-
+  
+        this.tr.idEtablissementUserCreator = res.idDepartement
+        this.tr.etablissementUserCreator = res.nomDepartement
       })
 
   }
@@ -199,21 +198,22 @@ export class EnregistrerTRRecueComponent implements OnInit {
 
   prop: Proprietaire = new Proprietaire();
   date = new Date().toLocaleDateString();
-  isValidFormSubmitted = false;
+  isValidFormSubmittedP = false;
   onSubmitProp(formP: NgForm) {
+    
     this.prop.creatorName = this.UserNameConnected;
     this.prop.datenereg = this.date;
     this.prop.idUserCreator = this.UserIdConnected;
-    if (formP.invalid) {
-      this.isValidFormSubmitted = false;
-
-    } else {
+   
+      
       if (this.cinexist) {
-        this.isValidFormSubmitted = true
+        
+        
         this.proprietaireService.Create(this.prop).subscribe(res => {
           
           this.toastr.success("تمت الإضافة بنجاح", "نجاح");
           formP.resetForm();
+          this.GetPropList();
         },
           err => {
             console.log(err);
@@ -222,7 +222,7 @@ export class EnregistrerTRRecueComponent implements OnInit {
       } else {
         this.toastr.warning('لم تتم الإضافة رقم الهوية موجود', ' فشل');
       }
-    }
+    
   }
 
   //Create Organisme
@@ -242,6 +242,7 @@ export class EnregistrerTRRecueComponent implements OnInit {
 
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         formO.resetForm();
+        this.GetOrganismeList();
       },
         err => {
           console.log(err);
@@ -329,16 +330,15 @@ export class EnregistrerTRRecueComponent implements OnInit {
     this.tr.userNameCreator = this.UserNameConnected;
     this.tr.dateenreg = this.date;
     this.tr.idUserCreator = this.UserIdConnected;
+    if (this.OrgName != '')
     this.tr.nomOrg = this.OrgName;
+    if (this.PropName != '')
     this.tr.nomProp = this.PropName;
     this.tr.type = "recue"
     this.tr.etat = "غير مستلمة"
     this.tr.attribut6 ="الأصل"
 
-    if (form.invalid) {
-      this.isValidFormSubmittedTR = false;
-    } else {
-      this.isValidFormSubmittedTR = true;
+
       this.transactionRecueService.Create(this.tr).subscribe(
         res => {
           this.Idtransaction = res.id
@@ -420,7 +420,7 @@ export class EnregistrerTRRecueComponent implements OnInit {
         }
 
       )
-    }
+    
 
 
   }

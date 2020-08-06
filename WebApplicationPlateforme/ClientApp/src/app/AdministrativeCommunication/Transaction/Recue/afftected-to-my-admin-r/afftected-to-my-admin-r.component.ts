@@ -152,7 +152,7 @@ export class AfftectedToMyAdminRComponent implements OnInit {
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-      this.adminId = res.IdAdministration
+      this.adminId = res.idAdministration
       
     })
 
@@ -332,12 +332,12 @@ export class AfftectedToMyAdminRComponent implements OnInit {
       // User Affected
       this.UserService.GetUserById(last.iduserAffected).subscribe(res => {
         this.affected = res.fullName
-        this.administrationService.GetById(res.IdAdministration).subscribe(res => {
+        this.administrationService.GetById(res.idAdministration).subscribe(res => {
           this.AdministrationName = res.nom
 
         })
 
-        this.etablissementService.GetById(res.IdDepartement).subscribe(res => {
+        this.etablissementService.GetById(res.idDepartement).subscribe(res => {
           this.etabname1 = res.nom
         })
       })
@@ -345,13 +345,13 @@ export class AfftectedToMyAdminRComponent implements OnInit {
       //User Qui affecte
       this.UserService.GetUserById(last.idUserQuiAffecte).subscribe(res => {
         this.affecter = res.fullName
-        this.administrationService.GetById(res.IdAdministration).subscribe(res => {
+        this.administrationService.GetById(res.idAdministration).subscribe(res => {
           this.adminisgtrationName = res.nom
 
 
         })
 
-        this.etablissementService.GetById(res.IdDepartement).subscribe(res => {
+        this.etablissementService.GetById(res.idDepartement).subscribe(res => {
           this.etabname2 = res.nom
         })
       })

@@ -1,4 +1,3 @@
-
 <body>
   <style>
     /*-- Transaction1 Page Style --*/
@@ -41,8 +40,31 @@
         <app-side-menu></app-side-menu>
       </div>
       <div class="col-md-9 col-sm-8">
-        <app-main-page-ac2></app-main-page-ac2>
+        <!-- Second Navbar -->
+        <nav class="d-flex p-0 bd-highlight tasks-nav mt-2">
+          <a href="" [routerLink]="['/transactions-rlist']" class="p-2 flex-fill bd-highlight">
+            <span><i class="fa fa-home"></i></span>
+            الرئيسية
+          </a>
+          <a href="" [routerLink]="['/enreg-i']" class="p-2 flex-fill bd-highlight">
+            <span><i class="fa fa-save"></i></span>
+            قائمة المعاملات الداخلية المسجلة
+          </a>
+          <!-- <a href="" [routerLink]="['/afftected-to-my-admin-e']" class="p-2 flex-fill bd-highlight">
+            <span><i class="fa fa-building"></i></span>
+            قائمة المعاملات الصادرة من إدارتي
+          </a>!-->
+          <a href="" [routerLink]="['/enreg-temp-i']" class="p-2 flex-fill bd-highlight">
+            <span><i class="fa fa-clock"></i></span>
+            قائمة المعاملات المحفوظة مؤقتا
+          </a>
+          <a href="" [routerLink]="['/enreg-def-i']" class="p-2 flex-fill bd-highlight box-menu-btn">
+            <span><i class="fa fa-box"></i></span>
+            قائمة المعاملات المحفوظة نهائيا
+          </a>
+        </nav>
         <!-- Tasks Page Content -->
+        <!-- Transaction1 Page Content -->
         <!-- Transaction1 Page Content -->
         <section class="page-content">
           <!-- Navbar 3-->
@@ -52,17 +74,28 @@
                 <span><i class="fa fa-pencil-alt"></i></span>
               </div>
               <div class="text">
-                <p>معاملات مستلمة /غير مستلمة</p>
-                <span>10</span>
+                <p>معاملات الواردة المستلمة </p>
+                <span>{{receptiontr}}</span>
               </div>
             </div>
+
+            <div class="p-2 flex-fill bd-highlight item">
+              <div class="sympol">
+                <span><i class="fa fa-pencil-alt"></i></span>
+              </div>
+              <div class="text">
+                <p>معاملات الصادرة المستلمة </p>
+                <span>{{receptionte}}</span>
+              </div>
+            </div>
+
             <div class="p-2 flex-fill bd-highlight item">
               <div class="sympol">
                 <span><i class="fa fa-clipboard-check"></i></span>
               </div>
               <div class="text">
                 <p>عدد المعاملات الواردة</p>
-                <span>5</span>
+                <span>{{emise}}</span>
               </div>
             </div>
             <div class="p-2 flex-fill bd-highlight item">
@@ -71,7 +104,7 @@
               </div>
               <div class="text">
                 <p>عدد المعاملات الصادرة</p>
-                <span>3</span>
+                <span>{{recue}}</span>
               </div>
             </div>
             <div class="p-2 flex-fill bd-highlight item">
@@ -83,31 +116,16 @@
                 <span>3</span>
               </div>
             </div>
-            <div class="p-2 flex-fill bd-highlight item">
-              <div class="sympol">
-                <span><i class="fa fa-clipboard-list"></i></span>
-              </div>
-              <div class="text">
-                <p>قرار وتعميم</p>
-                <span>3</span>
-              </div>
-            </div>
+    
           </div>
-
           <!-- Charts -->
           <div class="charts">
             <div class="container">
               <div class="row">
                 <div class="col-md-6">
                   <div class="chart text-center py-4 px-3">
-                    <h6>مقارنة بين المهمات التي أنشئت والتي تم إنهاؤها</h6>
-                    <canvas id="chart1"></canvas>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="chart text-center py-4 px-3">
-                    <h6>المهمات التي تم إنجازها لهذا العام</h6>
-                    <canvas id="chart2"></canvas>
+                    <h6>المعاملات  الداخلية المستلمة /غير المستلمة</h6>
+                    <canvas id="canvas"></canvas>
                   </div>
                 </div>
               </div>
@@ -125,3 +143,4 @@
     <p>المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات في أبو عريش</p>
   </footer>
 </body>
+

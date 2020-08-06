@@ -1,0 +1,146 @@
+<body>
+  <style>
+    /*-- Transaction1 Page Style --*/
+    .page-content {
+      direction: rtl;
+    }
+
+    .box-menu {
+      position: fixed;
+      top: 140px;
+      left: 25px;
+      padding: 0;
+      width: 200px;
+      border: 1px solid #108199;
+      z-index: 99999;
+      display: none;
+    }
+
+      .box-menu a {
+        display: block;
+        text-decoration: none;
+        text-align: center;
+        width: 100%;
+        padding: 6px 0;
+        border-bottom: 1px solid #d1d1d1;
+        background-color: #fff;
+        color: #108199;
+      }
+
+        .box-menu a:hover {
+          background-color: #108199;
+          color: #fff;
+        }
+  </style>
+  <app-nav-menu></app-nav-menu>
+  <!-- Page Content -->
+  <div class="content">
+    <div class="row">
+      <div class="col-md-3 col-sm-4">
+        <app-side-menu></app-side-menu>
+      </div>
+      <div class="col-md-9 col-sm-8">
+        <!-- Second Navbar -->
+        <nav class="d-flex p-0 bd-highlight tasks-nav mt-2">
+          <a href="" [routerLink]="['/transactions-rlist']" class="p-2 flex-fill bd-highlight">
+            <span><i class="fa fa-home"></i></span>
+            الرئيسية
+          </a>
+          <a href="" [routerLink]="['/enreg-e']" class="p-2 flex-fill bd-highlight">
+            <span><i class="fa fa-save"></i></span>
+            قائمة المعاملات االصادرة المسجلة
+          </a>
+          <!-- <a href="" [routerLink]="['/afftected-to-my-admin-e']" class="p-2 flex-fill bd-highlight">
+      <span><i class="fa fa-building"></i></span>
+      قائمة المعاملات الصادرة من إدارتي
+    </a>!-->
+          <a href="" [routerLink]="['/enreg-temp-e']" class="p-2 flex-fill bd-highlight">
+            <span><i class="fa fa-clock"></i></span>
+            قائمة المعاملات المحفوظة مؤقتا
+          </a>
+          <a href="" [routerLink]="['/enreg-def-e']" class="p-2 flex-fill bd-highlight box-menu-btn">
+            <span><i class="fa fa-box"></i></span>
+            قائمة المعاملات المحفوظة نهائيا
+          </a>
+        </nav>
+        <!-- Tasks Page Content -->
+        <!-- Transaction1 Page Content -->
+        <!-- Transaction1 Page Content -->
+        <section class="page-content">
+          <!-- Navbar 3-->
+          <div class="d-flex flex-wrap p-2 bd-highlight nav-2">
+            <div class="p-2 flex-fill bd-highlight item">
+              <div class="sympol">
+                <span><i class="fa fa-pencil-alt"></i></span>
+              </div>
+              <div class="text">
+                <p>معاملات الواردة المستلمة </p>
+                <span>{{receptiontr}}</span>
+              </div>
+            </div>
+
+            <div class="p-2 flex-fill bd-highlight item">
+              <div class="sympol">
+                <span><i class="fa fa-pencil-alt"></i></span>
+              </div>
+              <div class="text">
+                <p>معاملات الصادرة المستلمة </p>
+                <span>{{receptionte}}</span>
+              </div>
+            </div>
+
+            <div class="p-2 flex-fill bd-highlight item">
+              <div class="sympol">
+                <span><i class="fa fa-clipboard-check"></i></span>
+              </div>
+              <div class="text">
+                <p>عدد المعاملات الواردة</p>
+                <span>{{emise}}</span>
+              </div>
+            </div>
+            <div class="p-2 flex-fill bd-highlight item">
+              <div class="sympol">
+                <span><i class="fa fa-stopwatch"></i></span>
+              </div>
+              <div class="text">
+                <p>عدد المعاملات الصادرة</p>
+                <span>{{recue}}</span>
+              </div>
+            </div>
+            <div class="p-2 flex-fill bd-highlight item">
+              <div class="sympol">
+                <span><i class="fa fa-clipboard-list"></i></span>
+              </div>
+              <div class="text">
+                <p>عدد المعاملات الداخلية</p>
+                <span>3</span>
+              </div>
+            </div>
+     
+          </div>
+          <!-- Charts -->
+          <div class="charts">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="chart text-center py-4 px-3">
+                    <h6>المعاملات  الصادرة المستلمة /غير المستلمة</h6>
+                    <canvas id="canvas"></canvas>
+                  </div>
+                </div>
+             
+              </div>
+            </div>
+          </div>
+
+        </section>
+      </div><!-- End col-9 -->
+
+    </div>
+
+  </div>
+  <!-- Footer -->
+  <footer class="text-center">
+    <p>المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات في أبو عريش</p>
+  </footer>
+</body>

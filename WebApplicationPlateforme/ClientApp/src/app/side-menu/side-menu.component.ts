@@ -21,7 +21,10 @@ export class SideMenuComponent implements OnInit {
   // Get User Connected
   UserIdConnected: string;
   UserNameConnected: string;
-  privtest: boolean = false;
+  privtestaddTask: boolean = false;
+  privtestfinance: boolean = false;
+  privtesttransaction: boolean = false;
+  privtestTasks: boolean = false;
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
@@ -30,28 +33,22 @@ export class SideMenuComponent implements OnInit {
 
       this.privilegesService.GetById(this.UserIdConnected).subscribe(res => {
         
-        if (res.addTask == 1) 
-          this.privtest = true;
-        console.log(this.privtest)
+
+        if (res.addTask == 1)
+          this.privtestaddTask = true;
+        if (res.appel == 1)
+          this.privtestfinance = true
+        if (res.commAd == 1)
+          this.privtesttransaction = true
+        if (res.settings == 1)
+          this.privtestTasks = true
+        
       })
 
      
     
     })
   }
-  //Privilege Test
 
-  getPriv(id) {
-    this.privilegesService.GetById(id).subscribe(res => {
-      if (res.addTask == 1) {
-        this.privtest = true;
-        
-      } else
-        this.privtest = false;
-   
-    })
-    
-    console.log(this.privtest)
-  }
 
 }

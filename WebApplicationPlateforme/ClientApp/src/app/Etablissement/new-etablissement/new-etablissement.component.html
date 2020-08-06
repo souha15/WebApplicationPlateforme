@@ -47,13 +47,6 @@
           </select>
         </div>
 
-        <div class="col-sm-6">
-          <label for="days"><span><i class="fa fa-user"></i></span>مدير القسم</label>
-          <select name="nomDirecteur" #nomDirecteur="ngModel" [(ngModel)]="eta.nomDirecteur">
-            <option [ngValue]="undefined" selected disabled>-مدير القسم-</option>
-            <option *ngFor="let item of UsersList" value="{{item.fullName}}">{{item.fullName}}</option>
-          </select>
-        </div>
 
 
 

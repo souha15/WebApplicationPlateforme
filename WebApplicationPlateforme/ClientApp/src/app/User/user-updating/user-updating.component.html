@@ -96,8 +96,16 @@
                   <label for="tasks-manage">نظام إدارة المهام</label>
                   <input type="checkbox" name="addTask" id="add-task" (change)='onSelect2($event)' #addTask="ngModel" [(ngModel)]="privilegesService.formData.addTask" [checked]="Privileges.addTask == '1'">
                   <label for="add-task">إضافة مهمة</label>
-                  <input type="checkbox" name="Rapport" id="tasks-report" (change)='onSelect3($event)' #Rapport="ngModel" [(ngModel)]="privilegesService.formData.Rapport" [checked]="Privileges.Rapport == '1'">
+                  <input type="checkbox" name="rapport" id="tasks-report" (change)='onSelect3($event)' #rapport="ngModel" [(ngModel)]="privilegesService.formData.rapport" [checked]="Privileges.rapport == '1'">
                   <label for="tasks-report">تقارير</label>
+                </div>
+
+
+                <div class="form-group">
+                  <input type="checkbox" name="commAd" id="contacts" (change)='onSelect4($event)' #commAd="ngModel" [(ngModel)]="privilegesService.formData.commAd" [checked]="Privileges.commAd == '1'">
+                  <label for="contacts">نظام الاتصالات الادارية</label>
+                  <input type="checkbox" name="appel" id="contacts-1" (change)='onSelect5($event)' #appel="ngModel" [(ngModel)]="privilegesService.formData.appel" [checked]="Privileges.appel == '1'">
+                  <label for="contacts-1">نظام المالية</label>
                 </div>
                 <div class="form-group">
                   <input class="btn" type="submit" value="تسجيل">

@@ -10,7 +10,7 @@
       <section class="main-content text-center">
         <div class="container">
           <div class="row">
-            <div class="col-sm-6 col-md-4 my-4">
+            <div class="col-sm-6 col-md-4 my-4" *ngIf="privtestTasks">
               <div class="link-box">
                 <a [routerLink]="['/main-tasks']">
                   <span class="d-block"><i class="fa fa-tasks fa-3x"></i></span>
@@ -18,7 +18,7 @@
                 </a>
               </div>
             </div>
-            <div class="col-sm-6 col-md-4 my-4">
+            <div class="col-sm-6 col-md-4 my-4" *ngIf="privtestfinance">
               <div class="link-box">
                 <a [routerLink]="['/main-finance-page']">
                   <span class="d-block"><i class="fa fa-coins fa-3x"></i></span>
@@ -26,9 +26,9 @@
                 </a>
               </div>
             </div>
-            <div class="col-sm-6 col-md-4 my-4">
+            <div class="col-sm-6 col-md-4 my-4" *ngIf="privtesttransaction">
               <div class="link-box">
-                <a href="">
+                <a href="" [routerLink]="['/mailing']">
                   <span class="d-block"><i class="fa fa-mail-bulk fa-3x"></i></span>
                   <h4>المراسلات</h4>
                 </a>
@@ -36,7 +36,7 @@
             </div>
             <div class="col-sm-6 col-md-4 my-4">
               <div class="link-box">
-                <a href="#">
+                <a href="">
                   <span class="d-block"><i class="fa fa-clipboard-list fa-3x"></i></span>
                   <h4>الفعاليات</h4>
                 </a>
@@ -44,7 +44,7 @@
             </div>
             <div class="col-sm-6 col-md-4 my-4">
               <div class="link-box">
-                <a href="#">
+                <a href="" [routerLink]="['/users-list']">
                   <span class="d-block"><i class="fa fa-users fa-3x"></i></span>
                   <h4>الموظفين</h4>
                 </a>

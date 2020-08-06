@@ -1,0 +1,74 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+  
+    <div class="col-md-9 col-sm-8">
+      <app-navmenurequests></app-navmenurequests>
+      <header>
+        <h3 class="task-head">كشف طلبات الاجازات</h3>
+      </header>
+      <div class="leave-request-list">
+        <div class="table-responsive">
+          <table class="table table-bordered text-center table-striped">
+            <thead class="thead-primary">
+              <tr>
+                <th scope="col">الرقم التسلسلي</th>
+                <th scope="col">نوع الاجازة</th>
+                <th scope="col">مدة الاجازة</th>
+                <th scope="col">تاريخ بدء الاجازة</th>
+                <th scope="col">الموظف المعوض</th>
+                <th scope="col">الحالة</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>اجازة عادية</td>
+                <td>1</td>
+                <td>20/1/2020</td>
+                <td>محمد علي</td>
+                <td><span class="ok">موافق</span></td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>اجازة ايام متفرقة</td>
+                <td>3</td>
+                <td>20/1/2020</td>
+                <td>احمد محمد</td>
+                <td><span class="refused">مرفوض</span></td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>اجازة عادية</td>
+                <td>5</td>
+                <td>20/1/2020</td>
+                <td>سعيد مسعود</td>
+                <td><span class="ok">موافق</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link" href="#">السابق</a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">التالي</a></li>
+          </ul>
+        </nav>
+
+      </div>
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات في أبو عريش</p>
+</footer>

@@ -50,4 +50,8 @@ export class AdministrationService {
   DeletAdministration(id) {
     return this.http.delete(this.rootURL + '/Administrations/' + id);
   }
+
+  PutObservable(Transaction: Administration) {
+    return this.http.put<Administration>(this.rootURL + '/Administrations/' + Transaction.id, Transaction, this.headers);
+  }
 }

@@ -11,10 +11,16 @@
         <div class="row">
           <div class="col-md">
             <div class="box mails">
-              <h4>المراسلات </h4>
+              <h4>الداخلية </h4>
               <div class="row">
                 <div class="col text-center px-2 py-3">
-                  <a [routerLink]="['/main-page-ac']" class="txt">الرئيسية</a>
+                  <ul>
+                    <li><a [routerLink]="['/enregistrer-tri']">تسجيل معاملة داخلية  </a></li>
+                    <li><a [routerLink]="['/my-liste-tr-i']"> المعاملات الداخلية </a></li>
+                    <li><a [routerLink]="['/main-page-ac']"> صندوق الداخلية </a></li>
+
+                  </ul>
+                 
                 </div>
                 <div class="col text-center px-2 py-3">
                   <span class="sympol"><i class="fa fa-mail-bulk fa-3x"></i></span>
@@ -47,8 +53,10 @@
                 <div class="col-7">
                   <div class="txt  text-right px-2 py-3">
                     <ul>
-                      <li>أرشيف الخطابات الصادرة</li>
-                      <li>سجل الصادر</li>
+                       <li><a [routerLink]="['/enregistrer-tre']">تسجيل صادر عام  </a></li>
+   <li><a [routerLink]="['/my-liste-tr-emise']"> المعاملات الصادرة </a></li>
+   <li><a [routerLink]="['/transactions-elist']"> صندوق الصادر </a></li>
+    
                     </ul>
                   </div>
                 </div>
@@ -65,8 +73,10 @@
                 <div class="col ">
                   <div class=" px-2 py-3">
                     <ul>
-                      <li> تقارير المعاملات الواردة</li>
-                      <li>تقارير المعاملات الصادرة</li>
+                      <li><a [routerLink]="['/rapport-recue']">  تقارير المعاملات الواردة</a></li>
+                      <li><a [routerLink]="['/rappot-emise']">تقارير المعاملات الصادرة</a></li>
+                      <li><a [routerLink]="['/rapport-interne']">تقارير المعاملات الداخلية</a></li>
+                   
                       
                     </ul>
                   </div>

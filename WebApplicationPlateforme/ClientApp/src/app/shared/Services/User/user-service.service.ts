@@ -28,9 +28,14 @@ export class UserServiceService {
     Email: ['', [Validators.email, Validators.required]],
     fullName: ['',  Validators.required],
     PhoneNumber: ['', [Validators.minLength(8), Validators.maxLength(10)]],
-    Statut: [''],
-    IdDepartement: [''],
-    IdAdministration: [''],
+    directeur: [''],
+    position: [''],
+    num: ['',  Validators.required],
+    registreCivil: ['', Validators.required],
+    idDepartement: [''],
+    idAdministration: [''],
+    nomAdministration: [''],
+    nomDepartement: [''],
     Roles: ['', Validators.required],
     Passwords: this.fb.group({
       Password: ['', [Validators.required, Validators.minLength(6)]],
@@ -62,9 +67,14 @@ export class UserServiceService {
       fullName: this.formModel.value.fullName,
       Password: this.formModel.value.Passwords.Password,
       PhoneNumber: this.formModel.value.PhoneNumber,
-      Statut: this.formModel.value.Statut,
-      IdDepartement: this.formModel.value.IdDepartement,
-      IdAdministration: this.formModel.value.IdAdministration,
+      directeur: this.formModel.value.directeur,
+      position: this.formModel.value.position,
+      num: this.formModel.value.num,
+      registreCivil: this.formModel.value.registreCivil,
+      idDepartement: this.formModel.value.idDepartement,
+      idAdministration: this.formModel.value.idAdministration,
+      nomAdministration: this.formModel.value.nomAdministration,
+      nomDepartement: this.formModel.value.nomDepartement,
       Roles: roles,
 
     };
@@ -133,6 +143,10 @@ export class UserServiceService {
 
   EditUser() {
     return this.http.put<UserDetail>(this.BaseURI + '/User/' + this.formData.id, this.formData, this.headers);
+  }
+
+  PutObservable(user: UserDetail) {
+    return this.http.put<UserDetail>(this.BaseURI + '/User/' + user.id, user, this.headers);
   }
 
   //Handling Roles

@@ -65,4 +65,103 @@ export class TransactionService {
   GetById(Id) {
     return this.http.get<Transaction>(this.rootURL + '/Transactions/' + Id);
   }
+
+
+/***Transaction Emise****/
+
+  //Create Transaction
+
+  CreateE(Transaction: Transaction) {
+    return this.http.post<Transaction>(this.rootURL + '/TransactionEmises', Transaction, this.headers);
+  }
+
+  //Edit Transaction
+  EditE() {
+    return this.http.put(this.rootURL + '/TransactionEmises/' + this.formData.id, this.formData, this.headers);
+  }
+
+  // List Transaction
+
+  ListE(): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(this.rootURL + '/TransactionEmises');
+  }
+
+
+  //Delete Transaction
+
+  DeleteE(id) {
+    return this.http.delete(this.rootURL + '/TransactionEmises/' + id);
+  }
+
+  //Put Transaction
+
+  PutObservableE(Transaction: Transaction) {
+    return this.http.put<Transaction>(this.rootURL + '/TransactionEmises/' + Transaction.id, Transaction, this.headers);
+  }
+
+  PutObservableTrE(Transaction: Transaction) {
+    return this.http.put<Transaction>(this.rootURL + '/TransactionEmises/' + Transaction.id, Transaction, this.headers);
+  }
+
+  PutE(Id) {
+    return this.http.put(this.rootURL + '/TransactionEmises/' + this.formData.id, this.formData, this.headers);
+  }
+
+  //Get Transaction By Id
+
+  GetByIdE(Id) {
+    return this.http.get<Transaction>(this.rootURL + '/TransactionEmises/' + Id);
+  }
+
+
+/******/
+
+  /***Transaction Interne****/
+
+  //Create Transaction
+
+  CreateI(Transaction: Transaction) {
+    return this.http.post<Transaction>(this.rootURL + '/TransactionIs', Transaction, this.headers);
+  }
+
+  //Edit Transaction
+  EditI() {
+    return this.http.put(this.rootURL + '/TransactionIs/' + this.formData.id, this.formData, this.headers);
+  }
+
+  // List Transaction
+
+  ListI(): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(this.rootURL + '/TransactionIs');
+  }
+
+
+  //Delete Transaction
+
+  DeleteI(id) {
+    return this.http.delete(this.rootURL + '/TransactionIs/' + id);
+  }
+
+  //Put Transaction
+
+  PutObservableI(Transaction: Transaction) {
+    return this.http.put<Transaction>(this.rootURL + '/TransactionIs/' + Transaction.id, Transaction, this.headers);
+  }
+
+  PutObservableTrI(Transaction: Transaction) {
+    return this.http.put<Transaction>(this.rootURL + '/TransactionIs/' + Transaction.id, Transaction, this.headers);
+  }
+
+  PutI(Id) {
+    return this.http.put(this.rootURL + '/TransactionIs/' + this.formData.id, this.formData, this.headers);
+  }
+
+  //Get Transaction By Id
+
+  GetByIdI(Id) {
+    return this.http.get<Transaction>(this.rootURL + '/TransactionIs/' + Id);
+  }
+
+
+/******/
 }

@@ -104,6 +104,47 @@ import { EnregDefRComponent } from './AdministrativeCommunication/Transaction/Re
 import { EnregTempRComponent } from './AdministrativeCommunication/Transaction/Recue/enreg-temp-r/enreg-temp-r.component';
 import { EnregRComponent } from './AdministrativeCommunication/Transaction/Recue/enreg-r/enreg-r.component';
 import { AfftectedToMyAdminRComponent } from './AdministrativeCommunication/Transaction/Recue/afftected-to-my-admin-r/afftected-to-my-admin-r.component';
+import { NgxBarcode6Module } from 'ngx-barcode6';
+import { TransactionsElistComponent } from './AdministrativeCommunication/Transaction/Emise/transactions-elist/transactions-elist.component';
+import { EnregEComponent } from './AdministrativeCommunication/Transaction/Emise/enreg-e/enreg-e.component';
+import { AfftectedToMyAdminEComponent } from './AdministrativeCommunication/Transaction/Emise/afftected-to-my-admin-e/afftected-to-my-admin-e.component';
+import { EnregTempEComponent } from './AdministrativeCommunication/Transaction/Emise/enreg-temp-e/enreg-temp-e.component';
+import { EnregDefEComponent } from './AdministrativeCommunication/Transaction/Emise/enreg-def-e/enreg-def-e.component';
+import { RappotEmiseComponent } from './AdministrativeCommunication/Rapport/rappot-emise/rappot-emise.component';
+import { RapportInterneComponent } from './AdministrativeCommunication/Rapport/rapport-interne/rapport-interne.component';
+import { RapportRecueComponent } from './AdministrativeCommunication/Rapport/rapport-recue/rapport-recue.component';
+import { EnregDefIComponent } from './AdministrativeCommunication/Transaction/Interne/enreg-def-i/enreg-def-i.component';
+import { EnregTempIComponent } from './AdministrativeCommunication/Transaction/Interne/enreg-temp-i/enreg-temp-i.component';
+import { EnregIComponent } from './AdministrativeCommunication/Transaction/Interne/enreg-i/enreg-i.component';
+import { AffectedToMyAdminIComponent } from './AdministrativeCommunication/Transaction/Interne/affected-to-my-admin-i/affected-to-my-admin-i.component';
+import { BeneficiaireCComponent } from './Evenement/beneficiaire-c/beneficiaire-c.component';
+import { TacheEvCComponent } from './Evenement/tache-ev-c/tache-ev-c.component';
+import { OutilsCComponent } from './Evenement/outils-c/outils-c.component';
+import { MediasCComponent } from './Evenement/medias-c/medias-c.component';
+import { ClasseCComponent } from './Evenement/classe-c/classe-c.component';
+import { TblMenuComponent } from './Evenement/tbl-menu/tbl-menu.component';
+import { TblMainComponent } from './Evenement/tbl-main/tbl-main.component';
+import { EventRegisterComponent } from './Evenement/event-register/event-register.component';
+import { EventDetailsComponent } from './Evenement/event-details/event-details.component';
+import { EventListComponent } from './Evenement/event-list/event-list.component';
+import { ActivityCComponent } from './Evenement/activity-c/activity-c.component';
+import { DepenseCComponent } from './Evenement/depense-c/depense-c.component';
+import { DemandeCongeComponent } from './RH/Conge/demande-conge/demande-conge.component';
+import { MyListCongeComponent } from './RH/Conge/my-list-conge/my-list-conge.component';
+import { ValidateCongeComponent } from './RH/Conge/validate-conge/validate-conge.component';
+import { SuivieCongeComponent } from './RH/Conge/suivie-conge/suivie-conge.component';
+import { PermissionAddComponent } from './RH/Permission/permission-add/permission-add.component';
+import { PermissionListComponent } from './RH/Permission/permission-list/permission-list.component';
+import { NomEquipementComponent } from './RH/Equipement/nom-equipement/nom-equipement.component';
+import { TypeEquipementComponent } from './RH/Equipement/type-equipement/type-equipement.component';
+import { EquipementAddComponent } from './RH/Equipement/equipement-add/equipement-add.component';
+import { EquipementListComponent } from './RH/Equipement/equipement-list/equipement-list.component';
+import { RecrutementListComponent } from './RH/Recrutement/recrutement-list/recrutement-list.component';
+import { RecrutementAddComponent } from './RH/Recrutement/recrutement-add/recrutement-add.component';
+import { EquipementListDirComponent } from './RH/Equipement/equipement-list-dir/equipement-list-dir.component';
+import { PermissionListDirComponent } from './RH/Permission/permission-list-dir/permission-list-dir.component';
+import { MenurequestsComponent } from './RH/menurequests/menurequests.component';
+import { NavmenurequestsComponent } from './RH/navmenurequests/navmenurequests.component';
 
 @NgModule({
   declarations: [
@@ -184,6 +225,46 @@ import { AfftectedToMyAdminRComponent } from './AdministrativeCommunication/Tran
     EnregTempRComponent,
     EnregRComponent,
     AfftectedToMyAdminRComponent,
+    TransactionsElistComponent,
+    EnregEComponent,
+    AfftectedToMyAdminEComponent,
+    EnregTempEComponent,
+    EnregDefEComponent,
+    RappotEmiseComponent,
+    RapportInterneComponent,
+    RapportRecueComponent,
+    EnregDefIComponent,
+    EnregTempIComponent,
+    EnregIComponent,
+    AffectedToMyAdminIComponent,
+    BeneficiaireCComponent,
+    TacheEvCComponent,
+    OutilsCComponent,
+    MediasCComponent,
+    ClasseCComponent,
+    TblMenuComponent,
+    TblMainComponent,
+    EventRegisterComponent,
+    EventDetailsComponent,
+    EventListComponent,
+    ActivityCComponent,
+    DepenseCComponent,
+    DemandeCongeComponent,
+    MyListCongeComponent,
+    ValidateCongeComponent,
+    SuivieCongeComponent,
+    PermissionAddComponent,
+    PermissionListComponent,
+    NomEquipementComponent,
+    TypeEquipementComponent,
+    EquipementAddComponent,
+    EquipementListComponent,
+    RecrutementListComponent,
+    RecrutementAddComponent,
+    EquipementListDirComponent,
+    PermissionListDirComponent,
+    MenurequestsComponent,
+    NavmenurequestsComponent,
 
   ],
   imports: [
@@ -195,7 +276,7 @@ import { AfftectedToMyAdminRComponent } from './AdministrativeCommunication/Tran
     BrowserAnimationsModule,
     Ng2SearchPipeModule,
     Ng2OrderModule,
- 
+    NgxBarcode6Module,
     NgxPaginationModule,
     NgbModule,
     ToastrModule.forRoot(),
@@ -284,12 +365,93 @@ import { AfftectedToMyAdminRComponent } from './AdministrativeCommunication/Tran
       { path: 'main-page-ac', component: MainPageACComponent, canActivate: [AuthGuard] },
       { path: 'main-page-ac2', component: MainPageAC2Component, canActivate: [AuthGuard] },
       { path: 'transactions-rlist', component: TransactionsRListComponent, canActivate: [AuthGuard] },
-{ path: 'enreg-def-r' , component: EnregDefRComponent, canActivate: [AuthGuard] },
-{ path:'enreg-temp-r' , component: EnregTempRComponent, canActivate: [AuthGuard] },
-{ path:'enreg-r' , component: EnregRComponent, canActivate: [AuthGuard] },
-{ path: 'afftected-to-my-admin-r', component: AfftectedToMyAdminRComponent , canActivate: [AuthGuard] },
+      { path: 'enreg-def-r' , component: EnregDefRComponent, canActivate: [AuthGuard] },
+      { path:'enreg-temp-r' , component: EnregTempRComponent, canActivate: [AuthGuard] },
+      { path:'enreg-r' , component: EnregRComponent, canActivate: [AuthGuard] },
+      { path: 'afftected-to-my-admin-r', component: AfftectedToMyAdminRComponent, canActivate: [AuthGuard] },
+
+      { path: 'transactions-elist', component: TransactionsElistComponent , canActivate: [AuthGuard] },
+      { path: 'enreg-e', component: EnregEComponent , canActivate: [AuthGuard] },
+      { path: 'afftected-to-my-admin-e', component: AfftectedToMyAdminEComponent , canActivate: [AuthGuard] },
+      { path: 'enreg-temp-e', component: EnregTempEComponent , canActivate: [AuthGuard] },
+      { path: 'enreg-def-e', component: EnregDefEComponent, canActivate: [AuthGuard] },
+      { path: 'rappot-emise', component: RappotEmiseComponent, canActivate: [AuthGuard] },
+      { path: 'rapport-interne', component: RapportInterneComponent, canActivate: [AuthGuard] },
+      { path: 'rapport-recue', component: RapportRecueComponent, canActivate: [AuthGuard] },
+
       //{ path: 'user-updating/:id', component: UserUpdatingComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
-   
+
+    { path: 'enreg-def-i', component: EnregDefIComponent, canActivate: [AuthGuard] },
+    { path: 'enreg-temp-i', component: EnregTempIComponent, canActivate: [AuthGuard] },
+    { path: 'enreg-i', component: EnregIComponent, canActivate: [AuthGuard] },
+    { path: 'affected-to-my-admin-i', component: AffectedToMyAdminIComponent, canActivate: [AuthGuard] },
+
+
+    //Evenement
+
+  { path: 'beneficiaire-c', component: BeneficiaireCComponent, canActivate: [AuthGuard] },
+
+  { path: 'tache-ev-c', component: TacheEvCComponent, canActivate: [AuthGuard] },
+
+  { path: 'outils-c', component: OutilsCComponent, canActivate: [AuthGuard] },
+
+  { path: 'medias-c', component: MediasCComponent, canActivate: [AuthGuard] },
+
+  { path: 'classe-c', component: ClasseCComponent, canActivate: [AuthGuard] },
+
+  { path: 'tbl-menu', component: TblMenuComponent, canActivate: [AuthGuard] },
+
+  { path: 'tbl-main', component: TblMainComponent, canActivate: [AuthGuard] },
+
+  { path: 'event-register', component: EventRegisterComponent, canActivate: [AuthGuard] },
+
+      { path: 'event-details', component: EventDetailsComponent, canActivate: [AuthGuard] },
+
+      { path: 'event-details/:id', component: EventDetailsComponent, canActivate: [AuthGuard] },
+
+      { path: 'event-list', component: EventListComponent, canActivate: [AuthGuard] },
+
+      { path: 'medias-c/:id', component: MediasCComponent, canActivate: [AuthGuard] },
+
+      { path: 'activity-c', component: ActivityCComponent, canActivate: [AuthGuard] },
+
+      { path: 'depense-c', component: DepenseCComponent, canActivate: [AuthGuard] },
+
+      //Ressources Humaines
+
+      { path: 'demande-conge', component: DemandeCongeComponent, canActivate: [AuthGuard] },
+
+      { path: 'my-list-conge', component: MyListCongeComponent, canActivate: [AuthGuard] },
+
+      { path: 'validate-conge', component: ValidateCongeComponent, canActivate: [AuthGuard] },
+
+      { path: 'suivie-conge', component: SuivieCongeComponent, canActivate: [AuthGuard] },
+
+
+      { path: 'permission-add', component: PermissionAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'permission-list', component: PermissionListComponent, canActivate: [AuthGuard] },
+
+      { path: 'nom-equipement', component: NomEquipementComponent, canActivate: [AuthGuard] },
+
+      { path: 'type-equipement', component: TypeEquipementComponent, canActivate: [AuthGuard] },
+
+      { path: 'equipement-add', component: EquipementAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'equipement-list', component: EquipementListComponent, canActivate: [AuthGuard] },
+
+      { path: 'recrutement-list', component: RecrutementListComponent, canActivate: [AuthGuard] },
+
+      { path: 'recrutement-add', component: RecrutementAddComponent, canActivate: [AuthGuard] },
+ 
+      { path: 'equipement-list-dir', component: EquipementListDirComponent, canActivate: [AuthGuard] },
+
+      { path: 'permission-list-dir', component: PermissionListDirComponent, canActivate: [AuthGuard] },
+
+      { path: 'menurequests', component: MenurequestsComponent, canActivate: [AuthGuard] },
+      { path: 'navmenurequests', component: NavmenurequestsComponent, canActivate: [AuthGuard] },
+
+
 
      
     ])

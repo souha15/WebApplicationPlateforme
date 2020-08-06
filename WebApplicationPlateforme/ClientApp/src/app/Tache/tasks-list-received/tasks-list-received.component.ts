@@ -29,24 +29,15 @@ export class TasksListReceivedComponent implements OnInit {
   //Tache list
 
   tacheliste: Tache[] = [];
- 
-
-  listtache() {
-    this.TacheService.ListTache().subscribe(res => {
-      this.tacheliste=res
-    })
-  }
-
   filtredtachelist: Tache[] = [];
 
   filtredDataTache() {
     this.TacheService.ListTache().subscribe(res => {
       this.tacheliste = res
 
-      if (this.tacheliste != null) {
+   
         this.filtredtachelist = this.tacheliste.filter(item => item.affectedName == this.UserIdConnected || item.atous == 'all')
- 
-      }
+
     });
 
     

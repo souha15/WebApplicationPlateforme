@@ -1,29 +1,65 @@
-.task-num {
-  color: #ed685e;
-  font-weight: bold;
-  font-size: 18px;
-  border-top-style: hidden;
-  border-right-style: hidden;
-  border-left-style: hidden;
-  border-bottom-style: hidden;
+.isred {
+  background: #ff6666;
 }
 
-.task-det {
-  color: cadetblue;
-  font-weight: bold;
-  font-size: 18px;
+.isgreen {
+  background: #33ff77;
 }
 
-.aaa {
-  background-color: #eb4034;
-  color: #fff;
-  padding: 5px;
-  border-radius: 10px 10px 10px 10px;
-  border: 0;
-  height: auto;
-  width: auto;
+.page-content {
+  direction: rtl;
 }
 
-ul {
-  list-style: none
+.box-menu {
+  position: fixed;
+  top: 140px;
+  left: 16px;
+  padding: 0;
+  width: 200px;
+  border: 1px solid #108199;
+  z-index: 99999;
+  display: none;
+}
+
+  .box-menu a {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+    padding: 6px 0;
+    border-bottom: 1px solid #d1d1d1;
+    background-color: #fff;
+    color: #108199;
+  }
+
+    .box-menu a:hover {
+      background-color: #108199;
+      color: #fff;
+    }
+
+/*--- form style---*/
+.task-form input[type='date'] {
+  width: 200px
+}
+
+.tab-btn {
+  background-color: #fff;
+  color: #108199;
+  border: 1px solid #108199;
+}
+
+  .tab-btn:hover,
+  .tab-btn.active {
+    background-color: #108199;
+    color: #fff;
+  }
+
+input#files2 {
+  display: none
+}
+
+.stop-form label {
+  min-width: 126px;
+  background: #91c3d8;
+  color: #444;
 }
