@@ -279,6 +279,7 @@ import { NavmenurequestsComponent } from './RH/navmenurequests/navmenurequests.c
     NgxBarcode6Module,
     NgxPaginationModule,
     NgbModule,
+   
     ToastrModule.forRoot(),
     RouterModule.forRoot([
       //{ path: '', redirectTo: '/User/login-page', pathMatch:'full' },

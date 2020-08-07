@@ -230,11 +230,13 @@ code {
 }
 
 /*---Main Roles---*/
+
 * {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  font-family: Raleway
 }
 
 footer {
@@ -301,6 +303,7 @@ nav.log-nav .log-btns {
   border-radius: 5px;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
+  font-size: 20px;
 }
 
 .navbar-light .navbar-nav .nav-link:hover {
@@ -765,10 +768,13 @@ button.enter {
 .side-menu h5 {
   cursor: pointer;
   padding: 15px 10px;
+  font-size:20px;
+  font-weight:bold;
 }
 
   .side-menu h5 .arrow {
-    float: left
+    float: left;
+ 
   }
 
 .side-menu div {
@@ -782,7 +788,8 @@ button.enter {
     color: #fff;
     background: #276985;
     margin-bottom: 5px;
-    text-align: center
+    text-align: center;
+    
   }
 
 /********* Task Form ********/
@@ -895,6 +902,7 @@ button.enter {
   text-align: center;
   padding: 10px 30px;
   border-radius: 5px;
+  font-family: Raleway
 }
 
 .tabel-cont {
@@ -930,6 +938,7 @@ table tbody td .task-st {
 /*********** Task Details Page ************/
 header {
   padding: 10px 0;
+  font-family: Raleway
 }
 
 .task-head {
@@ -1116,7 +1125,8 @@ table .show-details {
 
   .user-info-box header {
     background: #108199;
-    margin-bottom: 20px
+    margin-bottom: 20px;
+    font-family: Raleway
   }
 
 .check-in-out {
@@ -1124,7 +1134,8 @@ table .show-details {
 }
 
 .user-info-box header img {
-  width: 150px
+  width: 150px;
+  font-family: Raleway
 }
 
 .user-info-box header a {
@@ -1137,7 +1148,8 @@ table .show-details {
     z-index: 10;
     position: absolute;
     top: 130px;
-    right: 90px
+    right: 90px;
+    font-family: Raleway
   }
 
 .user-info-box {
@@ -1436,3 +1448,6 @@ table .show-details {
 }
 
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
